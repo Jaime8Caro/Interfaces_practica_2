@@ -1,0 +1,347 @@
+/* =========================================
+   1. RESET Y BASE (Global)
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #000;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Contenedor maestro */
+.desktop {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+a:hover { opacity: 0.8; }
+img { max-width: 100%; display: block; }
+
+/* =========================================
+   2. COMPONENTES COMPARTIDOS (Navbar, Footer, Botones)
+   ========================================= */
+
+/* --- NAVBAR --- */
+.navbar {
+  width: 100%;
+  height: 90px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar-content {
+  width: 100%;
+  max-width: 1335px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.company-2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.logo { width: 40px; height: 40px; object-fit: cover; }
+
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { font-weight: 600; color: #000; }
+
+/* Buscador mini del navbar (usado en Experiencias y futuras) */
+.menu-mini {
+  background: #000;
+  border-radius: 20px;
+  padding: 5px 5px 5px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+.menu-mini label { font-size: 14px; font-weight: 600; white-space: nowrap; }
+
+/* Botones Navbar */
+.buttons-2 { display: flex; align-items: center; gap: 16px; }
+
+/* --- BOTONES GLOBALES --- */
+.primary-button, .button, .div-wrapper, .primary-button-3, .primary-button-black {
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.primary-button-white, .primary-button-2 {
+  background: #fff;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.text-button {
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* --- FOOTER (Compartido) --- */
+.footer {
+  background: #fff;
+  padding: 60px 40px;
+  margin-top: auto;
+  border-top: 1px solid #eee;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-col h3 { font-weight: 700; margin-bottom: 8px; }
+.footer-col a { color: #666; font-size: 15px; }
+
+/* =========================================
+   3. PÁGINA: HOME (index.html)
+   ========================================= */
+
+.hero-home {
+  margin-top: 90px;
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+.hero-home img { width: 100%; height: 100%; object-fit: cover; }
+
+.section-home {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Títulos Específicos Home */
+.home-title {
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 48px);
+  text-align: center;
+  margin-bottom: 10px;
+}
+.home-subtitle {
+  font-size: 20px;
+  text-align: center;
+  color: #666;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+/* Componentes exclusivos Home */
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 40px;
+}
+.stat-item { text-align: center; }
+.stat-number { font-size: 32px; font-weight: 700; }
+.stat-label { color: #888; font-weight: 500; }
+
+.feature-row {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #f5f5f5;
+}
+.feature-content {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.feature-image { flex: 1; height: 400px; object-fit: cover; border-radius: 12px; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto 60px;
+}
+.gallery-item { height: 300px; border-radius: 18px; overflow: hidden; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.gallery-item:hover img { transform: scale(1.05); }
+
+.blog-card {
+  display: flex;
+  background: white;
+  border-radius: 13px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  min-height: 300px;
+}
+.blog-text { flex: 2; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
+.blog-img { flex: 1; object-fit: cover; }
+
+.testimonials-section { background-color: #f5f5f5; padding: 60px 0; }
+.testimonials-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+.testimonial-card {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  width: 340px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   4. PÁGINA: EXPERIENCIAS (experiencias.html)
+   ========================================= */
+
+/* Hero Específico Experiencias */
+.hero-experiencias {
+  margin-top: 90px;
+  width: 100%;
+  height: 400px;
+  background-color: #222; /* Fallback */
+  /* background-image: url('img/hero-experiencias.png'); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+.hero-experiencias h1 { font-size: 4rem; font-weight: 700; }
+.hero-experiencias p { font-size: 1.5rem; opacity: 0.9; margin-top: 10px; }
+
+/* Barra de Filtros */
+.filters-bar {
+  background: #fff;
+  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  position: relative;
+  z-index: 10;
+}
+
+.search-field, .filter-dropdown, .sort-button {
+  background: #f2f2f2;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  gap: 10px;
+}
+.input-clean, .select-clean {
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+  color: #333;
+}
+
+/* Grid de Cards Verticales */
+.experiences-grid {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.experience-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 400px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.experience-card:hover { transform: translateY(-5px); }
+.experience-card img { width: 100%; height: 100%; object-fit: cover; }
+
+.difficulty-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* =========================================
+   5. RESPONSIVE UTILITIES
+   ========================================= */
+@media (max-width: 768px) {
+  .navbar-content { padding: 0 10px; }
+  .nav-links, .buttons-2 { display: none; }
+  
+  /* Home Responsive */
+  .feature-row { flex-direction: column; }
+  .blog-card { flex-direction: column; }
+  .hero-home { height: 400px; }
+  
+  /* Experiencias Responsive */
+  .hero-experiencias h1 { font-size: 2.5rem; }
+  .experiences-grid { grid-template-columns: 1fr; padding: 20px; }
+}
