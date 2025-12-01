@@ -12,183 +12,86 @@
   <body>
     <div class="desktop">
       
-      <nav class="navbar" role="navigation">
+      <header class="navbar">
         <div class="navbar-content">
-            <div class="company-2">
-            <img class="logo" src="defecto.png" alt="Logo" />
-            <div class="pack-go-2">Pack&amp;Go</div>
-            </div>
-            <div class="nav-links">
-                <a href="#inicio" class="text-wrapper-21">Inicio</a>
-                <a href="destinos.html" class="text-wrapper-21">Destinos</a>
-                <a href="experiencias.html" class="text-wrapper-21">Experiencias</a>
-                <a href="#blog" class="text-wrapper-21">Blog</a>
-            </div>
-            <div class="menu">
-            <label for="search-input" class="company-3">
-                <span class="text-wrapper-22">Buscar destinos</span>
-            </label>
-            <div class="buttons">
-                <button type="submit" class="primary-button-2">Buscar</button>
-            </div>
-            </div>
-            <div class="buttons-2">
-            <a href="#login" class="text-wrapper-24">Login</a>
-            <a href="#signup" class="primary-button-3">Crear cuenta</a>
+            <a href="index.html" class="company-2" style="text-decoration: none; color: inherit;">
+                <img class="logo" src="defecto.png" alt="Logo" />
+                <div class="pack-go-2">Pack&amp;Go</div>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="active-link">Inicio</a>
+                <a href="destinos.html">Destinos</a>
+                <a href="experiencias.html">Experiencias</a>
+                <a href="blogs.html">Blog</a>
+            </nav>
+            <div class="buttons-2" id="auth-container">
+                <a href="login.html" class="text-button">Iniciar sesión</a>
+                <a href="register.html" class="primary-button-black">Crear cuenta</a>
             </div>
         </div>
-      </nav>
+      </header>
 
       <header class="hero-home">
         <img class="hero" src="defecto.png" alt="Hero Image" />
       </header>
 
-      <section class="quote">
-        <h1 class="text-wrapper">"Aventuras listas para vivir"</h1>
-        <div class="author">
-          <div class="name">
-            <p class="div">
-              Únete a miles de mochileros que comparten sus experiencias sobre alojamientos, visados y aventuras.
-            </p>
-          </div>
-        </div>
+      <section class="section-home">
+        <h1 class="home-title">"Aventuras listas para vivir"</h1>
+        <p class="home-subtitle">Únete a miles de mochileros que comparten sus experiencias.</p>
         <div class="stats-container">
-          <div class="stat-item">
-            <div class="stat-number">50K+</div>
-            <div class="stat-label">Mochileros activos</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">180+</div>
-            <div class="stat-label">Países cubiertos</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">25K+</div>
-            <div class="stat-label">Experiencias</div>
-          </div>
+          <div class="stat-item"><div class="stat-number">50K+</div><div class="stat-label">Mochileros activos</div></div>
+          <div class="stat-item"><div class="stat-number">180+</div><div class="stat-label">Países cubiertos</div></div>
+          <div class="stat-item"><div class="stat-number">25K+</div><div class="stat-label">Experiencias</div></div>
         </div>
       </section>
 
-      <section class="frame">
-        <h2 class="text-wrapper-2">"Nuevas experiencias"</h2>
-        <p class="text-wrapper-3">Lo ultimo en viajes mochileros</p>
-      </section>
-
-      <section class="feature">
-        <div class="feature-wrapper">
-          <article class="feature-2">
-            <div class="row">
-              <div class="content">
-                <div class="text">
-                  <h3 class="text-wrapper-4">Visita Sydney</h3>
-                  <p class="p">
-                    Descubre la magia de Sydney, una ciudad vibrante donde la naturaleza y la vida urbana se mezclan.
-                  </p>
-                </div>
-                <a href="#" class="button"><span class="text-wrapper-5">Comprar ofertas</span></a>
-              </div>
-              <img class="image" src="defecto.png" alt="Sydney" />
+      <section class="section-home">
+        <h2 class="home-title">Nuevas experiencias</h2>
+        <div class="feature-row">
+            <div class="feature-content">
+                <h3>Visita Sydney</h3>
+                <p>Descubre la magia de Sydney, una ciudad vibrante donde la naturaleza y la vida urbana se mezclan.</p>
+                <a href="experiencias.html" class="primary-button-black">Ver ofertas</a>
             </div>
-            <div class="row-2">
-              <img class="image" src="defecto.png" alt="Outback" />
-              <div class="content">
-                <div class="text">
-                  <h3 class="text-wrapper-4">Magia del Outback</h3>
-                  <p class="p">
-                    Adéntrate en el corazón rojo de Australia y descubre la inmensidad del desierto.
-                  </p>
-                </div>
-                <a href="#" class="div-wrapper"><span class="text-wrapper-6">Comprar ofertas</span></a>
-              </div>
+            <img class="feature-image" src="defecto.png" alt="Sydney" />
+        </div>
+        <div class="feature-row">
+            <img class="feature-image" src="defecto.png" alt="Outback" />
+            <div class="feature-content">
+                <h3>Magia del Outback</h3>
+                <p>Adéntrate en el corazón rojo de Australia y descubre la inmensidad del desierto.</p>
+                <a href="experiencias.html" class="primary-button-black">Ver ofertas</a>
             </div>
-          </article>
         </div>
       </section>
 
-      <section class="frame-2">
-        <h2 class="text-wrapper-7">"Mejores experiencias"</h2>
-        <p class="text-wrapper-3">Solo para nuestros viajeros</p>
-      </section>
-
-      <section class="gallery-grid">
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-        <article class="card-item"><img class="img" src="defecto.png" alt="Exp" /></article>
-      </section>
-
-      <section class="frame-15">
-        <h2 class="text-wrapper-7">"Los mejores Blogs"</h2>
-        <p class="text-wrapper-3">Por si te apetece leer un poco</p>
-      </section>
-
-      <section class="frame-16">
-        <article class="frame-17">
-          <div class="blog-content">
-             <h3 class="text-wrapper-9">Los rincones del mundo 2025</h3>
-             <p class="text-wrapper-10">De Carolina Monteamor</p>
-             <p class="text-wrapper-11">Viajar con la mochila al hombro nunca pasa de moda...</p>
-             <a href="#" class="primary-button"><span class="text-wrapper-12">Leer artículo</span></a>
-          </div>
-          <img class="niklas-weiss" src="defecto.png" alt="Blog img" />
-        </article>
-        
-        <article class="frame-17">
-           <div class="blog-content">
-             <h3 class="text-wrapper-9">Nuevos paraísos mochileros</h3>
-             <p class="text-wrapper-10">De Carolina Monteamor</p>
-             <p class="text-wrapper-11">Cada año aparecen nuevos rincones que se vuelven tendencia...</p>
-             <a href="#" class="primary-button"><span class="text-wrapper-12">Leer artículo</span></a>
-           </div>
-           <img class="niklas-weiss" src="defecto.png" alt="Blog img" />
-        </article>
-      </section>
-
-      <section class="testimonials">
-        <header class="header">
-          <h2 class="text-wrapper-13">Testimonials</h2>
-          <p class="text-wrapper-14">Here's what people are saying</p>
-        </header>
-        <div class="cards">
-          <article class="card">
-            <blockquote class="text-wrapper-15">In the garden of life, some things are just very sweet.</blockquote>
-            <div class="author-2">
-              <img class="image-2" src="defecto.png" />
-              <div class="text-2"><cite class="text-wrapper-16">Andi Antennae</cite></div>
+      <section class="section-home">
+        <h2 class="home-title">Mejores Blogs</h2>
+        <div class="blog-card">
+            <div class="blog-text">
+                <h3>Los rincones del mundo 2025</h3>
+                <p>Viajar con la mochila al hombro nunca pasa de moda...</p>
+                <a href="blogs.html" class="text-button">Leer artículo &rarr;</a>
             </div>
-          </article>
-          <article class="card">
-             <blockquote class="text-wrapper-15">Your expectations will fly sky high.</blockquote>
-             <div class="author-2">
-               <img class="image-2" src="defecto.png" />
-               <div class="text-2"><cite class="text-wrapper-16">Wanda Wingleton</cite></div>
-             </div>
-           </article>
+            <img class="blog-img" src="defecto.png" alt="Blog" />
         </div>
       </section>
 
       <footer class="footer">
-        <div class="container">
-          <div class="content-2">
-            <div class="pack-go">Pack&amp;Go</div>
-            <p class="text-wrapper-19">La comunidad donde los caminos se cruzan.</p>
-          </div>
-          <nav class="nav">
-            <div class="column">
-              <h3 class="text-wrapper-20">Features</h3>
-              <a href="#">Destinos</a>
-              <a href="#">Blog</a>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="company-2">Pack&amp;Go</div>
+                <p>La comunidad donde los caminos se cruzan.</p>
             </div>
-            <div class="column">
-              <h3 class="text-wrapper-20">Support</h3>
-              <a href="#">Contacto</a>
-              <a href="#">Privacidad</a>
+            <div class="footer-col">
+                <h3>Features</h3>
+                <a href="destinos.html">Destinos</a>
+                <a href="experiencias.html">Experiencias</a>
+                <a href="blogs.html">Blog</a>
             </div>
-          </nav>
+            <div class="footer-col"><h3>Support</h3><a href="#">Contacto</a><a href="#">Privacidad</a></div>
         </div>
       </footer>
-
     </div>
   </body>
 </html>

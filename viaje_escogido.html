@@ -14,45 +14,31 @@
       
       <header class="navbar">
         <div class="navbar-content">
-            <div class="company-2">
-            <img class="logo" src="defecto.png" alt="Logo" />
-            <div class="pack-go-2">Pack&amp;Go</div>
-            </div>
-            
+            <a href="index.html" class="company-2" style="text-decoration: none; color: inherit;">
+                <img class="logo" src="defecto.png" alt="Logo" />
+                <div class="pack-go-2">Pack&amp;Go</div>
+            </a>
             <nav class="nav-links">
                 <a href="index.html">Inicio</a>
                 <a href="destinos.html">Destinos</a>
-                <a href="experiencias.html">Experiencias</a>
-                <a href="#blog">Blog</a>
+                <a href="experiencias.html" class="active-link">Experiencias</a>
+                <a href="blogs.html">Blog</a>
             </nav>
-
-            <div class="menu-mini">
-                <label>Buscar destinos</label>
-                <button type="button" class="primary-button">Buscar</button>
-            </div>
-
-            <div class="buttons-2">
-                <button type="button" class="text-button">Iniciar sesión</button>
-                <button type="button" class="primary-button-black">Crear cuenta</button>
+            <div class="buttons-2" id="auth-container">
+                <a href="login.html" class="text-button">Iniciar sesión</a>
+                <a href="register.html" class="primary-button-black">Crear cuenta</a>
             </div>
         </div>
       </header>
 
       <main class="trip-container">
-        
         <a href="experiencias.html" class="back-link">&lt; Volver a experiencias</a>
 
         <div class="trip-hero-grid">
-            
             <div class="trip-visuals">
-                <div class="trip-image-wrapper">
-                    <img src="defecto.png" alt="Bali" class="main-trip-image" />
-                </div>
-                
+                <div class="trip-image-wrapper"><img src="defecto.png" class="main-trip-image" /></div>
                 <div class="author-badge">
-                    <div class="author-img">
-                        <img src="defecto.png" alt="Monica" />
-                    </div>
+                    <div class="author-img"><img src="defecto.png" /></div>
                     <div class="author-info">
                         <span class="published-by">Publicado por</span>
                         <span class="author-name">Monica &bull; 4/03/2024</span>
@@ -62,146 +48,30 @@
 
             <div class="trip-details">
                 <h1 class="trip-title">Vacaciones en Balí</h1>
-                
-                <div class="trip-tags">
-                    <span class="tag">Categoria</span>
-                    <span class="tag">Dificultad</span>
-                    <div class="rating">
-                        <img src="defecto.png" class="star-icon" alt="Star"/> 
-                        <span>(127 reseñas)</span>
-                    </div>
-                </div>
-
+                <div class="trip-tags"><span class="tag">Categoria</span><span class="tag">Dificultad</span></div>
                 <div class="trip-meta-grid">
-                    <div class="meta-item">
-                        <strong>Ubicación:</strong> Cuzco, Perú
-                    </div>
-                    <div class="meta-item">
-                        <strong>Duración:</strong> 7 Días
-                    </div>
-                    <div class="meta-item">
-                        <strong>Grupo:</strong> 8-12 Personas
-                    </div>
+                    <div><strong>Ubicación:</strong> Cuzco, Perú</div>
+                    <div><strong>Duración:</strong> 7 Días</div>
                 </div>
-
-                <p class="trip-description">
-                    Sumérgete en la magia de la isla de los dioses con esta experiencia única. Disfruta de playas paradisíacas, templos milenarios y arrozales infinitos, combinando relax, cultura y aventura. Incluye alojamiento, excursiones guiadas y actividades locales como yoga al amanecer y cenas frente al mar.
-                </p>
-
+                <p class="trip-description">Sumérgete en la magia de la isla de los dioses...</p>
                 <div class="trip-pricing-card">
-                    <div class="price-block">
-                        <span class="price-amount">$ 680</span>
-                        <span class="price-per">/ persona</span>
-                    </div>
+                    <div class="price-block"><span class="price-amount">$ 680</span><span class="price-per">/ persona</span></div>
                     <div class="action-buttons">
-                        <button class="primary-button-black">Comprar billetes</button>
-                        <button class="icon-button-round" aria-label="Favoritos">
-                            <img src="defecto.png" alt="Heart" />
-                        </button>
+                        <a href="checkout.html" class="primary-button-black" style="text-decoration:none;">Comprar billetes</a>
+                        <button class="icon-button-round"><img src="defecto.png" alt="Heart" /></button>
                     </div>
                 </div>
-
             </div>
         </div>
-
       </main>
-
-      <nav class="trip-subnav">
-          <a href="#itinerario" class="subnav-link active">Itinerario</a>
-          <a href="#incluye" class="subnav-link">Incluye</a>
-          <a href="#equipo" class="subnav-link">Equipo</a>
-          <a href="#resenas" class="subnav-link">Reseñas</a>
-      </nav>
-
-      <section id="itinerario" class="trip-section-content">
-          
-          <article class="timeline-item">
-              <div class="timeline-number">1</div>
-              <div class="timeline-content">
-                  <h3>Llegada y Bienvenida</h3>
-                  <p>Encuentro con el grupo en el punto de partida. Briefing de seguridad, distribución de equipos y primera caminata de aclimatación.</p>
-              </div>
-          </article>
-
-          <article class="timeline-item">
-            <div class="timeline-number">2</div>
-            <div class="timeline-content">
-                <h3>Inicio de la Aventura</h3>
-                <p>Comenzamos el trekking principal atravesando paisajes impresionantes. Almuerzo en ruta y llegada al primer campamento.</p>
-            </div>
-        </article>
-
-        <article class="timeline-item">
-            <div class="timeline-number">3</div>
-            <div class="timeline-content">
-                <h3>Punto Panorámico</h3>
-                <p>Ascenso al mirador principal. Día intenso pero gratificante con vistas espectaculares. Noche en refugio de montaña.</p>
-            </div>
-        </article>
-
-      </section>
-
-      <section class="trip-section-content">
-          <h2 class="section-heading">Preguntas Frecuentes</h2>
-          
-          <details class="faq-item">
-              <summary>¿Qué nivel de condición física necesito?</summary>
-              <p>Se requiere un nivel medio. Caminaremos unas 4-5 horas diarias.</p>
-          </details>
-
-          <details class="faq-item">
-            <summary>¿Qué pasa si el clima es malo?</summary>
-            <p>Tenemos planes alternativos para actividades bajo techo o rutas seguras.</p>
-          </details>
-
-          <details class="faq-item">
-            <summary>¿Puedo ir solo o debo ir en grupo?</summary>
-            <p>¡Puedes venir solo! Es la mejor manera de conocer gente nueva.</p>
-          </details>
-      </section>
-
-      <section class="trip-section-content">
-          <div class="testimonial-card-large">
-              <div class="testimonial-header">
-                  <img src="defecto.png" class="author-avatar" alt="Wanda" />
-                  <div>
-                      <h4>Wanda Wingleton</h4>
-                      <span>Lepidopterist at Butterflai</span>
-                  </div>
-              </div>
-              <p>"I was completely taken by the exceptional naming power and attention to detail from this service. I wanted to find a way to get attention for my creatures of great wonder and beauty."</p>
-          </div>
-      </section>
 
       <footer class="footer">
         <div class="footer-container">
-          <div class="footer-col">
-             <div class="company-2">
-                 <div class="pack-go-2">Pack&amp;Go</div>
-             </div>
-             <p>La comunidad donde los caminos se cruzan.</p>
-             <img src="defecto.png" style="width:100px; margin-top:10px;" alt="Social" />
-          </div>
-          
-          <div class="footer-col">
-              <h3>Features</h3>
-              <a href="destinos.html">Destinos</a>
-              <a href="experiencias.html">Experiencias</a>
-              <a href="#">Blog</a>
-            </div>
-            <div class="footer-col">
-              <h3>Learn more</h3>
-              <a href="#">Acerca de nosotros</a>
-            </div>
-            <div class="footer-col">
-              <h3>Support</h3>
-              <a href="#">Contacto</a>
-              <a href="#">Terminos</a>
-              <a href="#">Privacidad</a>
-            </div>
+            <div class="footer-col"><div class="company-2">Pack&amp;Go</div></div>
+            <div class="footer-col"><h3>Features</h3><a href="destinos.html">Destinos</a><a href="experiencias.html">Experiencias</a></div>
+            <div class="footer-col"><h3>Support</h3><a href="#">Contacto</a></div>
         </div>
       </footer>
-
     </div>
   </body>
 </html>
