@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Viajes - Pack&Go</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="perfil.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-backpack"></i>
+                    <span>Pack&Go</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="destinos.html">Destinos</a></li>
+                <li><a href="experiencias.html">Experiencias</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar destinos">
+                <button type="submit">Buscar</button>
+            </div>
+            <div class="user-actions logged-in">
+                <a href="perfil.html" class="user-avatar-link">
+                    <div class="user-avatar-placeholder"></div>
+                </a>
+                
+                <a href="index.html" class="btn-black-sm">Cerrar sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="perfil.html" class="sidebar-link">Datos personales</a></li>
+                    <li><a href="favoritos.html" class="sidebar-link">Favoritos</a></li>
+                    <li><a href="mis-viajes.html" class="sidebar-link active">Mis viajes</a></li>
+                    <li><a href="configuracion.html" class="sidebar-link">Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-link">Dar de baja</a>
+            </div>
+        </aside>
+
+        <section class="profile-content">
+            <div class="content-wrapper">
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-chevron-left"></i> Volver a Inicio
+                </a>
+                
+                <h2 class="section-heading">Reservas futuras</h2>
+                
+                <div class="trips-list">
+                    <article class="trip-card">
+                        <div class="trip-image">
+                            <img src="images/sidney.jpg" alt="Monaco">
+                        </div>
+                        <div class="trip-info">
+                            <h3>Viaje a Monaco</h3>
+                            <p class="trip-date">24 de mayo, 2026</p>
+                            <p class="trip-countdown">Quedan 156 días</p>
+                        </div>
+                    </article>
+
+                    <article class="trip-card">
+                        <div class="trip-image">
+                            <img src="images/outback.jpg" alt="Los Angeles">
+                        </div>
+                        <div class="trip-info">
+                            <h3>Viaje a Los Angeles</h3>
+                            <p class="trip-date">18 de febrero, 2026</p>
+                            <p class="trip-countdown">Quedan 79 días</p>
+                        </div>
+                    </article>
+                </div>
+
+                <h2 class="section-heading mt-large">Mis aventuras</h2>
+                
+                <div class="trips-list">
+                    <article class="trip-card">
+                        <div class="trip-image">
+                            <img src="images/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg" alt="Amazonas">
+                        </div>
+                        <div class="trip-info">
+                            <h3>Viaje al Amazonas</h3>
+                            <p class="trip-date">17 de octubre, 2019</p>
+                        </div>
+                    </article>
+
+                    <article class="trip-card">
+                        <div class="trip-image">
+                            <img src="images/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Tokio">
+                        </div>
+                        <div class="trip-info">
+                            <h3>Viaje a Tokio</h3>
+                            <p class="trip-date">23 de enero, 2017</p>
+                        </div>
+                    </article>
+
+                    <article class="trip-card">
+                        <div class="trip-image">
+                            <img src="images/leonard-cotte-R5scocnOOdM-unsplash.jpg" alt="Bruselas">
+                        </div>
+                        <div class="trip-info">
+                            <h3>Viaje a Bruselas</h3>
+                            <p class="trip-date">9 de julio, 2013</p>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Pack&Go</h3>
+                <p>La comunidad donde los caminos se cruzan.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Features</h4>
+                    <a href="#">Destinos</a>
+                    <a href="#">Experiencias</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="link-column">
+                    <h4>Learn more</h4>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Nosotros</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="#">Contacto</a>
+                    <a href="#">Terminos</a>
+                    <a href="#">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

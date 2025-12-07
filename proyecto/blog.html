@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Pack&Go</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-backpack"></i>
+                    <span>Pack&Go</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="destinos.html">Destinos</a></li>
+                <li><a href="experiencias.html">Experiencias</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar destinos">
+                <button type="submit">Buscar</button>
+            </div>
+            <div class="user-actions">
+                <a href="login.html" class="btn-login">Iniciar sesión</a>
+                <a href="signup.html" class="btn-signup">Crear cuenta</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="sticky-destinations-hero">
+            <div class="hero-text">
+                <h1>Historias para contar</h1>
+                <p>Conoce historias de otros viajeros en este blog</p>
+            </div>
+        </section>
+
+        <div class="experiences-content-list">
+            
+            <div class="search-filter-bar">
+                <div class="search-input-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar publicación">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn">Todas las categorías</button>
+                    <button class="filter-icon-btn"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+
+            <div class="blog-list-container">
+                
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Bali">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Los rincones del mundo que todo mochilero debería visitar en 2025</h3>
+                        <p class="blog-author">De Carolina Monteamor</p>
+                        <p class="blog-excerpt">Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia entre los viajeros que buscan aventura, paisajes únicos y experiencias auténticas...</p>
+                        <a href="blog_post.html" class="btn-black-sm">Leer artículo completo</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/cassie-matias-GgJtM4ZNwpg-unsplash.jpg" alt="India">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Los 10 destinos más sorprendentes de este año</h3>
+                        <p class="blog-author">De Carolina Monteamor</p>
+                        <p class="blog-excerpt">Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia entre los viajeros que buscan aventura, paisajes únicos y experiencias auténticas...</p>
+                        <button class="btn-black-sm">Leer artículo completo</button>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/morten-andreassen-mX0tCOykgSY-unsplash.jpg" alt="Roadtrip">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Los secretos mejor guardados del mundo mochilero</h3>
+                        <p class="blog-author">De Carolina Monteamor</p>
+                        <p class="blog-excerpt">Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia entre los viajeros que buscan aventura, paisajes únicos y experiencias auténticas...</p>
+                        <button class="btn-black-sm">Leer artículo completo</button>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/andrew-ridley-Kt5hRENuotI-unsplash.jpg" alt="Naturaleza">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Los nuevos paraísos mochileros que deberías conocer</h3>
+                        <p class="blog-author">De Carolina Monteamor</p>
+                        <p class="blog-excerpt">Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia entre los viajeros que buscan aventura, paisajes únicos y experiencias auténticas...</p>
+                        <button class="btn-black-sm">Leer artículo completo</button>
+                    </div>
+                </article>
+
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Pack&Go</h3>
+                <p>La comunidad donde los caminos se cruzan.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Features</h4>
+                    <a href="#">Destinos</a>
+                    <a href="#">Experiencias</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="link-column">
+                    <h4>Learn more</h4>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Nosotros</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="#">Contacto</a>
+                    <a href="#">Terminos</a>
+                    <a href="#">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

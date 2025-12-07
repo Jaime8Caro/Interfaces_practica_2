@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación y Pago - Pack&Go</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-backpack"></i>
+                    <span>Pack&Go</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="destinos.html">Destinos</a></li>
+                <li><a href="experiencias.html">Experiencias</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar destinos">
+                <button type="submit">Buscar</button>
+            </div>
+            <div class="user-actions logged-in">
+                <a href="perfil.html" class="user-avatar-link">
+                    <div class="user-avatar-placeholder"></div>
+                </a>
+                
+                <a href="index.html" class="btn-black-sm">Cerrar sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="back-link-container">
+            <a href="experiencias.html"><i class="fa-solid fa-chevron-left"></i> Volver a experiencias</a>
+        </div>
+
+        <section class="checkout-section">
+            
+            <h1 class="page-title-center">Confirmación y Pago</h1>
+
+            <div class="stepper-wrapper">
+                <div class="stepper-line"></div>
+                
+                <div class="step-item completed">
+                    <div class="step-circle">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="step-pill">1º Datos Personales</div>
+                </div>
+
+                <div class="step-item completed">
+                    <div class="step-circle">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="step-pill">2º Acompañantes | Mascotas | Alergias</div>
+                </div>
+
+                <div class="step-item active">
+                    <div class="step-circle"></div>
+                    <div class="step-pill">3º Confirmación | Pago</div>
+                </div>
+            </div>
+
+            <div class="confirmation-grid">
+                
+                <div class="conf-column text-left">
+                    <h3 class="column-title">Resumen del viaje</h3>
+                    <div class="trip-summary">
+                        <p><strong>Destino:</strong> Vacaciones en Balí</p>
+                        <p class="summary-text">
+                            Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it. Call out a feature, benefit, or value of your site.
+                        </p>
+                        <p><strong>Duración:</strong> 7 Días</p>
+                        <p><strong>Acompañantes:</strong> 1</p>
+                        <p><strong>Mascota:</strong> No</p>
+                        <p><strong>Alergias:</strong> Ninguna</p>
+                    </div>
+                </div>
+
+                <div class="conf-column center-content">
+                    <h3 class="column-title">Coste total</h3>
+                    
+                    <div class="cost-breakdown">
+                        <div class="cost-row">234.00 $</div>
+                        <div class="cost-row">234.00 $</div>
+                        <hr class="cost-divider">
+                        <div class="cost-total">468.00 $</div>
+                    </div>
+                </div>
+
+                <div class="conf-column center-content">
+                    <h3 class="column-title">Divisas de pago</h3>
+                    
+                    <div class="currency-buttons">
+                        <button class="currency-btn active">USD $</button>
+                        <button class="currency-btn">EUR €</button>
+                        <button class="currency-btn">GBP £</button>
+                        <button class="currency-btn">JPY ¥</button>
+                    </div>
+
+                    <h3 class="column-title" style="margin-top: 2rem;">Método de pago</h3>
+                    
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <span>Tarjeta bancaria</span>
+                            <input type="radio" name="payment" checked>
+                        </label>
+                        <label class="payment-option">
+                            <span>Transferencia bancaria</span>
+                            <input type="radio" name="payment">
+                        </label>
+                        <label class="payment-option">
+                            <span>Pagos digitales (Paypal, Wise)</span>
+                            <input type="radio" name="payment">
+                        </label>
+                    </div>
+
+                    <a href="compra_exito.html" class="btn-confirm-green">Confirmar compra</a>
+                </div>
+
+            </div>
+
+            <div class="checkout-actions" style="margin-top: 4rem;">
+                <a href="proceso_compra_paso2.html" class="btn-rounded-outline">Regresar al paso anterior</a>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Pack&Go</h3>
+                <p>La comunidad donde los caminos se cruzan.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Features</h4>
+                    <a href="#">Destinos</a>
+                    <a href="#">Experiencias</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="link-column">
+                    <h4>Learn more</h4>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Nosotros</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="#">Contacto</a>
+                    <a href="#">Terminos</a>
+                    <a href="#">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
