@@ -1,11 +1,15 @@
 function validarCampoFormulario(campo, esValido, mensajeError, placeholderOriginal) {
+    campo.classList.remove("campo-invalido");
+    void campo.offsetWidth;
     if (!esValido) {
         campo.value = "";
-        campo.placeholder = mensajeError;
         campo.classList.add("campo-invalido");
+        campo.placeholder = mensajeError;
+        setTimeout(() => {
+            campo.placeholder = placeholderOriginal;
+        }, 1500);
     } else {
         campo.placeholder = placeholderOriginal;
-        campo.classList.remove("campo-invalido");
     }
 }
 

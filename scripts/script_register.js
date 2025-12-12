@@ -7,16 +7,16 @@ document.addEventListener("DOMContentLoaded", function() {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // --- SELECCIÓN DE ELEMENTOS (Por placeholder ya que no tienen ID en register.html) ---
-            const nombreInput = form.querySelector('input[placeholder="Nombre"]');
-            const apellidosInput = form.querySelector('input[placeholder="Apellidos"]');
-            const fechaInput = form.querySelector('input[placeholder="Fecha de nacimiento"]');
-            const correoInput = form.querySelector('input[placeholder="Correo electrónico"]');
-            const correoConfInput = form.querySelector('input[placeholder="Confirmacion correo"]');
-            const usuarioInput = form.querySelector('input[placeholder="Nombre de usuario"]');
-            const passInput = form.querySelector('input[placeholder="Contraseña"]');
-            const imagenInput = form.querySelector('input[type="file"]');
-            const privacyInput = document.getElementById("privacy"); // Este sí tiene ID
+            // --- SELECCIÓN DE ELEMENTOS (Actualizado: Ahora usamos IDs) ---
+            const nombreInput = document.getElementById('nombre');
+            const apellidosInput = document.getElementById('apellidos');
+            const fechaInput = document.getElementById('fecha-nacimiento');
+            const correoInput = document.getElementById('email');
+            const correoConfInput = document.getElementById('confirmar-email');
+            const usuarioInput = document.getElementById('usuario');
+            const passInput = document.getElementById('password');
+            const imagenInput = document.getElementById('foto-perfil'); // Input file oculto
+            const privacyInput = document.getElementById("privacy");
             const privacyLabel = form.querySelector('label[for="privacy"]'); // Para marcar error en el texto
 
             // --- VALORES ---
@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const correoConfirmacion = correoConfInput.value.trim();
             const apodo = usuarioInput.value.trim();
             const contraseña = passInput.value.trim();
-            const imagenPerfil = imagenInput.files[0];
+            
+            // Verificación de seguridad por si no se seleccionó archivo
+            const imagenPerfil = imagenInput.files && imagenInput.files[0] ? imagenInput.files[0] : null;
 
             let formularioValido = true;
 
@@ -45,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
             let esCorreoFormatoValido = correo.length >= 3 && correo.includes("@");
             
             // Si el formato es válido, comprobamos si YA EXISTE (para evitar el alert de script.js)
-            if (esCorreoFormatoValido && validarUsuarioExistente(correo)) {
+            // Nota: validarUsuarioExistente debe estar definida en script.js
+            if (esCorreoFormatoValido && typeof validarUsuarioExistente === 'function' && validarUsuarioExistente(correo)) {
                 // Si existe, forzamos el error visual aquí
                 validarCampoFormulario(correoInput, false, "¡Correo ya registrado!", "Correo electrónico");
                 formularioValido = false;
@@ -57,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // 3. Confirmación de Correo
             const coinciden = (correo === correoConfirmacion) && (correo !== "");
-            validarCampoFormulario(correoConfInput, coinciden, "No coinciden", "Confirmacion correo");
+            validarCampoFormulario(correoConfInput, coinciden, "Correos no coinciden", "Confirmacion correo");
             if (!coinciden) formularioValido = false;
 
             // 4. Fecha (Validar que no esté vacía y sea fecha pasada)
@@ -66,13 +69,14 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!esFechaValida) formularioValido = false;
 
             // 5. Usuario / Apodo
-            validarCampoFormulario(usuarioInput, apodo.length >= 3, "Muy corto", "Nombre de usuario");
+            validarCampoFormulario(usuarioInput, apodo.length >= 3, "Usuario muy corto", "Nombre de usuario");
             if (apodo.length < 3) formularioValido = false;
 
             // 6. Contraseña
             validarCampoFormulario(passInput, contraseña.length >= 6, "Mínimo 6 caracteres", "Contraseña");
             if (contraseña.length < 6) formularioValido = false;
 
+            // Validación de Privacidad
             if (!privacyInput.checked) {
                 privacyLabel.style.color = "red"; // Indicador visual simple
                 privacyInput.style.outline = "2px solid red";
@@ -101,8 +105,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 // llamar a guardarUsuario() si esta tuviera un alert (aunque ya validamos duplicados arriba).
                 // Pero usaremos tu función 'guardarUsuario' asumiendo que ya pasamos el filtro de duplicado.
                 
-                guardarUsuario(datosUsuario); // Esto guarda y loguea al usuario
-                window.location.href = "index.html"; // Redirección
+                if (typeof guardarUsuario === 'function') {
+                    guardarUsuario(datosUsuario); // Esto guarda y loguea al usuario
+                    window.location.href = "index.html"; // Redirección
+                } else {
+                    console.error("Error: La función guardarUsuario no está definida en script.js");
+                }
             };
 
             // Procesar imagen si existe
