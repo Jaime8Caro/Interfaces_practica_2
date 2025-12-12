@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vacaciones en Balí - Pack&Go</title>
+    <title>Experiencia - Pack&Go</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script src="scripts/script.js" defer></script>
+    <script src="scripts/script_compra.js" defer></script>
     <script src="scripts/script_experiencias.js" defer></script>
 </head>
 <body>
@@ -17,17 +19,16 @@
     <header class="main-header">
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
-                    <i class="fa-solid fa-backpack"></i>
-                    <span>Pack&Go</span>
-                </a>
+                <i class="fa-solid fa-backpack"></i>
+                <span>Pack&Go</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="destinos.html">Destinos</a></li>
                 <li><a href="experiencias.html">Experiencias</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
+
             <div class="search-bar">
                 <input type="text" placeholder="Buscar destinos">
                 <button type="submit">Buscar</button>
@@ -68,7 +69,7 @@
             <div class="container product-grid">
                 
                 <div class="product-gallery">
-                    <img id="detail-image" src="" alt="Experience Image">
+                    <img id="detail-image" src="" alt="Cargando experiencia...">
                 </div>
 
                 <div class="product-details">
@@ -79,11 +80,7 @@
 
                     <div class="rating-row">
                         <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <span id="detail-reviews">(... reseñas)</span>
                     </div>
@@ -104,7 +101,9 @@
                             <span class="amount" id="detail-price">$ ...</span>
                             <span class="unit">/ persona</span>
                         </div>
-                        <a href="proceso_compra.html" class="btn-black">Reservar ahora</a>
+                        <button class="btn-black" id="btn-reservar-dinamico">
+                            Reservar ahora
+                        </button>
                     </div>
 
                     <div class="product-description">
@@ -117,18 +116,15 @@
 
         <section class="product-content-body">
             <div class="container">
-                
                 <div class="author-block">
-                    <div class="author-avatar"></div> 
+                    <div class="author-avatar" style="background: #ddd; width: 50px; height: 50px; border-radius: 50%;"></div> 
                     <div class="author-text">
-                        <h4 id="detail-author">Publicado por ...</h4>
+                        <h4 id="detail-author">...</h4>
                         <span id="detail-date">...</span>
                     </div>
                 </div>
                 
-                <p class="long-description" id="detail-long-desc">
-                    Sumérgete en la magia de la isla de los dioses con esta experiencia única. Disfruta de playas paradisíacas, templos milenarios y arrozales infinitos... Perfecto para quienes buscan equilibrio, naturaleza y momentos inolvidables.
-                </p>
+                <p class="long-description" id="detail-long-desc">...</p>
 
                 <div class="tabs-navigation">
                     <button class="tab-btn active" data-tab="tab-itinerario">Itinerario</button>
@@ -138,62 +134,27 @@
                 </div>
 
                 <div id="tab-itinerario" class="tab-content-panel active">
-                    <div class="itinerary-timeline">
-                        </div>
+                    <div class="itinerary-timeline"></div>
                 </div>
 
                 <div id="tab-incluye" class="tab-content-panel">
                     <ul class="check-list">
-                        <li><i class="fa-solid fa-check"></i> Alojamiento en hoteles 3/4★</li>
-                        <li><i class="fa-solid fa-check"></i> Todos los desayunos incluidos</li>
-                        <li><i class="fa-solid fa-check"></i> Guía experto en español</li>
-                        <li><i class="fa-solid fa-check"></i> Transporte privado (Van/Bus)</li>
-                        <li><i class="fa-solid fa-check"></i> Entradas a parques nacionales</li>
-                        <li><i class="fa-solid fa-check"></i> Traslados aeropuerto</li>
+                        <li><i class="fa-solid fa-check"></i> Alojamiento seleccionado</li>
+                        <li><i class="fa-solid fa-check"></i> Guía experto</li>
+                        <li><i class="fa-solid fa-check"></i> Transporte interno</li>
                     </ul>
                 </div>
 
                 <div id="tab-equipo" class="tab-content-panel">
-                    <h4 style="margin-bottom:1rem;">Recomendamos llevar:</h4>
-                    <ul class="equip-list">
-                        <li>Mochila cómoda (40-50L)</li>
-                        <li>Calzado de trekking impermeable</li>
-                        <li>Ropa por capas (térmica, forro polar)</li>
-                        <li>Chaqueta impermeable / Cortavientos</li>
-                        <li>Botella de agua reutilizable</li>
-                        <li>Batería externa para cámara/móvil</li>
-                    </ul>
+                    <p>Revisa la descripción para ver el equipo recomendado.</p>
                 </div>
 
                 <div id="tab-resenas" class="tab-content-panel">
-                    <div class="testimonial-box-feature">
-                        <div class="user-feature-header">
-                            <div class="user-feature-icon icon-blue"><i class="fa-regular fa-face-smile"></i></div>
-                            <div>
-                                <h4>Wanda Wingleton</h4>
-                                <small>Viajero Verificado</small>
-                            </div>
-                            <i class="fa-solid fa-quote-right quote-right"></i>
-                        </div>
-                        <p>"Una experiencia increíble. La organización fue perfecta y los paisajes superaron mis expectativas. ¡Repetiré seguro!"</p>
-                    </div>
-                    <br>
-                    <div class="testimonial-box-feature">
-                        <div class="user-feature-header">
-                            <div class="user-feature-icon icon-green"><i class="fa-regular fa-thumbs-up"></i></div>
-                            <div>
-                                <h4>Roberto Casas</h4>
-                                <small>Viajero Verificado</small>
-                            </div>
-                            <i class="fa-solid fa-quote-right quote-right"></i>
-                        </div>
-                        <p>"Muy buen ambiente en el grupo. Los guías sabían muchísimo sobre la historia local."</p>
-                    </div>
+                    <p>Opiniones de viajeros verificados.</p>
                 </div>
 
             </div>
         </section>
-
     </main>
 
     <footer class="main-footer">
@@ -201,33 +162,8 @@
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
                 <p>La comunidad donde los caminos se cruzan.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
-                </div>
             </div>
-            <div class="footer-links">
-                <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="#">Destinos</a>
-                    <a href="#">Experiencias</a>
-                    <a href="#">Blog</a>
-                </div>
-                <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
-                </div>
-                <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
-                </div>
             </div>
-        </div>
     </footer>
-
 </body>
 </html>

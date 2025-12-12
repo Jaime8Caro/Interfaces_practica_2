@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/script_compra.js" defer></script>
 </head>
 <body>
 
@@ -50,7 +52,7 @@
             </div>
             <div class="user-actions logged-in">
                 <div class="user-avatar-placeholder"></div>
-                <button class="btn-black-sm">Cerrar sesión</button>
+                <a href="index.html" class="btn-black-sm">Cerrar sesión</a>
             </div>
         </nav>
     </header>
@@ -69,18 +71,24 @@
             <h1 class="page-title-center" style="margin-bottom: 2rem;">¡Compra realizada con éxito!</h1>
 
             <div class="success-details-box">
-                <h3 class="details-subtitle">Detalles de la experiencia</h3>
+                <h3 class="details-subtitle">Detalles de la reserva: <span id="exito-id">#PKG-0000</span></h3>
                 
-                <h2 class="experience-title-large">Vacaciones en Balí</h2>
+                <h2 class="experience-title-large" id="exito-titulo">Cargando reserva...</h2>
                 
                 <p class="success-description">
-                    Sumérgete en la magia de la isla de los dioses con esta experiencia única. Disfruta de playas paradisíacas, templos milenarios y arrozales infinitos, combinando relax, cultura y aventura. Tu reserva ha sido confirmada y hemos enviado un correo electrónico con todos los detalles y el itinerario completo.
+                    Hemos enviado un correo de confirmación a <strong id="exito-email">...</strong> con todos los detalles y el itinerario completo. 
+                    ¡Prepárate para tu aventura!
                 </p>
+                
+                <div style="margin-top: 20px; text-align: left; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p><strong>Destino:</strong> <span id="exito-destino">...</span></p>
+                    <p><strong>Total pagado:</strong> <span id="exito-precio">...</span></p>
+                </div>
             </div>
 
             <div class="checkout-actions">
-                <button class="btn-rounded-black">Guardar recibo</button>
-                <a href="#" class="btn-rounded-outline">Ver detalles de reserva</a>
+                <a href="perfil.html" class="btn-rounded-black">Ver en mi perfil</a>
+                <a href="index.html" class="btn-rounded-outline">Volver al inicio</a>
             </div>
 
         </section>
@@ -91,33 +99,8 @@
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
                 <p>La comunidad donde los caminos se cruzan.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
-                </div>
             </div>
-            <div class="footer-links">
-                <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="#">Destinos</a>
-                    <a href="#">Experiencias</a>
-                    <a href="#">Blog</a>
-                </div>
-                <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
-                </div>
-                <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
-                </div>
             </div>
-        </div>
     </footer>
-
 </body>
 </html>

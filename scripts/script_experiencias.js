@@ -1088,25 +1088,30 @@ const experiencesData = [
     }
 ];
 
+// --- 1. LÓGICA DE LISTADOS Y DETALLE ---
 
-// 1. Lógica para EXPERIENCIAS (Listado y Filtros)
+// Detectar dónde estamos
 const experiencesListContainer = document.querySelector(".experiences-grid-list");
-if (experiencesListContainer && document.getElementById("exp-search-input")) {
-    renderExperiencesList(experiencesListContainer); // Carga inicial
-    initExperiencesFilters(experiencesListContainer); // Activamos filtros
-}
-// (Si estamos en Destinos, usamos la otra lógica que ya tenías)
-else if (experiencesListContainer && document.getElementById("list-europa")) {
-    initDestinationsPage(); 
-}
-
-// 2. Lógica para COMPRA (Detalle)
 const productDetailSection = document.querySelector(".product-details");
-if (productDetailSection) {
-    loadExperienceDetail();
-}
 
-// --- FUNCIÓN DE RENDERIZADO (Actualizada para manejar "No resultados") ---
+// Inicializar según la página
+document.addEventListener("DOMContentLoaded", function() {
+    // Si estamos en experiencias.html (y no es destinos)
+    if (experiencesListContainer && !document.getElementById("list-europa")) {
+        renderExperiencesList(experiencesListContainer);
+        initExperiencesFilters(experiencesListContainer);
+    }
+    // Si estamos en destinos.html
+    else if (document.getElementById("list-europa")) {
+        initDestinationsPage();
+    }
+    // Si estamos en compra.html (Detalle)
+    else if (productDetailSection) {
+        loadExperienceDetail();
+    }
+});
+
+// --- FUNCIÓN DE RENDERIZADO (Listado) ---
 function renderExperiencesList(container, listaDatos = experiencesData) {
     container.innerHTML = ""; 
 
@@ -1148,7 +1153,7 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
     });
 }
 
-// --- NUEVA FUNCIÓN: LÓGICA DE FILTROS Y BÚSQUEDA ---
+// --- LÓGICA DE FILTROS ---
 function initExperiencesFilters(container) {
     const searchInput = document.getElementById("exp-search-input");
     const categoryBtn = document.getElementById("btn-exp-category");
@@ -1156,31 +1161,17 @@ function initExperiencesFilters(container) {
     const sortBtn = document.getElementById("btn-exp-sort");
     const filterContainer = document.querySelector(".filter-buttons");
 
-    // Estados iniciales
-    let filtros = {
-        texto: "",
-        categoria: "Todas",
-        dificultad: "Todas",
-        orden: "Defecto"
-    };
+    let filtros = { texto: "", categoria: "Todas", dificultad: "Todas", orden: "Defecto" };
 
-    // 1. FUNCIÓN MAESTRA QUE APLICA TODO
     const aplicarFiltros = () => {
         let resultados = experiencesData.filter(exp => {
-            // A. Filtro Texto (Título o Ubicación)
             const textoMatch = exp.titulo.toLowerCase().includes(filtros.texto) || 
                                exp.ubicacion.toLowerCase().includes(filtros.texto);
-            
-            // B. Filtro Categoría
             const catMatch = filtros.categoria === "Todas" || exp.categoria === filtros.categoria;
-
-            // C. Filtro Dificultad
             const difMatch = filtros.dificultad === "Todas" || exp.dificultad === filtros.dificultad;
-
             return textoMatch && catMatch && difMatch;
         });
 
-        // D. Ordenamiento
         if (filtros.orden === "Precio: Menor a Mayor") {
             resultados.sort((a, b) => a.precio - b.precio);
         } else if (filtros.orden === "Precio: Mayor a Menor") {
@@ -1190,18 +1181,18 @@ function initExperiencesFilters(container) {
         renderExperiencesList(container, resultados);
     };
 
-    // 2. EVENTOS DEL BUSCADOR
-    searchInput.addEventListener("input", (e) => {
-        filtros.texto = e.target.value.toLowerCase().trim();
-        aplicarFiltros();
-    });
-
-    // 3. GENERADOR DE MENÚS DESPLEGABLES
+    if(searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            filtros.texto = e.target.value.toLowerCase().trim();
+            aplicarFiltros();
+        });
+    }
+    
+    // Función helper para menús
     const crearMenu = (boton, opciones, tipoFiltro) => {
         const menu = document.createElement("div");
-        menu.className = "category-dropdown"; // Reutilizamos tu clase CSS
+        menu.className = "category-dropdown"; 
         
-        // Opción "Todas"
         const opcionTodas = document.createElement("div");
         opcionTodas.className = "category-option";
         opcionTodas.textContent = tipoFiltro === 'categoria' ? "Todas las categorías" : "Todas las dificultades";
@@ -1213,14 +1204,12 @@ function initExperiencesFilters(container) {
         });
         menu.appendChild(opcionTodas);
 
-        // Opciones Dinámicas
         opciones.forEach(opcionTxt => {
             const item = document.createElement("div");
             item.className = "category-option";
             item.textContent = opcionTxt;
             item.addEventListener("click", () => {
                 filtros[tipoFiltro] = opcionTxt;
-                // Acortar texto si es muy largo para el botón
                 boton.textContent = opcionTxt; 
                 menu.classList.remove("show");
                 aplicarFiltros();
@@ -1228,82 +1217,71 @@ function initExperiencesFilters(container) {
             menu.appendChild(item);
         });
 
-        // Lógica de apertura/cierre
-        filterContainer.appendChild(menu); // Añadimos al DOM
+        filterContainer.appendChild(menu); 
         
-        // Ajuste de posición manual si es necesario, o dejamos que CSS lo maneje
-        if(boton === sortBtn) menu.style.right = "0"; 
-
         boton.addEventListener("click", (e) => {
             e.stopPropagation();
-            // Cerrar otros menús abiertos
-            document.querySelectorAll(".category-dropdown").forEach(m => {
-                if(m !== menu) m.classList.remove("show");
-            });
+            document.querySelectorAll(".category-dropdown").forEach(m => { if(m !== menu) m.classList.remove("show"); });
             menu.classList.toggle("show");
-            
-            // Posicionar menú justo debajo del botón clickeado (para evitar superposiciones)
             menu.style.top = (boton.offsetTop + boton.offsetHeight + 10) + "px";
-            // Si es el botón de dificultad (centro), centramos un poco el menú
-            if(boton === difficultyBtn) menu.style.left = boton.offsetLeft + "px";
-            if(boton === categoryBtn) menu.style.left = boton.offsetLeft + "px";
+            if(boton === difficultyBtn || boton === categoryBtn) menu.style.left = boton.offsetLeft + "px";
         });
     };
 
-    // 4. INICIALIZAR LOS MENÚS
-    
-    // A. Categorías (Extraer únicas del data)
-    const categoriasUnicas = [...new Set(experiencesData.map(e => e.categoria))].sort();
-    crearMenu(categoryBtn, categoriasUnicas, "categoria");
+    if(categoryBtn) {
+        const categoriasUnicas = [...new Set(experiencesData.map(e => e.categoria))].sort();
+        crearMenu(categoryBtn, categoriasUnicas, "categoria");
+    }
 
-    // B. Dificultades (Extraer únicas)
-    const dificultadesUnicas = ["Baja", "Media", "Alta", "Muy Alta"]; // Orden lógico manual
-    crearMenu(difficultyBtn, dificultadesUnicas, "dificultad");
+    if(difficultyBtn) {
+        const dificultadesUnicas = ["Baja", "Media", "Alta", "Muy Alta"];
+        crearMenu(difficultyBtn, dificultadesUnicas, "dificultad");
+    }
 
-    // C. Ordenar (Menú manual)
-    const menuSort = document.createElement("div");
-    menuSort.className = "category-dropdown sort-menu"; // Clase sort-menu para alinear a derecha
-    ["Precio: Menor a Mayor", "Precio: Mayor a Menor", "Defecto"].forEach(orden => {
-        const item = document.createElement("div");
-        item.className = "category-option";
-        item.textContent = orden;
-        item.addEventListener("click", () => {
-            filtros.orden = orden;
-            menuSort.classList.remove("show");
-            aplicarFiltros();
+    if(sortBtn) {
+        const menuSort = document.createElement("div");
+        menuSort.className = "category-dropdown sort-menu";
+        ["Precio: Menor a Mayor", "Precio: Mayor a Menor", "Defecto"].forEach(orden => {
+            const item = document.createElement("div");
+            item.className = "category-option";
+            item.textContent = orden;
+            item.addEventListener("click", () => {
+                filtros.orden = orden;
+                menuSort.classList.remove("show");
+                aplicarFiltros();
+            });
+            menuSort.appendChild(item);
         });
-        menuSort.appendChild(item);
-    });
-    filterContainer.appendChild(menuSort);
-    
-    sortBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
-        menuSort.classList.toggle("show");
-    });
+        filterContainer.appendChild(menuSort);
+        sortBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
+            menuSort.classList.toggle("show");
+        });
+    }
 
-    // 5. CERRAR AL HACER CLICK FUERA
     document.addEventListener("click", (e) => {
-        if (!filterContainer.contains(e.target)) {
+        if (filterContainer && !filterContainer.contains(e.target)) {
             document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
         }
     });
 }
 
-// ... (El resto de funciones como loadExperienceDetail y initDestinationsPage siguen aquí) ...
 
-// --- FUNCIÓN PARA CARGAR EL DETALLE (compra.html) ---
+// --- FUNCIÓN CLAVE: CARGAR EL DETALLE EN compra.html ---
 function loadExperienceDetail() {
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get("id"));
 
+    // Buscar experiencia por ID
     const exp = experiencesData.find(e => e.id === id);
 
     if (!exp) {
-        document.querySelector("main").innerHTML = "<h1 style='text-align:center; margin-top:50px;'>Experiencia no encontrada</h1><p style='text-align:center'><a href='experiencias.html'>Volver</a></p>";
+        document.querySelector("main").innerHTML = "<div class='container' style='padding:50px; text-align:center;'><h1>Experiencia no encontrada</h1><a href='experiencias.html' class='btn-black'>Volver</a></div>";
         return;
     }
 
+    // Rellenar datos visuales
     document.getElementById("detail-image").src = exp.imagen;
     document.getElementById("detail-title").textContent = exp.titulo;
     document.getElementById("detail-reviews").textContent = `(${exp.resenas} reseñas)`;
@@ -1318,70 +1296,83 @@ function loadExperienceDetail() {
     document.getElementById("detail-date").textContent = exp.fechaPub;
     document.getElementById("detail-long-desc").textContent = exp.descripcionLarga;
 
+    // Renderizar Itinerario
     const timelineContainer = document.querySelector(".itinerary-timeline");
-    timelineContainer.innerHTML = "";
-    
-    if (exp.itinerario && exp.itinerario.length > 0) {
-        exp.itinerario.forEach(step => {
-            const item = document.createElement("div");
-            item.className = "timeline-item";
-            item.innerHTML = `
-                <div class="step-number">${step.dia}</div>
-                <div class="step-content">
-                    <h3>${step.titulo}</h3>
-                    <p>${step.desc}</p>
-                </div>
-            `;
-            timelineContainer.appendChild(item);
-        });
-    } else {
-        timelineContainer.innerHTML = "<p>Itinerario disponible bajo petición.</p>";
+    if(timelineContainer) {
+        timelineContainer.innerHTML = "";
+        if (exp.itinerario && exp.itinerario.length > 0) {
+            exp.itinerario.forEach(step => {
+                const item = document.createElement("div");
+                item.className = "timeline-item";
+                item.innerHTML = `
+                    <div class="step-number">${step.dia}</div>
+                    <div class="step-content"><h3>${step.titulo}</h3><p>${step.desc}</p></div>
+                `;
+                timelineContainer.appendChild(item);
+            });
+        }
     }
 
-    const btnComprar = document.querySelector(".price-action-row .btn-black");
-    if(btnComprar) {
-        btnComprar.addEventListener("click", () => {
-            localStorage.setItem("compraActual", JSON.stringify(exp));
+    // --- CONFIGURACIÓN DEL BOTÓN DE RESERVA ---
+    // Seleccionamos el botón. Puede ser por clase o ID si se lo has puesto.
+    // Intentamos buscar por ID primero, si no, por la clase.
+    let btnReservar = document.getElementById("btn-reservar-dinamico");
+    
+    // Fallback si no tiene el ID 'btn-reservar-dinamico' en el HTML
+    if (!btnReservar) {
+        btnReservar = document.querySelector(".price-action-row .btn-black");
+    }
+    
+    if (btnReservar) {
+        // Clonamos el botón para eliminar cualquier onclick anterior (como el de Bali)
+        const nuevoBtn = btnReservar.cloneNode(true);
+        btnReservar.parentNode.replaceChild(nuevoBtn, btnReservar);
+
+        // Le asignamos el evento click con los datos de LA EXPERIENCIA ACTUAL
+        nuevoBtn.addEventListener("click", () => {
+            if (typeof iniciarProcesoCompra === 'function') {
+                iniciarProcesoCompra(
+                    exp.titulo, 
+                    exp.precio, 
+                    exp.imagen, 
+                    exp.duracion, 
+                    exp.ubicacion
+                );
+            } else {
+                console.error("Error: La función iniciarProcesoCompra no está definida en script.js");
+                // Fallback de emergencia
+                localStorage.setItem('compra_seleccionada', JSON.stringify(exp));
+                window.location.href = 'proceso_compra.html';
+            }
         });
     }
-// --- LÓGICA DE PESTAÑAS (TABS) ---
+
+    // Lógica de pestañas (Tabs)
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-content-panel');
-
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // 1. Quitar clase 'active' de todos los botones y paneles
             tabButtons.forEach(b => b.classList.remove('active'));
             tabPanels.forEach(p => p.classList.remove('active'));
-
-            // 2. Añadir clase 'active' al botón clicado
             btn.classList.add('active');
-
-            // 3. Mostrar el panel correspondiente usando el atributo data-tab
             const targetId = btn.getAttribute('data-tab');
             const targetPanel = document.getElementById(targetId);
-            if (targetPanel) {
-                targetPanel.classList.add('active');
-            }
+            if (targetPanel) targetPanel.classList.add('active');
         });
     });
 }
 
-// 2. NUEVA FUNCIÓN ESPECIAL PARA LA PÁGINA DE DESTINOS
+
+// --- FUNCIÓN PARA LA PÁGINA DE DESTINOS ---
 function initDestinationsPage() {
-    // Definimos qué IDs pertenecen a qué continente según los datos que generamos
-    const idsEuropa = [1, ...range(4, 24)]; // Islandia(1) + Europa del listado
-    const idsAsia   = [2, ...range(25, 36)]; // Bali(2) + Asia del listado
+    // Definimos qué IDs pertenecen a qué continente
+    // NOTA: Asegúrate de que los rangos coincidan con tu array de experiencesData real
+    const idsEuropa = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; 
+    const idsAsia   = [2, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]; 
     const idsAfrica = [37, 38, 56, 57, 58, 60];
     const idsOceania = [39, 40, 51, 52, 53, 54];
-    const idsAmerica = [3, ...range(41, 50), 61, 62]; // Peru(3) + Norte y Sur América
+    const idsAmerica = [3, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 61, 62]; 
 
-    // Función auxiliar para generar rangos de números
-    function range(start, end) {
-        return Array(end - start + 1).fill().map((_, idx) => start + idx);
-    }
-
-    // Objeto de configuración: ID del HTML -> Lista de IDs de datos
     const mapaContinentes = {
         "list-oceania": idsOceania,
         "list-africa": idsAfrica,
@@ -1390,29 +1381,21 @@ function initDestinationsPage() {
         "list-asia": idsAsia
     };
 
-    // Recorremos el mapa y renderizamos
     for (const [containerId, ids] of Object.entries(mapaContinentes)) {
         const container = document.getElementById(containerId);
         if (container) {
-            // Filtramos los datos globales para obtener solo los de este continente
             const ciudadesContinente = experiencesData.filter(e => ids.includes(e.id));
             renderExperiencesList(container, ciudadesContinente);
         }
     }
 
-    // Lógica para los botones de filtro (Scroll suave)
     const botones = document.querySelectorAll(".continent-btn");
     botones.forEach(btn => {
         btn.addEventListener("click", () => {
-            // Quitamos clase active a todos
             botones.forEach(b => b.classList.remove("active"));
-            // Ponemos active al clickado
             btn.classList.add("active");
-            
-            // Hacemos scroll a la sección correspondiente
             const continenteNombre = btn.textContent.trim().toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Quita tildes (oceanía -> oceania)
-            
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
             const seccion = document.getElementById(`sec-${continenteNombre}`);
             if (seccion) {
                 seccion.scrollIntoView({ behavior: 'smooth' });
@@ -1420,25 +1403,3 @@ function initDestinationsPage() {
         });
     });
 }
-
-// 3. ACTUALIZAMOS EL DOMContentLoaded
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // Si estamos en experiencias.html
-    const experiencesListContainer = document.querySelector(".experiences-grid-list");
-    // Verificamos que NO estemos en destinos (porque destinos tiene varios grids)
-    if (experiencesListContainer && !document.getElementById("list-europa")) {
-        renderExperiencesList(experiencesListContainer);
-    }
-
-    // Si estamos en destinos.html (detectamos uno de sus contenedores únicos)
-    if (document.getElementById("list-europa")) {
-        initDestinationsPage();
-    }
-
-    // Si estamos en compra.html
-    const productDetailSection = document.querySelector(".product-details");
-    if (productDetailSection) {
-        loadExperienceDetail();
-    }
-});

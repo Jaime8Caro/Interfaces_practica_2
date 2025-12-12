@@ -145,35 +145,24 @@ function mostrarLocalStorage() {
     console.log("Usuario actual:", obtenerUsuarioActual() || "Ninguno");
 }
 
-function obtenerConsejos() {
-    const KEY = 'packgo_consejos_v1';
-    try {
-        const raw = localStorage.getItem(KEY);
-        if (!raw) {
-            return []
-        };
-        const arr = JSON.parse(raw);
-        if (!Array.isArray(arr)) {
-            return [];
-        }
-        return arr;
-    } catch (e) {
-        console.error("Error leyendo consejos de localStorage:", e);
-        return [];
-    }
+function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
+    const compraActual = {
+        titulo: titulo,
+        precio: parseFloat(precio), // Aseguramos que sea número
+        imagen: imagen,
+        duracion: duracion,
+        destino: destino,
+        fecha_inicio: new Date().toLocaleDateString() // Simulada
+    };
+
+    localStorage.setItem('compra_seleccionada', JSON.stringify(compraActual));
+    window.location.href = 'proceso_compra.html';
 }
 
 function mostrarLocalStorage() {
     console.log("=== CONTENIDO DEL LOCALSTORAGE ===");
     console.log("Usuarios registrados:", obtenerUsuarios());
     console.log("Usuario actual:", obtenerUsuarioActual() || "Ninguno");
-
-    const consejos = obtenerConsejos();
-    if (consejos.length === 0) {
-        console.log("Consejos: ninguno (clave 'packgo_consejos_v1' vacía o inexistente)");
-    } else {
-        console.log(`Consejos (últimos ${Math.min(consejos.length, 10)} mostrados, total ${consejos.length}):`, consejos.slice(0, 10));
-    }
 }
 
 function limpiarTodoLocalStorage() {
