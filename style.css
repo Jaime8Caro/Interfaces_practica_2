@@ -1513,3 +1513,41 @@ blockquote {
         font-size: 1rem;
     }
 }
+
+/* ================= MENÚ DESPLEGABLE CATEGORÍAS ================= */
+.filter-buttons {position: relative; }
+.category-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: auto;
+    right: 0;
+    background-color: var(--color-white);
+    min-width: 180px; 
+    max-width: 250px;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    z-index: 1000;
+    overflow: hidden;
+    padding: 5px 0;
+}
+.category-dropdown.show {display: block; animation: fadeIn 0.2s ease-out;}
+.category-option {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-gray);
+    transition: background 0.2s, color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+.category-option:last-child {border-bottom: none;}
+.category-option:hover {background-color: #f9f9f9;color: var(--color-black);font-weight: 600;}
+.category-dropdown.sort-menu {min-width: 160px;}
+.filter-icon-btn.active {background-color: var(--color-black); color: var(--color-white);}
+/* Pequeña animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
