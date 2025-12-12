@@ -1088,28 +1088,23 @@ const experiencesData = [
     }
 ];
 
-//
 
-// ... (MANTÉN TU ARRAY experiencesData AQUÍ ARRIBA IGUAL QUE ANTES) ...
+// 1. Lógica para EXPERIENCIAS (Listado y Filtros)
+const experiencesListContainer = document.querySelector(".experiences-grid-list");
+if (experiencesListContainer && document.getElementById("exp-search-input")) {
+    renderExperiencesList(experiencesListContainer); // Carga inicial
+    initExperiencesFilters(experiencesListContainer); // Activamos filtros
+}
+// (Si estamos en Destinos, usamos la otra lógica que ya tenías)
+else if (experiencesListContainer && document.getElementById("list-europa")) {
+    initDestinationsPage(); 
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. Lógica para EXPERIENCIAS (Listado y Filtros)
-    const experiencesListContainer = document.querySelector(".experiences-grid-list");
-    if (experiencesListContainer && document.getElementById("exp-search-input")) {
-        renderExperiencesList(experiencesListContainer); // Carga inicial
-        initExperiencesFilters(experiencesListContainer); // Activamos filtros
-    }
-    // (Si estamos en Destinos, usamos la otra lógica que ya tenías)
-    else if (experiencesListContainer && document.getElementById("list-europa")) {
-        initDestinationsPage(); 
-    }
-
-    // 2. Lógica para COMPRA (Detalle)
-    const productDetailSection = document.querySelector(".product-details");
-    if (productDetailSection) {
-        loadExperienceDetail();
-    }
-});
+// 2. Lógica para COMPRA (Detalle)
+const productDetailSection = document.querySelector(".product-details");
+if (productDetailSection) {
+    loadExperienceDetail();
+}
 
 // --- FUNCIÓN DE RENDERIZADO (Actualizada para manejar "No resultados") ---
 function renderExperiencesList(container, listaDatos = experiencesData) {

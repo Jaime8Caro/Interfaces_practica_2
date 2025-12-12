@@ -1,3 +1,62 @@
+// --- LÓGICA DEL SELECTOR DE IDIOMA ---
+
+const langToggle = document.getElementById('langToggle');
+const langSelector = document.querySelector('.language-selector');
+const currentFlag = document.getElementById('currentFlag');
+const langOptions = document.querySelectorAll('.lang-option');
+
+// 1. Función para actualizar la interfaz visualmente
+function updateLanguageUI(src) {
+    if (currentFlag) {
+        currentFlag.src = src;
+    }
+}
+
+if (langToggle && langSelector) {
+    // A. CARGAR IDIOMA GUARDADO AL INICIAR
+    const savedLangSrc = localStorage.getItem('idioma_src');
+    
+    if (savedLangSrc) {
+        updateLanguageUI(savedLangSrc);
+    }
+
+    // B. ABRIR / CERRAR MENÚ
+    langToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langSelector.classList.toggle('active');
+    });
+
+    // C. CERRAR AL CLICAR FUERA
+    document.addEventListener('click', (e) => {
+        if (!langSelector.contains(e.target)) {
+            langSelector.classList.remove('active');
+        }
+    });
+
+    // D. SELECCIONAR IDIOMA
+    langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault(); // Evitar salto del link '#'
+            
+            // Obtener datos de la opción clicada
+            const selectedLang = option.getAttribute('data-lang'); // ej: 'en'
+            const selectedSrc = option.getAttribute('data-src');   // ej: 'bandera_en.png'
+
+            // 1. Actualizar la bandera principal ("lo que está primero")
+            updateLanguageUI(selectedSrc);
+
+            // 2. Guardar en LocalStorage
+            localStorage.setItem('idioma', selectedLang);      // Guardamos 'es', 'en', etc.
+            localStorage.setItem('idioma_src', selectedSrc);   // Guardamos la ruta de la imagen para cargarla rápido
+
+            // 3. Cerrar el menú
+            langSelector.classList.remove('active');
+
+            console.log(`Idioma cambiado a: ${selectedLang}`);
+        });
+    });
+}
+
 function validarCampoFormulario(campo, esValido, mensajeError, placeholderOriginal) {
     campo.classList.remove("campo-invalido");
     void campo.offsetWidth;

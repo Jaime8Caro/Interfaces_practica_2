@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="scripts/script.js"></script>
-    <script src="scripts/script_blog.js"></script> </body>
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/script_blog.js" defer></script> </body>
 </head>
 <body>
 
@@ -31,6 +31,24 @@
             <div class="search-bar">
                 <input type="text" placeholder="Buscar destinos">
                 <button type="submit">Buscar</button>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn" id="langToggle">
+                    <img src="images/bandera_españa.png" alt="es" class="flag-icon" id="currentFlag">
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </button>
+                
+                <div class="lang-dropdown" id="langMenu">
+                    <a href="#" class="lang-option" data-lang="es" data-src="images/bandera_españa.png">
+                        <img src="images/bandera_españa.png" alt="es" class="flag-icon">
+                    </a>
+                    <a href="#" class="lang-option" data-lang="en" data-src="images/bandera_inglaterra.png">
+                        <img src="images/bandera_inglaterra.png" alt="en" class="flag-icon">
+                    </a>
+                    <a href="#" class="lang-option" data-lang="fr" data-src="images/bandera_francia.png">
+                        <img src="images/bandera_francia.png" alt="fr" class="flag-icon">
+                    </a>
+                </div>
             </div>
             <div class="user-actions">
                 <a href="login.html" class="btn-login">Iniciar sesión</a>

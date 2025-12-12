@@ -380,33 +380,30 @@ const blogData = [
     }
 
 ];
-
-document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. LÓGICA PARA LA PÁGINA BLOG PRINCIPAL
-    const blogListContainer = document.querySelector(".blog-list-container");
-    if (blogListContainer) {
-        renderBlogList(blogListContainer);
-        initBlogFilters(blogListContainer);
-    }
+// 1. LÓGICA PARA LA PÁGINA BLOG PRINCIPAL
+const blogListContainer = document.querySelector(".blog-list-container");
+if (blogListContainer) {
+    renderBlogList(blogListContainer);
+    initBlogFilters(blogListContainer);
+}
 
-    // 2. LÓGICA PARA EL POST INDIVIDUAL
-    const articleBody = document.querySelector(".article-body");
-    if (articleBody) {
-        loadBlogPost();
-    }
+// 2. LÓGICA PARA EL POST INDIVIDUAL
+const articleBody = document.querySelector(".article-body");
+if (articleBody) {
+    loadBlogPost();
+}
 
-    // 3. LÓGICA PARA LA PÁGINA DE INICIO (INDEX)
-    const indexBlogContainer = document.getElementById("index-blog-container");
+// 3. LÓGICA PARA LA PÁGINA DE INICIO (INDEX)
+const indexBlogContainer = document.getElementById("index-blog-container");
+
+if (indexBlogContainer) {
+    // Aquí está el truco: .slice(0, 2) toma solo los elementos 0 y 1 del array
+    const ultimosDosPosts = blogData.slice(0, 2); 
     
-    if (indexBlogContainer) {
-        // Aquí está el truco: .slice(0, 2) toma solo los elementos 0 y 1 del array
-        const ultimosDosPosts = blogData.slice(0, 2); 
-        
-        // Reutilizamos la función que ya creamos para pintar las tarjetas
-        renderBlogList(indexBlogContainer, ultimosDosPosts);
-    }
-});
+    // Reutilizamos la función que ya creamos para pintar las tarjetas
+    renderBlogList(indexBlogContainer, ultimosDosPosts);
+}
 
 // Modificamos la función para que acepte un segundo parámetro 'listaDePosts'
 // Si no le pasamos nada, usará 'blogData' por defecto (todos los posts)
