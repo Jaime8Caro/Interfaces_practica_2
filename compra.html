@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="scripts/script.js"></script>
+    <script src="scripts/script_experiencias.js"></script>
 </head>
 <body>
 
@@ -23,7 +25,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html" class="active">Experiencias</a></li>
+                <li><a href="experiencias.html">Experiencias</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
             <div class="search-bar">
@@ -48,12 +50,12 @@
             <div class="container product-grid">
                 
                 <div class="product-gallery">
-                    <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Bali">
+                    <img id="detail-image" src="" alt="Experience Image">
                 </div>
 
                 <div class="product-details">
                     <div class="details-header">
-                        <h1>Vacaciones en Balí</h1>
+                        <h1 id="detail-title">Cargando...</h1>
                         <button class="btn-favorite"><i class="fa-solid fa-plus"></i> Añadir a favoritos</button>
                     </div>
 
@@ -65,32 +67,31 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <span>(137 reseñas)</span>
+                        <span id="detail-reviews">(... reseñas)</span>
                     </div>
 
                     <div class="info-icons-row">
-                        <span><i class="fa-solid fa-location-dot"></i> Cuzco, Perú</span>
-                        <span><i class="fa-regular fa-clock"></i> 7 Días</span>
-                        <span><i class="fa-solid fa-user-group"></i> 8-12 Personas</span>
+                        <span id="detail-location"><i class="fa-solid fa-location-dot"></i> ...</span>
+                        <span id="detail-duration"><i class="fa-regular fa-clock"></i> ...</span>
+                        <span id="detail-group"><i class="fa-solid fa-user-group"></i> ...</span>
                     </div>
 
                     <div class="tags-row">
-                        <span class="tag-pill">Categoría</span>
-                        <span class="tag-pill">Dificultad</span>
+                        <span class="tag-pill" id="detail-category">...</span>
+                        <span class="tag-pill" id="detail-difficulty">...</span>
                     </div>
 
                     <div class="price-action-row">
-                        <a href="proceso_compra_paso1.html" class="btn-black">Comprar billetes</a>
-                        
                         <div class="price-display">
-                            <span class="amount">$ 680</span>
+                            <span class="amount" id="detail-price">$ ...</span>
                             <span class="unit">/ persona</span>
                         </div>
+                        <a href="proceso_compra_paso1.html" class="btn-black">Reservar ahora</a>
                     </div>
 
                     <div class="product-description">
                         <h3>Sobre esta experiencia</h3>
-                        <p>Sumérgete en la magia de la isla de los dioses con esta experiencia única. Disfruta de playas paradisíacas, templos milenarios y arrozales infinitos, combinando relax, cultura y aventura. Incluye alojamiento, excursiones guiadas y actividades locales como yoga al amanecer y cenas frente al mar.</p>
+                        <p id="detail-short-desc">...</p>
                     </div>
                 </div>
             </div>
@@ -100,78 +101,76 @@
             <div class="container">
                 
                 <div class="author-block">
-                    <div class="author-avatar"></div> <div class="author-text">
-                        <h4>Publicado por <strong>Monica</strong></h4>
-                        <span>4/03/2024</span>
+                    <div class="author-avatar"></div> 
+                    <div class="author-text">
+                        <h4 id="detail-author">Publicado por ...</h4>
+                        <span id="detail-date">...</span>
                     </div>
                 </div>
                 
-                <p class="long-description">
+                <p class="long-description" id="detail-long-desc">
                     Sumérgete en la magia de la isla de los dioses con esta experiencia única. Disfruta de playas paradisíacas, templos milenarios y arrozales infinitos... Perfecto para quienes buscan equilibrio, naturaleza y momentos inolvidables.
                 </p>
 
                 <div class="tabs-navigation">
-                    <button class="tab-btn active">Itinerario</button>
-                    <button class="tab-btn">Incluye</button>
-                    <button class="tab-btn">Equipo</button>
-                    <button class="tab-btn">Reseñas</button>
+                    <button class="tab-btn active" data-tab="tab-itinerario">Itinerario</button>
+                    <button class="tab-btn" data-tab="tab-incluye">Incluye</button>
+                    <button class="tab-btn" data-tab="tab-equipo">Equipo</button>
+                    <button class="tab-btn" data-tab="tab-resenas">Reseñas</button>
                 </div>
 
-                <div class="itinerary-timeline">
-                    
-                    <div class="timeline-item">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Llegada y Bienvenida</h3>
-                            <p>Encuentro con el grupo en el punto de partida. Briefing de seguridad, distribución de equipos y primera caminata de aclimatación.</p>
+                <div id="tab-itinerario" class="tab-content-panel active">
+                    <div class="itinerary-timeline">
                         </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>Inicio de la Aventura</h3>
-                            <p>Comenzamos el trekking principal atravesando paisajes impresionantes. Almuerzo en ruta y llegada al primer campamento.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>Punto Panorámico</h3>
-                            <p>Ascenso al mirador principal. Día intenso pero gratificante con vistas espectaculares. Noche en refugio de montaña.</p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="faq-section">
-                    <h3>Preguntas Frecuentes</h3>
-                    
-                    <div class="faq-item">
-                        <span>¿Qué nivel de condición física necesito?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-item">
-                        <span>¿Qué pasa si el clima es malo?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-item">
-                        <span>¿Puedo ir solo o debo ir en grupo?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
+                <div id="tab-incluye" class="tab-content-panel">
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-check"></i> Alojamiento en hoteles 3/4★</li>
+                        <li><i class="fa-solid fa-check"></i> Todos los desayunos incluidos</li>
+                        <li><i class="fa-solid fa-check"></i> Guía experto en español</li>
+                        <li><i class="fa-solid fa-check"></i> Transporte privado (Van/Bus)</li>
+                        <li><i class="fa-solid fa-check"></i> Entradas a parques nacionales</li>
+                        <li><i class="fa-solid fa-check"></i> Traslados aeropuerto</li>
+                    </ul>
                 </div>
 
-                <div class="testimonial-box-feature">
-                    <div class="user-feature-header">
-                        <div class="user-feature-icon icon-blue"><i class="fa-regular fa-face-smile"></i></div>
-                        <div>
-                            <h4>Wanda Wingleton</h4>
-                            <small>Lepidopterist at Butterflai</small>
+                <div id="tab-equipo" class="tab-content-panel">
+                    <h4 style="margin-bottom:1rem;">Recomendamos llevar:</h4>
+                    <ul class="equip-list">
+                        <li>Mochila cómoda (40-50L)</li>
+                        <li>Calzado de trekking impermeable</li>
+                        <li>Ropa por capas (térmica, forro polar)</li>
+                        <li>Chaqueta impermeable / Cortavientos</li>
+                        <li>Botella de agua reutilizable</li>
+                        <li>Batería externa para cámara/móvil</li>
+                    </ul>
+                </div>
+
+                <div id="tab-resenas" class="tab-content-panel">
+                    <div class="testimonial-box-feature">
+                        <div class="user-feature-header">
+                            <div class="user-feature-icon icon-blue"><i class="fa-regular fa-face-smile"></i></div>
+                            <div>
+                                <h4>Wanda Wingleton</h4>
+                                <small>Viajero Verificado</small>
+                            </div>
+                            <i class="fa-solid fa-quote-right quote-right"></i>
                         </div>
-                        <i class="fa-solid fa-quote-right quote-right"></i>
+                        <p>"Una experiencia increíble. La organización fue perfecta y los paisajes superaron mis expectativas. ¡Repetiré seguro!"</p>
                     </div>
-                    <p>"I was completely taken by the exceptional naming power and attention to detail from this service. I wanted to find a way to get attention for my creatures of great wonder and beauty in this world's great garden, and Namedly delivered."</p>
+                    <br>
+                    <div class="testimonial-box-feature">
+                        <div class="user-feature-header">
+                            <div class="user-feature-icon icon-green"><i class="fa-regular fa-thumbs-up"></i></div>
+                            <div>
+                                <h4>Roberto Casas</h4>
+                                <small>Viajero Verificado</small>
+                            </div>
+                            <i class="fa-solid fa-quote-right quote-right"></i>
+                        </div>
+                        <p>"Muy buen ambiente en el grupo. Los guías sabían muchísimo sobre la historia local."</p>
+                    </div>
                 </div>
 
             </div>

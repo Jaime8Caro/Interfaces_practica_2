@@ -6,12 +6,12 @@
     <title>Experiencias - Pack&Go</title>
     
     <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="scripts/"></script>
+    <script src="scripts/script_experiencias.js"></script> </body>
 </head>
 <body>
 
@@ -57,114 +57,16 @@
             <div class="search-filter-bar">
                 <div class="search-input-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar destinos">
+                    <input type="text" id="exp-search-input" placeholder="Buscar destino o actividad">
                 </div>
                 <div class="filter-buttons">
-                    <button class="filter-btn">Todas las categorías</button>
-                    <button class="filter-btn">Todas las dificultades</button>
-                    <button class="filter-icon-btn"><i class="fa-solid fa-sliders"></i></button>
+                    <button class="filter-btn" id="btn-exp-category">Todas las categorías</button>
+                    <button class="filter-btn" id="btn-exp-difficulty">Todas las dificultades</button>
+                    <button class="filter-icon-btn" id="btn-exp-sort"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
                 </div>
             </div>
 
-            <div class="experiences-grid-list">
-                
-                <a href="compra.html" class="experience-card-item">
-                    <div class="card-image-header">
-                        <span class="difficulty-badge">Dificultad</span>
-                        <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
-                    </div>
-                    
-                    <div class="card-body">
-                        <h3>Auroras Boreales en Islandia</h3>
-                        <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
-                        
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-location-dot"></i> Reykjavík, Islandia</span>
-                            <span><i class="fa-regular fa-calendar"></i> 3 días / 4 noches</span>
-                            <span><i class="fa-solid fa-user-group"></i> Grupos de 8-12</span>
-                        </div>
-
-                        <div class="card-footer">
-                            <span class="price">$680 <small>/ persona</small></span>
-                            
-                            <span class="btn-reservar">Reservar</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="compra.html" class="experience-card-item">
-                    <div class="card-image-header">
-                        <span class="difficulty-badge">Dificultad</span>
-                        <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
-                    </div>
-                    
-                    <div class="card-body">
-                        <h3>Auroras Boreales en Islandia</h3>
-                        <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
-                        
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-location-dot"></i> Reykjavík, Islandia</span>
-                            <span><i class="fa-regular fa-calendar"></i> 3 días / 4 noches</span>
-                            <span><i class="fa-solid fa-user-group"></i> Grupos de 8-12</span>
-                        </div>
-
-                        <div class="card-footer">
-                            <span class="price">$680 <small>/ persona</small></span>
-                            
-                            <span class="btn-reservar">Reservar</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="compra.html" class="experience-card-item">
-                    <div class="card-image-header">
-                        <span class="difficulty-badge">Dificultad</span>
-                        <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
-                    </div>
-                    
-                    <div class="card-body">
-                        <h3>Auroras Boreales en Islandia</h3>
-                        <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
-                        
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-location-dot"></i> Reykjavík, Islandia</span>
-                            <span><i class="fa-regular fa-calendar"></i> 3 días / 4 noches</span>
-                            <span><i class="fa-solid fa-user-group"></i> Grupos de 8-12</span>
-                        </div>
-
-                        <div class="card-footer">
-                            <span class="price">$680 <small>/ persona</small></span>
-                            
-                            <span class="btn-reservar">Reservar</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="compra.html" class="experience-card-item">
-                    <div class="card-image-header">
-                        <span class="difficulty-badge">Dificultad</span>
-                        <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
-                    </div>
-                    
-                    <div class="card-body">
-                        <h3>Auroras Boreales en Islandia</h3>
-                        <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
-                        
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-location-dot"></i> Reykjavík, Islandia</span>
-                            <span><i class="fa-regular fa-calendar"></i> 3 días / 4 noches</span>
-                            <span><i class="fa-solid fa-user-group"></i> Grupos de 8-12</span>
-                        </div>
-
-                        <div class="card-footer">
-                            <span class="price">$680 <small>/ persona</small></span>
-                            
-                            <span class="btn-reservar">Reservar</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+            <div class="experiences-grid-list"></div>
         </div>
     </main>
 
