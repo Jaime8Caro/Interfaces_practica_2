@@ -47,35 +47,34 @@
             
             <div class="auth-card signup-mode">
                 <form action="#">
-                    
                     <div class="signup-grid">
                         <div class="input-group">
-                            <input type="text" placeholder="Nombre">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="Apellidos">
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos">
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onblur="(this.type='text')">
-                        </div>
-
-                        <div class="input-group">
-                            <input type="email" placeholder="Correo electrónico">
-                        </div>
-                        <div class="input-group">
-                            <input type="email" placeholder="Confirmacion correo">
-                        </div>
-                        <div class="input-group">
-                            <input type="text" placeholder="Nombre de usuario">
+                            <input type="date" id="fecha-nacimiento" name="fecha_nacimiento" placeholder="Fecha de nacimiento">
                         </div>
 
                         <div class="input-group">
-                            <input type="password" placeholder="Contraseña">
+                            <input type="email" id="email" name="email" placeholder="Correo electrónico">
                         </div>
                         <div class="input-group">
-                            <label class="file-upload-label">
+                            <input type="email" id="confirmar-email" name="confirmar_email" placeholder="Confirmacion correo">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario">
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" id="password" name="password" placeholder="Contraseña">
+                        </div>
+                        <div class="input-group">
+                            <label class="file-upload-label" for="foto-perfil">
                                 <span>Subir foto de perfil</span>
-                                <input type="file" style="display: none;">
+                                <input type="file" id="foto-perfil" name="foto_perfil" style="display: none;">
                             </label>
                         </div>
                         <div></div> 
@@ -87,10 +86,9 @@
                     </div>
                     
                     <div class="auth-buttons">
-                        <button type="submit" class="btn-black">Crear cuenta</button>
+                        <button type="submit" id="btn-crear-cuenta" class="btn-black">Crear cuenta</button>
                         <a href="login.html" class="btn-outline">Ya tengo cuenta</a>
                     </div>
-                    
 
                 </form>
             </div>
