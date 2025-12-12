@@ -39,9 +39,7 @@ img { display: block; max-width: 100%; }
     background-color: var(--color-white); color: var(--color-black); border: none;
     border-radius: 20px; padding: 8px 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
 }
-/* ======================================================================= */
-/* ======================================================================= */
-/* ======================================================================= */
+
 /* --- SELECTOR DE IDIOMA (Solo Banderas) --- */
 .language-selector {
     position: relative;
@@ -85,7 +83,7 @@ img { display: block; max-width: 100%; }
     transform: rotate(180deg);
 }
 
-/* --- MENÚ DESPLEGABLE --- */
+/* Menu de idiomas */
 .lang-dropdown {
     position: absolute;
     top: 110%;
@@ -125,9 +123,6 @@ img { display: block; max-width: 100%; }
 .lang-option:hover {
     background-color: #f0f0f0;
 }
-/* ======================================================================= */
-/* ======================================================================= */
-/* ======================================================================= */
 
 .user-actions { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; font-weight: 600; }
 .btn-signup {
@@ -630,6 +625,29 @@ img { display: block; max-width: 100%; }
 }
 
 /*======================== PÁGINA DE COMPRA (PRODUCTO) ========================*/
+/* Ocultar contenido por defecto */
+.step-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Mostrar solo el activo */
+.step-content.active {
+    display: block;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilo para paso completado (Círculo negro con check) */
+.step-item.completed .step-circle {
+    background-color: #000;
+    color: white;
+    border-color: #000;
+}
 /* Contenedor general */
 .container {
     max-width: 1200px;
@@ -978,7 +996,6 @@ img { display: block; max-width: 100%; }
     border: 1px solid rgba(0,0,0,0.03);
     transition: transform 0.3s;
 }
-.step-content:hover { transform: translateY(-5px); }
 
 .step-content h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; }
 .step-content p { font-size: 0.95rem; color: #555; line-height: 1.6; }
@@ -1117,12 +1134,22 @@ img { display: block; max-width: 100%; }
 
 /* Círculo Grande */
 .step-circle {
-    width: 50px;
-    height: 50px;
-    border: 3px solid #333;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: var(--color-white); 
+    background-color: #fff;
+    border: 2px solid #ccc;
+    color: #ccc;
+    font-weight: 600;
+    
+    /* CENTRADO PERFECTO DEL NÚMERO */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
 }
 
 /* Píldora de Texto Negra */
@@ -1140,6 +1167,13 @@ img { display: block; max-width: 100%; }
 /* 5. Formulario (Inputs Grises) */
 .checkout-form-container {
     margin-bottom: 3rem;
+}
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .form-row-3 {
@@ -1267,6 +1301,12 @@ img { display: block; max-width: 100%; }
     accent-color: var(--color-black);
 }
 
+.step-item.active .step-circle {
+    border-color: #000;
+    color: #000;
+    background-color: #fff;
+}
+
 /* 4. Estado "Completado" del Stepper (Paso 1 con Check) */
 .step-item.completed .step-circle {
     display: flex;
@@ -1274,7 +1314,7 @@ img { display: block; max-width: 100%; }
     align-items: center;
     border-color: #333; /* Borde negro */
 }
-.step-item.completed .step-circle i {font-size: 1.5rem;color: #333;}
+.step-item.completed .step-circle i {font-size: 1.5rem;color: #ffffff;}
 
 /* Responsive para Paso 2 */
 @media (max-width: 900px) {
@@ -1282,6 +1322,27 @@ img { display: block; max-width: 100%; }
         grid-template-columns: 1fr; /* Una columna en móviles */
         gap: 3rem;
     }
+}
+.toggle-row {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.toggle-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #000; /* Color negro al marcar */
+    cursor: pointer;
 }
 
 /*======================== PÁGINA PROCESO PASO 3 (CONFIRMACIÓN) ========================*/
