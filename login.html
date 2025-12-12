@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="scripts/script.js"></script>
+    <script src="scripts/script_login.js"></script>
 </head>
 <body>
 
@@ -35,7 +36,7 @@
             </div>
             <div class="user-actions">
                 <a href="login.html" class="btn-login" style="font-weight: 700;">Iniciar sesión</a>
-                <a href="signup.html" class="btn-signup">Crear cuenta</a>
+                <a href="register.html" class="btn-signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
@@ -47,18 +48,18 @@
             <div class="auth-card login-mode">
                 <form action="#">
                     <div class="input-group">
-                        <input type="email" id="email" placeholder="Correo electrónico" required>
+                        <input type="text" id="email" placeholder="Correo electrónico">
                     </div>
                     
                     <div class="input-group">
-                        <input type="password" id="password" placeholder="Contraseña" required>
+                        <input type="password" id="password" placeholder="Contraseña">
                     </div>
                     
                     <a href="#" class="forgot-password-link">No recuerdo mi contraseña</a>
                     
                     <div class="auth-buttons">
                         <button type="submit" class="btn-black btn-login-form">Iniciar sesión</button>
-                        <a href="signup.html" class="btn-outline">No tengo cuenta</a>
+                        <a href="register.html" class="btn-outline">No tengo cuenta</a>
                     </div>
                 </form>
             </div>
