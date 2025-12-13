@@ -559,7 +559,7 @@ const experiencesData = [
         duracion: "5 días / 4 noches",
         grupo: "Cultural",
         precio: 1300,
-        imagen: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8S2lvdG98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500",
+        imagen: "images/kioto.jpg",
         dificultad: "Baja",
         categoria: "Cultural",
         rating: 5.0,
@@ -1094,20 +1094,38 @@ const experiencesData = [
 const experiencesListContainer = document.querySelector(".experiences-grid-list");
 const productDetailSection = document.querySelector(".product-details");
 
-// Inicializar según la página
 document.addEventListener("DOMContentLoaded", function() {
-    // Si estamos en experiencias.html (y no es destinos)
+    
+    // 1. LÓGICA PARA EXPERIENCIAS (Listado completo)
+    const experiencesListContainer = document.querySelector(".experiences-grid-list");
     if (experiencesListContainer && !document.getElementById("list-europa")) {
         renderExperiencesList(experiencesListContainer);
         initExperiencesFilters(experiencesListContainer);
     }
-    // Si estamos en destinos.html
+    
+    // 2. LÓGICA PARA DESTINOS (Por continentes)
     else if (document.getElementById("list-europa")) {
         initDestinationsPage();
     }
-    // Si estamos en compra.html (Detalle)
-    else if (productDetailSection) {
+    
+    // 3. LÓGICA PARA DETALLE DE COMPRA
+    else if (document.querySelector(".product-details")) {
         loadExperienceDetail();
+    }
+
+    // 4. NUEVO: LÓGICA PARA EL INDEX (HOME)
+    const indexContainer = document.getElementById("index-experiences-container");
+    
+    if (indexContainer) {
+        // 1. Creamos una copia de los datos para no desordenar el original
+        // 2. Ordenamos por RATING de mayor a menor (b.rating - a.rating)
+        // 3. Cortamos los 3 primeros (.slice(0, 3))
+        const mejoresExperiencias = [...experiencesData]
+            .sort((a, b) => b.rating - a.rating)
+            .slice(0, 3);
+        
+        // Pintamos las tarjetas
+        renderExperiencesList(indexContainer, mejoresExperiencias);
     }
 });
 
@@ -1161,6 +1179,7 @@ function initExperiencesFilters(container) {
     const sortBtn = document.getElementById("btn-exp-sort");
     const filterContainer = document.querySelector(".filter-buttons");
 
+    // Estados iniciales
     let filtros = { texto: "", categoria: "Todas", dificultad: "Todas", orden: "Defecto" };
 
     const aplicarFiltros = () => {
@@ -1181,6 +1200,27 @@ function initExperiencesFilters(container) {
         renderExperiencesList(container, resultados);
     };
 
+    // --- NUEVO: DETECTAR BÚSQUEDA DESDE EL HEADER (URL) ---
+    const params = new URLSearchParams(window.location.search);
+    const busquedaURL = params.get("busqueda"); // Leemos ?busqueda=...
+
+    if (busquedaURL) {
+        // 1. Decodificar el texto (quitar %20, etc)
+        const textoDecodificado = decodeURIComponent(busquedaURL).toLowerCase();
+        
+        // 2. Ponerlo en el input visualmente
+        if (searchInput) searchInput.value = decodeURIComponent(busquedaURL);
+        
+        // 3. Actualizar el filtro y aplicar
+        filtros.texto = textoDecodificado;
+        aplicarFiltros();
+        
+        // 4. (Opcional) Limpiar la URL para que no moleste si refrescas
+        // window.history.replaceState({}, document.title, "experiencias.html");
+    }
+
+    // --- FIN DE LO NUEVO ---
+
     if(searchInput) {
         searchInput.addEventListener("input", (e) => {
             filtros.texto = e.target.value.toLowerCase().trim();
@@ -1188,8 +1228,12 @@ function initExperiencesFilters(container) {
         });
     }
     
-    // Función helper para menús
+    // ... (El resto de tu función para crearMenús sigue igual abajo) ...
+    // ... Copia aquí el resto de tu función initExperiencesFilters original (crearMenu, event listeners, etc) ...
+    
+    // Función helper para menús (Ya la tenías, asegúrate de mantenerla dentro)
     const crearMenu = (boton, opciones, tipoFiltro) => {
+        // ... (Tu código existente para crear menú) ...
         const menu = document.createElement("div");
         menu.className = "category-dropdown"; 
         
@@ -1277,26 +1321,32 @@ function loadExperienceDetail() {
     const exp = experiencesData.find(e => e.id === id);
 
     if (!exp) {
-        document.querySelector("main").innerHTML = "<div class='container' style='padding:50px; text-align:center;'><h1>Experiencia no encontrada</h1><a href='experiencias.html' class='btn-black'>Volver</a></div>";
+        document.querySelector("main").innerHTML = "<div class='container' style='padding:150px 20px; text-align:center;'><h1>Experiencia no encontrada</h1><p>Lo sentimos, no pudimos cargar este viaje.</p><a href='experiencias.html' class='btn-black' style='margin-top:20px;'>Volver al listado</a></div>";
         return;
     }
 
-    // Rellenar datos visuales
+    // 1. Rellenar datos visuales principales (Hero)
     document.getElementById("detail-image").src = exp.imagen;
     document.getElementById("detail-title").textContent = exp.titulo;
     document.getElementById("detail-reviews").textContent = `(${exp.resenas} reseñas)`;
+    
+    // Iconos
     document.getElementById("detail-location").innerHTML = `<i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}`;
     document.getElementById("detail-duration").innerHTML = `<i class="fa-regular fa-clock"></i> ${exp.duracion}`;
     document.getElementById("detail-group").innerHTML = `<i class="fa-solid fa-user-group"></i> ${exp.grupo}`;
+    
+    // Tags y Precio
     document.getElementById("detail-category").textContent = exp.categoria;
     document.getElementById("detail-difficulty").textContent = exp.dificultad;
     document.getElementById("detail-price").textContent = `$ ${exp.precio}`;
+    
+    // Textos
     document.getElementById("detail-short-desc").textContent = exp.descripcionCorto;
     document.getElementById("detail-author").innerHTML = `Publicado por <strong>${exp.autor}</strong>`;
     document.getElementById("detail-date").textContent = exp.fechaPub;
     document.getElementById("detail-long-desc").textContent = exp.descripcionLarga;
 
-    // Renderizar Itinerario
+    // 2. Renderizar ITINERARIO
     const timelineContainer = document.querySelector(".itinerary-timeline");
     if(timelineContainer) {
         timelineContainer.innerHTML = "";
@@ -1306,54 +1356,70 @@ function loadExperienceDetail() {
                 item.className = "timeline-item";
                 item.innerHTML = `
                     <div class="step-number">${step.dia}</div>
-                    <div class="step-content"><h3>${step.titulo}</h3><p>${step.desc}</p></div>
+                    <div class="timeline-content">
+                        <h3>${step.titulo}</h3>
+                        <p>${step.desc}</p>
+                    </div>
                 `;
                 timelineContainer.appendChild(item);
             });
         }
     }
 
-    // --- CONFIGURACIÓN DEL BOTÓN DE RESERVA ---
-    // Seleccionamos el botón. Puede ser por clase o ID si se lo has puesto.
-    // Intentamos buscar por ID primero, si no, por la clase.
-    let btnReservar = document.getElementById("btn-reservar-dinamico");
-    
-    // Fallback si no tiene el ID 'btn-reservar-dinamico' en el HTML
-    if (!btnReservar) {
-        btnReservar = document.querySelector(".price-action-row .btn-black");
+    // 3. Renderizar Pestaña INCLUYE (Dinámico)
+    // Generamos una lista basada en la categoría para que se vea completo
+    const tabIncluye = document.getElementById("tab-incluye");
+    if (tabIncluye) {
+        tabIncluye.innerHTML = generarListaIncluye(exp.categoria);
     }
+
+    // 4. Renderizar Pestaña EQUIPO (Dinámico)
+    const tabEquipo = document.getElementById("tab-equipo");
+    if (tabEquipo) {
+        tabEquipo.innerHTML = generarListaEquipo(exp.dificultad);
+    }
+
+    // 5. Renderizar Pestaña RESEÑAS (Simuladas con datos reales)
+    const tabResenas = document.getElementById("tab-resenas");
+    if (tabResenas) {
+        tabResenas.innerHTML = generarResenas(exp.resenas);
+    }
+
+    // 6. Configuración del Botón de Reserva
+    let btnReservar = document.getElementById("btn-reservar-dinamico");
+    if (!btnReservar) btnReservar = document.querySelector(".price-action-row .btn-black");
     
     if (btnReservar) {
-        // Clonamos el botón para eliminar cualquier onclick anterior (como el de Bali)
         const nuevoBtn = btnReservar.cloneNode(true);
         btnReservar.parentNode.replaceChild(nuevoBtn, btnReservar);
 
-        // Le asignamos el evento click con los datos de LA EXPERIENCIA ACTUAL
         nuevoBtn.addEventListener("click", () => {
             if (typeof iniciarProcesoCompra === 'function') {
-                iniciarProcesoCompra(
-                    exp.titulo, 
-                    exp.precio, 
-                    exp.imagen, 
-                    exp.duracion, 
-                    exp.ubicacion
-                );
+                iniciarProcesoCompra(exp.titulo, exp.precio, exp.imagen, exp.duracion, exp.ubicacion);
             } else {
-                console.error("Error: La función iniciarProcesoCompra no está definida en script.js");
-                // Fallback de emergencia
                 localStorage.setItem('compra_seleccionada', JSON.stringify(exp));
                 window.location.href = 'proceso_compra.html';
             }
         });
     }
 
-    // Lógica de pestañas (Tabs)
+    // 7. Activar Lógica de Pestañas
+    initTabs();
+}
+
+// --- FUNCIONES AUXILIARES PARA GENERAR CONTENIDO ---
+
+function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-content-panel');
+
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+            // Quitar activo de todos
             tabButtons.forEach(b => b.classList.remove('active'));
             tabPanels.forEach(p => p.classList.remove('active'));
+            
+            // Activar actual
             btn.classList.add('active');
             const targetId = btn.getAttribute('data-tab');
             const targetPanel = document.getElementById(targetId);
@@ -1362,11 +1428,81 @@ function loadExperienceDetail() {
     });
 }
 
+function generarListaIncluye(categoria) {
+    // Items básicos siempre incluidos
+    let items = [
+        "Alojamiento seleccionado",
+        "Traslados aeropuerto - hotel",
+        "Guía local certificado (Español/Inglés)",
+        "Seguro de viaje básico",
+        "Atención 24/7"
+    ];
+
+    // Añadir extras según categoría
+    if (categoria === "Aventura") items.push("Equipo de seguridad y técnico", "Entradas a parques nacionales");
+    if (categoria === "Cultural") items.push("Entradas a museos y monumentos", "Degustación de comida local");
+    if (categoria === "Relax" || categoria === "Playa") items.push("Cóctel de bienvenida", "Clase de yoga o masaje");
+
+    // Convertir a HTML
+    let html = `<ul class="check-list">`;
+    items.forEach(item => {
+        html += `<li><i class="fa-solid fa-check"></i> ${item}</li>`;
+    });
+    html += `</ul>`;
+    return html;
+}
+
+function generarListaEquipo(dificultad) {
+    let titulo = "Equipaje recomendado";
+    let items = ["Mochila cómoda (30-50L)", "Botella de agua reutilizable", "Protector solar y gafas de sol", "Cámara de fotos", "Adaptador de corriente universal"];
+
+    if (dificultad === "Alta" || dificultad === "Media") {
+        items.push("Calzado de trekking impermeable", "Ropa térmica por capas", "Chaqueta cortavientos", "Botiquín personal básico");
+        titulo = "Equipamiento técnico necesario";
+    } else {
+        items.push("Ropa ligera y cómoda", "Calzado para caminar", "Bañador y toalla", "Gorra o sombrero");
+    }
+
+    let html = `<h4 style="margin-bottom:1rem; font-size:1.1rem;">${titulo}</h4><ul class="equip-list">`;
+    items.forEach(item => {
+        html += `<li>${item}</li>`;
+    });
+    html += `</ul>`;
+    return html;
+}
+
+function generarResenas(cantidad) {
+    // Generamos 2 reseñas ficticias bonitas para rellenar
+    return `
+        <div class="testimonial-box-feature" style="margin-bottom:20px;">
+            <div class="user-feature-header">
+                <div class="user-feature-icon icon-green"><i class="fa-regular fa-thumbs-up"></i></div>
+                <div>
+                    <h4>María González</h4>
+                    <small>Viajero Verificado • Hace 2 semanas</small>
+                </div>
+                <i class="fa-solid fa-quote-right quote-right"></i>
+            </div>
+            <p>"Simplemente espectacular. La organización fue impecable y los lugares que visitamos superaron mis expectativas. Totalmente recomendado."</p>
+        </div>
+
+        <div class="testimonial-box-feature">
+            <div class="user-feature-header">
+                <div class="user-feature-icon icon-blue"><i class="fa-regular fa-star"></i></div>
+                <div>
+                    <h4>Carlos R.</h4>
+                    <small>Viajero Verificado • Hace 1 mes</small>
+                </div>
+                <i class="fa-solid fa-quote-right quote-right"></i>
+            </div>
+            <p>"Una experiencia inolvidable. El guía fue muy profesional y el grupo muy divertido. Volveré a viajar con Pack&Go."</p>
+        </div>
+    `;
+}
+
 
 // --- FUNCIÓN PARA LA PÁGINA DE DESTINOS ---
 function initDestinationsPage() {
-    // Definimos qué IDs pertenecen a qué continente
-    // NOTA: Asegúrate de que los rangos coincidan con tu array de experiencesData real
     const idsEuropa = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; 
     const idsAsia   = [2, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]; 
     const idsAfrica = [37, 38, 56, 57, 58, 60];

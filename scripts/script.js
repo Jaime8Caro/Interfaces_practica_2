@@ -224,3 +224,35 @@ function actualizarHeaderUsuario() {
         logout();
     });
 }
+
+// --- FUNCIONALIDAD BUSCADOR HEADER ---
+document.addEventListener("DOMContentLoaded", () => {
+    const headerSearchInput = document.querySelector('.search-bar input');
+    const headerSearchBtn = document.querySelector('.search-bar button');
+
+    if (headerSearchInput && headerSearchBtn) {
+        
+        // Función para ejecutar la búsqueda
+        const realizarBusquedaHeader = () => {
+            const texto = headerSearchInput.value.trim();
+            if (texto) {
+                // Redirigimos a experiencias pasando el texto por URL
+                window.location.href = `experiencias.html?busqueda=${encodeURIComponent(texto)}`;
+            }
+        };
+
+        // Evento Click en el botón
+        headerSearchBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita recargas raras si está dentro de un form
+            realizarBusquedaHeader();
+        });
+
+        // Evento Enter en el input
+        headerSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                realizarBusquedaHeader();
+            }
+        });
+    }
+});
