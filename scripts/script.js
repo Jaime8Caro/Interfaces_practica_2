@@ -111,7 +111,7 @@ function guardarUsuario(usuarioNuevo) {
 
     //Comprobar si ya existe ese correo
     if (validarUsuarioExistente(usuarioNuevo.correo)) {
-        alert("Ese correo ya está registrado.");
+        console.log("Ese correo ya está registrado.");
         return false;
     }
 

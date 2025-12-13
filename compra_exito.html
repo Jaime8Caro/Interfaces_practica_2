@@ -17,17 +17,16 @@
     <header class="main-header">
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
-                    <i class="fa-solid fa-backpack"></i>
-                    <span>Pack&Go</span>
-                </a>
+                <i class="fa-solid fa-backpack"></i>
+                <span>Pack&Go</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="destinos.html">Destinos</a></li>
                 <li><a href="experiencias.html">Experiencias</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
+
             <div class="search-bar">
                 <input type="text" placeholder="Buscar destinos">
                 <button type="submit">Buscar</button>
@@ -50,16 +49,16 @@
                     </a>
                 </div>
             </div>
-            <div class="user-actions logged-in">
-                <div class="user-avatar-placeholder"></div>
-                <a href="index.html" class="btn-black-sm">Cerrar sesión</a>
+            <div class="user-actions">
+                <a href="login.html" class="btn-login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
 
     <main>
         <div class="back-link-container">
-            <a href="experiencias.html"><i class="fa-solid fa-chevron-left"></i> Volver a experiencias</a>
+            <a href="experiencias.html"><i class="fa-solid fa-chevron-left salir"></i> Volver a experiencias</a>
         </div>
 
         <section class="success-section">
@@ -86,21 +85,44 @@
                 </div>
             </div>
 
-            <div class="checkout-actions">
-                <a href="perfil.html" class="btn-rounded-black">Ver en mi perfil</a>
-                <a href="index.html" class="btn-rounded-outline">Volver al inicio</a>
-            </div>
+            <div class="acciones-postcompra"></div>
 
         </section>
     </main>
 
     <footer class="main-footer">
         <div class="footer-container">
+            
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
                 <p>La comunidad donde los caminos se cruzan.</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-solid fa-x"></i></a> </div>
             </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Features</h4>
+                    <a href="#">Destinos</a>
+                    <a href="#">Experiencias</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="link-column">
+                    <h4>Learn more</h4>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Nosotros</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="#">Contacto</a>
+                    <a href="#">Terminos</a>
+                    <a href="#">Privacidad</a>
+                </div>
             </div>
+        </div>
     </footer>
 </body>
 </html>

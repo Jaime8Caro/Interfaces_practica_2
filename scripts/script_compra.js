@@ -2,7 +2,6 @@
 
 let currentStep = 1;
 
-// --- INICIALIZACIÓN DE LA PÁGINA ---
 
 // Se ejecuta nada más cargar el script (gracias al defer)
 detectarPaginaYEjecutar();
@@ -24,6 +23,7 @@ function detectarPaginaYEjecutar() {
     // 2. SI ESTAMOS EN LA PÁGINA DE ÉXITO (compra_exito.html)
     else if (successSection) {
         cargarDatosExito();
+        cargarBotonesExito();
     }
 }
 
@@ -40,21 +40,21 @@ function cargarResumenCompra() {
         const viaje = JSON.parse(compraGuardada);
         
         // Elementos del DOM en el Paso 3
-        const tituloEl = document.getElementById('resumen-titulo');
-        const destinoEl = document.getElementById('resumen-destino');
-        const precioRowEl = document.getElementById('resumen-precio-base');
-        const precioTotalEl = document.getElementById('resumen-total');
-        const duracionEl = document.getElementById('resumen-duracion');
+        const titulo = document.getElementById('resumen-titulo');
+        const destino = document.getElementById('resumen-destino');
+        const precioRow = document.getElementById('resumen-precio-base');
+        const precioTotal = document.getElementById('resumen-total');
+        const duracion = document.getElementById('resumen-duracion');
 
-        if (tituloEl) tituloEl.innerText = viaje.titulo || "Experiencia";
-        if (destinoEl) destinoEl.innerText = viaje.destino || "Mundo";
-        if (duracionEl) duracionEl.innerText = viaje.duracion || "--";
+        if (titulo) titulo.innerText = viaje.titulo || "Experiencia";
+        if (destino) destino.innerText = viaje.destino || "Mundo";
+        if (duracion) duracion.innerText = viaje.duracion || "--";
         
         // Cálculos de precio
         if (viaje.precio) {
             const precioFmt = `$${viaje.precio.toFixed(2)}`;
-            if (precioRowEl) precioRowEl.innerText = precioFmt;
-            if (precioTotalEl) precioTotalEl.innerText = precioFmt;
+            if (precioRow) precioRow.innerText = precioFmt;
+            if (precioTotal) precioTotal.innerText = precioFmt;
         }
     } else {
         console.warn("No hay compra seleccionada en localStorage.");
@@ -297,4 +297,48 @@ function cargarDatosExito() {
         const titulo = document.getElementById('exito-titulo');
         if(titulo) titulo.innerText = "No se encontró ninguna reserva reciente.";
     }
+}
+
+function cargarBotonesExito() {
+    const accionesDiv = document.querySelector(".acciones-postcompra");
+    if (!accionesDiv) return;
+    const usuarioLogueado = obtenerUsuarioActual();
+
+    let botonesHTML = '';
+
+    if (usuarioLogueado) {
+        // CASO A: LOGUEADO -> Botón de Perfil
+        botonesHTML = '<a href="perfil.html" class="btn-rounded-black salir">Ver en mi perfil</a>';
+    } else {
+        // CASO B: NO LOGUEADO -> Botón de PDF
+        botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black">Descargar PDF</button>';
+    }
+
+    // Agregamos el botón de "Volver" que siempre sale
+    botonesHTML += '<a href="index.html" class="btn-rounded-outline salir">Volver al inicio</a>';
+
+    // Inyectamos el HTML
+    accionesDiv.innerHTML = botonesHTML;
+
+    // Lógica extra: Si aparece el botón de PDF, le damos funcionalidad
+    const btnPdf = document.getElementById('btn-descargar-pdf');
+    if (btnPdf) {
+        btnPdf.addEventListener('click', () => {
+            window.print(); 
+        });
+    }
+
+    document.querySelectorAll('.salir').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // No prevenimos el default, queremos que el enlace funcione,
+            // pero antes borramos los datos.
+            limpiarDatosTemporales();
+        });
+    });
+}
+
+function limpiarDatosTemporales() {
+    localStorage.removeItem('compra_seleccionada'); // Borra el viaje del carrito
+    localStorage.removeItem('ultima_reserva');      // Borra los datos de esta pantalla
+    console.log("Datos temporales de compra eliminados.");
 }

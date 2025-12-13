@@ -101,14 +101,10 @@ if (form) {
 
         const finalizarRegistro = (datosUsuario) => {
             // Agregamos el usuario directamente al localStorage aquí para evitar 
-            // llamar a guardarUsuario() si esta tuviera un alert (aunque ya validamos duplicados arriba).
-            // Pero usaremos tu función 'guardarUsuario' asumiendo que ya pasamos el filtro de duplicado.
-            
-            if (typeof guardarUsuario === 'function') {
-                guardarUsuario(datosUsuario); // Esto guarda y loguea al usuario
-                window.location.href = "index.html"; // Redirección
-            } else {
-                console.error("Error: La función guardarUsuario no está definida en script.js");
+            // llamar a guardarUsuario() (aunque ya validamos duplicados arriba).
+
+        if (guardarUsuario(datosUsuario)){
+            window.location.href = "index.html";
             }
         };
 
