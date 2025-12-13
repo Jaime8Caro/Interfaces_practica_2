@@ -1,11 +1,22 @@
 actualizarHeaderUsuario();
 
+// Instanciamos la clase (asumiendo que vanilla-i18n.js se ha cargado antes en el HTML)
+const i18n = new vanilla_i18n(['es', 'en', 'fr'], {
+    path: 'assets/vanilla-i18n', // Carpeta con los JSON (es.json, en.json...)
+    debug: true,                 // Muestra info en la consola
+    i18n_attr_name: 'data-i18n', // El atributo usado en el HTML
+    default_language: 'es'
+});
+
+// Iniciamos la traducción
+i18n.run();
+
 const langToggle = document.getElementById('langToggle');
 const langSelector = document.querySelector('.language-selector');
 const currentFlag = document.getElementById('currentFlag');
 const langOptions = document.querySelectorAll('.lang-option');
 
-// 1. Función para actualizar la interfaz visualmente
+// Función auxiliar para cambiar la imagen de la bandera visualmente
 function updateLanguageUI(src) {
     if (currentFlag) {
         currentFlag.src = src;
@@ -13,11 +24,15 @@ function updateLanguageUI(src) {
 }
 
 if (langToggle && langSelector) {
-    // A. CARGAR IDIOMA GUARDADO AL INICIAR
-    const savedLangSrc = localStorage.getItem('idioma_src');
     
-    if (savedLangSrc) {
-        updateLanguageUI(savedLangSrc);
+    // A. CARGAR BANDERA VISUAL AL INICIAR
+    // (La librería ya se encarga del texto, nosotros ponemos la banderita correcta)
+    const savedSrc = localStorage.getItem('idioma_src');
+    if (savedSrc) {
+        updateLanguageUI(savedSrc);
+    } else {
+        // Por defecto ponemos la de España si no hay nada guardado
+        updateLanguageUI('images/bandera_españa.png'); 
     }
 
     // B. ABRIR / CERRAR MENÚ
@@ -36,20 +51,24 @@ if (langToggle && langSelector) {
     // D. SELECCIONAR IDIOMA
     langOptions.forEach(option => {
         option.addEventListener('click', (e) => {
-            e.preventDefault(); // Evitar salto del link '#'
+            e.preventDefault(); 
             
-            // Obtener datos de la opción clicada
-            const selectedLang = option.getAttribute('data-lang'); // ej: 'en'
-            const selectedSrc = option.getAttribute('data-src');   // ej: 'bandera_en.png'
+            const selectedLang = option.getAttribute('data-lang'); // 'es', 'en', 'fr'
+            const selectedSrc = option.getAttribute('data-src');
 
-            // 1. Actualizar la bandera principal ("lo que está primero")
+            // 1. Actualizar la bandera visualmente
             updateLanguageUI(selectedSrc);
 
-            // 2. Guardar en LocalStorage
-            localStorage.setItem('idioma', selectedLang);      // Guardamos 'es', 'en', etc.
-            localStorage.setItem('idioma_src', selectedSrc);   // Guardamos la ruta de la imagen para cargarla rápido
+            // 2. Guardar la referencia de la imagen
+            localStorage.setItem('idioma_src', selectedSrc);
 
-            // 3. Cerrar el menú
+            // 3. EJECUTAR EL CAMBIO DE IDIOMA EN LA LIBRERÍA
+            // Esto traduce la página y actualiza el idioma en localStorage
+            if (i18n) {
+                i18n._runOnChange(selectedLang);
+            }
+
+            // 4. Cerrar el menú
             langSelector.classList.remove('active');
 
             console.log(`Idioma cambiado a: ${selectedLang}`);
@@ -88,7 +107,6 @@ function logout(redirectUrl = "index.html") {
     localStorage.setItem("usuarioActual", null);
     window.location.href = redirectUrl;
 }
-
 
 function obtenerUsuarioActual() {
     const usuario = localStorage.getItem("usuarioActual");
@@ -181,18 +199,16 @@ function actualizarHeaderUsuario() {
         return;
     }
 
-    // 1. Recuperamos el usuario (ajusta 'usuario' a tu clave real)
-    // Usamos JSON.parse porque normalmente guardamos el objeto entero
+    // 1. Recuperamos el usuario
     const usuario = obtenerUsuarioActual();
     
-    // Si NO hay usuario, no hacemos nada (se quedan los botones de Login/Registro)
+    // Si NO hay usuario, no hacemos nada
     if (!usuario){
         return;
     }
     
-    // Si no tiene foto guardada, usamos la de defecto
-    // NOTA: Recuerda tu regla de usar src="defecto.png"
-    const avatarImg = usuario.imagen || "assets/defecto.jpg"; 
+    // Ajuste: Usamos defecto.png como solicitaste y corregimos la ruta a images/
+    const avatarImg = usuario.imagen || "images/defecto.png"; 
     const nombreUsuario = usuario.nombre || "Usuario";
 
     // 2. Inyectamos el HTML del usuario logueado
@@ -210,7 +226,7 @@ function actualizarHeaderUsuario() {
         </div>
     `;
 
-    // 3. Lógica para abrir/cerrar el menú
+    // 3. Lógica para abrir/cerrar el menú de usuario
     const menuBtn = document.getElementById('userMenuBtn');
     const dropdown = document.getElementById('userDropdown');
     const logoutBtn = document.getElementById('logout-btn');
@@ -294,7 +310,6 @@ function mostrarAvisoLogin(titulo, mensaje) {
 
 // --- FUNCIONALIDAD BUSCADOR HEADER ---
 document.addEventListener("DOMContentLoaded", () => {
-    // Seleccionamos el input y el botón que están dentro de .search-bar (el del header)
     const headerSearchInput = document.querySelector('.search-bar input');
     const headerSearchBtn = document.querySelector('.search-bar button');
 
@@ -303,18 +318,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const realizarBusquedaHeader = () => {
             const texto = headerSearchInput.value.trim();
             if (texto) {
-                // Redirigimos a experiencias pasando el texto por la URL
                 window.location.href = `experiencias.html?busqueda=${encodeURIComponent(texto)}`;
             }
         };
 
-        // Al hacer click en el botón "Buscar"
         headerSearchBtn.addEventListener('click', (e) => {
             e.preventDefault();
             realizarBusquedaHeader();
         });
 
-        // Al pulsar "Enter" en el teclado
         headerSearchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -326,15 +338,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- FUNCIÓN GLOBAL PARA EL BOTÓN CORAZÓN DE LAS TARJETAS ---
 window.toggleCardFav = function(e, idViaje, btn) {
-    // 1. Evitar que el click se propague al enlace <a> (para no ir a la página de compra)
     e.preventDefault();
     e.stopPropagation();
 
-    // 2. Comprobar usuario
     let usuario = JSON.parse(localStorage.getItem("usuarioActual"));
 
     if (!usuario) {
-        // Si no está logueado, mostrar aviso
         if (typeof mostrarAvisoLogin === 'function') {
             mostrarAvisoLogin("Inicia sesión", "Debes estar registrado para guardar favoritos.");
         } else {
@@ -344,38 +353,25 @@ window.toggleCardFav = function(e, idViaje, btn) {
         return;
     }
 
-    // 3. Inicializar array si no existe
     if (!usuario.favoritos) usuario.favoritos = [];
 
     const index = usuario.favoritos.indexOf(idViaje);
     const icono = btn.querySelector("i");
 
     if (index === -1) {
-        // --> AÑADIR A FAVORITOS
         usuario.favoritos.push(idViaje);
-        
-        // Actualizar visualmente
         btn.classList.add("active");
-        icono.className = "fa-solid fa-heart"; // Corazón relleno
-        
-        // Feedback
+        icono.className = "fa-solid fa-heart"; 
         if(typeof mostrarToast === 'function') mostrarToast("Añadido a favoritos");
     } else {
-        // --> QUITAR DE FAVORITOS
         usuario.favoritos.splice(index, 1);
-        
-        // Actualizar visualmente
         btn.classList.remove("active");
-        icono.className = "fa-regular fa-heart"; // Corazón borde
-        
-        // Feedback
+        icono.className = "fa-regular fa-heart"; 
         if(typeof mostrarToast === 'function') mostrarToast("Eliminado de favoritos");
     }
 
-    // 4. Guardar en localStorage
     localStorage.setItem("usuarioActual", JSON.stringify(usuario));
     
-    // Sincronizar con la lista global de usuarios (script.js function logic)
     let usuariosGlobales = JSON.parse(localStorage.getItem("usuarios")) || [];
     const userIndex = usuariosGlobales.findIndex(u => u.correo === usuario.correo);
     if(userIndex !== -1) {
