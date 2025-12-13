@@ -160,7 +160,7 @@ const blogData = [
         </p>
 
         <div class="tip-box" style="background-color: #f8f9fa; border-left: 4px solid #333; padding: 15px; margin: 20px 0;">
-            <strong>💡 El truco del jabón sólido:</strong>
+            <strong>El truco del jabón sólido:</strong>
             Olvida los líquidos. Una pastilla de jabón tipo "Lagarto" o de coco sirve para: lavar tu ropa, ducharte, lavar los platos y hasta afeitarte. Ahorras espacio, peso y problemas en los controles del aeropuerto.
         </div>
 
@@ -396,21 +396,14 @@ if (articleBody) {
 
 // 3. LÓGICA PARA LA PÁGINA DE INICIO (INDEX)
 const indexBlogContainer = document.getElementById("index-blog-container");
-
 if (indexBlogContainer) {
-    // Aquí está el truco: .slice(0, 2) toma solo los elementos 0 y 1 del array
     const ultimosDosPosts = blogData.slice(0, 2); 
-    
-    // Reutilizamos la función que ya creamos para pintar las tarjetas
     renderBlogList(indexBlogContainer, ultimosDosPosts);
 }
 
-// Modificamos la función para que acepte un segundo parámetro 'listaDePosts'
-// Si no le pasamos nada, usará 'blogData' por defecto (todos los posts)
-function renderBlogList(container, listaDePosts = blogData) {
-    container.innerHTML = ""; // Limpiar contenido actual
 
-    // Si no hay resultados, mostramos un mensaje
+function renderBlogList(container, listaDePosts = blogData) {
+    container.innerHTML = "";
     if (listaDePosts.length === 0) {
         container.innerHTML = `
             <div style="text-align: center; padding: 40px; color: #666; width: 100%;">
@@ -423,7 +416,6 @@ function renderBlogList(container, listaDePosts = blogData) {
     listaDePosts.forEach(post => {
         const article = document.createElement("article");
         article.classList.add("blog-card");
-
         article.innerHTML = `
             <div class="blog-image">
                 <img src="${post.imagenPrincipal}" alt="${post.titulo}">
@@ -449,7 +441,7 @@ function loadBlogPost() {
 
     if (!post) return; 
 
-    // --- CARGA DEL CONTENIDO PRINCIPAL (Ya lo tenías) ---
+    // 3. Rellenar el contenido del post
     document.getElementById("post-tag").textContent = post.tag;
     document.getElementById("post-title").textContent = post.titulo;
     document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> Por ${post.autor}`;
@@ -457,34 +449,25 @@ function loadBlogPost() {
     document.getElementById("post-time").innerHTML = `<i class="fa-regular fa-clock"></i> ${post.lectura}`;
     document.getElementById("post-content").innerHTML = post.contenidoHTML;
 
-    // Cambiar fondo del Hero
+    // 4. Cambiar fondo del Hero
     const heroSection = document.querySelector(".sticky-article-hero");
     if (heroSection) {
         heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${post.imagenPrincipal}')`;
     }
-
     const relatedContainer = document.getElementById("related-posts-container");
-    
+
     if (relatedContainer) {
-        // 1. Filtramos para que NO aparezca el post que estamos leyendo actualmente
         const otrosPosts = blogData.filter(p => p.id !== id);
-
-        // 2. Tomamos solo los 2 primeros (puedes cambiar esto para que sean aleatorios si prefieres)
         const sugeridos = otrosPosts.slice(0, 2);
-
-        // 3. Limpiamos y generamos el HTML
         relatedContainer.innerHTML = "";
-        
         sugeridos.forEach(sugerido => {
             const card = document.createElement("a");
             card.href = `blog_post.html?id=${sugerido.id}`;
             card.className = "related-card";
-            
             card.innerHTML = `
                 <img src="${sugerido.imagenPrincipal}" alt="${sugerido.titulo}">
                 <h4>${sugerido.titulo}</h4>
             `;
-            
             relatedContainer.appendChild(card);
         });
     }
@@ -496,16 +479,13 @@ function initBlogFilters(container) {
     const sortBtn = document.querySelector(".filter-icon-btn");
     const filterButtonsContainer = document.querySelector(".filter-buttons");
     
-    // Variables de estado
     let terminoBusqueda = "";
     let categoriaActual = "Todas las categorías";
     let ordenActual = "Más recientes";
 
     // --- FUNCIÓN HELPER: Convertir fecha string a objeto Date ---
-    // Convierte "25 Agosto, 2025" a un objeto fecha real para poder comparar
     const parsearFecha = (fechaStr) => {
         const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        // Quitamos la coma y dividimos: ["25", "Agosto", "2025"]
         const partes = fechaStr.replace(',', '').split(' '); 
         const dia = parseInt(partes[0]);
         const mesIndex = meses.indexOf(partes[1]);
@@ -535,11 +515,10 @@ function initBlogFilters(container) {
                 return b.titulo.localeCompare(a.titulo);
             }
         });
-
         renderBlogList(container, resultados);
     };
 
-    // A. BÚSQUEDA
+    // BÚSQUEDA
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             terminoBusqueda = e.target.value.toLowerCase().trim();
@@ -553,7 +532,7 @@ function initBlogFilters(container) {
         });
     }
 
-    // B. MENÚ DE CATEGORÍAS (Izquierda)
+    // MENÚ DE CATEGORÍAS
     if (categoryBtn && filterButtonsContainer) {
         const categorias = ["Todas las categorías", ...new Set(blogData.map(p => p.tag))];
         const catMenu = crearMenuDropdown(categorias, (seleccion) => {
@@ -561,30 +540,24 @@ function initBlogFilters(container) {
             categoryBtn.textContent = seleccion;
             aplicarFiltros();
         });
-        
         filterButtonsContainer.appendChild(catMenu);
-
         categoryBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            cerrarTodosLosMenus(); // Cierra el otro menú si está abierto
+            cerrarTodosLosMenus();
             catMenu.classList.toggle("show");
         });
     }
 
-    // C. MENÚ DE ORDENAR
+    // MENÚ DE ORDENAR
     if (sortBtn && filterButtonsContainer) {
         const opcionesOrden = ["Más recientes", "Más antiguos", "A-Z", "Z-A"];
-        
-        // Creamos el menú usando la clase extra 'sort-menu'
         const sortMenu = crearMenuDropdown(opcionesOrden, (seleccion) => {
             ordenActual = seleccion;
             aplicarFiltros();
             console.log("Ordenando por:", seleccion);
         });
-        sortMenu.classList.add("sort-menu"); // Alineación a la derecha
-
+        sortMenu.classList.add("sort-menu");
         filterButtonsContainer.appendChild(sortMenu);
-
         sortBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             cerrarTodosLosMenus();
@@ -593,9 +566,7 @@ function initBlogFilters(container) {
         });
     }
 
-    // --- UTILIDADES ---
-    
-    // Función para cerrar menús al hacer clic fuera
+    // UTILIDADES
     document.addEventListener("click", (e) => {
         if (!filterButtonsContainer.contains(e.target)) {
             cerrarTodosLosMenus();
@@ -606,12 +577,9 @@ function initBlogFilters(container) {
         document.querySelectorAll(".category-dropdown").forEach(el => el.classList.remove("show"));
         if(sortBtn) sortBtn.classList.remove("active");
     }
-
-    // Generador de HTML de Menús para no repetir código
     function crearMenuDropdown(opciones, onClickCallback) {
         const menu = document.createElement("div");
         menu.className = "category-dropdown";
-
         opciones.forEach(opcionTxt => {
             const item = document.createElement("div");
             item.className = "category-option";

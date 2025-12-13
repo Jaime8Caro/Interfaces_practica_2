@@ -1,8 +1,5 @@
 // DATOS: Base de datos de tus experiencias
 const experiencesData = [
-    // --- NUEVAS CIUDADES DEL HTML (IDs 4+) ---
-    // Nota: He añadido datos genéricos (precio, itinerario, autor) para que funcione la web.
-    
     // EUROPA
     {
         id: 4,
@@ -1089,8 +1086,6 @@ const experiencesData = [
 ];
 
 // --- 1. LÓGICA DE LISTADOS Y DETALLE ---
-
-// Detectar dónde estamos
 const experiencesListContainer = document.querySelector(".experiences-grid-list");
 const productDetailSection = document.querySelector(".product-details");
 
@@ -1117,24 +1112,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const indexContainer = document.getElementById("index-experiences-container");
     
     if (indexContainer) {
-        // 1. Creamos una copia de los datos para no desordenar el original
-        // 2. Ordenamos por RATING de mayor a menor (b.rating - a.rating)
-        // 3. Cortamos los 3 primeros (.slice(0, 3))
         const mejoresExperiencias = [...experiencesData]
             .sort((a, b) => b.rating - a.rating)
             .slice(0, 3);
-        
-        // Pintamos las tarjetas
         renderExperiencesList(indexContainer, mejoresExperiencias);
     }
 });
 
-// --- FUNCIÓN DE RENDERIZADO (Listado) ---
+// Función para renderizar la lista de experiencias
 function renderExperiencesList(container, listaDatos = experiencesData) {
     container.innerHTML = ""; 
 
     if (listaDatos.length === 0) {
-        // ... (código de "no resultados" se mantiene igual)
         container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3>No hay resultados...</h3></div>`;
         return;
     }
@@ -1147,12 +1136,10 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
         // 2. COMPROBAR SI ESTE VIAJE ES FAVORITO
         const esFavorito = favoritos.includes(exp.id);
         const claseActiva = esFavorito ? "active" : "";
-        const iconoClase = esFavorito ? "fa-solid" : "fa-regular"; // Solid = relleno, Regular = borde
-
+        const iconoClase = esFavorito ? "fa-solid" : "fa-regular";
         const card = document.createElement("a");
         card.href = `compra.html?id=${exp.id}`;
         card.className = "experience-card-item";
-
         card.innerHTML = `
             <div class="card-image-header">
                 <span class="difficulty-badge">${exp.dificultad}</span>
@@ -1181,15 +1168,13 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
     });
 }
 
-// --- LÓGICA DE FILTROS ---
+// Función para inicializar los filtros de experiencias
 function initExperiencesFilters(container) {
     const searchInput = document.getElementById("exp-search-input");
     const categoryBtn = document.getElementById("btn-exp-category");
     const difficultyBtn = document.getElementById("btn-exp-difficulty");
     const sortBtn = document.getElementById("btn-exp-sort");
     const filterContainer = document.querySelector(".filter-buttons");
-
-    // Estados iniciales
     let filtros = { texto: "", categoria: "Todas", dificultad: "Todas", orden: "Defecto" };
 
     const aplicarFiltros = () => {
@@ -1211,14 +1196,10 @@ function initExperiencesFilters(container) {
         renderExperiencesList(container, resultados);
     };
 
-    // ============================================================
-    //  AÑADIR ESTE BLOQUE AQUÍ PARA RECUPERAR LA BÚSQUEDA
-    // ============================================================
     const params = new URLSearchParams(window.location.search);
     const busquedaURL = params.get("busqueda");
-
     if (busquedaURL) {
-        // 1. Decodificar el texto (quitar símbolos raros de la URL)
+        // 1. Decodificar el texto
         const textoDecodificado = decodeURIComponent(busquedaURL).toLowerCase();
         
         // 2. Escribirlo en el buscador de la página para que el usuario lo vea
@@ -1236,15 +1217,9 @@ function initExperiencesFilters(container) {
         });
     }
     
-    // ... (El resto de tu función para crearMenús sigue igual abajo) ...
-    // ... Copia aquí el resto de tu función initExperiencesFilters original (crearMenu, event listeners, etc) ...
-    
-    // Función helper para menús (Ya la tenías, asegúrate de mantenerla dentro)
     const crearMenu = (boton, opciones, tipoFiltro) => {
-        // ... (Tu código existente para crear menú) ...
         const menu = document.createElement("div");
         menu.className = "category-dropdown"; 
-        
         const opcionTodas = document.createElement("div");
         opcionTodas.className = "category-option";
         opcionTodas.textContent = tipoFiltro === 'categoria' ? "Todas las categorías" : "Todas las dificultades";
@@ -1255,7 +1230,6 @@ function initExperiencesFilters(container) {
             aplicarFiltros();
         });
         menu.appendChild(opcionTodas);
-
         opciones.forEach(opcionTxt => {
             const item = document.createElement("div");
             item.className = "category-option";
@@ -1268,9 +1242,7 @@ function initExperiencesFilters(container) {
             });
             menu.appendChild(item);
         });
-
         filterContainer.appendChild(menu); 
-        
         boton.addEventListener("click", (e) => {
             e.stopPropagation();
             document.querySelectorAll(".category-dropdown").forEach(m => { if(m !== menu) m.classList.remove("show"); });
@@ -1320,14 +1292,11 @@ function initExperiencesFilters(container) {
 }
 
 
-// --- FUNCIÓN CLAVE: CARGAR EL DETALLE EN compra.html ---
+// Función para cargar el detalle de una experiencia
 function loadExperienceDetail() {
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get("id"));
-
-    // Buscar experiencia por ID
     const exp = experiencesData.find(e => e.id === id);
-
     if (!exp) {
         document.querySelector("main").innerHTML = "<div class='container' style='padding:150px 20px; text-align:center;'><h1>Experiencia no encontrada</h1><p>Lo sentimos, no pudimos cargar este viaje.</p><a href='experiencias.html' class='btn-black' style='margin-top:20px;'>Volver al listado</a></div>";
         return;
@@ -1374,20 +1343,19 @@ function loadExperienceDetail() {
         }
     }
 
-    // 3. Renderizar Pestaña INCLUYE (Dinámico)
-    // Generamos una lista basada en la categoría para que se vea completo
+    // 3. Renderizar Pestaña INCLUYE
     const tabIncluye = document.getElementById("tab-incluye");
     if (tabIncluye) {
         tabIncluye.innerHTML = generarListaIncluye(exp.categoria);
     }
 
-    // 4. Renderizar Pestaña EQUIPO (Dinámico)
+    // 4. Renderizar Pestaña EQUIPO
     const tabEquipo = document.getElementById("tab-equipo");
     if (tabEquipo) {
         tabEquipo.innerHTML = generarListaEquipo(exp.dificultad);
     }
 
-    // 5. Renderizar Pestaña RESEÑAS (Simuladas con datos reales)
+    // 5. Renderizar Pestaña RESEÑAS
     const tabResenas = document.getElementById("tab-resenas");
     if (tabResenas) {
         tabResenas.innerHTML = generarResenas(exp.resenas);
@@ -1410,12 +1378,11 @@ function loadExperienceDetail() {
             }
         });
     }
-    // 6.5 LÓGICA DE FAVORITOS (NUEVO)
+    // 6.5 LÓGICA DE FAVORITOS
     const btnFav = document.querySelector('.btn-favorite');
-    
+
     // A. Comprobar si ya es favorito al cargar
     const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
-    
     if (usuarioActual && usuarioActual.favoritos && usuarioActual.favoritos.includes(exp.id)) {
         btnFav.classList.add('active');
         btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> Guardado`;
@@ -1423,25 +1390,19 @@ function loadExperienceDetail() {
 
     // B. Evento Click
     btnFav.addEventListener('click', () => {
-        // Recuperamos usuario al momento del click
         const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
-
-        // --- CAMBIO AQUÍ ---
         if (!usuario) {
-            // En lugar de redirigir, mostramos el modal
             if (typeof mostrarAvisoLogin === 'function') {
                 mostrarAvisoLogin(
                     "Inicia sesión para guardar favoritos",
                     "Necesitas identificarte para poder guardar esta experiencia en tu lista de deseos."
                 );
             } else {
-                // Fallback por si acaso
                 alert("Debes iniciar sesión");
                 window.location.href = "login.html";
             }
-            return; // Detenemos la ejecución aquí
+            return;
         }
-        // -------------------
 
         // Inicializar array si no existe
         if (!usuario.favoritos) usuario.favoritos = [];
@@ -1464,7 +1425,6 @@ function loadExperienceDetail() {
 
         // C. Guardar cambios
         localStorage.setItem("usuarioActual", JSON.stringify(usuario));
-        // Si tienes la función de sincronizar global, úsala:
         if (typeof actualizarUsuarioEnListaGlobal === 'function') {
             actualizarUsuarioEnListaGlobal(usuario);
         }
@@ -1472,22 +1432,17 @@ function loadExperienceDetail() {
 
     // 7. Activar Lógica de Pestañas
     initTabs();
-    
-    // 8. MEJORA DEL BOTÓN "VOLVER" (Historial + Scroll)
+
+    // 8. MEJORA DEL BOTÓN "VOLVER"
     const backLink = document.querySelector('.breadcrumb-bar a');
     
     if (backLink) {
-        // Cambiamos el comportamiento al hacer clic
         backLink.addEventListener('click', (e) => {
-            // Solo si hay historial para volver (evita romper si abres en pestaña nueva)
             if (window.history.length > 1) {
-                e.preventDefault(); // Evita ir al href="experiencias.html" por defecto
+                e.preventDefault();
                 window.history.back(); // Vuelve atrás recuperando el scroll
             }
         });
-
-        // Opcional: Cambiar el texto si venimos de otra sección conocida
-        // (Por ejemplo, si vienes del Perfil, que ponga "Volver atrás")
         if (document.referrer.includes("perfil.html")) {
             backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver a mi perfil';
         } else if (document.referrer.includes("index.html")) {
@@ -1496,19 +1451,15 @@ function loadExperienceDetail() {
     }
 }
 
-// --- FUNCIONES AUXILIARES PARA GENERAR CONTENIDO ---
-
+// Función para inicializar pestañas
 function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-content-panel');
 
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Quitar activo de todos
             tabButtons.forEach(b => b.classList.remove('active'));
             tabPanels.forEach(p => p.classList.remove('active'));
-            
-            // Activar actual
             btn.classList.add('active');
             const targetId = btn.getAttribute('data-tab');
             const targetPanel = document.getElementById(targetId);
@@ -1517,8 +1468,8 @@ function initTabs() {
     });
 }
 
+// Función para generar lista de incluye según categoría
 function generarListaIncluye(categoria) {
-    // Items básicos siempre incluidos
     let items = [
         "Alojamiento seleccionado",
         "Traslados aeropuerto - hotel",
@@ -1526,13 +1477,9 @@ function generarListaIncluye(categoria) {
         "Seguro de viaje básico",
         "Atención 24/7"
     ];
-
-    // Añadir extras según categoría
     if (categoria === "Aventura") items.push("Equipo de seguridad y técnico", "Entradas a parques nacionales");
     if (categoria === "Cultural") items.push("Entradas a museos y monumentos", "Degustación de comida local");
     if (categoria === "Relax" || categoria === "Playa") items.push("Cóctel de bienvenida", "Clase de yoga o masaje");
-
-    // Convertir a HTML
     let html = `<ul class="check-list">`;
     items.forEach(item => {
         html += `<li><i class="fa-solid fa-check"></i> ${item}</li>`;
@@ -1541,6 +1488,7 @@ function generarListaIncluye(categoria) {
     return html;
 }
 
+// Función para generar lista de equipo según dificultad
 function generarListaEquipo(dificultad) {
     let titulo = "Equipaje recomendado";
     let items = ["Mochila cómoda (30-50L)", "Botella de agua reutilizable", "Protector solar y gafas de sol", "Cámara de fotos", "Adaptador de corriente universal"];
@@ -1560,8 +1508,8 @@ function generarListaEquipo(dificultad) {
     return html;
 }
 
+// Función para generar reseñas de ejemplo
 function generarResenas(cantidad) {
-    // Generamos 2 reseñas ficticias bonitas para rellenar
     return `
         <div class="testimonial-box-feature" style="margin-bottom:20px;">
             <div class="user-feature-header">
@@ -1589,8 +1537,7 @@ function generarResenas(cantidad) {
     `;
 }
 
-
-// --- FUNCIÓN PARA LA PÁGINA DE DESTINOS ---
+// Función para inicializar la página de destinos por continentes
 function initDestinationsPage() {
     const idsEuropa = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; 
     const idsAsia   = [2, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]; 
@@ -1628,9 +1575,9 @@ function initDestinationsPage() {
         });
     });
 }
+
 // Función para mostrar el mensaje emergente
 function mostrarToast(mensaje, tipo = "success") {
-    // Crear el elemento si no existe
     let toast = document.getElementById("toast");
     if (!toast) {
         toast = document.createElement("div");
@@ -1639,19 +1586,15 @@ function mostrarToast(mensaje, tipo = "success") {
         document.body.appendChild(toast);
     }
 
-    // Icono según tipo
     const icono = tipo === "error" ? '<i class="fa-solid fa-circle-exclamation" style="color:#ff4d4d"></i>' : '<i class="fa-solid fa-circle-check"></i>';
-
     toast.innerHTML = `${icono} ${mensaje}`;
     toast.className = "toast-notification show";
-
-    // Ocultar después de 3 segundos
     setTimeout(() => {
         toast.className = toast.className.replace("show", "");
     }, 3000);
 }
 
-// Función para sincronizar con la lista de todos los usuarios (para que no se pierda al salir)
+// Función para sincronizar con la lista de todos los usuarios
 function actualizarUsuarioEnListaGlobal(usuarioModificado) {
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
     const index = usuarios.findIndex(u => u.correo === usuarioModificado.correo);

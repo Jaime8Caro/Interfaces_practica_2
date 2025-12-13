@@ -1,12 +1,10 @@
-// script_register.js
-
 const form = document.querySelector(".auth-card.signup-mode form");
 
 if (form) {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        // --- SELECCIÓN DE ELEMENTOS (Actualizado: Ahora usamos IDs) ---
+        // --- SELECCIÓN DE ELEMENTOS ---
         const nombreInput = document.getElementById('nombre');
         const apellidosInput = document.getElementById('apellidos');
         const fechaInput = document.getElementById('fecha-nacimiento');
@@ -14,9 +12,9 @@ if (form) {
         const correoConfInput = document.getElementById('confirmar-email');
         const usuarioInput = document.getElementById('usuario');
         const passInput = document.getElementById('password');
-        const imagenInput = document.getElementById('foto-perfil'); // Input file oculto
+        const imagenInput = document.getElementById('foto-perfil');
         const privacyInput = document.getElementById("privacy");
-        const privacyLabel = form.querySelector('label[for="privacy"]'); // Para marcar error en el texto
+        const privacyLabel = form.querySelector('label[for="privacy"]');
 
         // --- VALORES ---
         const nombre = nombreInput.value.trim();
@@ -26,8 +24,6 @@ if (form) {
         const correoConfirmacion = correoConfInput.value.trim();
         const apodo = usuarioInput.value.trim();
         const contraseña = passInput.value.trim();
-        
-        // Verificación de seguridad por si no se seleccionó archivo
         const imagenPerfil = imagenInput.files && imagenInput.files[0] ? imagenInput.files[0] : null;
 
         let formularioValido = true;
@@ -42,17 +38,12 @@ if (form) {
         if (apellidos.length < 3) formularioValido = false;
 
         // 2. Correo y Duplicados
-        // Primero validamos formato
         let esCorreoFormatoValido = correo.length >= 3 && correo.includes("@");
         
-        // Si el formato es válido, comprobamos si YA EXISTE (para evitar el alert de script.js)
-        // Nota: validarUsuarioExistente debe estar definida en script.js
         if (esCorreoFormatoValido && typeof validarUsuarioExistente === 'function' && validarUsuarioExistente(correo)) {
-            // Si existe, forzamos el error visual aquí
             validarCampoFormulario(correoInput, false, "¡Correo ya registrado!", "Correo electrónico");
             formularioValido = false;
         } else {
-            // Si no existe o formato invalido, aplicamos la validación normal
             validarCampoFormulario(correoInput, esCorreoFormatoValido, "Correo inválido", "Correo electrónico");
             if (!esCorreoFormatoValido) formularioValido = false;
         }
@@ -77,18 +68,18 @@ if (form) {
 
         // Validación de Privacidad
         if (!privacyInput.checked) {
-            privacyLabel.style.color = "red"; // Indicador visual simple
+            privacyLabel.style.color = "red";
             privacyInput.style.outline = "2px solid red";
             privacyInput.style.outlineOffset = "3px";
             formularioValido = false;
         } else {
             privacyInput.style.outline = "none";
-            privacyLabel.style.color = "#333"; // Color original
+            privacyLabel.style.color = "#333";
         }
 
         // --- GUARDADO ---
         if (!formularioValido) {
-            return false; // Si hay errores visuales, paramos aquí.
+            return false;
         }
 
         // Objeto usuario
@@ -100,8 +91,6 @@ if (form) {
         };
 
         const finalizarRegistro = (datosUsuario) => {
-            // Agregamos el usuario directamente al localStorage aquí para evitar 
-            // llamar a guardarUsuario() (aunque ya validamos duplicados arriba).
 
         if (guardarUsuario(datosUsuario)){
             window.location.href = "index.html";

@@ -26,7 +26,6 @@ function cargarDatosUsuarioPerfil() {
     const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
 
     if (!usuario) {
-        // Si no hay nadie logueado, redirigir
         window.location.href = 'login.html';
         return;
     }
@@ -45,15 +44,12 @@ function cargarDatosUsuarioPerfil() {
     const apellido = document.getElementById('input-apellido');
     const email = document.getElementById('input-email');
     const usuarioInput = document.getElementById('input-usuario');
-    const nacimiento = document.getElementById('input-nacimiento'); // <--- Nuevo ID
+    const nacimiento = document.getElementById('input-nacimiento');
 
-    // Rellenamos con seguridad (usando || '' para que no salga 'undefined')
     if (nombre) nombre.value = usuario.nombre || '';
-    if (apellido) apellido.value = usuario.apellidos || usuario.apellido || ''; // A veces guardamos 'apellidos'
+    if (apellido) apellido.value = usuario.apellidos || usuario.apellido || '';
     if (email) email.value = usuario.correo || '';
     if (usuarioInput) usuarioInput.value = usuario.apodo|| usuario.username || '';
-    
-    // Para la fecha, probamos varios nombres comunes
     if (nacimiento) nacimiento.value = usuario.fecha_nacimiento || usuario.nacimiento || usuario.fecha || '';
 }
 
@@ -86,24 +82,19 @@ function gestionarNavegacionPestanas() {
         }
     }
 
-    // Event Listeners para los clics
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const tabName = link.getAttribute('data-tab');
-            window.location.hash = tabName; // Actualizar URL
+            window.location.hash = tabName;
             activarPestana(tabName);
         });
     });
 
     // Carga inicial
     function leerHashYActivar() {
-        // Quitamos el # de la URL. Si está vacío, por defecto vamos a "datos"
         const hash = window.location.hash.replace('#', '') || 'datos';
-        
-        // Pequeño parche por si alguien entra con #perfil antiguo
         const tabFinal = (hash === 'perfil') ? 'datos' : hash;
-        
         activarPestana(tabFinal);
     }
 
@@ -117,7 +108,6 @@ function configurarLogoutSidebar() {
     if (btnLogout) {
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            // Usamos la función global si existe
             logout();
         });
     }
@@ -126,15 +116,7 @@ function configurarLogoutSidebar() {
 function cargarReservasUsuario() {
     const contenedor = document.getElementById('lista-reservas-container');
     const mensajeVacio = document.getElementById('mensaje-sin-reservas');
-    
-    // Recuperamos el historial de reservas
-    // Asegúrate de usar la misma clave que usaste al guardar ('reservas')
     const reservasGuardadas = JSON.parse(localStorage.getItem('reservas') || '[]');
-    
-    // Opcional: Filtrar solo las del usuario actual si guardaste el email en la reserva
-    // const usuario = obtenerUsuarioActual();
-    // const misReservas = reservasGuardadas.filter(r => r.cliente.email === usuario.email); 
-    // Por ahora usamos todas las guardadas en este navegador:
     const misReservas = reservasGuardadas;
 
     if (misReservas.length === 0) {
@@ -143,10 +125,10 @@ function cargarReservasUsuario() {
         if(mensajeVacio) mensajeVacio.style.display = 'block';
     } else {
         // CASO 2: HAY RESERVAS -> Las pintamos
-        if(contenedor) contenedor.style.display = 'grid'; // o 'block'
+        if(contenedor) contenedor.style.display = 'grid';
         if(mensajeVacio) mensajeVacio.style.display = 'none';
         
-        contenedor.innerHTML = ''; // Limpiar
+        contenedor.innerHTML = '';
         
         misReservas.forEach(reserva => {
             // Protección por si la estructura de datos varía
@@ -253,14 +235,12 @@ function gestionarConfiguracion() {
                 // --- ACCIÓN: DESBLOQUEAR ---
                 inputsConfig.forEach(input => {
                     input.disabled = false;
-                    input.style.borderColor = '#007bff'; // Feedback visual (azul)
+                    input.style.borderColor = '#007bff';
                 });
-                
-                // Cambiar icono a candado abierto
                 icon.classList.remove('fa-lock');
                 icon.classList.add('fa-lock-open');
-                icon.style.color = '#007bff'; // Color activo
-                
+                icon.style.color = '#007bff';
+            
                 if(statusMsg) statusMsg.style.display = 'none';
 
             } else {
@@ -269,8 +249,7 @@ function gestionarConfiguracion() {
                 
                 inputsConfig.forEach(input => {
                     input.disabled = true;
-                    input.style.borderColor = '#ddd'; // Restaurar borde
-                    // Guardamos el valor en el objeto
+                    input.style.borderColor = '#ddd';
                     nuevaConfig[input.id] = input.value;
                 });
 
