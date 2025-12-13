@@ -1472,6 +1472,28 @@ function loadExperienceDetail() {
 
     // 7. Activar Lógica de Pestañas
     initTabs();
+    
+    // 8. MEJORA DEL BOTÓN "VOLVER" (Historial + Scroll)
+    const backLink = document.querySelector('.breadcrumb-bar a');
+    
+    if (backLink) {
+        // Cambiamos el comportamiento al hacer clic
+        backLink.addEventListener('click', (e) => {
+            // Solo si hay historial para volver (evita romper si abres en pestaña nueva)
+            if (window.history.length > 1) {
+                e.preventDefault(); // Evita ir al href="experiencias.html" por defecto
+                window.history.back(); // Vuelve atrás recuperando el scroll
+            }
+        });
+
+        // Opcional: Cambiar el texto si venimos de otra sección conocida
+        // (Por ejemplo, si vienes del Perfil, que ponga "Volver atrás")
+        if (document.referrer.includes("perfil.html")) {
+            backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver a mi perfil';
+        } else if (document.referrer.includes("index.html")) {
+            backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver al inicio';
+        }
+    }
 }
 
 // --- FUNCIONES AUXILIARES PARA GENERAR CONTENIDO ---
