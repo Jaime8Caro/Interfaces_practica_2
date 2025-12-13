@@ -1472,7 +1472,7 @@ function loadExperienceDetail() {
 
     // 7. Activar Lógica de Pestañas
     initTabs();
-    
+
     // 8. MEJORA DEL BOTÓN "VOLVER" (Historial + Scroll)
     const backLink = document.querySelector('.breadcrumb-bar a');
     
