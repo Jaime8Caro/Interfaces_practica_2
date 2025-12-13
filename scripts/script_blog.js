@@ -407,8 +407,8 @@ function renderBlogList(container, listaDePosts = blogData) {
     if (listaDePosts.length === 0) {
         container.innerHTML = `
             <div style="text-align: center; padding: 40px; color: #666; width: 100%;">
-                <h3>No encontramos publicaciones que coincidan con tu búsqueda</h3>
-                <p>Intenta con otra palabra clave o categoría.</p>
+                <h3 data-i18n="blog.no_results_title">No encontramos publicaciones</h3>
+                <p data-i18n="blog.no_results_text">Intenta con otra palabra clave.</p>
             </div>`;
         return;
     }
@@ -416,18 +416,21 @@ function renderBlogList(container, listaDePosts = blogData) {
     listaDePosts.forEach(post => {
         const article = document.createElement("article");
         article.classList.add("blog-card");
+        // AÑADIDOS DATA-I18N
         article.innerHTML = `
             <div class="blog-image">
                 <img src="${post.imagenPrincipal}" alt="${post.titulo}">
             </div>
             <div class="blog-content">
                 <h3>${post.titulo}</h3>
-                <p class="blog-author">De ${post.autor}</p>
+                <p class="blog-author"><span data-i18n="blog.by">De</span> ${post.autor}</p>
                 <p class="blog-excerpt">${post.resumen}</p>
-                <a href="blog_post.html?id=${post.id}" class="btn-black-sm">Leer artículo completo</a>
+                <a href="blog_post.html?id=${post.id}" class="btn-black-sm" data-i18n="blog.read_more">Leer artículo completo</a>
             </div>
         `;
         container.appendChild(article);
+
+        if(window.i18n) window.i18n.run();
     });
 }
 

@@ -1124,7 +1124,7 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
     container.innerHTML = ""; 
 
     if (listaDatos.length === 0) {
-        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3>No hay resultados...</h3></div>`;
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3 data-i18n="general.no_results">No hay resultados...</h3></div>`;
         return;
     }
 
@@ -1143,11 +1143,9 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
         card.innerHTML = `
             <div class="card-image-header">
                 <span class="difficulty-badge">${exp.dificultad}</span>
-                
                 <button class="card-fav-btn ${claseActiva}" onclick="toggleCardFav(event, ${exp.id}, this)">
                     <i class="${iconoClase} fa-heart"></i>
                 </button>
-
                 <img src="${exp.imagen}" alt="${exp.titulo}">
             </div>
             <div class="card-body">
@@ -1159,12 +1157,13 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
                     <span><i class="fa-solid fa-user-group"></i> ${exp.grupo}</span>
                 </div>
                 <div class="card-footer">
-                    <span class="price">$${exp.precio} <small>/ persona</small></span>
-                    <span class="btn-reservar">Reservar</span>
+                    <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
+                    <span class="btn-reservar" data-i18n="cards.book_btn">Reservar</span>
                 </div>
             </div>
         `;
         container.appendChild(card);
+        if(window.i18n) window.i18n.run();
     });
 }
 
@@ -1449,6 +1448,7 @@ function loadExperienceDetail() {
             backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver al inicio';
         }
     }
+    if(window.i18n) window.i18n.run();
 }
 
 // Función para inicializar pestañas
@@ -1471,11 +1471,11 @@ function initTabs() {
 // Función para generar lista de incluye según categoría
 function generarListaIncluye(categoria) {
     let items = [
-        "Alojamiento seleccionado",
-        "Traslados aeropuerto - hotel",
-        "Guía local certificado (Español/Inglés)",
-        "Seguro de viaje básico",
-        "Atención 24/7"
+        '<span data-i18n="product.include_1">Alojamiento seleccionado</span>',
+        '<span data-i18n="product.include_traslados">Traslados aeropuerto - hotel</span>',
+        '<span data-i18n="product.include_2">Guía local certificado</span>',
+        '<span data-i18n="product.include_seguro">Seguro de viaje básico</span>',
+        '<span data-i18n="product.include_atencion">Atención 24/7</span>'
     ];
     if (categoria === "Aventura") items.push("Equipo de seguridad y técnico", "Entradas a parques nacionales");
     if (categoria === "Cultural") items.push("Entradas a museos y monumentos", "Degustación de comida local");

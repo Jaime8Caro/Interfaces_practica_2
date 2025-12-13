@@ -27,14 +27,14 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -55,31 +55,31 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login" style="font-weight: 700;">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" style="font-weight: 700;" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
 
     <main>
         <section class="auth-hero-section">
-            <h1 class="auth-page-title">Inicia sesión</h1>
+            <h1 class="auth-page-title" data-i18n="login.title">Inicia sesión</h1>
             
             <div class="auth-card login-mode">
                 <form action="#">
                     <div class="input-group">
-                        <input type="text" id="email" placeholder="Correo electrónico">
+                        <input type="text" id="email" placeholder="Correo electrónico" data-i18n-placeholder="login.email_ph">
                     </div>
                     
                     <div class="input-group">
-                        <input type="password" id="password" placeholder="Contraseña">
+                        <input type="password" id="password" placeholder="Contraseña" data-i18n-placeholder="login.password_ph">
                     </div>
                     
-                    <a href="#" class="forgot-password-link">No recuerdo mi contraseña</a>
+                    <a href="#" class="forgot-password-link" data-i18n="login.forgot_pass">No recuerdo mi contraseña</a>
                     
                     <div class="auth-buttons">
-                        <button type="submit" class="btn-black btn-login-form">Iniciar sesión</button>
-                        <a href="register.html" class="btn-outline">No tengo cuenta</a>
+                        <button type="submit" class="btn-black btn-login-form" data-i18n="login.submit_btn">Iniciar sesión</button>
+                        <a href="register.html" class="btn-outline" data-i18n="login.no_account_btn">No tengo cuenta</a>
                     </div>
                 </form>
             </div>
@@ -90,7 +90,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -99,21 +99,21 @@
             </div>
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

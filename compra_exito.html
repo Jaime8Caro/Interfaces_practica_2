@@ -23,15 +23,15 @@
                 <span>Pack&Go</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -52,15 +52,15 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
 
     <main>
         <div class="back-link-container">
-            <a href="experiencias.html"><i class="fa-solid fa-chevron-left salir"></i> Volver a experiencias</a>
+            <a href="experiencias.html"><i class="fa-solid fa-chevron-left salir"></i> <span data-i18n="success.back">Volver a experiencias</span></a>
         </div>
 
         <section class="success-section">
@@ -69,21 +69,22 @@
                 <i class="fa-regular fa-circle-check"></i>
             </div>
 
-            <h1 class="page-title-center" style="margin-bottom: 2rem;">¡Compra realizada con éxito!</h1>
+            <h1 class="page-title-center" style="margin-bottom: 2rem;" data-i18n="success.title">¡Compra realizada con éxito!</h1>
 
             <div class="success-details-box">
-                <h3 class="details-subtitle">Detalles de la reserva: <span id="exito-id">#PKG-0000</span></h3>
+                <h3 class="details-subtitle"><span data-i18n="success.subtitle">Detalles de la reserva:</span> <span id="exito-id">#PKG-0000</span></h3>
                 
-                <h2 class="experience-title-large" id="exito-titulo">Cargando reserva...</h2>
+                <h2 class="experience-title-large" id="exito-titulo" data-i18n="success.loading">Cargando reserva...</h2>
                 
                 <p class="success-description">
-                    Hemos enviado un correo de confirmación a <strong id="exito-email">...</strong> con todos los detalles y el itinerario completo. 
-                    ¡Prepárate para tu aventura!
+                    <span data-i18n="success.email_msg_1">Hemos enviado un correo de confirmación a</span> 
+                    <strong id="exito-email">...</strong> 
+                    <span data-i18n="success.email_msg_2">con todos los detalles y el itinerario completo. ¡Prepárate para tu aventura!</span>
                 </p>
                 
                 <div style="margin-top: 20px; text-align: left; padding-top: 20px; border-top: 1px solid #eee;">
-                    <p><strong>Destino:</strong> <span id="exito-destino">...</span></p>
-                    <p><strong>Total pagado:</strong> <span id="exito-precio">...</span></p>
+                    <p><strong data-i18n="success.label_destiny">Destino:</strong> <span id="exito-destino">...</span></p>
+                    <p><strong data-i18n="success.label_price">Total pagado:</strong> <span id="exito-precio">...</span></p>
                 </div>
             </div>
 
@@ -97,7 +98,7 @@
             
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -107,21 +108,21 @@
 
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

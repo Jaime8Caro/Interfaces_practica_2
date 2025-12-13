@@ -8,6 +8,8 @@ const i18n = new vanilla_i18n(['es', 'en', 'fr'], {
     default_language: 'es'
 });
 
+window.i18n = i18n;
+
 // Iniciamos la traducción
 i18n.run();
 

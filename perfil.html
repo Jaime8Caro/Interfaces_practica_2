@@ -27,18 +27,34 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
+            
             <div class="language-selector">
-                <button class="lang-btn"><img src="assets/bandera_españa.png" class="flag-icon"><i class="fa-solid fa-chevron-down"></i></button>
+                <button class="lang-btn" id="langToggle">
+                    <img src="assets/bandera_españa.png" alt="es" class="flag-icon" id="currentFlag">
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </button>
+                
+                <div class="lang-dropdown" id="langMenu">
+                    <a href="#" class="lang-option" data-lang="es" data-src="assets/bandera_españa.png">
+                        <img src="assets/bandera_españa.png" alt="es" class="flag-icon">
+                    </a>
+                    <a href="#" class="lang-option" data-lang="en" data-src="assets/bandera_inglaterra.png">
+                        <img src="assets/bandera_inglaterra.png" alt="en" class="flag-icon">
+                    </a>
+                    <a href="#" class="lang-option" data-lang="fr" data-src="assets/bandera_francia.png">
+                        <img src="assets/bandera_francia.png" alt="fr" class="flag-icon">
+                    </a>
+                </div>
             </div>
 
             <div class="user-actions" id="user-actions-container">
@@ -51,14 +67,14 @@
         <aside class="profile-sidebar">
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="#" class="sidebar-link active" data-tab="datos">Datos personales</a></li>
-                    <li><a href="#" class="sidebar-link" data-tab="favoritos">Favoritos</a></li>
-                    <li><a href="#" class="sidebar-link" data-tab="viajes">Mis viajes</a></li>
-                    <li><a href="#" class="sidebar-link" data-tab="configuracion">Configuración</a></li>
+                    <li><a href="#" class="sidebar-link active" data-tab="datos" data-i18n="profile.tab_data">Datos personales</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="favoritos" data-i18n="profile.tab_favorites">Favoritos</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="viajes" data-i18n="profile.tab_trips">Mis viajes</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="configuracion" data-i18n="profile.tab_config">Configuración</a></li>
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" class="sidebar-link" id="btn-logout-sidebar">Cerrar Sesión</a>
+                <a href="#" class="sidebar-link" id="btn-logout-sidebar" data-i18n="profile.logout">Cerrar Sesión</a>
             </div>
         </aside>
 
@@ -66,66 +82,66 @@
             
             <div class="content-wrapper">
                 <div id="tab-datos" class="tab-section">
-                    <h1>Datos personales</h1>
+                    <h1 data-i18n="profile.title_data">Datos personales</h1>
                     <div class="profile-avatar-large">
                         </div>
                     <form class="profile-form">
                         <div class="form-group">
-                            <label for="input-nombre">Nombre</label>
+                            <label for="input-nombre" data-i18n="profile.label_name">Nombre</label>
                             <input type="text" id="input-nombre" class="form-input" readonly>
                         </div>
 
                         <div class="form-group">
-                            <label for="input-apellido">Apellido</label>
+                            <label for="input-apellido" data-i18n="profile.label_lastname">Apellido</label>
                             <input type="text" id="input-apellido" class="form-input" readonly>
                         </div>
 
                         <div class="form-group">
-                            <label for="input-nacimiento">Fecha de nacimiento</label>
+                            <label for="input-nacimiento" data-i18n="profile.label_dob">Fecha de nacimiento</label>
                             <input type="text" id="input-nacimiento" class="form-input" readonly>
                         </div>
 
                         <div class="form-group">
-                            <label for="input-email">Correo electrónico</label>
+                            <label for="input-email" data-i18n="profile.label_email">Correo electrónico</label>
                             <input type="email" id="input-email" class="form-input" readonly>
                         </div>
 
                         <div class="form-group">
-                            <label for="input-usuario">Nombre de usuario</label>
+                            <label for="input-usuario" data-i18n="profile.label_user">Nombre de usuario</label>
                             <input type="text" id="input-usuario" class="form-input" readonly>
                         </div>
                     </form>
                 </div>
 
                 <div id="tab-favoritos" class="tab-section" style="display: none;">
-                    <h1>Favoritos</h1>
+                    <h1 data-i18n="profile.title_favorites">Favoritos</h1>
                     <div class="favorites-grid" id="favorites-container">
                         </div>
                     
                     <div id="no-favorites-msg" style="display:none; text-align:center; padding:40px; color:#888;">
                         <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:15px; opacity:0.5;"></i>
-                        <p>Aún no has guardado ningún viaje.</p>
-                        <a href="experiencias.html" class="btn-black-sm" style="margin-top:10px;">Explorar</a>
+                        <p data-i18n="profile.no_fav_msg">Aún no has guardado ningún viaje.</p>
+                        <a href="experiencias.html" class="btn-black-sm" style="margin-top:10px;" data-i18n="profile.btn_explore">Explorar</a>
                     </div>
                 </div>
 
                 <div id="tab-viajes" class="tab-section" style="display: none;">
-                    <h2 class="section-heading">Mis Reservas</h2>
+                    <h2 class="section-heading" data-i18n="profile.title_trips">Mis Reservas</h2>
 
                     <div id="lista-reservas-container" class="trips-list">
                         </div>
 
                     <div id="mensaje-sin-reservas" class="empty-state" style="text-align: center; padding: 50px; display: none;">
                         <i class="fa-solid fa-suitcase-rolling" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
-                        <h3 style="color: #555;">No tienes viajes reservados aún</h3>
-                        <p style="color: #888; margin-bottom: 20px;">¿A qué estás esperando para tu próxima aventura?</p>
-                        <a href="destinos.html" class="btn-black-sm">Explorar Destinos</a>
+                        <h3 style="color: #555;" data-i18n="profile.no_trips_title">No tienes viajes reservados aún</h3>
+                        <p style="color: #888; margin-bottom: 20px;" data-i18n="profile.no_trips_text">¿A qué estás esperando para tu próxima aventura?</p>
+                        <a href="destinos.html" class="btn-black-sm" data-i18n="profile.btn_explore_destinations">Explorar Destinos</a>
                     </div>
                 </div>
 
                 <div id="tab-configuracion" class="tab-section" style="display: none;">
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                        <h1 style="margin:0;">Configuración</h1>
+                        <h1 style="margin:0;" data-i18n="profile.title_config">Configuración</h1>
                         <button id="btn-lock-config" class="btn-icon" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #666;">
                             <i class="fa-solid fa-lock"></i>
                         </button>
@@ -133,20 +149,20 @@
 
                     <form class="profile-form">
                         <div class="form-group">
-                            <label for="pago">Método de pago por defecto</label>
-                            <input type="text" id="pago" class="form-input config-field" placeholder="Ej: Tarjeta Visa terminada en 4242" disabled>
+                            <label for="pago" data-i18n="profile.label_payment">Método de pago por defecto</label>
+                            <input type="text" id="pago" class="form-input config-field" placeholder="Ej: Tarjeta Visa terminada en 4242" data-i18n-placeholder="profile.ph_payment" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="idioma">Idioma</label>
-                            <input type="text" id="idioma" class="form-input config-field" placeholder="Ej: Español" disabled>
+                            <label for="idioma" data-i18n="profile.label_lang">Idioma</label>
+                            <input type="text" id="idioma" class="form-input config-field" placeholder="Ej: Español" data-i18n-placeholder="profile.ph_lang" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="interfaz">Interfaz</label>
-                            <input type="text" id="interfaz" class="form-input config-field" placeholder="Ej: Modo Claro" disabled>
+                            <label for="interfaz" data-i18n="profile.label_interface">Interfaz</label>
+                            <input type="text" id="interfaz" class="form-input config-field" placeholder="Ej: Modo Claro" data-i18n-placeholder="profile.ph_interface" disabled>
                         </div>
                     </form>
                     
-                    <p id="config-status" style="font-size: 0.8rem; color: green; display: none; margin-top: 10px;">Cambios guardados.</p>
+                    <p id="config-status" style="font-size: 0.8rem; color: green; display: none; margin-top: 10px;" data-i18n="profile.status_saved">Cambios guardados.</p>
                 </div>
 
             </div>
@@ -157,7 +173,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -166,21 +182,21 @@
             </div>
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

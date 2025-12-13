@@ -145,13 +145,14 @@ function cargarReservasUsuario() {
                     <div class="trip-info">
                         <h3>${titulo}</h3>
                         <p class="trip-date"><i class="fa-regular fa-calendar"></i> ${fecha}</p>
-                        <p class="trip-id" style="font-size: 0.8rem; color: #999;">Ref: #${id}</p>
+                        <p class="trip-id" style="font-size: 0.8rem; color: #999;"><span data-i18n="profile.ref">Ref:</span> #${id}</p>
                     </div>
                 </article>
             `;
             contenedor.innerHTML += tarjetaHTML;
         });
     }
+    if(window.i18n) window.i18n.run();
 }
 function cargarFavoritosUsuario() {
     const container = document.getElementById('favorites-container');
@@ -201,13 +202,14 @@ function cargarFavoritosUsuario() {
                     <span><i class="fa-solid fa-user-group"></i> ${exp.grupo}</span>
                 </div>
                 <div class="card-footer">
-                    <span class="price">$${exp.precio} <small>/ persona</small></span>
-                    <span class="btn-reservar">Ver detalles</span>
+                    <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
+                    <span class="btn-reservar" data-i18n="profile.view_details">Ver detalles</span>
                 </div>
             </div>
         </a>`;
         container.innerHTML += cardHTML;
     });
+    if(window.i18n) window.i18n.run();
 }
 
 function gestionarConfiguracion() {

@@ -25,14 +25,14 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="destinos.html" class="active">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" class="active" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
@@ -62,8 +62,8 @@
     <main>
         <section class="sticky-destinations-hero">
             <div class="hero-text">
-                <h1>Mejores Destinos</h1>
-                <p>Descubre aventuras únicas diseñadas para mochileros como tú</p>
+                <h1 data-i18n="destinations_page.hero_title">Mejores Destinos</h1>
+                <p data-i18n="destinations_page.hero_subtitle">Descubre aventuras únicas diseñadas para mochileros como tú</p>
             </div>
         </section>
 
@@ -71,34 +71,34 @@
             
             <div class="destinations-intro">
                 <div class="section-title">
-                    <h2>“Aventuras listas para vivir”</h2>
-                    <p>Únete a miles de mochileros que comparten sus experiencias.</p>
+                    <h2 data-i18n="stats.title">“Aventuras listas para vivir”</h2>
+                    <p class="stats-subtitle" data-i18n="stats.subtitle">Únete a miles de mochileros que comparten sus experiencias.</p>
                 </div>
                 
                 <div class="mini-stats-grid">
-                    <div class="mini-stat"><h3>50K+</h3><p>Mochileros activos</p></div>
-                    <div class="mini-stat"><h3>180+</h3><p>Países cubiertos</p></div>
-                    <div class="mini-stat"><h3>25K+</h3><p>Experiencias compartidas</p></div>
+                    <div class="mini-stat"><h3>50K+</h3><p data-i18n="stats.active">Mochileros activos</p></div>
+                    <div class="mini-stat"><h3>180+</h3><p data-i18n="stats.countries">Países cubiertos</p></div>
+                    <div class="mini-stat"><h3>25K+</h3><p data-i18n="stats.shared">Experiencias compartidas</p></div>
                 </div>
             </div>
 
             <div class="continents-filter">
-                <button class="continent-btn active">Oceanía</button>
-                <button class="continent-btn">África</button>
-                <button class="continent-btn">Europa</button>
-                <button class="continent-btn">América</button>
-                <button class="continent-btn">Asia</button>
+                <button class="continent-btn active" data-i18n="continents.oceania">Oceanía</button>
+                <button class="continent-btn" data-i18n="continents.africa">África</button>
+                <button class="continent-btn" data-i18n="continents.europe">Europa</button>
+                <button class="continent-btn" data-i18n="continents.america">América</button>
+                <button class="continent-btn" data-i18n="continents.asia">Asia</button>
             </div>
             
         </div>
 
         <section class="sticky-europa-hero" id="sec-europa">
             <div class="showcase-content">
-                <span class="showcase-subtitle">Descubre</span>
-                <h2 class="showcase-title">Europa</h2>
+                <span class="showcase-subtitle" data-i18n="destinations_page.discover_label">Descubre</span>
+                <h2 class="showcase-title" data-i18n="continents.europe">Europa</h2>
                 <div class="showcase-buttons">
-                    <button class="btn-black" onclick="document.getElementById('list-europa').scrollIntoView({behavior: 'smooth'})">Buscar experiencias</button>
-                    <a href="blog.html" class="btn-outline-light">Descubrir historias</a>
+                    <button class="btn-black" onclick="document.getElementById('list-europa').scrollIntoView({behavior: 'smooth'})" data-i18n="destinations_page.search_experiences_btn">Buscar experiencias</button>
+                    <a href="blog.html" class="btn-outline-light" data-i18n="destinations_page.discover_stories_btn">Descubrir historias</a>
                 </div>
             </div>
         </section>
@@ -110,11 +110,11 @@
 
         <section class="sticky-america-hero" id="sec-america">
             <div class="showcase-content">
-                <span class="showcase-subtitle">Descubre</span>
-                <h2 class="showcase-title">América</h2>
+                <span class="showcase-subtitle" data-i18n="destinations_page.discover_label">Descubre</span>
+                <h2 class="showcase-title" data-i18n="continents.america">América</h2>
                 <div class="showcase-buttons">
-                    <button class="btn-black" onclick="document.getElementById('list-america').scrollIntoView({behavior: 'smooth'})">Buscar experiencias</button>
-                    <a href="blog.html" class="btn-outline-light">Descubrir historias</a>
+                    <button class="btn-black" onclick="document.getElementById('list-america').scrollIntoView({behavior: 'smooth'})" data-i18n="destinations_page.search_experiences_btn">Buscar experiencias</button>
+                    <a href="blog.html" class="btn-outline-light" data-i18n="destinations_page.discover_stories_btn">Descubrir historias</a>
                 </div>
             </div>
         </section>
@@ -126,11 +126,11 @@
 
         <section class="sticky-asia-hero" id="sec-asia">
             <div class="showcase-content">
-                <span class="showcase-subtitle">Descubre</span>
-                <h2 class="showcase-title">Asia</h2>
+                <span class="showcase-subtitle" data-i18n="destinations_page.discover_label">Descubre</span>
+                <h2 class="showcase-title" data-i18n="continents.asia">Asia</h2>
                 <div class="showcase-buttons">
-                    <button class="btn-black" onclick="document.getElementById('list-asia').scrollIntoView({behavior: 'smooth'})">Buscar experiencias</button>
-                    <a href="blog.html" class="btn-outline-light">Descubrir historias</a>
+                    <button class="btn-black" onclick="document.getElementById('list-asia').scrollIntoView({behavior: 'smooth'})" data-i18n="destinations_page.search_experiences_btn">Buscar experiencias</button>
+                    <a href="blog.html" class="btn-outline-light" data-i18n="destinations_page.discover_stories_btn">Descubrir historias</a>
                 </div>
             </div>
         </section>
@@ -142,11 +142,11 @@
 
         <section class="sticky-oceania-hero" id="sec-oceania">
             <div class="showcase-content">
-                <span class="showcase-subtitle">Descubre</span>
-                <h2 class="showcase-title">Oceanía</h2>
+                <span class="showcase-subtitle" data-i18n="destinations_page.discover_label">Descubre</span>
+                <h2 class="showcase-title" data-i18n="continents.oceania">Oceanía</h2>
                 <div class="showcase-buttons">
-                    <button class="btn-black" onclick="document.getElementById('list-oceania').scrollIntoView({behavior: 'smooth'})">Buscar experiencias</button>
-                    <a href="blog.html" class="btn-outline-light">Descubrir historias</a>
+                    <button class="btn-black" onclick="document.getElementById('list-oceania').scrollIntoView({behavior: 'smooth'})" data-i18n="destinations_page.search_experiences_btn">Buscar experiencias</button>
+                    <a href="blog.html" class="btn-outline-light" data-i18n="destinations_page.discover_stories_btn">Descubrir historias</a>
                 </div>
             </div>
         </section>
@@ -158,11 +158,11 @@
 
         <section class="sticky-africa-hero" id="sec-africa">
             <div class="showcase-content">
-                <span class="showcase-subtitle">Descubre</span>
-                <h2 class="showcase-title">África</h2>
+                <span class="showcase-subtitle" data-i18n="destinations_page.discover_label">Descubre</span>
+                <h2 class="showcase-title" data-i18n="continents.africa">África</h2>
                 <div class="showcase-buttons">
-                    <button class="btn-black" onclick="document.getElementById('list-africa').scrollIntoView({behavior: 'smooth'})">Buscar experiencias</button>
-                    <a href="blog.html" class="btn-outline-light">Descubrir historias</a>
+                    <button class="btn-black" onclick="document.getElementById('list-africa').scrollIntoView({behavior: 'smooth'})" data-i18n="destinations_page.search_experiences_btn">Buscar experiencias</button>
+                    <a href="blog.html" class="btn-outline-light" data-i18n="destinations_page.discover_stories_btn">Descubrir historias</a>
                 </div>
             </div>
         </section>
@@ -177,7 +177,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -186,21 +186,21 @@
             </div>
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

@@ -24,15 +24,15 @@
                 <span>Pack&Go</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
@@ -62,7 +62,9 @@
     <main>
         <div class="breadcrumb-bar">
             <div class="container">
-                <a href="experiencias.html"><i class="fa-solid fa-chevron-left"></i> Volver a experiencias</a>
+                <a href="experiencias.html">
+                    <i class="fa-solid fa-chevron-left"></i> <span data-i18n="product.back_link">Volver a experiencias</span>
+                </a>
             </div>
         </div>
 
@@ -75,8 +77,10 @@
 
                 <div class="product-details">
                     <div class="details-header">
-                        <h1 id="detail-title">Cargando...</h1>
-                        <button class="btn-favorite"><i class="fa-solid fa-plus"></i> Añadir a favoritos</button>
+                        <h1 id="detail-title" data-i18n="product.loading_title">Cargando...</h1>
+                        <button class="btn-favorite">
+                            <i class="fa-solid fa-plus"></i> <span data-i18n="product.add_fav">Añadir a favoritos</span>
+                        </button>
                     </div>
 
                     <div class="rating-row">
@@ -100,15 +104,15 @@
                     <div class="price-action-row">
                         <div class="price-display">
                             <span class="amount" id="detail-price">$ ...</span>
-                            <span class="unit">/ persona</span>
+                            <span class="unit" data-i18n="product.per_person">/ persona</span>
                         </div>
-                        <button class="btn-black" id="btn-reservar-dinamico">
+                        <button class="btn-black" id="btn-reservar-dinamico" data-i18n="product.book_now">
                             Reservar ahora
                         </button>
                     </div>
 
                     <div class="product-description">
-                        <h3>Sobre esta experiencia</h3>
+                        <h3 data-i18n="product.about_title">Sobre esta experiencia</h3>
                         <p id="detail-short-desc">...</p>
                     </div>
                 </div>
@@ -128,10 +132,10 @@
                 <p class="long-description" id="detail-long-desc">...</p>
 
                 <div class="tabs-navigation">
-                    <button class="tab-btn active" data-tab="tab-itinerario">Itinerario</button>
-                    <button class="tab-btn" data-tab="tab-incluye">Incluye</button>
-                    <button class="tab-btn" data-tab="tab-equipo">Equipo</button>
-                    <button class="tab-btn" data-tab="tab-resenas">Reseñas</button>
+                    <button class="tab-btn active" data-tab="tab-itinerario" data-i18n="product.tab_itinerary">Itinerario</button>
+                    <button class="tab-btn" data-tab="tab-incluye" data-i18n="product.tab_includes">Incluye</button>
+                    <button class="tab-btn" data-tab="tab-equipo" data-i18n="product.tab_gear">Equipo</button>
+                    <button class="tab-btn" data-tab="tab-resenas" data-i18n="product.tab_reviews">Reseñas</button>
                 </div>
 
                 <div id="tab-itinerario" class="tab-content-panel active">
@@ -140,18 +144,18 @@
 
                 <div id="tab-incluye" class="tab-content-panel">
                     <ul class="check-list">
-                        <li><i class="fa-solid fa-check"></i> Alojamiento seleccionado</li>
-                        <li><i class="fa-solid fa-check"></i> Guía experto</li>
-                        <li><i class="fa-solid fa-check"></i> Transporte interno</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="product.include_1">Alojamiento seleccionado</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="product.include_2">Guía experto</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="product.include_3">Transporte interno</span></li>
                     </ul>
                 </div>
 
                 <div id="tab-equipo" class="tab-content-panel">
-                    <p>Revisa la descripción para ver el equipo recomendado.</p>
+                    <p data-i18n="product.gear_text">Revisa la descripción para ver el equipo recomendado.</p>
                 </div>
 
                 <div id="tab-resenas" class="tab-content-panel">
-                    <p>Opiniones de viajeros verificados.</p>
+                    <p data-i18n="product.reviews_text">Opiniones de viajeros verificados.</p>
                 </div>
 
             </div>
@@ -160,34 +164,32 @@
 
     <footer class="main-footer">
         <div class="footer-container">
-            
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
-                
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a> </div>
+                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                </div>
             </div>
-
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

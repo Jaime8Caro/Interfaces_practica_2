@@ -206,27 +206,28 @@ window.addDynamicEntry = function(type) {
     let htmlContent = '';
 
     if (type === 'acompanante') {
+        // Placeholder con data-i18n-placeholder
         htmlContent = `
-            <h4><i class="fa-solid fa-user"></i> Acompañante</h4>
+            <h4><i class="fa-solid fa-user"></i> <span data-i18n="checkout.companion_label">Acompañante</span></h4>
             <div class="input-group">
-                <input type="text" placeholder="Nombre completo" class="input-gray" required>
+                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_fullname">
             </div>
             <div class="input-group">
-                <input type="text" placeholder="DNI / Pasaporte" class="input-gray" required>
+                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_dni">
             </div>
         `;
     } else {
         htmlContent = `
-            <h4><i class="fa-solid fa-paw"></i> Mascota</h4>
+            <h4><i class="fa-solid fa-paw"></i> <span data-i18n="checkout.pet_label">Mascota</span></h4>
             <div class="input-group" style="margin-bottom: 12px;">
-                <input type="text" placeholder="Ej: Perro, Gato" class="input-gray" required>
+                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_pet_type">
             </div>
             <div class="input-group">
                 <select class="styled-select" required>
-                    <option value="" disabled selected>Selecciona el tamaño</option>
-                    <option value="pequeño">Pequeño</option>
-                    <option value="mediano">Mediano</option>
-                    <option value="grande">Grande</option>
+                    <option value="" disabled selected data-i18n="checkout.select_size">Selecciona el tamaño</option>
+                    <option value="pequeño" data-i18n="checkout.size_s">Pequeño</option>
+                    <option value="mediano" data-i18n="checkout.size_m">Mediano</option>
+                    <option value="grande" data-i18n="checkout.size_l">Grande</option>
                 </select>
             </div>
         `;
@@ -239,6 +240,7 @@ window.addDynamicEntry = function(type) {
 
     card.innerHTML = htmlContent;
     container.appendChild(card);
+    if(window.i18n) window.i18n.run();
 };
 
 // Borrar una tarjeta específica
@@ -349,12 +351,12 @@ function cargarBotonesExito() {
     let botonesHTML = '';
 
     if (usuarioLogueado) {
-        botonesHTML = '<a href="perfil.html#viajes" class="btn-rounded-black salir">Ver en mi perfil</a>';
+        botonesHTML = '<a href="perfil.html#viajes" class="btn-rounded-black salir" data-i18n="success.btn_profile">Ver en mi perfil</a>';
     } else {
-        botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black">Descargar PDF</button>';
+        botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black" data-i18n="success.btn_pdf">Descargar PDF</button>';
     }
 
-    botonesHTML += '<a href="index.html" class="btn-rounded-outline salir">Volver al inicio</a>';
+    botonesHTML += '<a href="index.html" class="btn-rounded-outline salir" data-i18n="success.btn_home">Volver al inicio</a>';
     accionesDiv.innerHTML = botonesHTML;
     const btnPdf = document.getElementById('btn-descargar-pdf');
     if (btnPdf) {
@@ -368,6 +370,7 @@ function cargarBotonesExito() {
             limpiarDatosTemporales();
         });
     });
+    if(window.i18n) window.i18n.run();
 }
 
 function limpiarDatosTemporales() {

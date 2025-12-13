@@ -24,15 +24,15 @@
                 <span>Pack&Go</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -53,37 +53,39 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
 
     <main>
         <div class="back-link-container">
-            <a href="experiencias.html"><i class="fa-solid fa-chevron-left"></i> Volver a experiencias</a>
+            <a href="experiencias.html">
+                <i class="fa-solid fa-chevron-left"></i> <span data-i18n="checkout.back">Volver a experiencias</span>
+            </a>
         </div>
 
         <section class="checkout-section">
             
-            <h1 class="page-title-center" id="checkout-title">Datos Personales</h1>
+            <h1 class="page-title-center" id="checkout-title" data-i18n="checkout.step1_title">Datos Personales</h1>
 
             <div class="stepper-wrapper">
                 <div class="stepper-line"></div> 
                 
                 <div class="step-item active" id="indicator-1" onclick="goToStep(1)" style="cursor: pointer;">
                     <div class="step-circle">1</div>
-                    <div class="step-pill">Datos Personales</div>
+                    <div class="step-pill" data-i18n="checkout.step1_label">Datos Personales</div>
                 </div>
 
                 <div class="step-item" id="indicator-2" onclick="goToStep(2)" style="cursor: pointer;">
                     <div class="step-circle">2</div>
-                    <div class="step-pill">Acompañantes</div>
+                    <div class="step-pill" data-i18n="checkout.step2_label">Acompañantes</div>
                 </div>
 
                 <div class="step-item" id="indicator-3" onclick="goToStep(3)" style="cursor: pointer;">
                     <div class="step-circle">3</div>
-                    <div class="step-pill">Pago</div>
+                    <div class="step-pill" data-i18n="checkout.step3_label">Pago</div>
                 </div>
             </div>
 
@@ -92,19 +94,18 @@
                     
                     <div id="step-1" class="step-content active">
                         <div class="form-row-3">
-                            <div class="input-group"><input type="text" placeholder="Nombre" class="input-gray" required></div>
-                            <div class="input-group"><input type="text" placeholder="Apellidos" class="input-gray" required></div>
-                            <div class="input-group"><input type="text" placeholder="DNI/NIF" class="input-gray" required></div>
+                            <div class="input-group"><input type="text" placeholder="Nombre" class="input-gray" required data-i18n-placeholder="checkout.ph_name"></div>
+                            <div class="input-group"><input type="text" placeholder="Apellidos" class="input-gray" required data-i18n-placeholder="checkout.ph_lastname"></div>
+                            <div class="input-group"><input type="text" placeholder="DNI/NIF" class="input-gray" required data-i18n-placeholder="checkout.ph_dni"></div>
                         </div>
                         <div class="form-row-2">
-                            <div class="input-group"><input type="tel" placeholder="Teléfono" class="input-gray" required></div>
-                            <div class="input-group"><input type="email" name="user_email" placeholder="Correo electrónico" class="input-gray" required></div>
-                            <!-- <div class="input-group"><input type="text" placeholder="Dirección" class="input-gray"></div> -->
+                            <div class="input-group"><input type="tel" placeholder="Teléfono" class="input-gray" required data-i18n-placeholder="checkout.ph_phone"></div>
+                            <div class="input-group"><input type="email" name="user_email" placeholder="Correo electrónico" class="input-gray" required data-i18n-placeholder="checkout.ph_email"></div>
                         </div>
 
                         <div class="checkout-actions">
-                            <a href="experiencias.html" class="btn-rounded-outline">Cancelar</a>
-                            <button type="button" class="btn-rounded-black" onclick="nextStep(2)">Siguiente paso</button>
+                            <a href="experiencias.html" class="btn-rounded-outline" data-i18n="checkout.btn_cancel">Cancelar</a>
+                            <button type="button" class="btn-rounded-black" onclick="nextStep(2)" data-i18n="checkout.btn_next">Siguiente paso</button>
                         </div>
                     </div>
 
@@ -112,12 +113,12 @@
                         <div class="companions-grid-container">
                             
                             <div class="companion-column">
-                                <h3 class="column-title">Acompañantes</h3>
+                                <h3 class="column-title" data-i18n="checkout.companions_title">Acompañantes</h3>
                                 
                                 <div class="toggle-row">
                                     <label class="toggle-label">
                                         <input type="checkbox" id="check-acompanante" onchange="toggleListSection('check-acompanante', 'wrapper-acompanantes', 'acompanante')">
-                                        <span>¿Viajas acompañado?</span>
+                                        <span data-i18n="checkout.check_companions">¿Viajas acompañado?</span>
                                     </label>
                                 </div>
 
@@ -125,18 +126,18 @@
                                     <div id="list-acompanantes" class="dynamic-list-container"></div>
                                     
                                     <button type="button" class="btn-add-dashed" onclick="addDynamicEntry('acompanante')">
-                                        <i class="fa-solid fa-plus"></i> Añadir otro acompañante
+                                        <i class="fa-solid fa-plus"></i> <span data-i18n="checkout.btn_add_companion">Añadir otro acompañante</span>
                                     </button>
                                 </div>
                             </div>
 
                             <div class="companion-column">
-                                <h3 class="column-title">Mascotas</h3>
+                                <h3 class="column-title" data-i18n="checkout.pets_title">Mascotas</h3>
                                 
                                 <div class="toggle-row">
                                     <label class="toggle-label">
                                         <input type="checkbox" id="check-mascota" onchange="toggleListSection('check-mascota', 'wrapper-mascotas', 'mascota')">
-                                        <span>¿Viajas con mascota?</span>
+                                        <span data-i18n="checkout.check_pets">¿Viajas con mascota?</span>
                                     </label>
                                 </div>
 
@@ -144,17 +145,17 @@
                                     <div id="list-mascotas" class="dynamic-list-container"></div>
                                     
                                     <button type="button" class="btn-add-dashed" onclick="addDynamicEntry('mascota')">
-                                        <i class="fa-solid fa-plus"></i> Añadir otra mascota
+                                        <i class="fa-solid fa-plus"></i> <span data-i18n="checkout.btn_add_pet">Añadir otra mascota</span>
                                     </button>
                                 </div>
                             </div>
 
                             <div class="companion-column">
-                                <h3 class="column-title">Alergias</h3>
+                                <h3 class="column-title" data-i18n="checkout.allergies_title">Alergias</h3>
                                 <div class="toggle-row">
                                     <label class="toggle-label">
                                         <input type="checkbox" id="check-alergia" onchange="toggleSimpleSection('check-alergia', 'form-alergia')">
-                                        <span>¿Tienes alergias?</span>
+                                        <span data-i18n="checkout.check_allergies">¿Tienes alergias?</span>
                                     </label>
                                 </div>
                                 <div id="form-alergia" style="display: none; margin-top: 15px;">
@@ -162,6 +163,7 @@
                                         <textarea 
                                             class="styled-textarea" 
                                             placeholder="Por favor, indica si tienes alergia a algún alimento (ej: gluten, frutos secos), medicamento o animal."
+                                            data-i18n-placeholder="checkout.ph_allergies"
                                         ></textarea>
                                     </div>
                                 </div>
@@ -170,40 +172,40 @@
                         </div>
 
                         <div class="checkout-actions" style="margin-top: 4rem;">
-                            <button type="button" class="btn-rounded-outline" onclick="prevStep(1)">Regresar</button>
-                            <button type="button" class="btn-rounded-black" onclick="nextStep(3)">Siguiente paso</button>
+                            <button type="button" class="btn-rounded-outline" onclick="prevStep(1)" data-i18n="checkout.btn_back">Regresar</button>
+                            <button type="button" class="btn-rounded-black" onclick="nextStep(3)" data-i18n="checkout.btn_next">Siguiente paso</button>
                         </div>
                     </div>
 
                     <div id="step-3" class="step-content">
                         <div class="confirmation-grid">
                             <div class="conf-column text-left">
-                                <h3 class="column-title">Resumen del viaje</h3>
+                                <h3 class="column-title" data-i18n="checkout.summary_title">Resumen del viaje</h3>
                                 <div class="trip-summary">
-                                    <p><strong>Experiencia:</strong> <span id="resumen-titulo">Cargando...</span></p>
-                                    <p><strong>Destino:</strong> <span id="resumen-destino">...</span></p>
-                                    <p class="summary-text">Tu aventura está a punto de comenzar. Revisa los detalles antes de finalizar.</p>
-                                    <p><strong>Duración:</strong> <span id="resumen-duracion">...</span></p>
+                                    <p><strong data-i18n="checkout.label_exp">Experiencia:</strong> <span id="resumen-titulo">Cargando...</span></p>
+                                    <p><strong data-i18n="checkout.label_dest">Destino:</strong> <span id="resumen-destino">...</span></p>
+                                    <p class="summary-text" data-i18n="checkout.summary_text">Tu aventura está a punto de comenzar. Revisa los detalles antes de finalizar.</p>
+                                    <p><strong data-i18n="checkout.label_dur">Duración:</strong> <span id="resumen-duracion">...</span></p>
                                 </div>
                             </div>
 
                             <div class="conf-column center-content">
-                                <h3 class="column-title">Coste total</h3>
+                                <h3 class="column-title" data-i18n="checkout.cost_title">Coste total</h3>
                                 <div class="cost-breakdown">
-                                    <div class="cost-row">Base <span id="resumen-precio-base">...</span></div>
-                                    <div class="cost-row">Impuestos <span>$0.00</span></div>
+                                    <div class="cost-row"><span data-i18n="checkout.label_base">Base</span> <span id="resumen-precio-base">...</span></div>
+                                    <div class="cost-row"><span data-i18n="checkout.label_taxes">Impuestos</span> <span>$0.00</span></div>
                                     <hr class="cost-divider">
                                     <div class="cost-total" id="resumen-total">...</div>
                                 </div>
                             </div>
 
                             <div class="conf-column center-content">
-                                <h3 class="column-title">Divisas y Pago</h3>
-                                <button type="submit" class="btn-confirm-green" style="margin-top: 20px;">Confirmar compra</button>
+                                <h3 class="column-title" data-i18n="checkout.payment_title">Divisas y Pago</h3>
+                                <button type="submit" class="btn-confirm-green" style="margin-top: 20px;" data-i18n="checkout.btn_confirm">Confirmar compra</button>
                             </div>
                         </div>
                         <div class="checkout-actions" style="margin-top: 4rem;">
-                            <button type="button" class="btn-rounded-outline" onclick="prevStep(2)">Regresar</button>
+                            <button type="button" class="btn-rounded-outline" onclick="prevStep(2)" data-i18n="checkout.btn_back">Regresar</button>
                         </div>
                     </div>
 
@@ -214,34 +216,32 @@
 
     <footer class="main-footer">
         <div class="footer-container">
-            
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
-                
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a> </div>
+                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                </div>
             </div>
-
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>

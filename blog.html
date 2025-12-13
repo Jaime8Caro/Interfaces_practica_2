@@ -12,7 +12,7 @@
     
     <script src="scripts/vanilla-i18n.js" defer></script>
     <script src="scripts/script.js" defer></script>
-    <script src="scripts/script_blog.js" defer></script> </body>
+    <script src="scripts/script_blog.js" defer></script> 
 </head>
 <body>
 
@@ -25,14 +25,14 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="destinos.html">Destinos</a></li>
-                <li><a href="experiencias.html">Experiencias</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
+                <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
+                <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos">
-                <button type="submit">Buscar</button>
+                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
                 <button class="lang-btn" id="langToggle">
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
-                <a href="login.html" class="btn-login">Iniciar sesión</a>
-                <a href="register.html" class="btn-signup">Crear cuenta</a>
+                <a href="login.html" class="btn-login" data-i18n="nav.login">Iniciar sesión</a>
+                <a href="register.html" class="btn-signup" data-i18n="nav.signup">Crear cuenta</a>
             </div>
         </nav>
     </header>
@@ -62,8 +62,8 @@
     <main>
         <section class="sticky-destinations-hero">
             <div class="hero-text">
-                <h1>Historias para contar</h1>
-                <p>Conoce historias de otros viajeros en este blog</p>
+                <h1 data-i18n="blog.hero_title">Historias para contar</h1>
+                <p data-i18n="blog.hero_subtitle">Conoce historias de otros viajeros en este blog</p>
             </div>
         </section>
 
@@ -72,10 +72,10 @@
             <div class="search-filter-bar">
                 <div class="search-input-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar publicación">
+                    <input type="text" placeholder="Buscar publicación" data-i18n-placeholder="blog.search_placeholder">
                 </div>
                 <div class="filter-buttons">
-                    <button class="filter-btn">Todas las categorías</button>
+                    <button class="filter-btn" data-i18n="blog.filter_all">Todas las categorías</button>
                     <button class="filter-icon-btn"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
             </div>
@@ -89,7 +89,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
+                <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -98,21 +98,21 @@
             </div>
             <div class="footer-links">
                 <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="destinos.html">Destinos</a>
-                    <a href="experiencias.html">Experiencias</a>
-                    <a href="blog.html">Blog</a>
+                    <h4 data-i18n="footer.features">Features</h4>
+                    <a href="destinos.html" data-i18n="nav.destinos">Destinos</a>
+                    <a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a>
+                    <a href="blog.html" data-i18n="nav.blog">Blog</a>
                 </div>
                 <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
+                    <h4 data-i18n="footer.learn_more">Learn more</h4>
+                    <a href="#" data-i18n="footer.about">Acerca de</a>
+                    <a href="#" data-i18n="footer.us">Nosotros</a>
                 </div>
                 <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
+                    <h4 data-i18n="footer.support">Support</h4>
+                    <a href="#" data-i18n="footer.contact">Contacto</a>
+                    <a href="#" data-i18n="footer.terms">Terminos</a>
+                    <a href="#" data-i18n="footer.privacy">Privacidad</a>
                 </div>
             </div>
         </div>
