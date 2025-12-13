@@ -118,12 +118,101 @@ img { display: block; max-width: 100%; }
     padding: 10px;
     width: 100%;
     transition: background 0.2s;
+    transition: transform 0.3s ease-in-out;
 }
 
 .lang-option:hover {
     background-color: #f0f0f0;
+    transform: scale(1.3);
 }
 
+/* Acciones de usuario */
+/* --- ESTILOS DE USUARIO LOGUEADO --- */
+
+.user-profile-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* La imagen circular del avatar */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+.user-profile-wrapper:hover .user-avatar {
+    border-color: #000;
+}
+
+/* El menú desplegable */
+.user-dropdown {
+    position: absolute;
+    top: 55px; /* Ajustar según la altura de tu header */
+    right: 0;
+    background-color: white;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    width: 200px;
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.user-dropdown.show {
+    display: flex;
+}
+
+/* Elementos del menú */
+.user-dropdown-header {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.user-dropdown a, 
+.user-dropdown button {
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit; /* Heredar tipografía */
+}
+
+.user-dropdown a:hover, 
+.user-dropdown button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* Color rojo suave para cerrar sesión */
+.user-dropdown button#logout-btn {
+    color: #d9534f;
+    border-top: 1px solid #eee;
+}
+.user-dropdown button#logout-btn:hover {
+    background-color: #fff5f5;
+}
 .user-actions { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; font-weight: 600; }
 .btn-signup {
     background-color: var(--color-black); color: var(--color-white);
@@ -1679,7 +1768,7 @@ blockquote {
 
 
 /* ======================== PÁGINA PERFIL DE USUARIO ========================*/
-.profile-container {display: flex; min-height: calc(100vh - 80px - 300px); margin-top: 80px;}
+.profile-container {display: flex; min-height: calc(100vh - 80px); margin-top: 80px;}
 
 /* --- Barra Lateral (Sidebar) --- */
 .profile-sidebar {
@@ -1691,6 +1780,9 @@ blockquote {
     flex-direction: column;
     justify-content: space-between;
     flex-shrink: 0;
+    top: 80px;
+    position: sticky; 
+    height: calc(100vh - 80px);
 }
 
 .sidebar-nav ul {
@@ -1716,6 +1808,14 @@ blockquote {
 .sidebar-link.active {
     opacity: 1;
     font-weight: 700;
+}
+.tab-section {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Contenido del Perfil --- */
@@ -1794,6 +1894,7 @@ blockquote {
 
     .profile-sidebar {
         width: 100%;
+        height: fit-content;
         padding: 1.5rem;
         flex-direction: row;
         align-items: center;

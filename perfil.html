@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil - Pack&Go</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="perfil.css">
+    <title>Mi Perfil - Pack&Go</title>
     
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script src="scripts/script.js" defer></script>
+    <script src="scripts/script_perfil.js" defer></script>
 </head>
 <body>
 
@@ -30,127 +30,138 @@
                 <li><a href="experiencias.html">Experiencias</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
+
             <div class="search-bar">
                 <input type="text" placeholder="Buscar destinos">
                 <button type="submit">Buscar</button>
             </div>
             <div class="language-selector">
-                <button class="lang-btn" id="langToggle">
-                    <img src="images/bandera_españa.png" alt="es" class="flag-icon" id="currentFlag">
-                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
-                </button>
-                
-                <div class="lang-dropdown" id="langMenu">
-                    <a href="#" class="lang-option" data-lang="es" data-src="images/bandera_españa.png">
-                        <img src="images/bandera_españa.png" alt="es" class="flag-icon">
-                    </a>
-                    <a href="#" class="lang-option" data-lang="en" data-src="images/bandera_inglaterra.png">
-                        <img src="images/bandera_inglaterra.png" alt="en" class="flag-icon">
-                    </a>
-                    <a href="#" class="lang-option" data-lang="fr" data-src="images/bandera_francia.png">
-                        <img src="images/bandera_francia.png" alt="fr" class="flag-icon">
-                    </a>
-                </div>
+                <button class="lang-btn"><img src="images/bandera_españa.png" class="flag-icon"><i class="fa-solid fa-chevron-down"></i></button>
             </div>
-            <div class="user-actions logged-in">
-                <a href="perfil.html" class="user-avatar-link">
-                    <div class="user-avatar-placeholder"></div>
-                </a>
-                
-                <a href="index.html" class="btn-black-sm">Cerrar sesión</a>
+            <div class="user-actions" id="user-actions-container">
             </div>
         </nav>
     </header>
 
     <main class="profile-container">
+        
         <aside class="profile-sidebar">
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="perfil.html" class="sidebar-link active">Datos personales</a></li>
-                    <li><a href="favoritos.html" class="sidebar-link">Favoritos</a></li>
-                    <li><a href="mis_viajes.html" class="sidebar-link">Mis viajes</a></li>
-                    <li><a href="configuracion.html" class="sidebar-link">Configuración</a></li>
+                    <li><a href="#" class="sidebar-link active" data-tab="datos">Datos personales</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="favoritos">Favoritos</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="viajes">Mis viajes</a></li>
+                    <li><a href="#" class="sidebar-link" data-tab="configuracion">Configuración</a></li>
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">Dar de baja</a>
+                <a href="#" class="sidebar-link" id="btn-logout-sidebar">Cerrar Sesión</a>
             </div>
         </aside>
 
         <section class="profile-content">
+            
             <div class="content-wrapper">
-                <a href="index.html" class="back-link">
-                    <i class="fa-solid fa-chevron-left"></i> Volver a Inicio
-                </a>
-                
-                <h1>Datos personales</h1>
+                <div id="tab-datos" class="tab-section">
+                    <h1>Datos personales</h1>
+                    <div class="profile-avatar-large">
+                        </div>
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label for="input-nombre">Nombre</label>
+                            <input type="text" id="input-nombre" class="form-input" readonly>
+                        </div>
 
-                <div class="profile-avatar-large"></div>
+                        <div class="form-group">
+                            <label for="input-apellido">Apellido</label>
+                            <input type="text" id="input-apellido" class="form-input" readonly>
+                        </div>
 
-                <form class="profile-form">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" class="form-input" placeholder="Nombre">
+                        <div class="form-group">
+                            <label for="input-nacimiento">Fecha de nacimiento</label>
+                            <input type="text" id="input-nacimiento" class="form-input" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-email">Correo electrónico</label>
+                            <input type="email" id="input-email" class="form-input" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-usuario">Nombre de usuario</label>
+                            <input type="text" id="input-usuario" class="form-input" readonly>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="tab-favoritos" class="tab-section" style="display: none;">
+                    <h1>Favoritos</h1>
+                    <div class="favorites-grid">
+                        <a href="compra.html" class="experience-card-item">
+                            <div class="card-image-header">
+                                <span class="difficulty-badge">Dificultad</span>
+                                <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
+                            </div>
+                            <div class="card-body">
+                                <h3>Auroras Boreales en Islandia</h3>
+                                <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
+                                <div class="card-meta">
+                                    <span><i class="fa-solid fa-location-dot"></i> Reykjavík</span>
+                                    <span><i class="fa-regular fa-calendar"></i> 3 días</span>
+                                    <span><i class="fa-solid fa-user-group"></i> Grupos 8-12</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">$680 <small>/ persona</small></span>
+                                    <span class="btn-reservar">Reservar</span>
+                                </div>
+                            </div>
+                        </a>
+                        </div> 
+                </div>
+
+                <div id="tab-viajes" class="tab-section" style="display: none;">
+                    <h2 class="section-heading">Mis Reservas</h2>
+
+                    <div id="lista-reservas-container" class="trips-list">
+                        </div>
+
+                    <div id="mensaje-sin-reservas" class="empty-state" style="text-align: center; padding: 50px; display: none;">
+                        <i class="fa-solid fa-suitcase-rolling" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3 style="color: #555;">No tienes viajes reservados aún</h3>
+                        <p style="color: #888; margin-bottom: 20px;">¿A qué estás esperando para tu próxima aventura?</p>
+                        <a href="destinos.html" class="btn-black-sm">Explorar Destinos</a>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="apellido">Apellido</label>
-                        <input type="text" id="apellido" class="form-input" placeholder="Apellido">
-                    </div>
+                <div id="tab-configuracion" class="tab-section" style="display: none;">
+                    <h1>Configuración</h1>
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label for="pago">Método de pago por defecto</label>
+                            <input type="text" id="pago" class="form-input" placeholder="Tarjeta Visa terminada en 4242">
+                        </div>
+                        <div class="form-group">
+                            <label for="idioma">Idioma</label>
+                            <input type="text" id="idioma" class="form-input" placeholder="Español">
+                        </div>
+                        <div class="form-group">
+                            <label for="interfaz">Interfaz</label>
+                            <input type="text" id="interfaz" class="form-input" placeholder="Modo Claro">
+                        </div>
+                    </form>
+                </div>
 
-                    <div class="form-group">
-                        <label for="fecha-nacimiento">Fecha de nacimiento</label>
-                        <input type="text" id="fecha-nacimiento" class="form-input" placeholder="Fecha de nacimiento">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" class="form-input" placeholder="Correo electrónico">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="usuario">Nombre de usuario</label>
-                        <input type="text" id="usuario" class="form-input" placeholder="Nombre de usuario">
-                    </div>
-                </form>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
         <div class="footer-container">
-            
             <div class="footer-brand">
-                <h3>Pack&Go</h3>
-                <p>La comunidad donde los caminos se cruzan.</p>
-                
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a> </div>
-            </div>
-
-            <div class="footer-links">
-                <div class="link-column">
-                    <h4>Features</h4>
-                    <a href="#">Destinos</a>
-                    <a href="#">Experiencias</a>
-                    <a href="#">Blog</a>
-                </div>
-                <div class="link-column">
-                    <h4>Learn more</h4>
-                    <a href="#">Acerca de</a>
-                    <a href="#">Nosotros</a>
-                </div>
-                <div class="link-column">
-                    <h4>Support</h4>
-                    <a href="#">Contacto</a>
-                    <a href="#">Terminos</a>
-                    <a href="#">Privacidad</a>
-                </div>
+               <h3>Pack&Go</h3>
+               <p>Pack your bags, go explore.</p>
             </div>
         </div>
     </footer>
-
 </body>
 </html>

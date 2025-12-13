@@ -1,4 +1,4 @@
-// --- LÓGICA DEL SELECTOR DE IDIOMA ---
+actualizarHeaderUsuario();
 
 const langToggle = document.getElementById('langToggle');
 const langSelector = document.querySelector('.language-selector');
@@ -168,4 +168,59 @@ function mostrarLocalStorage() {
 function limpiarTodoLocalStorage() {
     localStorage.clear();
     console.log("Todo el localStorage ha sido limpiado");
+}
+
+
+function actualizarHeaderUsuario() {
+    const container = document.getElementById('user-actions-container');
+    if (!container){
+        console.log("algosalio mal") 
+        return;
+    }
+
+    // 1. Recuperamos el usuario (ajusta 'usuario' a tu clave real)
+    // Usamos JSON.parse porque normalmente guardamos el objeto entero
+    const usuario = obtenerUsuarioActual();
+    
+    // Si NO hay usuario, no hacemos nada (se quedan los botones de Login/Registro)
+    if (!usuario){
+        console.log("algosalio mal") 
+        return;
+    }
+    
+    // Si no tiene foto guardada, usamos la de defecto
+    // NOTA: Recuerda tu regla de usar src="defecto.png"
+    const avatarImg = usuario.imagen || "images/defecto.jpg"; 
+    const nombreUsuario = usuario.nombre || "Usuario";
+
+    // 2. Inyectamos el HTML del usuario logueado
+    container.innerHTML = `
+        <div class="user-profile-wrapper" id="userMenuBtn">
+            <img src="${avatarImg}" alt="Perfil" class="user-avatar">
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; color: #555;"></i>
+            
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-dropdown-header">Hola, ${nombreUsuario}</div>
+                <a href="perfil.html#viajes"><i class="fa-solid fa-suitcase"></i> Mis Viajes</a>
+                <a href="perfil.html#configuracion"><i class="fa-solid fa-gear"></i> Configuración</a>
+                <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
+            </div>
+        </div>
+    `;
+
+    // 3. Lógica para abrir/cerrar el menú
+    const menuBtn = document.getElementById('userMenuBtn');
+    const dropdown = document.getElementById('userDropdown');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        dropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('show');
+    });
+    logoutBtn.addEventListener('click', () => {
+        logout();
+    });
 }
