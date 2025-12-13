@@ -1201,6 +1201,7 @@ function initExperiencesFilters(container) {
             return textoMatch && catMatch && difMatch;
         });
 
+
         if (filtros.orden === "Precio: Menor a Mayor") {
             resultados.sort((a, b) => a.precio - b.precio);
         } else if (filtros.orden === "Precio: Mayor a Menor") {
@@ -1210,26 +1211,23 @@ function initExperiencesFilters(container) {
         renderExperiencesList(container, resultados);
     };
 
-    // --- NUEVO: DETECTAR BÚSQUEDA DESDE EL HEADER (URL) ---
+    // ============================================================
+    //  AÑADIR ESTE BLOQUE AQUÍ PARA RECUPERAR LA BÚSQUEDA
+    // ============================================================
     const params = new URLSearchParams(window.location.search);
-    const busquedaURL = params.get("busqueda"); // Leemos ?busqueda=...
+    const busquedaURL = params.get("busqueda");
 
     if (busquedaURL) {
-        // 1. Decodificar el texto (quitar %20, etc)
+        // 1. Decodificar el texto (quitar símbolos raros de la URL)
         const textoDecodificado = decodeURIComponent(busquedaURL).toLowerCase();
         
-        // 2. Ponerlo en el input visualmente
+        // 2. Escribirlo en el buscador de la página para que el usuario lo vea
         if (searchInput) searchInput.value = decodeURIComponent(busquedaURL);
         
-        // 3. Actualizar el filtro y aplicar
+        // 3. Aplicar el filtro inmediatamente
         filtros.texto = textoDecodificado;
         aplicarFiltros();
-        
-        // 4. (Opcional) Limpiar la URL para que no moleste si refrescas
-        // window.history.replaceState({}, document.title, "experiencias.html");
     }
-
-    // --- FIN DE LO NUEVO ---
 
     if(searchInput) {
         searchInput.addEventListener("input", (e) => {

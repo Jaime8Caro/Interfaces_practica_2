@@ -378,7 +378,8 @@ function cargarBotonesExito() {
 
     if (usuarioLogueado) {
         // CASO A: LOGUEADO -> Botón de Perfil
-        botonesHTML = '<a href="perfil.html" class="btn-rounded-black salir">Ver en mi perfil</a>';
+        // CAMBIO AQUÍ: Añadimos #viajes al final del enlace
+        botonesHTML = '<a href="perfil.html#viajes" class="btn-rounded-black salir">Ver en mi perfil</a>';
     } else {
         // CASO B: NO LOGUEADO -> Botón de PDF
         botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black">Descargar PDF</button>';
@@ -400,8 +401,8 @@ function cargarBotonesExito() {
 
     document.querySelectorAll('.salir').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // No prevenimos el default, queremos que el enlace funcione,
-            // pero antes borramos los datos.
+            // No prevenimos el default, queremos que el enlace funcione y cambie de página,
+            // pero antes borramos los datos temporales de "última compra".
             limpiarDatosTemporales();
         });
     });
