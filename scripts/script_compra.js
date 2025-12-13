@@ -12,6 +12,21 @@ function detectarPaginaYEjecutar() {
 
     // 1. SI ESTAMOS EN EL PROCESO DE COMPRA (proceso_compra.html)
     if (checkoutForm) {
+        // Verificamos que exista un usuario autenticado antes de mostrar el checkout 
+        let usuarioLogueado = null;
+        if (typeof obtenerUsuarioActual === 'function') {
+            usuarioLogueado = obtenerUsuarioActual();
+        }
+
+        if (!usuarioLogueado) {
+            if (typeof mostrarAvisoLogin === 'function') {
+                mostrarAvisoLogin(
+                    'Inicia sesión para continuar',
+                    'Identifícate para revisar tus datos y terminar la compra.'
+                );
+            }
+            return;
+        }
         // Cargar datos del viaje en el Paso 3
         cargarResumenCompra();
         // Vincular el submit
@@ -63,6 +78,22 @@ function cargarResumenCompra() {
 
 function finalizarCompra(e) {
     e.preventDefault(); // Evitar recarga
+
+    // Aseguramos que la reserva solo se realice con sesión válida
+    let usuarioLogueado = null;
+    if (typeof obtenerUsuarioActual === 'function') {
+        usuarioLogueado = obtenerUsuarioActual();
+    }
+
+    if (!usuarioLogueado) {
+        if (typeof mostrarAvisoLogin === 'function') {
+            mostrarAvisoLogin(
+                'Necesitas iniciar sesión',
+                'Inicia sesión para guardar tu reserva y continuar con el proceso'
+            );
+        }
+        return;
+    }
 
     // A. Recopilar Datos Personales
     const datosContacto = {

@@ -146,6 +146,15 @@ function mostrarLocalStorage() {
 }
 
 function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
+    const usuario = obtenerUsuarioActual();
+    if (!usuario) {
+        mostrarAvisoLogin(
+            "Necesitas iniciar sesión",
+            "Inicia sesión para guardar tu reserva y continuar con el proceso."
+        );
+        return;
+    }
+
     const compraActual = {
         titulo: titulo,
         precio: parseFloat(precio), // Aseguramos que sea número
@@ -223,4 +232,69 @@ function actualizarHeaderUsuario() {
     logoutBtn.addEventListener('click', () => {
         logout();
     });
+}
+
+function mostrarAvisoLogin(titulo, mensaje) {
+    // Buscamos el modal ya creado
+    let modal = document.getElementById('login-required-modal');
+
+    if (!modal) {
+        // Si no existe, lo construimos desde cero
+        modal = document.createElement('div');
+        modal.id = 'login-required-modal';
+        modal.className = 'login-required-overlay';
+
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'login-required-card';
+
+        const icono = document.createElement('div');
+        icono.className = 'login-required-icon';
+        icono.innerHTML = '<i class="fa-solid fa-lock"></i>';
+
+        const tituloEl = document.createElement('h3');
+        tituloEl.id = 'login-required-title';
+        tituloEl.textContent = 'Necesitas iniciar sesión';
+
+        const mensajeEl = document.createElement('p');
+        mensajeEl.id = 'login-required-message';
+        mensajeEl.textContent = 'Para continuar con tu compra necesitamos identificarte.';
+
+        const acciones = document.createElement('div');
+        acciones.className = 'login-required-actions';
+
+        const btnCerrar = document.createElement('button');
+        btnCerrar.type = 'button';
+        btnCerrar.id = 'login-required-close';
+        btnCerrar.className = 'btn-rounded-outline';
+        btnCerrar.textContent = 'Seguir explorando';
+
+        const enlaceLogin = document.createElement('a');
+        enlaceLogin.href = 'login.html';
+        enlaceLogin.id = 'login-required-login';
+        enlaceLogin.className = 'btn-rounded-black';
+        enlaceLogin.textContent = 'Ir a iniciar sesión';
+
+        acciones.appendChild(btnCerrar);
+        acciones.appendChild(enlaceLogin);
+        tarjeta.appendChild(icono);
+        tarjeta.appendChild(tituloEl);
+        tarjeta.appendChild(mensajeEl);
+        tarjeta.appendChild(acciones);
+        modal.appendChild(tarjeta);
+        document.body.appendChild(modal);
+
+        // Cerrar al pulsar el botón
+        btnCerrar.addEventListener('click', () => modal.classList.remove('show'));
+        // Cerrar al hacer clic fuera de la tarjeta
+        modal.addEventListener('click', (evento) => {
+            if (evento.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    }
+
+    // Actualizamos textos y mostramos el modal
+    modal.querySelector('#login-required-title').textContent = titulo;
+    modal.querySelector('#login-required-message').textContent = mensaje;
+    modal.classList.add('show');
 }

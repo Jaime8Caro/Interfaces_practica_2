@@ -2043,3 +2043,75 @@ blockquote {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Ajustes para inicio de sesión requerido al realizar una compra */
+.login-required-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 2000;
+}
+
+.login-required-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.login-required-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2.5rem;
+    width: min(420px, 100%);
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+    animation: modalPop 0.35s ease;
+}
+
+.login-required-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: #f5f2ff;
+    color: #5d3eff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.login-required-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.login-required-card p {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.login-required-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
