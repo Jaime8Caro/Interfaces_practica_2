@@ -183,7 +183,7 @@ function limpiarTodoLocalStorage() {
 function actualizarHeaderUsuario() {
     const container = document.getElementById('user-actions-container');
     if (!container){
-        console.log("algosalio mal") 
+        console.log("algo salio mal") 
         return;
     }
 
@@ -193,7 +193,6 @@ function actualizarHeaderUsuario() {
     
     // Si NO hay usuario, no hacemos nada (se quedan los botones de Login/Registro)
     if (!usuario){
-        console.log("algosalio mal") 
         return;
     }
     
@@ -207,9 +206,9 @@ function actualizarHeaderUsuario() {
         <div class="user-profile-wrapper" id="userMenuBtn">
             <img src="${avatarImg}" alt="Perfil" class="user-avatar">
             <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; color: #555;"></i>
-            
             <div class="user-dropdown" id="userDropdown">
                 <div class="user-dropdown-header">Hola, ${nombreUsuario}</div>
+                <a href="perfil.html#datos"><i class="fa-solid fa-user-pen"></i> Perfil</a>
                 <a href="perfil.html#viajes"><i class="fa-solid fa-suitcase"></i> Mis Viajes</a>
                 <a href="perfil.html#configuracion"><i class="fa-solid fa-gear"></i> Configuración</a>
                 <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
