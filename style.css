@@ -36,8 +36,15 @@ img { display: block; max-width: 100%; }
     padding: 8px 15px; width: 100%; font-family: var(--font-main);
 }
 .search-bar button {
-    background-color: var(--color-white); color: var(--color-black); border: none;
-    border-radius: 20px; padding: 8px 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
+    background-color: var(--color-white); 
+    color: var(--color-black); 
+    border: none;
+    border-radius: 20px; 
+    padding: 8px 20px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    font-size: 0.85rem;
+    font-family: var(--font-main); 
 }
 
 /* --- SELECTOR DE IDIOMA (Solo Banderas) --- */
@@ -584,7 +591,7 @@ img { display: block; max-width: 100%; }
 /*======================== DESTINOS ZONAS DE CONTENIDO ========================*/
 .scrolling-content-layer {
     position: relative;
-    z-index: 10;
+    z-index: 100;
     background-color: var(--color-bg);
     width: 100%;
     padding-top: 5rem;
@@ -913,7 +920,7 @@ img { display: block; max-width: 100%; }
 /*======================== CONTENIDO INFERIOR (ITINERARIO) ========================*/
 .product-content-body {
     padding: 80px 20px; 
-    background-color: var(--color-bg); /* Fondo distinto para separar secciones */
+    background-color: var(--color-bg);
 }
 
 /* Autor */
@@ -2043,6 +2050,7 @@ blockquote {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+<<<<<<< HEAD
 
 /* Ajustes para inicio de sesión requerido al realizar una compra */
 .login-required-overlay {
@@ -2115,3 +2123,48 @@ blockquote {
         transform: translateY(0) scale(1);
     }
 }
+=======
+/* --- BOTÓN FAVORITO ACTIVO --- */
+.btn-favorite.active {
+    background-color: #ffe6e6;
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+/* --- NOTIFICACIÓN TOAST (Mensaje emergente) --- */
+.toast-notification {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 16px;
+    position: fixed;
+    z-index: 2000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.toast-notification.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px; /* Sube un poquito al aparecer */
+}
+
+.toast-notification i {
+    color: #4caf50; /* Check verde */
+    font-size: 1.2rem;
+}
+
+>>>>>>> 92190f982bcecd7b2229b6c19bdb2b9489f6b295

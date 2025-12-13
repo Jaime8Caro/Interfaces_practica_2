@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. GESTIÓN DEL LOGOUT
     configurarLogoutSidebar();
+
+    // 4. CARGAR RESERVAS Y FAVORITOS
+    cargarReservasUsuario();
+
+    // 5. CARGAR FAVORITOS
+    cargarFavoritosUsuario();
 });
 
 // --- FUNCIONES ---
@@ -162,3 +168,56 @@ function cargarReservasUsuario() {
         });
     }
 }
+function cargarFavoritosUsuario() {
+    const container = document.getElementById('favorites-container');
+    const noFavMsg = document.getElementById('no-favorites-msg');
+    
+    // Obtener usuario
+    const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
+
+    // Verificar si hay usuario y si tiene favoritos
+    if (!usuario || !usuario.favoritos || usuario.favoritos.length === 0) {
+        if(container) container.innerHTML = '';
+        if(noFavMsg) noFavMsg.style.display = 'block';
+        return;
+    }
+
+    // Ocultar mensaje de vacío
+    if(noFavMsg) noFavMsg.style.display = 'none';
+    if(container) container.innerHTML = '';
+
+    // Filtrar los viajes que coinciden con los IDs guardados
+    // (experiencesData viene de script_experiencias.js que añadimos al HTML)
+    if (typeof experiencesData === 'undefined') {
+        console.error("Error: experiencesData no está cargado. Revisa el HTML.");
+        return;
+    }
+
+    const misFavoritos = experiencesData.filter(exp => usuario.favoritos.includes(exp.id));
+
+    // Pintar tarjetas
+    misFavoritos.forEach(exp => {
+        const cardHTML = `
+        <a href="compra.html?id=${exp.id}" class="experience-card-item">
+            <div class="card-image-header">
+                <span class="difficulty-badge">${exp.dificultad}</span>
+                <img src="${exp.imagen}" alt="${exp.titulo}">
+            </div>
+            <div class="card-body">
+                <h3>${exp.titulo}</h3>
+                <p class="card-description">${exp.descripcionCorto}</p>
+                <div class="card-meta">
+                    <span><i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}</span>
+                    <span><i class="fa-regular fa-calendar"></i> ${exp.duracion}</span>
+                    <span><i class="fa-solid fa-user-group"></i> ${exp.grupo}</span>
+                </div>
+                <div class="card-footer">
+                    <span class="price">$${exp.precio} <small>/ persona</small></span>
+                    <span class="btn-reservar">Ver detalles</span>
+                </div>
+            </div>
+        </a>`;
+        container.innerHTML += cardHTML;
+    });
+}
+
