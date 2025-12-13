@@ -6,7 +6,7 @@ const blogData = [
         autor: "Carolina Monteamor",
         fecha: "25 Agosto, 2025",
         lectura: "5 min de lectura",
-        imagenPrincipal: "images/niklas-weiss--2WlTWZLnRc-unsplash.jpg",
+        imagenPrincipal: "assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg",
         tag: "Destinos 2025",
         resumen: "Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia...",
         contenidoHTML: `
@@ -24,7 +24,7 @@ const blogData = [
             </p>
             
             <figure class="article-inline-image">
-                <img src="images/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Arrozales de Bali">
+                <img src="assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Arrozales de Bali">
                 <figcaption>Los impresionantes arrozales de Tegallalang en Ubud.</figcaption>
             </figure>
 
@@ -69,7 +69,7 @@ const blogData = [
     autor: "Adriana del Río",
     fecha: "10 Septiembre, 2025",
     lectura: "7 min de lectura",
-    imagenPrincipal: "images/india.jpg",
+    imagenPrincipal: "assets/india.jpg",
     tag: "Asia",
     resumen: "La India es un continente en sí mismo. Descubre los templos olvidados, las rutas de especias y los paisajes que desafían la imaginación.",
     contenidoHTML: `
@@ -87,7 +87,7 @@ const blogData = [
         </p>
         
         <figure class="article-inline-image">
-            <img src="images/ruinas_de_hampi.jpg" alt="Ruinas de Hampi al atardecer">
+            <img src="assets/ruinas_de_hampi.jpg" alt="Ruinas de Hampi al atardecer">
             <figcaption>El atardecer sobre el templo Virupaksha es un momento inolvidable.</figcaption>
         </figure>
 
@@ -142,7 +142,7 @@ const blogData = [
     autor: "Miguel Ángel Soto",
     fecha: "05 Octubre, 2025",
     lectura: "4 min de lectura",
-    imagenPrincipal: "images/morten-andreassen-mX0tCOykgSY-unsplash.jpg",
+    imagenPrincipal: "assets/morten-andreassen-mX0tCOykgSY-unsplash.jpg",
     tag: "Consejos",
     resumen: "Ahorrar dinero, empacar ligero y conocer gente local. Te contamos los secretos de los expertos para viajar más lejos con menos.",
     contenidoHTML: `
@@ -170,7 +170,7 @@ const blogData = [
         </p>
 
         <figure class="article-inline-image">
-            <img src="images/tren_nocturno.jpg" alt="Tren nocturno en movimiento">
+            <img src="assets/tren_nocturno.jpg" alt="Tren nocturno en movimiento">
             <figcaption>Los trenes nocturnos en Asia no solo ahorran dinero, son una aventura social.</figcaption>
         </figure>
 
@@ -220,7 +220,7 @@ const blogData = [
     autor: "Javier Navarro",
     fecha: "12 Noviembre, 2025",
     lectura: "6 min de lectura",
-    imagenPrincipal: "images/andrew-ridley-Kt5hRENuotI-unsplash.jpg",
+    imagenPrincipal: "assets/andrew-ridley-Kt5hRENuotI-unsplash.jpg",
     tag: "Naturaleza",
     resumen: "Si buscas desconexión total, estos parques naturales y playas vírgenes son para ti. Lugares donde el Wi-Fi no llega, pero la conexión es total.",
     contenidoHTML: `
@@ -238,7 +238,7 @@ const blogData = [
         </p>
 
         <figure class="article-inline-image">
-            <img src="images/montañas_del_caucaso.jpg" alt="Montañas del Cáucaso en Georgia">
+            <img src="assets/montañas_del_caucaso.jpg" alt="Montañas del Cáucaso en Georgia">
             <figcaption>Mestia y Ushguli: aldeas donde el tiempo se detuvo hace siglos.</figcaption>
         </figure>
 
@@ -268,7 +268,7 @@ const blogData = [
         </blockquote>
 
         <figure class="article-inline-image">
-            <img src="images/colombia_desierto.jpg" alt="Desierto de La Guajira en Colombia">
+            <img src="assets/colombia_desierto.jpg" alt="Desierto de La Guajira en Colombia">
             <figcaption>La Guijara Colombia</figcaption>
         </figure>
 
@@ -303,7 +303,7 @@ const blogData = [
     autor: "Marta Giménez",
     fecha: "18 Diciembre, 2025",
     lectura: "5 min de lectura",
-    imagenPrincipal: "images/street_market.jpg",
+    imagenPrincipal: "assets/street_market.jpg",
     tag: "Gastronomía",
     resumen: "Olvídate de los restaurantes de mantel blanco. La verdadera cultura de un país se hierve, se fríe y se sirve en las aceras.",
     contenidoHTML: `
@@ -321,7 +321,7 @@ const blogData = [
         </p>
 
         <figure class="article-inline-image">
-            <img src="images/bangkok_street_food.jpg" alt="Puesto de comida callejera en Bangkok">
+            <img src="assets/bangkok_street_food.jpg" alt="Puesto de comida callejera en Bangkok">
             <figcaption>El chef callejero de Bangkok: un espectáculo de fuego y destreza.</figcaption>
         </figure>
 

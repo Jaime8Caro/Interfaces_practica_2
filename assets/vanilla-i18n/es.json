@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "inicio": "Inicio",
+    "destinos": "Destinos",
+    "experiencias": "Experiencias",
+    "blog": "Blog",
+    "buscar": "Buscar"
+  },
+  "hero": {
+    "titulo": "Comparte y descubre viajes mochileros de larga distancia",
+    "boton": "Comenzar mi aventura"
+  }
+}

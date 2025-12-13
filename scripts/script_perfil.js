@@ -152,7 +152,7 @@ function cargarReservasUsuario() {
             // Protección por si la estructura de datos varía
             const titulo = reserva.viaje ? reserva.viaje.titulo : 'Viaje Pack&Go';
             const fecha = reserva.viaje ? reserva.viaje.fecha_inicio : reserva.fecha_compra;
-            const img = reserva.viaje ? reserva.viaje.imagen : 'images/default_trip.jpg';
+            const img = reserva.viaje ? reserva.viaje.imagen : 'assets/default_trip.jpg';
             const id = reserva.id_reserva || '---';
 
             const tarjetaHTML = `

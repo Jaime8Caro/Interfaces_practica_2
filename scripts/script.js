@@ -192,7 +192,7 @@ function actualizarHeaderUsuario() {
     
     // Si no tiene foto guardada, usamos la de defecto
     // NOTA: Recuerda tu regla de usar src="defecto.png"
-    const avatarImg = usuario.imagen || "images/defecto.jpg"; 
+    const avatarImg = usuario.imagen || "assets/defecto.jpg"; 
     const nombreUsuario = usuario.nombre || "Usuario";
 
     // 2. Inyectamos el HTML del usuario logueado

@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "inicio": "Accueil",
+    "destinos": "Destinations",
+    "experiencias": "Expériences",
+    "blog": "Blog",
+    "buscar": "Rechercher"
+  },
+  "hero": {
+    "titulo": "Partagez et découvrez des voyages sac à dos longue distance",
+    "boton": "Commencer mon aventure"
+  }
+}

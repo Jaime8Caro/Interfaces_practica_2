@@ -293,7 +293,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== INDEX HERO ========================*/
 .hero-section {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/rohit-tandon-9wg5jCEPBsw-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/rohit-tandon-9wg5jCEPBsw-unsplash.jpg') center/cover;
     height: 100vh; width: 100%; display: flex; flex-direction: column;
     align-items: center; text-align: center; padding-top: 160px; padding-bottom: 40px;
     color: var(--color-white); position: sticky; top: 0; z-index: 0;
@@ -413,7 +413,7 @@ img { display: block; max-width: 100%; }
 /*======================== EXPERIENCES PAGE ========================*/
 .experiences-page-container { position: relative; background-color: var(--color-bg); }
 .sticky-experiences-hero {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/sam-ladley-9ikhVviqgo0-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/sam-ladley-9ikhVviqgo0-unsplash.jpg') center/cover;
     padding: 160px 20px 200px; text-align: center; color: var(--color-white);
     position: sticky; top: 0; z-index: 900;
 }
@@ -459,7 +459,7 @@ img { display: block; max-width: 100%; }
 }
 /*======================== LOGIN Y SIGNUP ========================*/
 .auth-hero-section {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/rohit-tandon-9wg5jCEPBsw-unsplash.jpg');
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/rohit-tandon-9wg5jCEPBsw-unsplash.jpg');
     background-size: cover;
     background-position: top center; 
     min-height: 100vh;
@@ -572,7 +572,7 @@ img { display: block; max-width: 100%; }
 /*======================== DESTINOS ========================*/
 /*======================== DESTINOS HERO ========================*/
 .sticky-destinations-hero {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/sam-ladley-9ikhVviqgo0-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/sam-ladley-9ikhVviqgo0-unsplash.jpg') center/cover;
     padding: 160px 20px 200px;
     text-align: center;
     color: var(--color-white);
@@ -601,7 +601,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== DESTINOS OCEANIA HERO ========================*/
 .sticky-oceania-hero {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images/quentin-menini-clOI20JW9ow-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/quentin-menini-clOI20JW9ow-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;
@@ -617,7 +617,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== DESTINOS AFRICA HERO ========================*/
 .sticky-africa-hero {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images/hu-chen-0LwfbRtQ-ac-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/hu-chen-0LwfbRtQ-ac-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;
@@ -633,7 +633,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== DESTINOS EUROPA HERO ========================*/
 .sticky-europa-hero {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images/leonard-cotte-R5scocnOOdM-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/leonard-cotte-R5scocnOOdM-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;
@@ -649,7 +649,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== DESTINOS AMERICA HERO ========================*/
 .sticky-america-hero {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images/peter-heymans-jR_O7T8cPzg-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/peter-heymans-jR_O7T8cPzg-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;
@@ -665,7 +665,7 @@ img { display: block; max-width: 100%; }
 
 /*======================== DESTINOS ASIA HERO ========================*/
 .sticky-asia-hero {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images/manuel-cosentino-n--CMLApjfI-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/manuel-cosentino-n--CMLApjfI-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;
@@ -1613,7 +1613,7 @@ img { display: block; max-width: 100%; }
 /*======================== BLOG POST ========================*/
 /* Sticky Hero del Artículo */
 .sticky-article-hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/niklas-weiss--2WlTWZLnRc-unsplash.jpg') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg') center/cover;
     position: sticky;
     top: 0;
     z-index: 0;

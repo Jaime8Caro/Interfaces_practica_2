@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "inicio": "Home",
+    "destinos": "Destinations",
+    "experiencias": "Experiences",
+    "blog": "Blog",
+    "buscar": "Search"
+  },
+  "hero": {
+    "titulo": "Share and discover long-distance backpacking trips",
+    "boton": "Start my adventure"
+  }
+}
