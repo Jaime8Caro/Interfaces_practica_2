@@ -123,21 +123,29 @@
                 </div>
 
                 <div id="tab-configuracion" class="tab-section" style="display: none;">
-                    <h1>Configuración</h1>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <h1 style="margin:0;">Configuración</h1>
+                        <button id="btn-lock-config" class="btn-icon" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #666;">
+                            <i class="fa-solid fa-lock"></i>
+                        </button>
+                    </div>
+
                     <form class="profile-form">
                         <div class="form-group">
                             <label for="pago">Método de pago por defecto</label>
-                            <input type="text" id="pago" class="form-input" placeholder="Tarjeta Visa terminada en 4242">
+                            <input type="text" id="pago" class="form-input config-field" placeholder="Ej: Tarjeta Visa terminada en 4242" disabled>
                         </div>
                         <div class="form-group">
                             <label for="idioma">Idioma</label>
-                            <input type="text" id="idioma" class="form-input" placeholder="Español">
+                            <input type="text" id="idioma" class="form-input config-field" placeholder="Ej: Español" disabled>
                         </div>
                         <div class="form-group">
                             <label for="interfaz">Interfaz</label>
-                            <input type="text" id="interfaz" class="form-input" placeholder="Modo Claro">
+                            <input type="text" id="interfaz" class="form-input config-field" placeholder="Ej: Modo Claro" disabled>
                         </div>
                     </form>
+                    
+                    <p id="config-status" style="font-size: 0.8rem; color: green; display: none; margin-top: 10px;">Cambios guardados.</p>
                 </div>
 
             </div>

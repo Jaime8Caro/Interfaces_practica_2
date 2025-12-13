@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. CARGAR FAVORITOS
     cargarFavoritosUsuario();
+
+    // 6. GESTIONAR CONFIG
+    gestionarConfiguracion();
 });
 
 // --- FUNCIONES ---
@@ -223,4 +226,68 @@ function cargarFavoritosUsuario() {
         </a>`;
         container.innerHTML += cardHTML;
     });
+}
+
+function gestionarConfiguracion() {
+    const btnLock = document.getElementById('btn-lock-config');
+    const inputsConfig = document.querySelectorAll('.config-field');
+    const icon = btnLock.querySelector('i');
+    const statusMsg = document.getElementById('config-status');
+
+    // 1. CARGAR DATOS PREVIOS (Si el usuario ya guardó algo antes)
+    const configGuardada = JSON.parse(localStorage.getItem('userConfig')) || {};
+    
+    if (configGuardada.pago) document.getElementById('pago').value = configGuardada.pago;
+    if (configGuardada.idioma) document.getElementById('idioma').value = configGuardada.idioma;
+    if (configGuardada.interfaz) document.getElementById('interfaz').value = configGuardada.interfaz;
+
+    // 2. LOGICA DEL CANDADO
+    if (btnLock) {
+        btnLock.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Comprobamos si actualmente está bloqueado (input disabled)
+            const estaBloqueado = inputsConfig[0].disabled;
+
+            if (estaBloqueado) {
+                // --- ACCIÓN: DESBLOQUEAR ---
+                inputsConfig.forEach(input => {
+                    input.disabled = false;
+                    input.style.borderColor = '#007bff'; // Feedback visual (azul)
+                });
+                
+                // Cambiar icono a candado abierto
+                icon.classList.remove('fa-lock');
+                icon.classList.add('fa-lock-open');
+                icon.style.color = '#007bff'; // Color activo
+                
+                if(statusMsg) statusMsg.style.display = 'none';
+
+            } else {
+                // --- ACCIÓN: BLOQUEAR Y GUARDAR ---
+                const nuevaConfig = {};
+                
+                inputsConfig.forEach(input => {
+                    input.disabled = true;
+                    input.style.borderColor = '#ddd'; // Restaurar borde
+                    // Guardamos el valor en el objeto
+                    nuevaConfig[input.id] = input.value;
+                });
+
+                // Guardar en LocalStorage
+                localStorage.setItem('userConfig', JSON.stringify(nuevaConfig));
+
+                // Cambiar icono a candado cerrado
+                icon.classList.remove('fa-lock-open');
+                icon.classList.add('fa-lock');
+                icon.style.color = '#666';
+
+                // Mostrar mensaje de guardado
+                if(statusMsg) {
+                    statusMsg.style.display = 'block';
+                    setTimeout(() => statusMsg.style.display = 'none', 3000);
+                }
+            }
+        });
+    }
 }
