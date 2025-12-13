@@ -187,9 +187,8 @@ function cargarFavoritosUsuario() {
     if(container) container.innerHTML = '';
 
     // Filtrar los viajes que coinciden con los IDs guardados
-    // (experiencesData viene de script_experiencias.js que añadimos al HTML)
     if (typeof experiencesData === 'undefined') {
-        console.error("Error: experiencesData no está cargado. Revisa el HTML.");
+        console.error("Error: experiencesData no está cargado. Revisa que script_experiencias.js esté incluido en el HTML.");
         return;
     }
 
@@ -201,6 +200,11 @@ function cargarFavoritosUsuario() {
         <a href="compra.html?id=${exp.id}" class="experience-card-item">
             <div class="card-image-header">
                 <span class="difficulty-badge">${exp.dificultad}</span>
+                
+                <button class="card-fav-btn active" onclick="toggleCardFav(event, ${exp.id}, this)">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+
                 <img src="${exp.imagen}" alt="${exp.titulo}">
             </div>
             <div class="card-body">
@@ -220,4 +224,3 @@ function cargarFavoritosUsuario() {
         container.innerHTML += cardHTML;
     });
 }
-

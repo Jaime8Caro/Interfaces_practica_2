@@ -2364,3 +2364,41 @@ blockquote {
     border-color: var(--color-black);
     box-shadow: 0 0 0 4px rgba(0,0,0,0.05); /* Resplandor suave al escribir */
 }
+/* --- BOTÓN FAVORITO EN TARJETA (HEART TOGGLE) --- */
+.card-fav-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10; /* Para estar encima de la imagen */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.85); /* Blanco semitransparente */
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    color: #ccc; /* Color gris por defecto (no favorito) */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-fav-btn:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+    color: #ff4d4d; /* Rojo al pasar el ratón */
+}
+
+/* Estado Activo (Es favorito) */
+.card-fav-btn.active {
+    color: #ff4d4d;
+    background-color: #fff;
+}
+
+/* Animación de latido al hacer click */
+.card-fav-btn:active i {
+    transform: scale(0.8);
+}

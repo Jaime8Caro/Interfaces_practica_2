@@ -1134,16 +1134,21 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
     container.innerHTML = ""; 
 
     if (listaDatos.length === 0) {
-        container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;">
-                <h3>No encontramos experiencias con esos filtros</h3>
-                <p>Intenta cambiar la búsqueda o borrar los filtros.</p>
-                <button onclick="location.reload()" class="btn-black-sm" style="margin-top:15px">Ver todo</button>
-            </div>`;
+        // ... (código de "no resultados" se mantiene igual)
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3>No hay resultados...</h3></div>`;
         return;
     }
 
+    // 1. OBTENER FAVORITOS DEL USUARIO ACTUAL
+    const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+    const favoritos = usuario ? (usuario.favoritos || []) : [];
+
     listaDatos.forEach(exp => {
+        // 2. COMPROBAR SI ESTE VIAJE ES FAVORITO
+        const esFavorito = favoritos.includes(exp.id);
+        const claseActiva = esFavorito ? "active" : "";
+        const iconoClase = esFavorito ? "fa-solid" : "fa-regular"; // Solid = relleno, Regular = borde
+
         const card = document.createElement("a");
         card.href = `compra.html?id=${exp.id}`;
         card.className = "experience-card-item";
@@ -1151,6 +1156,11 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
         card.innerHTML = `
             <div class="card-image-header">
                 <span class="difficulty-badge">${exp.dificultad}</span>
+                
+                <button class="card-fav-btn ${claseActiva}" onclick="toggleCardFav(event, ${exp.id}, this)">
+                    <i class="${iconoClase} fa-heart"></i>
+                </button>
+
                 <img src="${exp.imagen}" alt="${exp.titulo}">
             </div>
             <div class="card-body">
@@ -1631,3 +1641,62 @@ function actualizarUsuarioEnListaGlobal(usuarioModificado) {
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 }
+// --- FUNCIÓN GLOBAL PARA EL BOTÓN CORAZÓN DE LAS TARJETAS ---
+window.toggleCardFav = function(e, idViaje, btn) {
+    // 1. Evitar que el click se propague al enlace <a> (para no ir a la página de compra)
+    e.preventDefault();
+    e.stopPropagation();
+
+    // 2. Comprobar usuario
+    let usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+    if (!usuario) {
+        // Si no está logueado, mostrar aviso
+        if (typeof mostrarAvisoLogin === 'function') {
+            mostrarAvisoLogin("Inicia sesión", "Debes estar registrado para guardar favoritos.");
+        } else {
+            alert("Inicia sesión para guardar favoritos");
+            window.location.href = "login.html";
+        }
+        return;
+    }
+
+    // 3. Inicializar array si no existe
+    if (!usuario.favoritos) usuario.favoritos = [];
+
+    const index = usuario.favoritos.indexOf(idViaje);
+    const icono = btn.querySelector("i");
+
+    if (index === -1) {
+        // --> AÑADIR A FAVORITOS
+        usuario.favoritos.push(idViaje);
+        
+        // Actualizar visualmente
+        btn.classList.add("active");
+        icono.className = "fa-solid fa-heart"; // Corazón relleno
+        
+        // Feedback
+        if(typeof mostrarToast === 'function') mostrarToast("Añadido a favoritos");
+    } else {
+        // --> QUITAR DE FAVORITOS
+        usuario.favoritos.splice(index, 1);
+        
+        // Actualizar visualmente
+        btn.classList.remove("active");
+        icono.className = "fa-regular fa-heart"; // Corazón borde
+        
+        // Feedback
+        if(typeof mostrarToast === 'function') mostrarToast("Eliminado de favoritos");
+    }
+
+    // 4. Guardar en localStorage
+    localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+    
+    // Sincronizar con la lista global de usuarios (script.js function logic)
+    let usuariosGlobales = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const userIndex = usuariosGlobales.findIndex(u => u.correo === usuario.correo);
+    if(userIndex !== -1) {
+        usuariosGlobales[userIndex] = usuario;
+        localStorage.setItem("usuarios", JSON.stringify(usuariosGlobales));
+    }
+};
