@@ -139,12 +139,6 @@ function validarUsuarioExistente(correo) {
     return false;
 }
 
-function mostrarLocalStorage() {
-    console.log("=== CONTENIDO DEL LOCALSTORAGE ===");
-    console.log("Usuarios registrados:", obtenerUsuarios());
-    console.log("Usuario actual:", obtenerUsuarioActual() || "Ninguno");
-}
-
 function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
     const usuario = obtenerUsuarioActual();
     if (!usuario) {
@@ -297,3 +291,95 @@ function mostrarAvisoLogin(titulo, mensaje) {
     modal.querySelector('#login-required-message').textContent = mensaje;
     modal.classList.add('show');
 }
+
+// --- FUNCIONALIDAD BUSCADOR HEADER ---
+document.addEventListener("DOMContentLoaded", () => {
+    // Seleccionamos el input y el botón que están dentro de .search-bar (el del header)
+    const headerSearchInput = document.querySelector('.search-bar input');
+    const headerSearchBtn = document.querySelector('.search-bar button');
+
+    if (headerSearchInput && headerSearchBtn) {
+        
+        const realizarBusquedaHeader = () => {
+            const texto = headerSearchInput.value.trim();
+            if (texto) {
+                // Redirigimos a experiencias pasando el texto por la URL
+                window.location.href = `experiencias.html?busqueda=${encodeURIComponent(texto)}`;
+            }
+        };
+
+        // Al hacer click en el botón "Buscar"
+        headerSearchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            realizarBusquedaHeader();
+        });
+
+        // Al pulsar "Enter" en el teclado
+        headerSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                realizarBusquedaHeader();
+            }
+        });
+    }
+});
+
+// --- FUNCIÓN GLOBAL PARA EL BOTÓN CORAZÓN DE LAS TARJETAS ---
+window.toggleCardFav = function(e, idViaje, btn) {
+    // 1. Evitar que el click se propague al enlace <a> (para no ir a la página de compra)
+    e.preventDefault();
+    e.stopPropagation();
+
+    // 2. Comprobar usuario
+    let usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+    if (!usuario) {
+        // Si no está logueado, mostrar aviso
+        if (typeof mostrarAvisoLogin === 'function') {
+            mostrarAvisoLogin("Inicia sesión", "Debes estar registrado para guardar favoritos.");
+        } else {
+            alert("Inicia sesión para guardar favoritos");
+            window.location.href = "login.html";
+        }
+        return;
+    }
+
+    // 3. Inicializar array si no existe
+    if (!usuario.favoritos) usuario.favoritos = [];
+
+    const index = usuario.favoritos.indexOf(idViaje);
+    const icono = btn.querySelector("i");
+
+    if (index === -1) {
+        // --> AÑADIR A FAVORITOS
+        usuario.favoritos.push(idViaje);
+        
+        // Actualizar visualmente
+        btn.classList.add("active");
+        icono.className = "fa-solid fa-heart"; // Corazón relleno
+        
+        // Feedback
+        if(typeof mostrarToast === 'function') mostrarToast("Añadido a favoritos");
+    } else {
+        // --> QUITAR DE FAVORITOS
+        usuario.favoritos.splice(index, 1);
+        
+        // Actualizar visualmente
+        btn.classList.remove("active");
+        icono.className = "fa-regular fa-heart"; // Corazón borde
+        
+        // Feedback
+        if(typeof mostrarToast === 'function') mostrarToast("Eliminado de favoritos");
+    }
+
+    // 4. Guardar en localStorage
+    localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+    
+    // Sincronizar con la lista global de usuarios (script.js function logic)
+    let usuariosGlobales = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const userIndex = usuariosGlobales.findIndex(u => u.correo === usuario.correo);
+    if(userIndex !== -1) {
+        usuariosGlobales[userIndex] = usuario;
+        localStorage.setItem("usuarios", JSON.stringify(usuariosGlobales));
+    }
+};

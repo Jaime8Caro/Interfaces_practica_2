@@ -626,35 +626,3 @@ function initBlogFilters(container) {
         return menu;
     }
 }
-
-// --- FUNCIONALIDAD BUSCADOR HEADER ---
-document.addEventListener("DOMContentLoaded", () => {
-    // Seleccionamos el input y el botón que están dentro de .search-bar (el del header)
-    const headerSearchInput = document.querySelector('.search-bar input');
-    const headerSearchBtn = document.querySelector('.search-bar button');
-
-    if (headerSearchInput && headerSearchBtn) {
-        
-        const realizarBusquedaHeader = () => {
-            const texto = headerSearchInput.value.trim();
-            if (texto) {
-                // Redirigimos a experiencias pasando el texto por la URL
-                window.location.href = `experiencias.html?busqueda=${encodeURIComponent(texto)}`;
-            }
-        };
-
-        // Al hacer click en el botón "Buscar"
-        headerSearchBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            realizarBusquedaHeader();
-        });
-
-        // Al pulsar "Enter" en el teclado
-        headerSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                realizarBusquedaHeader();
-            }
-        });
-    }
-});
