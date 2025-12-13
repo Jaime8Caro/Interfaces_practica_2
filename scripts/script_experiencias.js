@@ -1402,6 +1402,50 @@ function loadExperienceDetail() {
             }
         });
     }
+    // 6.5 LÓGICA DE FAVORITOS (NUEVO)
+    const btnFav = document.querySelector('.btn-favorite');
+    
+    // A. Comprobar si ya es favorito al cargar
+    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
+    
+    if (usuarioActual && usuarioActual.favoritos && usuarioActual.favoritos.includes(exp.id)) {
+        btnFav.classList.add('active');
+        btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> Guardado`;
+    }
+
+    // B. Evento Click
+    btnFav.addEventListener('click', () => {
+        const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+        if (!usuario) {
+            mostrarToast("Inicia sesión para guardar favoritos", "error");
+            setTimeout(() => window.location.href = "login.html", 1500);
+            return;
+        }
+
+        // Inicializar array si no existe
+        if (!usuario.favoritos) usuario.favoritos = [];
+
+        const index = usuario.favoritos.indexOf(exp.id);
+
+        if (index === -1) {
+            // AGREGAR
+            usuario.favoritos.push(exp.id);
+            btnFav.classList.add('active');
+            btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> Guardado`;
+            mostrarToast("Añadido a tus favoritos correctamente");
+        } else {
+            // QUITAR
+            usuario.favoritos.splice(index, 1);
+            btnFav.classList.remove('active');
+            btnFav.innerHTML = `<i class="fa-solid fa-plus"></i> Añadir a favoritos`;
+            mostrarToast("Eliminado de favoritos");
+        }
+
+        // C. Guardar cambios en LocalStorage (Usuario actual y Lista global)
+        localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+        actualizarUsuarioEnListaGlobal(usuario);
+    });
 
     // 7. Activar Lógica de Pestañas
     initTabs();
@@ -1538,4 +1582,37 @@ function initDestinationsPage() {
             }
         });
     });
+}
+// Función para mostrar el mensaje emergente
+function mostrarToast(mensaje, tipo = "success") {
+    // Crear el elemento si no existe
+    let toast = document.getElementById("toast");
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "toast";
+        toast.className = "toast-notification";
+        document.body.appendChild(toast);
+    }
+
+    // Icono según tipo
+    const icono = tipo === "error" ? '<i class="fa-solid fa-circle-exclamation" style="color:#ff4d4d"></i>' : '<i class="fa-solid fa-circle-check"></i>';
+
+    toast.innerHTML = `${icono} ${mensaje}`;
+    toast.className = "toast-notification show";
+
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+    }, 3000);
+}
+
+// Función para sincronizar con la lista de todos los usuarios (para que no se pierda al salir)
+function actualizarUsuarioEnListaGlobal(usuarioModificado) {
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const index = usuarios.findIndex(u => u.correo === usuarioModificado.correo);
+    
+    if (index !== -1) {
+        usuarios[index] = usuarioModificado;
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
 }

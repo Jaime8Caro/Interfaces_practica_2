@@ -13,6 +13,7 @@
     
     <script src="scripts/script.js" defer></script>
     <script src="scripts/script_perfil.js" defer></script>
+    <script src="scripts/script_experiencias.js" defer></script>
 </head>
 <body>
 
@@ -38,6 +39,7 @@
             <div class="language-selector">
                 <button class="lang-btn"><img src="images/bandera_españa.png" class="flag-icon"><i class="fa-solid fa-chevron-down"></i></button>
             </div>
+
             <div class="user-actions" id="user-actions-container">
             </div>
         </nav>
@@ -96,27 +98,14 @@
 
                 <div id="tab-favoritos" class="tab-section" style="display: none;">
                     <h1>Favoritos</h1>
-                    <div class="favorites-grid">
-                        <a href="compra.html" class="experience-card-item">
-                            <div class="card-image-header">
-                                <span class="difficulty-badge">Dificultad</span>
-                                <img src="images/sam-ladley-9ikhVviqgo0-unsplash.jpg" alt="Playa Tropical">
-                            </div>
-                            <div class="card-body">
-                                <h3>Auroras Boreales en Islandia</h3>
-                                <p class="card-description">Caza las luces del norte en el círculo polar ártico</p>
-                                <div class="card-meta">
-                                    <span><i class="fa-solid fa-location-dot"></i> Reykjavík</span>
-                                    <span><i class="fa-regular fa-calendar"></i> 3 días</span>
-                                    <span><i class="fa-solid fa-user-group"></i> Grupos 8-12</span>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="price">$680 <small>/ persona</small></span>
-                                    <span class="btn-reservar">Reservar</span>
-                                </div>
-                            </div>
-                        </a>
-                        </div> 
+                    <div class="favorites-grid" id="favorites-container">
+                        </div>
+                    
+                    <div id="no-favorites-msg" style="display:none; text-align:center; padding:40px; color:#888;">
+                        <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:15px; opacity:0.5;"></i>
+                        <p>Aún no has guardado ningún viaje.</p>
+                        <a href="experiencias.html" class="btn-black-sm" style="margin-top:10px;">Explorar</a>
+                    </div>
                 </div>
 
                 <div id="tab-viajes" class="tab-section" style="display: none;">
