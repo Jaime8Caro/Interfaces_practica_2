@@ -814,21 +814,65 @@ img { display: block; max-width: 100%; }
     letter-spacing: -1px;
 }
 
+/* --- BOTÓN FAVORITO MEJORADO --- */
 .btn-favorite {
-    background: #f5f5f5;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--color-white);
+    border: 1px solid #e0e0e0; /* Borde sutil inicial */
+    color: var(--color-gray);
+    padding: 12px 28px;        /* Relleno para forma de píldora */
+    border-radius: 50px;       /* Bordes totalmente redondos */
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s;
-    flex-shrink: 0;
-    color: var(--color-black);
+    display: inline-flex;      /* Para alinear icono y texto */
+    align-items: center;
+    gap: 10px;                 /* Espacio entre corazón y texto */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición muy suave */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); /* Sombra inicial muy leve */
+    
+    /* Aseguramos que no tenga ancho fijo */
+    width: auto; 
+    height: auto;
 }
-.btn-favorite:hover { background-color: #ffe6e6; color: #ff4d4d; transform: scale(1.1);}
+
+/* Efecto Hover (Al pasar el mouse) */
+.btn-favorite:hover {
+    background-color: #fff;
+    border-color: #ff4d4d;     /* El borde se pone rojo */
+    color: #ff4d4d;            /* El texto se pone rojo */
+    transform: translateY(-3px); /* Se eleva un poco */
+    box-shadow: 0 8px 20px rgba(255, 77, 77, 0.15); /* Sombra rojiza brillante */
+}
+
+/* Efecto Click (Al presionar) */
+.btn-favorite:active {
+    transform: scale(0.96) translateY(-3px); /* Efecto de "pulsar" */
+}
+
+/* --- ESTADO ACTIVO (GUARDADO) --- */
+.btn-favorite.active {
+    background-color: #ff4d4d; /* Fondo Rojo Vibrante */
+    color: #ffffff;            /* Texto Blanco */
+    border-color: #ff4d4d;
+    box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3); /* Sombra intensa */
+}
+
+.btn-favorite.active:hover {
+    background-color: #e60000; /* Un rojo un poco más oscuro al pasar mouse */
+    transform: translateY(-3px);
+}
+
+/* Animación del Icono (Corazón) */
+.btn-favorite i {
+    font-size: 1.1rem;
+    transition: transform 0.4s ease;
+}
+
+/* Al hacer hover, el corazón late una vez */
+.btn-favorite:hover i {
+    transform: scale(1.2);
+}
 
 /* Rating */
 .rating-row {
@@ -2122,13 +2166,7 @@ blockquote {
     }
 }
 
-/* --- BOTÓN FAVORITO ACTIVO --- */
-.btn-favorite.active {
-    background-color: #ffe6e6;
-    color: #ff4d4d;
-    border: 1px solid #ff4d4d;
-}
-
+/* --- NOTIFICACIÓN TOAST (Mensaje emergente) --- */
 /* --- NOTIFICACIÓN TOAST (Mensaje emergente) --- */
 .toast-notification {
     visibility: hidden;
@@ -2147,20 +2185,182 @@ blockquote {
     font-weight: 500;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     opacity: 0;
-    transition: opacity 0.5s, bottom 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+
+    /* CAMBIO CLAVE: Transición al ocultar */
+    /* opacity tarda 0.5s, bottom tarda 0.5s */
+    /* visibility espera 0.5s (el último valor) antes de cambiar a hidden */
+    transition: opacity 0.5s ease, bottom 0.5s ease, visibility 0s linear 0.5s;
 }
 
 .toast-notification.show {
     visibility: visible;
     opacity: 1;
-    bottom: 50px; /* Sube un poquito al aparecer */
+    bottom: 50px; 
+
+    /* CAMBIO CLAVE: Transición al mostrar */
+    /* Aquí visibility cambia instantáneamente (0s delay) para que empiece a verse */
+    transition: opacity 0.5s ease, bottom 0.5s ease, visibility 0s linear 0s;
 }
 
 .toast-notification i {
-    color: #4caf50; /* Check verde */
+    color: #4caf50;
     font-size: 1.2rem;
+}
+
+/* --- ESTILOS DINÁMICOS PASO 2 (MEJORADO) --- */
+
+/* Contenedor de la lista */
+.dynamic-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Tarjeta individual de Acompañante/Mascota */
+.dynamic-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative; /* Para posicionar el botón de borrar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dynamic-card h4 {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 700;
+}
+
+/* Botón de Borrar (X roja) */
+.btn-delete-card {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete-card:hover {
+    background-color: #ffe6e6;
+}
+
+/* Botón "Añadir Nuevo" (Estilo dashed) */
+.btn-add-dashed {
+    width: 100%;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    color: #666;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-main);
+    transition: all 0.2s;
+}
+
+.btn-add-dashed:hover {
+    border-color: var(--color-black);
+    color: var(--color-black);
+    background-color: #fff;
+}
+/* --- MEJORAS FORMULARIO (SELECT Y TEXTAREA) --- */
+
+/* 1. Selector de Tamaño (Estilo Moderno) */
+.input-group { position: relative; } /* Para posicionar iconos si fuera necesario */
+
+.styled-select {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 40px; /* Espacio para la flecha */
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    
+    /* Eliminar flecha por defecto del navegador */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    /* Poner flecha personalizada (SVG encoded) */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+.styled-select:hover {
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.styled-select:focus {
+    background-color: #fff;
+    border-color: var(--color-black);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+/* 2. Textarea de Alergias (Estilo Limpio) */
+.styled-textarea {
+    width: 100%;
+    height: 140px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: #333;
+    outline: none;
+    resize: none; /* Evita que el usuario rompa el diseño estirándolo */
+    transition: all 0.3s ease;
+    line-height: 1.6;
+}
+
+.styled-textarea::placeholder {
+    color: #999;
+    font-weight: 500;
+}
+
+.styled-textarea:hover {
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.styled-textarea:focus {
+    background-color: #fff;
+    border-color: var(--color-black);
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.05); /* Resplandor suave al escribir */
 }

@@ -1415,13 +1415,25 @@ function loadExperienceDetail() {
 
     // B. Evento Click
     btnFav.addEventListener('click', () => {
-        const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+        // Recuperamos usuario al momento del click
+        const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
 
+        // --- CAMBIO AQUÍ ---
         if (!usuario) {
-            mostrarToast("Inicia sesión para guardar favoritos", "error");
-            setTimeout(() => window.location.href = "login.html", 1500);
-            return;
+            // En lugar de redirigir, mostramos el modal
+            if (typeof mostrarAvisoLogin === 'function') {
+                mostrarAvisoLogin(
+                    "Inicia sesión para guardar favoritos",
+                    "Necesitas identificarte para poder guardar esta experiencia en tu lista de deseos."
+                );
+            } else {
+                // Fallback por si acaso
+                alert("Debes iniciar sesión");
+                window.location.href = "login.html";
+            }
+            return; // Detenemos la ejecución aquí
         }
+        // -------------------
 
         // Inicializar array si no existe
         if (!usuario.favoritos) usuario.favoritos = [];
@@ -1442,9 +1454,12 @@ function loadExperienceDetail() {
             mostrarToast("Eliminado de favoritos");
         }
 
-        // C. Guardar cambios en LocalStorage (Usuario actual y Lista global)
+        // C. Guardar cambios
         localStorage.setItem("usuarioActual", JSON.stringify(usuario));
-        actualizarUsuarioEnListaGlobal(usuario);
+        // Si tienes la función de sincronizar global, úsala:
+        if (typeof actualizarUsuarioEnListaGlobal === 'function') {
+            actualizarUsuarioEnListaGlobal(usuario);
+        }
     });
 
     // 7. Activar Lógica de Pestañas

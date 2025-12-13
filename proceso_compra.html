@@ -115,19 +115,18 @@
                                 
                                 <div class="toggle-row">
                                     <label class="toggle-label">
-                                        <input type="checkbox" id="check-acompanante" onchange="toggleQuantitySection('check-acompanante', 'qty-wrapper-acompanante', 'list-acompanantes', 'acompanante')">
+                                        <input type="checkbox" id="check-acompanante" onchange="toggleListSection('check-acompanante', 'wrapper-acompanantes', 'acompanante')">
                                         <span>¿Viajas acompañado?</span>
                                     </label>
                                 </div>
 
-                                <div id="qty-wrapper-acompanante" style="display: none; margin-bottom: 20px;">
-                                    <label style="font-size: 13px; font-weight: 600;">¿Cuántos acompañantes?</label>
-                                    <input type="number" id="num-acompanantes" min="1" max="10" placeholder="1" class="input-gray" 
-                                        style="width: 80px; margin-top: 5px;"
-                                        oninput="renderDynamicFields('acompanante', 'list-acompanantes')">
+                                <div id="wrapper-acompanantes" style="display: none; margin-top: 15px;">
+                                    <div id="list-acompanantes" class="dynamic-list-container"></div>
+                                    
+                                    <button type="button" class="btn-add-dashed" onclick="addDynamicEntry('acompanante')">
+                                        <i class="fa-solid fa-plus"></i> Añadir otro acompañante
+                                    </button>
                                 </div>
-
-                                <div id="list-acompanantes"></div>
                             </div>
 
                             <div class="companion-column">
@@ -135,19 +134,18 @@
                                 
                                 <div class="toggle-row">
                                     <label class="toggle-label">
-                                        <input type="checkbox" id="check-mascota" onchange="toggleQuantitySection('check-mascota', 'qty-wrapper-mascota', 'list-mascotas', 'mascota')">
+                                        <input type="checkbox" id="check-mascota" onchange="toggleListSection('check-mascota', 'wrapper-mascotas', 'mascota')">
                                         <span>¿Viajas con mascota?</span>
                                     </label>
                                 </div>
 
-                                <div id="qty-wrapper-mascota" style="display: none; margin-bottom: 20px;">
-                                    <label style="font-size: 13px; font-weight: 600;">¿Cuántas mascotas?</label>
-                                    <input type="number" id="num-mascotas" min="1" max="5" placeholder="1" class="input-gray" 
-                                        style="width: 80px; margin-top: 5px;"
-                                        oninput="renderDynamicFields('mascota', 'list-mascotas')">
+                                <div id="wrapper-mascotas" style="display: none; margin-top: 15px;">
+                                    <div id="list-mascotas" class="dynamic-list-container"></div>
+                                    
+                                    <button type="button" class="btn-add-dashed" onclick="addDynamicEntry('mascota')">
+                                        <i class="fa-solid fa-plus"></i> Añadir otra mascota
+                                    </button>
                                 </div>
-
-                                <div id="list-mascotas"></div>
                             </div>
 
                             <div class="companion-column">
@@ -160,7 +158,10 @@
                                 </div>
                                 <div id="form-alergia" style="display: none; margin-top: 15px;">
                                     <div class="input-group">
-                                        <textarea placeholder="Describe las alergias..." class="input-gray" style="height: 120px; padding: 10px; resize: none;"></textarea>
+                                        <textarea 
+                                            class="styled-textarea" 
+                                            placeholder="Por favor, indica si tienes alergia a algún alimento (ej: gluten, frutos secos), medicamento o animal."
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -226,9 +227,9 @@
             <div class="footer-links">
                 <div class="link-column">
                     <h4>Features</h4>
-                    <a href="#">Destinos</a>
-                    <a href="#">Experiencias</a>
-                    <a href="#">Blog</a>
+                    <a href="destinos.html">Destinos</a>
+                    <a href="experiencias.html">Experiencias</a>
+                    <a href="blog.html">Blog</a>
                 </div>
                 <div class="link-column">
                     <h4>Learn more</h4>

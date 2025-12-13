@@ -188,25 +188,100 @@ function updateStepper(stepNumber) {
 }
 
 
-// --- FORMULARIOS DINÁMICOS (Paso 2) ---
+// --- FORMULARIOS DINÁMICOS (Paso 2 - Lógica Mejorada) ---
 
-window.toggleQuantitySection = function(checkboxId, qtyWrapperId, listContainerId, type) {
+// 1. Mostrar/Ocultar la sección completa (Checkbox)
+window.toggleListSection = function(checkboxId, wrapperId, type) {
     const checkbox = document.getElementById(checkboxId);
-    const qtyWrapper = document.getElementById(qtyWrapperId);
-    
+    const wrapper = document.getElementById(wrapperId);
+    const listContainerId = type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas';
+    const listContainer = document.getElementById(listContainerId);
+
     if (checkbox && checkbox.checked) {
-        qtyWrapper.style.display = 'block';
-        const inputQty = qtyWrapper.querySelector('input');
-        if(inputQty) inputQty.value = 1; // Empezar en 1
-        window.renderDynamicFields(type, listContainerId);
+        wrapper.style.display = 'block';
+        // Si la lista está vacía al marcar, añadimos el primero automáticamente
+        if (listContainer.children.length === 0) {
+            addDynamicEntry(type);
+        }
     } else if (checkbox) {
-        qtyWrapper.style.display = 'none';
-        document.getElementById(listContainerId).innerHTML = '';
-        const inputQty = qtyWrapper.querySelector('input');
-        if(inputQty) inputQty.value = '';
+        wrapper.style.display = 'none';
+        // Opcional: ¿Borrar datos al desmarcar? 
+        // Si quieres conservar los datos por si se equivocó al desmarcar, comenta la siguiente línea:
+        listContainer.innerHTML = ''; 
     }
 };
 
+// 2. Añadir nueva tarjeta (sin borrar las anteriores)
+window.addDynamicEntry = function(type) {
+    const containerId = type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas';
+    const container = document.getElementById(containerId);
+    
+    // Calcular el número para el título (1, 2, 3...)
+    const count = container.children.length + 1;
+
+    // Crear el div de la tarjeta
+    const card = document.createElement('div');
+    card.className = 'dynamic-card';
+    // Añadimos un ID único temporal para poder animar o referenciar si fuera necesario
+    card.id = `${type}-entry-${Date.now()}`;
+
+    let htmlContent = '';
+
+    if (type === 'acompanante') {
+        htmlContent = `
+            <h4><i class="fa-solid fa-user"></i> Acompañante</h4>
+            <div class="input-group">
+                <input type="text" placeholder="Nombre completo" class="input-gray" required>
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="DNI / Pasaporte" class="input-gray" required>
+            </div>
+        `;
+    } else {
+        // TARJETA DE MASCOTA MEJORADA
+        htmlContent = `
+            <h4><i class="fa-solid fa-paw"></i> Mascota</h4>
+            <div class="input-group" style="margin-bottom: 12px;">
+                <input type="text" placeholder="Ej: Perro, Gato" class="input-gray" required>
+            </div>
+            <div class="input-group">
+                <select class="styled-select" required>
+                    <option value="" disabled selected>Selecciona el tamaño</option>
+                    <option value="pequeño">Pequeño</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
+                </select>
+            </div>
+        `;
+    }
+    // Añadimos el botón de borrar
+    htmlContent += `
+        <button type="button" class="btn-delete-card" onclick="removeEntry(this)" title="Eliminar">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
+    `;
+
+    card.innerHTML = htmlContent;
+    container.appendChild(card);
+};
+
+// 3. Borrar una tarjeta específica
+window.removeEntry = function(button) {
+    // El botón está dentro de .dynamic-card
+    const card = button.closest('.dynamic-card');
+    if (card) {
+        // Animación de salida (opcional)
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)';
+        card.style.transition = 'all 0.3s ease';
+        
+        setTimeout(() => {
+            card.remove();
+        }, 300);
+    }
+};
+
+// 4. Lógica de Alergias (Simple)
 window.toggleSimpleSection = function(checkboxId, containerId) {
     const checkbox = document.getElementById(checkboxId);
     const container = document.getElementById(containerId);
@@ -218,42 +293,6 @@ window.toggleSimpleSection = function(checkboxId, containerId) {
         container.querySelector('textarea').removeAttribute('required');
     }
 };
-
-window.renderDynamicFields = function(type, containerId) {
-    const container = document.getElementById(containerId);
-    const qtyInputId = type === 'acompanante' ? 'num-acompanantes' : 'num-mascotas';
-    const cantidad = parseInt(document.getElementById(qtyInputId).value) || 0;
-    
-    if (cantidad > 20) return;
-
-    let html = '';
-    for (let i = 1; i <= cantidad; i++) {
-        if (type === 'acompanante') {
-            html += `
-            <div class="dynamic-card">
-                <h4 class="dynamic-title"><i class="fa-solid fa-user"></i> Acompañante ${i}</h4>
-                <div class="input-group"><input type="text" placeholder="Nombre completo" class="input-gray" required></div>
-                <div class="input-group"><input type="text" placeholder="DNI / Pasaporte" class="input-gray" required></div>
-            </div>`;
-        } else {
-            html += `
-            <div class="dynamic-card">
-                <h4 class="dynamic-title"><i class="fa-solid fa-paw"></i> Mascota ${i}</h4>
-                <div class="input-group"><input type="text" placeholder="Ej: Perro, Gato" class="input-gray" required></div>
-                <div class="input-group">
-                    <select class="input-gray" required>
-                        <option value="" disabled selected>Tamaño</option>
-                        <option value="pequeño">Pequeño</option>
-                        <option value="mediano">Mediano</option>
-                        <option value="grande">Grande</option>
-                    </select>
-                </div>
-            </div>`;
-        }
-    }
-    container.innerHTML = html;
-};
-
 // --- VALIDACIÓN Y NAVEGACIÓN ---
 
 function validateCurrentStep(step) {
