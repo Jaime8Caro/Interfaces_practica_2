@@ -1,16 +1,12 @@
-// scripts/script_compra.js
-
 let currentStep = 1;
-
-
-// Se ejecuta nada más cargar el script (gracias al defer)
 detectarPaginaYEjecutar();
 
+// Función principal para detectar la página y ejecutar la lógica correspondiente
 function detectarPaginaYEjecutar() {
     const checkoutForm = document.getElementById('checkoutForm');
     const successSection = document.querySelector('.success-section');
 
-    // 1. SI ESTAMOS EN EL PROCESO DE COMPRA (proceso_compra.html)
+    // 1. SI ESTAMOS EN EL PROCESO DE COMPRA
     if (checkoutForm) {
         // Verificamos que exista un usuario autenticado antes de mostrar el checkout 
         let usuarioLogueado = null;
@@ -27,11 +23,8 @@ function detectarPaginaYEjecutar() {
             }
             return;
         }
-        // Cargar datos del viaje en el Paso 3
         cargarResumenCompra();
-        // Vincular el submit
         checkoutForm.addEventListener('submit', finalizarCompra);
-        // Inicializar stepper visualmente en paso 1 (por si acaso)
         updateStepper(1);
     }
     
@@ -42,19 +35,17 @@ function detectarPaginaYEjecutar() {
     }
 }
 
-
 // ==========================================
 // LÓGICA DE PROCESO DE COMPRA (proceso_compra.html)
 // ==========================================
 
+// Función para cargar el resumen del viaje en el Paso 3
 function cargarResumenCompra() {
     // Recuperamos el viaje que el usuario eligió
     const compraGuardada = localStorage.getItem('compra_seleccionada');
-    
+
     if (compraGuardada) {
         const viaje = JSON.parse(compraGuardada);
-        
-        // Elementos del DOM en el Paso 3
         const titulo = document.getElementById('resumen-titulo');
         const destino = document.getElementById('resumen-destino');
         const precioRow = document.getElementById('resumen-precio-base');
@@ -65,7 +56,6 @@ function cargarResumenCompra() {
         if (destino) destino.innerText = viaje.destino || "Mundo";
         if (duracion) duracion.innerText = viaje.duracion || "--";
         
-        // Cálculos de precio
         if (viaje.precio) {
             const precioFmt = `$${viaje.precio.toFixed(2)}`;
             if (precioRow) precioRow.innerText = precioFmt;
@@ -76,10 +66,9 @@ function cargarResumenCompra() {
     }
 }
 
+// Función para finalizar la compra al enviar el formulario
 function finalizarCompra(e) {
-    e.preventDefault(); // Evitar recarga
-
-    // Aseguramos que la reserva solo se realice con sesión válida
+    e.preventDefault();
     let usuarioLogueado = null;
     if (typeof obtenerUsuarioActual === 'function') {
         usuarioLogueado = obtenerUsuarioActual();
@@ -155,6 +144,7 @@ function finalizarCompra(e) {
 
 // --- NAVEGACIÓN ENTRE PASOS ---
 
+// Función para mostrar el paso correspondiente
 function showStep(stepNumber) {
     document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
     
@@ -187,10 +177,7 @@ function updateStepper(stepNumber) {
     }
 }
 
-
-// --- FORMULARIOS DINÁMICOS (Paso 2 - Lógica Mejorada) ---
-
-// 1. Mostrar/Ocultar la sección completa (Checkbox)
+// Mostrar/Ocultar la sección completa
 window.toggleListSection = function(checkboxId, wrapperId, type) {
     const checkbox = document.getElementById(checkboxId);
     const wrapper = document.getElementById(wrapperId);
@@ -199,32 +186,23 @@ window.toggleListSection = function(checkboxId, wrapperId, type) {
 
     if (checkbox && checkbox.checked) {
         wrapper.style.display = 'block';
-        // Si la lista está vacía al marcar, añadimos el primero automáticamente
         if (listContainer.children.length === 0) {
             addDynamicEntry(type);
         }
     } else if (checkbox) {
         wrapper.style.display = 'none';
-        // Opcional: ¿Borrar datos al desmarcar? 
-        // Si quieres conservar los datos por si se equivocó al desmarcar, comenta la siguiente línea:
         listContainer.innerHTML = ''; 
     }
 };
 
-// 2. Añadir nueva tarjeta (sin borrar las anteriores)
+// Añadir nueva tarjeta (sin borrar las anteriores)
 window.addDynamicEntry = function(type) {
     const containerId = type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas';
     const container = document.getElementById(containerId);
-    
-    // Calcular el número para el título (1, 2, 3...)
     const count = container.children.length + 1;
-
-    // Crear el div de la tarjeta
     const card = document.createElement('div');
     card.className = 'dynamic-card';
-    // Añadimos un ID único temporal para poder animar o referenciar si fuera necesario
     card.id = `${type}-entry-${Date.now()}`;
-
     let htmlContent = '';
 
     if (type === 'acompanante') {
@@ -238,7 +216,6 @@ window.addDynamicEntry = function(type) {
             </div>
         `;
     } else {
-        // TARJETA DE MASCOTA MEJORADA
         htmlContent = `
             <h4><i class="fa-solid fa-paw"></i> Mascota</h4>
             <div class="input-group" style="margin-bottom: 12px;">
@@ -254,7 +231,6 @@ window.addDynamicEntry = function(type) {
             </div>
         `;
     }
-    // Añadimos el botón de borrar
     htmlContent += `
         <button type="button" class="btn-delete-card" onclick="removeEntry(this)" title="Eliminar">
             <i class="fa-solid fa-trash-can"></i>
@@ -265,12 +241,10 @@ window.addDynamicEntry = function(type) {
     container.appendChild(card);
 };
 
-// 3. Borrar una tarjeta específica
+// Borrar una tarjeta específica
 window.removeEntry = function(button) {
-    // El botón está dentro de .dynamic-card
     const card = button.closest('.dynamic-card');
     if (card) {
-        // Animación de salida (opcional)
         card.style.opacity = '0';
         card.style.transform = 'translateX(20px)';
         card.style.transition = 'all 0.3s ease';
@@ -281,7 +255,7 @@ window.removeEntry = function(button) {
     }
 };
 
-// 4. Lógica de Alergias (Simple)
+// Lógica de Alergias
 window.toggleSimpleSection = function(checkboxId, containerId) {
     const checkbox = document.getElementById(checkboxId);
     const container = document.getElementById(containerId);
@@ -293,8 +267,8 @@ window.toggleSimpleSection = function(checkboxId, containerId) {
         container.querySelector('textarea').removeAttribute('required');
     }
 };
-// --- VALIDACIÓN Y NAVEGACIÓN ---
 
+// Función para validar los campos del paso actual
 function validateCurrentStep(step) {
     const currentStepDiv = document.getElementById(`step-${step}`);
     if (!currentStepDiv) return true;
@@ -303,14 +277,13 @@ function validateCurrentStep(step) {
     let pasoValido = true;
 
     inputsRequeridos.forEach(input => {
-        if (input.offsetParent === null) return; // Ignorar ocultos
+        if (input.offsetParent === null) return;
 
         const placeholderOriginal = input.getAttribute('placeholder') || "Campo";
         let condicion = input.value.trim().length > 0;
         
         if (input.type === 'email') condicion = input.value.includes('@') && input.value.length > 3;
         
-        // Usamos la función global si existe (está en script.js)
         if (typeof validarCampoFormulario === 'function') {
             validarCampoFormulario(input, condicion, "Requerido", placeholderOriginal);
         } else if (!condicion) {
@@ -350,7 +323,6 @@ function cargarDatosExito() {
     const reserva = JSON.parse(localStorage.getItem('ultima_reserva'));
 
     if (reserva) {
-        // Rellenar datos en la pantalla de éxito
         const titulo = document.getElementById('exito-titulo');
         const id = document.getElementById('exito-id');
         const email = document.getElementById('exito-email');
@@ -377,21 +349,13 @@ function cargarBotonesExito() {
     let botonesHTML = '';
 
     if (usuarioLogueado) {
-        // CASO A: LOGUEADO -> Botón de Perfil
-        // CAMBIO AQUÍ: Añadimos #viajes al final del enlace
         botonesHTML = '<a href="perfil.html#viajes" class="btn-rounded-black salir">Ver en mi perfil</a>';
     } else {
-        // CASO B: NO LOGUEADO -> Botón de PDF
         botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black">Descargar PDF</button>';
     }
 
-    // Agregamos el botón de "Volver" que siempre sale
     botonesHTML += '<a href="index.html" class="btn-rounded-outline salir">Volver al inicio</a>';
-
-    // Inyectamos el HTML
     accionesDiv.innerHTML = botonesHTML;
-
-    // Lógica extra: Si aparece el botón de PDF, le damos funcionalidad
     const btnPdf = document.getElementById('btn-descargar-pdf');
     if (btnPdf) {
         btnPdf.addEventListener('click', () => {
@@ -401,15 +365,13 @@ function cargarBotonesExito() {
 
     document.querySelectorAll('.salir').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // No prevenimos el default, queremos que el enlace funcione y cambie de página,
-            // pero antes borramos los datos temporales de "última compra".
             limpiarDatosTemporales();
         });
     });
 }
 
 function limpiarDatosTemporales() {
-    localStorage.removeItem('compra_seleccionada'); // Borra el viaje del carrito
-    localStorage.removeItem('ultima_reserva');      // Borra los datos de esta pantalla
+    localStorage.removeItem('compra_seleccionada'); 
+    localStorage.removeItem('ultima_reserva');
     console.log("Datos temporales de compra eliminados.");
 }

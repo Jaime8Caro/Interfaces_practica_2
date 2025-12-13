@@ -1,5 +1,3 @@
-// script_login.js
-
 // Buscamos el formulario dentro de la tarjeta de login
 const form = document.querySelector(".auth-card.login-mode form");
 
@@ -29,14 +27,12 @@ if (form) {
 
         // 3. Intentar Login si el formato es correcto
         if (formularioValido) {
-            // 'login' es una función de tu script.js común
             const usuario = login(correo, contraseña);
             
             if (!usuario) {
                 validarCampoFormulario(correoInput, false, "Usuario no encontrado", "Correo electrónico");
                 validarCampoFormulario(passInput, false, "Credenciales invalidas", "Contraseña");
             } else {
-                // Éxito: Redirigimos al index
                 window.location.href = "index.html"; 
             }
         }
