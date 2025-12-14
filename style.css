@@ -44,7 +44,14 @@ img { display: block; max-width: 100%; }
     font-weight: 600; 
     cursor: pointer; 
     font-size: 0.85rem;
-    font-family: var(--font-main); 
+    font-family: var(--font-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    line-height: 1;
+    flex-shrink: 0;
+    height: auto;
 }
 
 /* --- SELECTOR DE IDIOMA --- */
@@ -181,7 +188,7 @@ img { display: block; max-width: 100%; }
     max-width: var(--max-w); margin: 0 auto; display: flex;
     justify-content: space-between; flex-wrap: wrap; gap: 4rem;
 }
-.footer-brand { flex: 1; min-width: 250px; }
+.footer-brand { flex: 1; min-width: 250px;}
 .footer-brand h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
 .footer-brand p { color: var(--color-gray); margin-bottom: 2rem; font-size: 0.9rem; max-width: 300px; }
 .social-icons { display: flex; gap: 1.5rem; }
@@ -469,6 +476,16 @@ img { display: block; max-width: 100%; }
 .forgot-password-link {display: block;text-align: right;color: #666;font-size: 0.95rem;margin-bottom: 3rem;font-weight: 600;}
 .privacy-check {display: flex;align-items: center;gap: 10px;margin-bottom: 2.5rem;font-size: 0.95rem;font-weight: 600;color: #333;}
 .privacy-check input[type="checkbox"] {width: 20px;height: 20px;cursor: pointer;accent-color: var(--color-black);}
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 50px;
+    background-color: #e8e8e8;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    display: block;
+    width: 100%;
+}
 #open-privacy-modal{
     color: rgb(0, 78, 0);
     text-decoration: underline; 
@@ -614,7 +631,7 @@ body.no-scroll {
     text-transform: uppercase;
 }
 
-/* Ocultar el input file nativo feo */
+/* Ocultar el input file nativo */
 #foto-perfil {
     display: none;
 }
@@ -635,6 +652,20 @@ body.no-scroll {
 @media (max-width: 992px) {
     .signup-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Ajuste específico para móvil para inputs de fecha */
+@media (max-width: 768px) {
+    input[type="date"] {
+        padding: 12px 15px;     /* Mismo padding que definimos para el móvil */
+        font-size: 0.95rem;     /* Mismo tamaño de letra */
+        line-height: 1.5;       /* Altura de línea cómoda */
+    }
+    
+    /* Aseguramos que el botón de buscar tenga espacio en móvil */
+    .search-bar {
+        gap: 5px; /* Espacio entre el input y el botón */
     }
 }
 
@@ -2349,6 +2380,9 @@ blockquote {
         gap: 2rem;
         text-align: center;
     }
+    .footer-brand {
+    justify-items: center;
+}
     .social-icons {
         justify-content: center;
     }
