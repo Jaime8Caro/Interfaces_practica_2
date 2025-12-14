@@ -68,9 +68,10 @@ function initRegister() {
 
         // Privacidad
         const privacyLabel = registerForm.querySelector('label[for="privacy"]');
+        validate(fields.privacy,fields.privacy.checked,"","")
+        
         if (!fields.privacy.checked) {
             privacyLabel.style.color = "red";
-            isValid = false;
         } else {
             privacyLabel.style.color = "#333";
         }

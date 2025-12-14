@@ -449,15 +449,37 @@ img { display: block; max-width: 100%; }
 }
 .input-group input::placeholder {color: #888;font-weight: 500;}
 .campo-invalido {
-    border: 2px solid #ff4d4d !important;
-    background-color: #ffe6e6 !important;
-    color: #cc0000 !important;
+    border: 2px solid #ff0000 !important;
+    background-color: #ffc6c6 !important;
+    color: #ff0000 !important;
 }
-
 .campo-invalido::placeholder {
-    color: #ff4d4d !important;
+    color: #ff0000 !important;
     font-weight: 700;
     opacity: 1;
+}
+
+input[type="checkbox"].campo-invalido {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+}
+input[type="checkbox"].campo-invalido:checked {
+    -webkit-appearance: auto;
+    appearance: auto;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--color-black);
+    border: none;
+    background-color: transparent;
+    outline: none;
 }
 
 .campo-invalido {
