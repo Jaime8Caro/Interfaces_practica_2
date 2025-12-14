@@ -154,7 +154,7 @@ class vanilla_i18n {
 
   async _loadLangFile(lang = undefined) {
     if (!lang) return;
-    const pathToLangFile = `/${this._path}/${lang}.json`;
+    const pathToLangFile = `${this._path}/${lang}.json`;
     try {
       var res = await fetch(pathToLangFile);
       if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`);

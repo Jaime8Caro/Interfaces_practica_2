@@ -2157,6 +2157,10 @@ blockquote {
         background-attachment: scroll; 
     }
 
+    .hero-content {
+        margin-bottom: 4rem;
+    }
+
     .hero-content h1, 
     .sticky-experiences-hero h1,
     .sticky-destinations-hero h1,
@@ -2307,6 +2311,11 @@ blockquote {
     }
 
     /* --- 8. PERFIL --- */
+    .profile-container {
+        flex-direction: column;
+        margin-top: 0; /* SOLUCIÓN: Eliminamos el margen superior porque el header ya no flota */
+    }
+
     .profile-sidebar {
         width: 100%;
         height: auto;
@@ -2316,6 +2325,7 @@ blockquote {
         overflow-x: auto;
         padding: 1rem;
         gap: 10px;
+        background-color: var(--color-black); /* Aseguramos fondo negro para que contraste */
     }
     
     .sidebar-nav ul {
@@ -2326,6 +2336,7 @@ blockquote {
     
     .profile-content {
         padding: 20px 15px;
+        margin-top: 0; /* Por seguridad */
     }
     
     .form-grid {
