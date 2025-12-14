@@ -117,19 +117,15 @@ if (form) {
     const checkbox = document.getElementById("privacy");
     const linkPrivacy = document.getElementById("open-privacy-modal");
     const closeBtn = document.getElementById("close-modal-x");
-    
-    // Elementos internos del modal
     const modalFooter = document.getElementById("privacy-modal-footer");
     const acceptBtn = document.getElementById("btn-accept-privacy");
     const textField = document.getElementById("privacy-text");
 
-    // --- 1. FUNCIÓN PARA ABRIR EL MODAL (CON MODOS) ---
+    // FUNCIÓN PARA ABRIR EL MODAL
     // modo = 'sign' (firmar) | 'read' (solo leer)
     const openModal = (mode) => {
         modal.classList.add("show");
-        document.body.classList.add("no-scroll"); // Bloquea scroll del fondo
-        
-        // Resetear scroll siempre arriba
+        document.body.classList.add("no-scroll");
         if (textField) textField.scrollTop = 0;
 
         if (mode === 'sign') {
@@ -146,12 +142,9 @@ if (form) {
         }
     };
 
-    // --- 2. LÓGICA DEL CHECKBOX (EL RECUADRO) ---
+    // LÓGICA DEL CHECKBOX
     if (checkbox) {
         checkbox.addEventListener("click", (e) => {
-            // Cuando haces clic, el navegador cambia el estado internamente antes de avisarnos.
-            // - Si estaba vacío, ahora 'checked' es TRUE.
-            // - Si estaba lleno, ahora 'checked' es FALSE.
 
             if (checkbox.checked) {
                 // CASO: Estaba vacío y el usuario quiere marcarlo.
@@ -166,12 +159,12 @@ if (form) {
         });
     }
 
-    // --- 3. LÓGICA DEL ENLACE DE TEXTO ---
+    // LÓGICA DEL ENLACE DE TEXTO
     if (linkPrivacy) {
         linkPrivacy.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Si el checkbox YA está marcado...
+            // Si el checkbox YA está marcado
             if (checkbox && checkbox.checked) {
                 // Abrimos en modo SOLO LECTURA (sin botón de firmar)
                 openModal('read');
@@ -182,7 +175,7 @@ if (form) {
         });
     }
 
-    // --- 4. CERRAR MODAL ---
+    // CERRAR MODAL
     const closeModal = () => {
         modal.classList.remove("show");
         document.body.classList.remove("no-scroll");
@@ -193,10 +186,10 @@ if (form) {
         if (e.target === modal) closeModal();
     });
 
-    // --- 5. DETECTAR SCROLL (Solo si estamos en modo firmar) ---
+    // DETECTAR SCROLL (Solo si estamos en modo firmar)
     if (textField) {
         textField.addEventListener("scroll", function() {
-            // Solo activamos lógica si el botón es visible (footer no oculto)
+            // Solo activamos lógica si el botón es visible
             const isFooterVisible = modalFooter && modalFooter.style.display !== "none";
             
             if (isFooterVisible) {
@@ -212,7 +205,7 @@ if (form) {
         });
     }
 
-    // --- 6. ACEPTAR Y FIRMAR ---
+    // ACEPTAR Y FIRMAR
     if (acceptBtn) {
         acceptBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -240,22 +233,21 @@ if (form) {
             const file = e.target.files[0];
 
             if (file) {
-                // 1. Validar que sea imagen (opcional pero recomendado)
+                // Validar que sea imagen
                 if (!file.type.startsWith('image/')) {
                     alert("Por favor, selecciona un archivo de imagen válido.");
                     return;
                 }
 
-                // 2. Usar FileReader para leer la imagen y mostrarla
+                // Usar FileReader para leer la imagen y mostrarla
                 const reader = new FileReader();
                 
                 reader.onload = function(evt) {
-                    imgPreview.src = evt.target.result; // Cambiamos el src de la imagen
+                    imgPreview.src = evt.target.result;
                 };
                 
                 reader.readAsDataURL(file);
             } else {
-                // Si cancela, volver a la imagen por defecto
                 imgPreview.src = "assets/defecto.jpg"; 
             }
         });

@@ -28,7 +28,6 @@ function updateLanguageUI(src) {
 if (langToggle && langSelector) {
     
     // A. CARGAR BANDERA VISUAL AL INICIAR
-    // (La librería ya se encarga del texto, nosotros ponemos la banderita correcta)
     const savedSrc = localStorage.getItem('idioma_src');
     if (savedSrc) {
         updateLanguageUI(savedSrc);

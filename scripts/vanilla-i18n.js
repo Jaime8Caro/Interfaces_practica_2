@@ -1,7 +1,7 @@
 "use strict";
 
 const MSG_LEVELS = ["DEBUG", "INFO", "WARN", "ERROR"];
-const DEFAULT_i18n_DATA_ATTR = "data-i18n"; // Ajustado a tu preferencia
+const DEFAULT_i18n_DATA_ATTR = "data-i18n";
 const DEFAULT_i18n_DIR = "assets/vanilla-i18n";
 const DEFAULT_LANG_TOGGLER_ID = "vanilla-i18n-toggler";
 
