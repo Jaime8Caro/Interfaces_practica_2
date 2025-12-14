@@ -2534,7 +2534,7 @@ blockquote {
 /* Ajustes extra para móviles muy muy pequeños */
 @media (max-width: 387px) {
     .main-header{
-        height: 12rem;
+        height: auto;
     }
 
     .nav-links{
