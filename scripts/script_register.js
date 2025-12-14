@@ -109,4 +109,156 @@ if (form) {
             finalizarRegistro(nuevoUsuario);
         }
     });
+
+
+    // MODAL DE PRIVACIDAD:
+    // --- REFERENCIAS ---
+    const modal = document.getElementById("privacy-modal");
+    const checkbox = document.getElementById("privacy");
+    const linkPrivacy = document.getElementById("open-privacy-modal");
+    const closeBtn = document.getElementById("close-modal-x");
+    
+    // Elementos internos del modal
+    const modalFooter = document.getElementById("privacy-modal-footer");
+    const acceptBtn = document.getElementById("btn-accept-privacy");
+    const textField = document.getElementById("privacy-text");
+
+    // --- 1. FUNCIÓN PARA ABRIR EL MODAL (CON MODOS) ---
+    // modo = 'sign' (firmar) | 'read' (solo leer)
+    const openModal = (mode) => {
+        modal.classList.add("show");
+        document.body.classList.add("no-scroll"); // Bloquea scroll del fondo
+        
+        // Resetear scroll siempre arriba
+        if (textField) textField.scrollTop = 0;
+
+        if (mode === 'sign') {
+            // MODO FIRMAR: Botón visible y bloqueado
+            if (modalFooter) modalFooter.style.display = "flex"; 
+            if (acceptBtn) {
+                acceptBtn.disabled = true;
+                acceptBtn.style.opacity = "0.5";
+                acceptBtn.style.cursor = "not-allowed";
+            }
+        } else {
+            // MODO LECTURA: Ocultamos el botón/footer para que no moleste
+            if (modalFooter) modalFooter.style.display = "none";
+        }
+    };
+
+    // --- 2. LÓGICA DEL CHECKBOX (EL RECUADRO) ---
+    if (checkbox) {
+        checkbox.addEventListener("click", (e) => {
+            // Cuando haces clic, el navegador cambia el estado internamente antes de avisarnos.
+            // - Si estaba vacío, ahora 'checked' es TRUE.
+            // - Si estaba lleno, ahora 'checked' es FALSE.
+
+            if (checkbox.checked) {
+                // CASO: Estaba vacío y el usuario quiere marcarlo.
+                // INTERCEPTAMOS: No dejamos marcarlo directamente. Abrimos modal.
+                e.preventDefault(); 
+                openModal('sign');
+            } else {
+                // CASO: Estaba lleno y el usuario quiere desmarcarlo.
+                // PERMITIMOS: No ponemos preventDefault(). 
+                // El navegador quitará el tick automáticamente.
+            }
+        });
+    }
+
+    // --- 3. LÓGICA DEL ENLACE DE TEXTO ---
+    if (linkPrivacy) {
+        linkPrivacy.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            // Si el checkbox YA está marcado...
+            if (checkbox && checkbox.checked) {
+                // Abrimos en modo SOLO LECTURA (sin botón de firmar)
+                openModal('read');
+            } else {
+                // Si no está marcado, abrimos en modo FIRMAR
+                openModal('sign');
+            }
+        });
+    }
+
+    // --- 4. CERRAR MODAL ---
+    const closeModal = () => {
+        modal.classList.remove("show");
+        document.body.classList.remove("no-scroll");
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // --- 5. DETECTAR SCROLL (Solo si estamos en modo firmar) ---
+    if (textField) {
+        textField.addEventListener("scroll", function() {
+            // Solo activamos lógica si el botón es visible (footer no oculto)
+            const isFooterVisible = modalFooter && modalFooter.style.display !== "none";
+            
+            if (isFooterVisible) {
+                // Tolerancia de 2px
+                if (this.scrollTop + this.clientHeight >= this.scrollHeight - 20) {
+                    if (acceptBtn) {
+                        acceptBtn.disabled = false;
+                        acceptBtn.style.opacity = "1";
+                        acceptBtn.style.cursor = "pointer";
+                    }
+                }
+            }
+        });
+    }
+
+    // --- 6. ACEPTAR Y FIRMAR ---
+    if (acceptBtn) {
+        acceptBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            if (checkbox) {
+                // Marcamos el checkbox mediante código
+                checkbox.checked = true;
+                
+                // Limpieza visual (quitar bordes rojos si hubiera validación)
+                checkbox.style.outline = "none";
+                const label = document.querySelector('label[for="privacy"]');
+                if(label) label.style.color = "#333";
+            }
+
+            closeModal();
+        });
+    }
+
+    //SUBIR IMAGEN:
+    const inputFoto = document.getElementById('foto-perfil');
+    const imgPreview = document.getElementById('avatar-img-preview');
+
+    if (inputFoto && imgPreview) {
+        inputFoto.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+
+            if (file) {
+                // 1. Validar que sea imagen (opcional pero recomendado)
+                if (!file.type.startsWith('image/')) {
+                    alert("Por favor, selecciona un archivo de imagen válido.");
+                    return;
+                }
+
+                // 2. Usar FileReader para leer la imagen y mostrarla
+                const reader = new FileReader();
+                
+                reader.onload = function(evt) {
+                    imgPreview.src = evt.target.result; // Cambiamos el src de la imagen
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                // Si cancela, volver a la imagen por defecto
+                imgPreview.src = "images/defecto.png"; 
+            }
+        });
+    }
 }
+
