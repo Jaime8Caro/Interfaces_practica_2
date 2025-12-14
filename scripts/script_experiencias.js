@@ -1356,16 +1356,18 @@ function loadExperienceDetail() {
     if(timelineContainer) {
         timelineContainer.innerHTML = "";
         if (exp.itinerario && exp.itinerario.length > 0) {
-            exp.itinerario.forEach(step => {
+            exp.itinerario.forEach((step, index) => {
                 const item = document.createElement("div");
                 item.className = "timeline-item";
-                // Aquí podrías añadir claves para el itinerario si decides traducirlo también en el JSON
-                // data-i18n="data_experiences.id_X.itinerary_day_1_title"
+                
+                // Calculamos el índice del paso (step_1, step_2, etc.)
+                const stepNum = index + 1;
+                
                 item.innerHTML = `
                     <div class="step-number">${step.dia}</div>
                     <div class="timeline-content">
-                        <h3>${step.titulo}</h3>
-                        <p>${step.desc}</p>
+                        <h3 data-i18n="data_experiences.id_${exp.id}.itinerary.step_${stepNum}.title">${step.titulo}</h3>
+                        <p data-i18n="data_experiences.id_${exp.id}.itinerary.step_${stepNum}.desc">${step.desc}</p>
                     </div>
                 `;
                 timelineContainer.appendChild(item);
@@ -1502,18 +1504,32 @@ function initTabs() {
 
 // Función para generar lista de incluye según categoría
 function generarListaIncluye(categoria) {
+    // Elementos base siempre presentes
     let items = [
         '<span data-i18n="product.include_1">Alojamiento seleccionado</span>',
         '<span data-i18n="product.include_traslados">Traslados aeropuerto - hotel</span>',
-        '<span data-i18n="product.include_2">Guía local certificado</span>',
+        '<span data-i18n="product.include_2">Guía experto</span>',
         '<span data-i18n="product.include_seguro">Seguro de viaje básico</span>',
         '<span data-i18n="product.include_atencion">Atención 24/7</span>'
     ];
-    if (categoria === "Aventura") items.push("Equipo de seguridad y técnico", "Entradas a parques nacionales");
-    if (categoria === "Cultural") items.push("Entradas a museos y monumentos", "Degustación de comida local");
-    if (categoria === "Relax" || categoria === "Playa") items.push("Cóctel de bienvenida", "Clase de yoga o masaje");
+
+    // Elementos condicionales según categoría
+    if (categoria === "Aventura") {
+        items.push('<span data-i18n="includes_extras.adventure_gear">Equipo de seguridad y técnico</span>');
+        items.push('<span data-i18n="includes_extras.park_fees">Entradas a parques nacionales</span>');
+    }
+    if (categoria === "Cultural") {
+        items.push('<span data-i18n="includes_extras.museum_fees">Entradas a museos y monumentos</span>');
+        items.push('<span data-i18n="includes_extras.food_tasting">Degustación de comida local</span>');
+    }
+    if (categoria === "Relax" || categoria === "Playa" || categoria === "Romántico") {
+        items.push('<span data-i18n="includes_extras.welcome_drink">Cóctel de bienvenida</span>');
+        items.push('<span data-i18n="includes_extras.yoga_massage">Clase de yoga o masaje</span>');
+    }
+
     let html = `<ul class="check-list">`;
     items.forEach(item => {
+        // Como 'item' ya contiene el HTML del span, lo insertamos directamente
         html += `<li><i class="fa-solid fa-check"></i> ${item}</li>`;
     });
     html += `</ul>`;
@@ -1522,17 +1538,35 @@ function generarListaIncluye(categoria) {
 
 // Función para generar lista de equipo según dificultad
 function generarListaEquipo(dificultad) {
-    let titulo = "Equipaje recomendado";
-    let items = ["Mochila cómoda (30-50L)", "Botella de agua reutilizable", "Protector solar y gafas de sol", "Cámara de fotos", "Adaptador de corriente universal"];
+    // Título por defecto
+    let tituloKey = "gear_list.title_recommended";
+    let tituloDef = "Equipaje recomendado";
+
+    // Ítems base
+    let items = [
+        '<span data-i18n="gear_list.backpack">Mochila cómoda (30-50L)</span>',
+        '<span data-i18n="gear_list.water_bottle">Botella de agua reutilizable</span>',
+        '<span data-i18n="gear_list.sun_protection">Protector solar y gafas de sol</span>',
+        '<span data-i18n="gear_list.camera">Cámara de fotos</span>',
+        '<span data-i18n="gear_list.adapter">Adaptador de corriente universal</span>'
+    ];
 
     if (dificultad === "Alta" || dificultad === "Media") {
-        items.push("Calzado de trekking impermeable", "Ropa térmica por capas", "Chaqueta cortavientos", "Botiquín personal básico");
-        titulo = "Equipamiento técnico necesario";
+        items.push('<span data-i18n="gear_list.trekking_shoes">Calzado de trekking impermeable</span>');
+        items.push('<span data-i18n="gear_list.thermal_layers">Ropa térmica por capas</span>');
+        items.push('<span data-i18n="gear_list.windbreaker">Chaqueta cortavientos</span>');
+        items.push('<span data-i18n="gear_list.first_aid">Botiquín personal básico</span>');
+        
+        tituloKey = "gear_list.title_technical";
+        tituloDef = "Equipamiento técnico necesario";
     } else {
-        items.push("Ropa ligera y cómoda", "Calzado para caminar", "Bañador y toalla", "Gorra o sombrero");
+        items.push('<span data-i18n="gear_list.light_clothes">Ropa ligera y cómoda</span>');
+        items.push('<span data-i18n="gear_list.walking_shoes">Calzado para caminar</span>');
+        items.push('<span data-i18n="gear_list.swimwear">Bañador y toalla</span>');
+        items.push('<span data-i18n="gear_list.hat">Gorra o sombrero</span>');
     }
 
-    let html = `<h4 style="margin-bottom:1rem; font-size:1.1rem;">${titulo}</h4><ul class="equip-list">`;
+    let html = `<h4 style="margin-bottom:1rem; font-size:1.1rem;" data-i18n="${tituloKey}">${tituloDef}</h4><ul class="equip-list">`;
     items.forEach(item => {
         html += `<li>${item}</li>`;
     });
@@ -1547,24 +1581,30 @@ function generarResenas(cantidad) {
             <div class="user-feature-header">
                 <div class="user-feature-icon icon-green"><i class="fa-regular fa-thumbs-up"></i></div>
                 <div>
-                    <h4>María González</h4>
-                    <small>Viajero Verificado • Hace 2 semanas</small>
+                    <h4 data-i18n="reviews_mock.user1_name">María González</h4>
+                    <small>
+                        <span data-i18n="reviews.verified">Viajero Verificado</span> • 
+                        <span data-i18n="reviews_mock.user1_time">Hace 2 semanas</span>
+                    </small>
                 </div>
                 <i class="fa-solid fa-quote-right quote-right"></i>
             </div>
-            <p>"Simplemente espectacular. La organización fue impecable y los lugares que visitamos superaron mis expectativas. Totalmente recomendado."</p>
+            <p data-i18n="reviews_mock.user1_text">"Simplemente espectacular. La organización fue impecable y los lugares que visitamos superaron mis expectativas. Totalmente recomendado."</p>
         </div>
 
         <div class="testimonial-box-feature">
             <div class="user-feature-header">
                 <div class="user-feature-icon icon-blue"><i class="fa-regular fa-star"></i></div>
                 <div>
-                    <h4>Carlos R.</h4>
-                    <small>Viajero Verificado • Hace 1 mes</small>
+                    <h4 data-i18n="reviews_mock.user2_name">Carlos R.</h4>
+                    <small>
+                        <span data-i18n="reviews.verified">Viajero Verificado</span> • 
+                        <span data-i18n="reviews_mock.user2_time">Hace 1 mes</span>
+                    </small>
                 </div>
                 <i class="fa-solid fa-quote-right quote-right"></i>
             </div>
-            <p>"Una experiencia inolvidable. El guía fue muy profesional y el grupo muy divertido. Volveré a viajar con Pack&Go."</p>
+            <p data-i18n="reviews_mock.user2_text">"Una experiencia inolvidable. El guía fue muy profesional y el grupo muy divertido. Volveré a viajar con Pack&Go."</p>
         </div>
     `;
 }

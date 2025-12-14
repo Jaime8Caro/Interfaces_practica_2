@@ -248,7 +248,7 @@ if (form) {
                 
                 reader.readAsDataURL(file);
             } else {
-                imgPreview.src = "assets/defecto.jpg"; 
+                imgPreview.src = "assets/defecto.png"; 
             }
         });
     }

@@ -304,402 +304,678 @@
   "data_experiences": {
     "id_4": {
       "title": "Imperial Getaway to Vienna",
-      "desc_short": "Classical music, palaces and coffee culture",
-      "desc_long": "Imperial city with museums and classical music at every step. Schönbrunn Palace and the Ringstrasse condense baroque and historicism, while cafes like Demel maintain the pastry tradition. Ideal for walking between parks and opera houses.",
+      "desc_short": "Classical music, palaces, and coffee culture",
+      "desc_long": "An imperial city with museums and classical music at every step. Schönbrunn Palace and the Ringstrasse condense baroque and historicism, while cafés like Demel maintain the pastry tradition. Ideal for walking between parks and opera houses.",
       "location": "Vienna, Austria",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Historic Arrival", "desc": "Walk along the Ringstrasse and first slice of Sacher torte." },
+        "step_2": { "title": "Imperial Palaces", "desc": "Guided tour of Schönbrunn Palace and its gardens." },
+        "step_3": { "title": "Music and Art", "desc": "Night at the Vienna State Opera." }
+      }
     },
     "id_5": {
       "title": "Fairytale Bruges",
       "desc_short": "Medieval canals and Belgian chocolate",
-      "desc_long": "Perfectly preserved medieval center, tree-lined canals and cobbled squares like the Markt. Belfries, guild houses and chocolate shops create a fairytale atmosphere that invites you to get lost without hurry.",
+      "desc_long": "A perfectly preserved medieval center, tree-lined canals, and cobbled squares like the Markt. Belfries, guild houses, and chocolate shops create a fairytale atmosphere that invites you to get lost without hurry.",
       "location": "Bruges, Belgium",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Boat Ride", "desc": "Tour through the main canals." },
+        "step_2": { "title": "Belfort Tower", "desc": "Climb the bell tower and chocolate tasting." }
+      }
     },
     "id_6": {
       "title": "Design in Copenhagen",
       "desc_short": "Nordic tradition and avant-garde",
-      "desc_long": "Balance between contemporary design and Nordic tradition. Nyhavn, Tivoli and cycling neighborhoods show a human and welcoming city; avant-garde gastronomy and respect for public space.",
+      "desc_long": "Balance between contemporary design and Nordic tradition. Nyhavn, Tivoli, and cycling neighborhoods show a human and welcoming city; avant-garde gastronomy and respect for public space.",
       "location": "Copenhagen, Denmark",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Nyhavn", "desc": "Dinner at the old port." },
+        "step_2": { "title": "Tivoli Gardens", "desc": "Fun day at the oldest amusement park." }
+      }
     },
     "id_7": {
       "title": "Charm of Ljubljana",
       "desc_short": "Slovenia's hidden gem",
-      "desc_long": "Small and scenic capital, with pedestrian center, riverside cafes and the castle on top. Ideal base for excursions to Lake Bled and the Julian Alps.",
+      "desc_long": "Small and scenic capital, with a pedestrian center, riverside cafés, and the castle on top. Ideal base for excursions to Lake Bled and the Julian Alps.",
       "location": "Ljubljana, Slovenia",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Castle", "desc": "Funicular ride up to the castle." },
+        "step_2": { "title": "Lake Bled", "desc": "Full-day excursion to the neighboring lake." }
+      }
     },
     "id_8": {
       "title": "Modernist Barcelona",
-      "desc_short": "Gaudi, beach and tapas",
-      "desc_long": "Gaudi's modernism, sea and mountains in the same plane. The Sagrada Familia, Park Güell and neighborhood life coexist with markets and museums; walks from Montjuïc to the beaches.",
+      "desc_short": "Gaudí, beach, and tapas",
+      "desc_long": "Gaudí's modernism, sea, and mountains on the same plane. The Sagrada Familia, Park Güell, and neighborhood life coexist with markets and museums; walks from Montjuïc to the beaches.",
       "location": "Barcelona, Spain",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Sagrada Familia", "desc": "Interior visit to the masterpiece." },
+        "step_2": { "title": "Gothic Quarter", "desc": "Walking tour through the old town." },
+        "step_3": { "title": "Park Güell", "desc": "Sunset with city views." }
+      }
     },
     "id_9": {
       "title": "Seville Has a Special Color",
-      "desc_short": "Flamenco, Alcazar and tradition",
-      "desc_long": "Monumental historic center, patios and tiles. The Alcazar, the Cathedral and the Santa Cruz neighborhood add to a powerful tapas culture and flamenco.",
+      "desc_short": "Flamenco, Alcázar, and tradition",
+      "desc_long": "Monumental historic center, patios, and tiles. The Alcázar, the Cathedral, and the Santa Cruz neighborhood add to a powerful tapas culture and flamenco.",
       "location": "Seville, Spain",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Real Alcázar", "desc": "Visit to the Arab palaces." },
+        "step_2": { "title": "Plaza de España", "desc": "Boat ride and iconic photos." }
+      }
     },
     "id_10": {
       "title": "Medieval Tallinn",
       "desc_short": "Fairytale in the Baltic",
-      "desc_long": "Walled medieval old town, towers and colorful roofs with views of the Baltic. Cold winter, but photogenic from Toompea.",
+      "desc_long": "Walled medieval old town, towers, and colorful roofs with views of the Baltic. Cold winter, but photogenic from Toompea.",
       "location": "Tallinn, Estonia",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Old Town", "desc": "Walk along the walls." },
+        "step_2": { "title": "Panoramic Views", "desc": "Kohtuotsa viewing platform." }
+      }
     },
     "id_11": {
       "title": "Romantic Paris",
       "desc_short": "The city of light and love",
-      "desc_long": "Urban romance: Seine, boulevards and iconic museums. Neighborhoods with their own identity and street-side cafes; Notre Dame, Sacré-Coeur and the Eiffel Tower as essential landmarks.",
+      "desc_long": "Urban romance: Seine, boulevards, and iconic museums. Neighborhoods with their own identity and street-side cafés; Notre Dame, Sacré-Cœur, and the Eiffel Tower as essential landmarks.",
       "location": "Paris, France",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Eiffel Tower", "desc": "Picnic on the Champ de Mars." },
+        "step_2": { "title": "Louvre", "desc": "Morning of art and culture." },
+        "step_3": { "title": "Montmartre", "desc": "Sunset at the basilica." }
+      }
     },
     "id_12": {
       "title": "Thermal Budapest",
       "desc_short": "The pearl of the Danube",
-      "desc_long": "Art Nouveau architecture, thermal baths and night walks on the Danube. The Parliament shines at dusk from the Chain Bridge.",
+      "desc_long": "Art Nouveau architecture, thermal baths, and night walks on the Danube. The Parliament shines at dusk from the Chain Bridge.",
       "location": "Budapest, Hungary",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Parliament", "desc": "Visit to the architectural gem." },
+        "step_2": { "title": "Széchenyi Baths", "desc": "Relaxing afternoon in thermal waters." }
+      }
     },
     "id_13": {
       "title": "Renaissance in Florence",
       "desc_short": "Art in every corner",
-      "desc_long": "Cradle of the Renaissance: Duomo, Uffizi and crafts in the Oltrarno. A living museum-city where every street holds sculptures, palaces and workshops.",
+      "desc_long": "Cradle of the Renaissance: Duomo, Uffizi, and crafts in the Oltrarno. A living museum-city where every street holds sculptures, palaces, and workshops.",
       "location": "Florence, Italy",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Uffizi Gallery", "desc": "The best Renaissance works." },
+        "step_2": { "title": "Ponte Vecchio", "desc": "Sunset over the Arno River." }
+      }
     },
     "id_14": {
       "title": "Eternal Rome",
       "desc_short": "Living history and gastronomy",
-      "desc_long": "The “Eternal City” combines classic ruins, baroque squares and neighborhood life. From the Pantheon to the Trevi Fountain, history coexists with trattorias and terraces.",
+      "desc_long": "The “Eternal City” combines classic ruins, baroque squares, and neighborhood life. From the Pantheon to the Trevi Fountain, history coexists with trattorias and terraces.",
       "location": "Rome, Italy",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Colosseum", "desc": "Entry to the Roman amphitheater." },
+        "step_2": { "title": "Vatican", "desc": "Visit to St. Peter's Basilica." },
+        "step_3": { "title": "Trastevere", "desc": "Typical Roman dinner." }
+      }
     },
     "id_15": {
       "title": "Canals of Venice",
       "desc_short": "The city on water",
-      "desc_long": "Without cars and with a unique aquatic layout. Canals, palaces and bridges connect islands; from San Marcos to the quieter neighborhoods, it is pure contemplation.",
+      "desc_long": "Without cars and with a unique aquatic layout. Canals, palaces, and bridges connect islands; from San Marcos to the quieter neighborhoods, it is pure contemplation.",
       "location": "Venice, Italy",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Gondola", "desc": "Traditional ride through the canals." },
+        "step_2": { "title": "Murano and Burano", "desc": "Visit to the glass and color islands." }
+      }
     },
     "id_16": {
       "title": "Historic Valletta",
       "desc_short": "Baroque and fortresses",
-      "desc_long": "Fortified and baroque, with viewpoints to the Grand Harbour. Palaces, churches and museums concentrated in a compact and walkable center.",
+      "desc_long": "Fortified and baroque, with viewpoints to the Grand Harbour. Palaces, churches, and museums concentrated in a compact and walkable center.",
       "location": "Valletta, Malta",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "St. John's Co-Cathedral", "desc": "Impressive baroque art." },
+        "step_2": { "title": "Three Cities", "desc": "Boat tour around the harbor." }
+      }
     },
     "id_17": {
       "title": "Fjords from Bergen",
       "desc_short": "Norwegian nature",
-      "desc_long": "Wooden houses in Bryggen, lively port and mountains falling into fjords. Perfect starting point for scenic routes.",
+      "desc_long": "Wooden houses in Bryggen, lively port, and mountains falling into fjords. Perfect starting point for scenic routes.",
       "location": "Bergen, Norway",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Bryggen", "desc": "Walk along the Hanseatic wharf." },
+        "step_2": { "title": "Fjords", "desc": "Cruise through nearby fjords." }
+      }
     },
     "id_18": {
       "title": "Amsterdam by Bike",
       "desc_short": "Canals and freedom",
-      "desc_long": "UNESCO Heritage canals, narrow gables and cycling culture. World-class museums and green neighborhoods connected by bridges.",
+      "desc_long": "UNESCO Heritage canals, narrow gables, and cycling culture. World-class museums and green neighborhoods connected by bridges.",
       "location": "Amsterdam, Netherlands",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Bike Route", "desc": "Tour like a local." },
+        "step_2": { "title": "Van Gogh Museum", "desc": "Must-see cultural visit." }
+      }
     },
     "id_19": {
       "title": "Port Wines",
       "desc_short": "Douro and tiles",
-      "desc_long": "Tiles, bridges over the Douro and Port wine cellars. Lello Bookstore and Leça swimming pools as contemporary icons.",
+      "desc_long": "Tiles, bridges over the Douro, and Port wine cellars. Lello Bookstore and Leça swimming pools as contemporary icons.",
       "location": "Porto, Portugal",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Wine Tasting", "desc": "Visit to Vila Nova de Gaia cellars." },
+        "step_2": { "title": "Ribeira", "desc": "Dinner by the river." }
+      }
     },
     "id_20": {
       "title": "Cosmopolitan London",
       "desc_short": "History and modernity",
-      "desc_long": "History and avant-garde on the banks of the Thames. Free museums, immense parks and an inexhaustible cultural and gastronomic scene.",
+      "desc_long": "History and avant-garde on the banks of the Thames. Free museums, immense parks, and an inexhaustible cultural and gastronomic scene.",
       "location": "London, United Kingdom",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Big Ben and Eye", "desc": "Icons of the city." },
+        "step_2": { "title": "British Museum", "desc": "History of the world." },
+        "step_3": { "title": "Camden Town", "desc": "Alternative markets." }
+      }
     },
     "id_21": {
       "title": "Mystery of Edinburgh",
       "desc_short": "Castles and legends",
-      "desc_long": "Royal Mile, castle and green hills. Arthur’s Seat volcanic rock gives an exceptional panoramic view over the stone city.",
+      "desc_long": "Royal Mile, castle, and green hills. Arthur’s Seat volcanic rock gives an exceptional panoramic view over the stone city.",
       "location": "Edinburgh, United Kingdom",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Edinburgh Castle", "desc": "Scottish crown jewels." },
+        "step_2": { "title": "Arthur's Seat", "desc": "Hike with views." }
+      }
     },
     "id_22": {
       "title": "Golden Prague",
       "desc_short": "Gothic and romantic",
-      "desc_long": "Gothic domes and towers over a photogenic old town. Charles Bridge at dawn and historic cafes with music and literature.",
+      "desc_long": "Gothic domes and towers over a photogenic old town. Charles Bridge at dawn and historic cafés with music and literature.",
       "location": "Prague, Czech Republic",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Charles Bridge", "desc": "Dawn without crowds." },
+        "step_2": { "title": "Prague Castle", "desc": "Largest castle complex." }
+      }
     },
     "id_23": {
       "title": "Alps in Lucerne",
       "desc_short": "Lake and mountains",
-      "desc_long": "Lake, nearby mountains and the Kapellbrücke as a postcard. Medieval roofs and alpine air just minutes from mountain routes.",
+      "desc_long": "Lake, nearby mountains, and the Kapellbrücke as a postcard. Medieval roofs and alpine air just minutes from mountain routes.",
       "location": "Lucerne, Switzerland",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Kapellbrücke Bridge", "desc": "Wooden icon." },
+        "step_2": { "title": "Mount Pilatus", "desc": "Cogwheel train excursion." }
+      }
     },
     "id_24": {
       "title": "Elegant Zurich",
       "desc_short": "Luxury and lakes",
-      "desc_long": "Elegant old town by the lake, museums, galleries and life by the water. Vibrant summers and Swiss efficiency in every detail.",
+      "desc_long": "Elegant old town by the lake, museums, galleries, and life by the water. Vibrant summers and Swiss efficiency in every detail.",
       "location": "Zurich, Switzerland",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Lake Zurich", "desc": "Boat ride." },
+        "step_2": { "title": "Bahnhofstrasse", "desc": "Shopping and chocolate." }
+      }
     },
     "id_25": {
       "title": "Imperial Beijing",
       "desc_short": "Wall and Forbidden City",
-      "desc_long": "Imperial capital with the Forbidden City, hutongs and wide avenues. Door to nearby sections of the Great Wall and a delicious regional cuisine.",
+      "desc_long": "Imperial capital with the Forbidden City, hutongs, and wide avenues. Gateway to nearby sections of the Great Wall and delicious regional cuisine.",
       "location": "Beijing, China",
-      "duration": "6 days / 5 nights"
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Forbidden City", "desc": "The heart of the empire." },
+        "step_2": { "title": "Great Wall", "desc": "Hike on a world wonder." }
+      }
     },
     "id_26": {
       "title": "Vertical Hong Kong",
       "desc_short": "Skyscrapers and nature",
-      "desc_long": "Dense skyline around a port full of ferries. Mountains, islands and nature reserves minutes from the financial center.",
+      "desc_long": "Dense skyline around a port full of ferries. Mountains, islands, and nature reserves minutes from the financial center.",
       "location": "Hong Kong, China",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Victoria Peak", "desc": "Panoramic views." },
+        "step_2": { "title": "Star Ferry", "desc": "Crossing the bay." }
+      }
     },
     "id_27": {
       "title": "Vibrant Seoul",
       "desc_short": "Tradition and K-Pop",
-      "desc_long": "Skyscrapers and palaces, night markets and an impeccable metro network. Districts like Bukchon and Myeongdong show tradition and fashion.",
+      "desc_long": "Skyscrapers and palaces, night markets, and an impeccable metro network. Districts like Bukchon and Myeongdong show tradition and fashion.",
       "location": "Seoul, South Korea",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Gyeongbokgung Palace", "desc": "Royal history." },
+        "step_2": { "title": "Myeongdong", "desc": "Shopping and street food." }
+      }
     },
     "id_28": {
       "title": "Pink Jaipur",
       "desc_short": "Palaces of Rajasthan",
-      "desc_long": "The “Pink City”: Hawa Mahal, forts and salmon-colored bazaars. Crafts, jewelry and Rajasthan gastronomy in palaces and streets.",
+      "desc_long": "The “Pink City”: Hawa Mahal, forts, and salmon-colored bazaars. Crafts, jewelry, and Rajasthan gastronomy in palaces and streets.",
       "location": "Jaipur, India",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Hawa Mahal", "desc": "The palace of winds." },
+        "step_2": { "title": "Amber Fort", "desc": "Jeep ascent and views." }
+      }
     },
     "id_29": {
       "title": "Zen Kyoto",
       "desc_short": "Temples and Geishas",
-      "desc_long": "Temples, shrines and classic gardens. Hanami in spring, tree-lined routes and possibility of crossing paths with geishas in Gion.",
+      "desc_long": "Temples, shrines, and classic gardens. Hanami in spring, tree-lined routes, and the possibility of crossing paths with geishas in Gion.",
       "location": "Kyoto, Japan",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Fushimi Inari", "desc": "Walk under the torii." },
+        "step_2": { "title": "Bamboo Forest", "desc": "Walk in Arashiyama." }
+      }
     },
     "id_30": {
       "title": "Spiritual Luang Prabang",
       "desc_short": "Monks and waterfalls",
-      "desc_long": "UNESCO Heritage next to the confluence of rivers. Monks processions at dawn, nearby waterfalls and colonial-Buddhist architecture.",
+      "desc_long": "UNESCO Heritage next to the confluence of rivers. Monks processions at dawn, nearby waterfalls, and colonial-Buddhist architecture.",
       "location": "Luang Prabang, Laos",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Alms Giving", "desc": "Dawn ritual." },
+        "step_2": { "title": "Kuang Si Falls", "desc": "Swim in turquoise waters." }
+      }
     },
     "id_31": {
       "title": "Historic Beirut",
       "desc_short": "The Paris of the Middle East",
-      "desc_long": "Beaches, clubs and rooftops facing mosques and historic souks. Gastronomy and nightlife with Mediterranean and Levantine air.",
+      "desc_long": "Beaches, clubs, and rooftops facing mosques and historic souks. Gastronomy and nightlife with Mediterranean and Levantine flair.",
       "location": "Beirut, Lebanon",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Pigeon Rocks", "desc": "Sunset on the coast." },
+        "step_2": { "title": "Souks", "desc": "Traditional shopping." }
+      }
     },
     "id_32": {
       "title": "Mystical Muscat",
       "desc_short": "Treasures of Oman",
-      "desc_long": "Bays and mountains framing mosques, souks and Portuguese forts. Coastal walks and white architecture next to the Gulf of Oman.",
+      "desc_long": "Bays and mountains framing mosques, souks, and Portuguese forts. Coastal walks and white architecture next to the Gulf of Oman.",
       "location": "Muscat, Oman",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Grand Mosque", "desc": "Impressive architecture." },
+        "step_2": { "title": "Mutrah Souq", "desc": "Scents of frankincense." }
+      }
     },
     "id_33": {
       "title": "Future in Doha",
       "desc_short": "Luxury in the desert",
-      "desc_long": "Corniche with futuristic skyline, Souq Waqif and I. M. Pei's Museum of Islamic Art. Mix of tradition and new cultural areas.",
+      "desc_long": "Corniche with futuristic skyline, Souq Waqif, and I. M. Pei's Museum of Islamic Art. Mix of tradition and new cultural areas.",
       "location": "Doha, Qatar",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Islamic Museum", "desc": "Art and views." },
+        "step_2": { "title": "Souq Waqif", "desc": "Traditional dinner." }
+      }
     },
     "id_34": {
       "title": "Thai Chiang Mai",
       "desc_short": "Temples and nature",
-      "desc_long": "Temples on the hillside, cafes and creative markets. Starting point for northern nature and intense culinary experiences.",
+      "desc_long": "Temples on the hillside, cafés, and creative markets. Starting point for northern nature and intense culinary experiences.",
       "location": "Chiang Mai, Thailand",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Doi Suthep", "desc": "Temple on the mountain." },
+        "step_2": { "title": "Elephant Sanctuary", "desc": "Responsible tourism." }
+      }
     },
     "id_35": {
       "title": "Chaos and Calm in Hanoi",
       "desc_short": "Essence of Vietnam",
-      "desc_long": "Lakes, temples and French quarter with romantic air. Narrow streets with traditional cafes and vibrant markets.",
+      "desc_long": "Lakes, temples, and French quarter with romantic flair. Narrow streets with traditional cafés and vibrant markets.",
       "location": "Hanoi, Vietnam",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Old Quarter", "desc": "Street food and chaos." },
+        "step_2": { "title": "Ha Long Bay", "desc": "Excursion to natural heritage." }
+      }
     },
     "id_36": {
       "title": "Future Singapore",
       "desc_short": "Gardens and skyscrapers",
-      "desc_long": "Garden-city with urban jungle, Botanical Garden and Gardens by the Bay. Temples, heritage houses and impeccable logistics to move around.",
+      "desc_long": "Garden-city with urban jungle, Botanical Garden, and Gardens by the Bay. Temples, heritage houses, and impeccable logistics to move around.",
       "location": "Singapore, Singapore",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Gardens by the Bay", "desc": "Futuristic Supertrees." },
+        "step_2": { "title": "Marina Bay Sands", "desc": "Views from the heights." }
+      }
     },
     "id_37": {
       "title": "Blue Chefchaouen",
       "desc_short": "The blue pearl of Morocco",
-      "desc_long": "Blue medina between Rif mountains. Painted alleys, artisan doors and nearby viewpoints to see the whole from above.",
+      "desc_long": "Blue medina between Rif mountains. Painted alleys, artisan doors, and nearby viewpoints to see the whole from above.",
       "location": "Chefchaouen, Morocco",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Medina", "desc": "Getting lost in the blue." },
+        "step_2": { "title": "Akchour Waterfalls", "desc": "Nearby nature." }
+      }
     },
     "id_38": {
       "title": "Cape Town and Penguins",
       "desc_short": "Mountain and sea",
-      "desc_long": "Table Mountain, beaches with penguins and colorful neighborhoods like Bo-Kaap. Gardens, nearby vineyards and scenic coastal routes.",
+      "desc_long": "Table Mountain, beaches with penguins, and colorful neighborhoods like Bo-Kaap. Gardens, nearby vineyards, and scenic coastal routes.",
       "location": "Cape Town, South Africa",
-      "duration": "5 days / 4 nights"
-    },
-    "id_56": {
-      "title": "Great Migration Safari",
-      "desc_short": "Wild nature in its purest state",
-      "desc_long": "Witness the greatest natural spectacle on the planet. Traverse the endless plains of the Serengeti in search of the 'Big Five' and watch thousands of wildebeest and zebras cross the Mara River.",
-      "location": "Serengeti, Tanzania",
-      "duration": "5 days / 4 nights"
-    },
-    "id_57": {
-      "title": "Pharaohs and Nile",
-      "desc_short": "Millennial history",
-      "desc_long": "A journey back in time to ancient Egypt. From the imposing Pyramids of Giza to the temples of Luxor and Karnak, sailing on the river that gave life to a civilization.",
-      "location": "Cairo and Luxor, Egypt",
-      "duration": "6 days / 5 nights"
-    },
-    "id_58": {
-      "title": "Victoria Falls",
-      "desc_short": "The smoke that thunders",
-      "desc_long": "Feel the power of one of the natural wonders of the world. Victoria Falls offer spectacular views, constant rainbows and adrenaline-filled activities.",
-      "location": "Livingstone, Zambia",
-      "duration": "3 days / 2 nights"
-    },
-    "id_60": {
-      "title": "Namib Desert",
-      "desc_short": "Red dunes and dead trees",
-      "desc_long": "Landscapes that seem from another planet. Climb the Big Daddy dune, walk among the petrified acacias of Deadvlei and contemplate one of the cleanest starry skies in the world.",
-      "location": "Sossusvlei, Namibia",
-      "duration": "6 days / 5 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Table Mountain", "desc": "Views from the top." },
+        "step_2": { "title": "Boulders Beach", "desc": "Swim with penguins." }
+      }
     },
     "id_39": {
       "title": "Iconic Sydney",
       "desc_short": "Opera and surf",
-      "desc_long": "Iconic Opera House, navigable bay and urban beaches like Bondi. Everyday ferries and waterfront parks.",
+      "desc_long": "Iconic Opera House, navigable bay, and urban beaches like Bondi. Everyday ferries and waterfront parks.",
       "location": "Sydney, Australia",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Opera House", "desc": "Must-have photo." },
+        "step_2": { "title": "Bondi Beach", "desc": "Surf lessons." }
+      }
     },
     "id_40": {
       "title": "Adrenaline in Queenstown",
       "desc_short": "Extreme adventure",
-      "desc_long": "Adrenaline capital between lake and mountains. Natural viewpoints, adventures and cinematic landscapes.",
+      "desc_long": "Adrenaline capital between lake and mountains. Natural viewpoints, adventures, and cinematic landscapes.",
       "location": "Queenstown, New Zealand",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Bungee Jumping", "desc": "Leap into the void." },
+        "step_2": { "title": "Milford Sound", "desc": "Impressive fjords." }
+      }
     },
     "id_41": {
       "title": "European Quebec",
       "desc_short": "France in America",
-      "desc_long": "Walled high town with views of the St. Lawrence. European atmosphere, steep roofs and pink sunsets.",
+      "desc_long": "Walled high town with views of the St. Lawrence. European atmosphere, steep roofs, and pink sunsets.",
       "location": "Quebec City, Canada",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Château Frontenac", "desc": "The most photographed hotel." },
+        "step_2": { "title": "Petit Champlain", "desc": "Fairytale streets." }
+      }
     },
     "id_42": {
       "title": "Rhythm of Havana",
       "desc_short": "Salsa and classic cars",
-      "desc_long": "Pastel-colored colonial architecture, music on every corner and seaside promenades. Old Havana and the Malecon set the rhythm.",
+      "desc_long": "Pastel-colored colonial architecture, music on every corner, and seaside promenades. Old Havana and the Malecon set the rhythm.",
       "location": "Havana, Cuba",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Old Havana", "desc": "Classic car ride." },
+        "step_2": { "title": "Malecon", "desc": "Sunset by the sea." }
+      }
     },
     "id_43": {
       "title": "New York, New York",
       "desc_short": "The capital of the world",
-      "desc_long": "Iconic architecture, parks like Central Park and an incomparable artistic scene. Urban energy that never goes out.",
+      "desc_long": "Iconic architecture, parks like Central Park, and an incomparable artistic scene. Urban energy that never goes out.",
       "location": "New York, United States",
-      "duration": "6 days / 5 nights"
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Times Square", "desc": "Neon lights." },
+        "step_2": { "title": "Central Park", "desc": "Green lung." },
+        "step_3": { "title": "Statue of Liberty", "desc": "Ferry to the icon." }
+      }
     },
     "id_44": {
       "title": "Golden San Francisco",
       "desc_short": "Bridge and trams",
-      "desc_long": "Golden Gate Bridge, hills and Victorian houses. World-class museums and neighborhoods with their own character.",
+      "desc_long": "Golden Gate Bridge, hills, and Victorian houses. World-class museums and neighborhoods with their own character.",
       "location": "San Francisco, United States",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Golden Gate", "desc": "Crossing by bicycle." },
+        "step_2": { "title": "Alcatraz", "desc": "Visit to the prison." }
+      }
     },
     "id_45": {
       "title": "Colonial San Miguel",
       "desc_short": "Art and color in Mexico",
-      "desc_long": "Colonial center with pink neo-Gothic parish church. Cobbled streets, patios and art in galleries and workshops.",
+      "desc_long": "Colonial center with pink neo-Gothic parish church. Cobbled streets, patios, and art in galleries and workshops.",
       "location": "San Miguel de Allende, Mexico",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Parish Church", "desc": "Pink icon." },
+        "step_2": { "title": "Handicraft Market", "desc": "Local color." }
+      }
     },
     "id_46": {
       "title": "Porteño Buenos Aires",
       "desc_short": "Tango and barbecue",
-      "desc_long": "Neighborhoods with identity (Recoleta, San Telmo, La Boca), varied architecture and intense cultural life. Tango, steakhouses and bookstores in emblematic buildings.",
+      "desc_long": "Neighborhoods with identity (Recoleta, San Telmo, La Boca), varied architecture, and intense cultural life. Tango, steakhouses, and bookstores in emblematic buildings.",
       "location": "Buenos Aires, Argentina",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Caminito", "desc": "Color in La Boca." },
+        "step_2": { "title": "San Telmo", "desc": "Antique fair." }
+      }
     },
     "id_47": {
       "title": "Samba Rio de Janeiro",
       "desc_short": "Christ and Copacabana",
-      "desc_long": "Mythical beaches, urban jungle and Christ the Redeemer watching over bays and hills. Samba rhythm in streets and squares.",
+      "desc_long": "Mythical beaches, urban jungle, and Christ the Redeemer watching over bays and hills. Samba rhythm in streets and squares.",
       "location": "Rio de Janeiro, Brazil",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Christ the Redeemer", "desc": "Views of the bay." },
+        "step_2": { "title": "Copacabana", "desc": "Beach day and caipirinhas." }
+      }
     },
     "id_48": {
       "title": "Colonial Cartagena",
       "desc_short": "Caribbean and walls",
-      "desc_long": "Walls, squares and colonial mansions covered in bougainvillea. Getsemaní and Bocagrande show their creative and modern faces.",
+      "desc_long": "Walls, squares, and colonial mansions covered in bougainvillea. Getsemaní and Bocagrande show their creative and modern faces.",
       "location": "Cartagena, Colombia",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Walled City", "desc": "Living history." },
+        "step_2": { "title": "Rosario Islands", "desc": "Excursion to turquoise beaches." }
+      }
     },
     "id_49": {
       "title": "Andean Quito",
       "desc_short": "History in the Andes",
       "desc_long": "Golden historic center under Andean volcanoes. Views from the Basilica of the National Vow and traditional markets.",
       "location": "Quito, Ecuador",
-      "duration": "3 days / 2 nights"
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Historic Center", "desc": "Golden churches." },
+        "step_2": { "title": "TelefériQo", "desc": "Views of Pichincha volcano." }
+      }
     },
     "id_50": {
       "title": "Imperial Cusco",
       "desc_short": "Capital of the Incas",
-      "desc_long": "Ancient Inca capital with squares, convents and cobbled streets. Starting point to Machu Picchu and viewpoints like the White Christ.",
+      "desc_long": "Ancient Inca capital with squares, convents, and cobbled streets. Starting point to Machu Picchu and viewpoints like the White Christ.",
       "location": "Cusco, Peru",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Plaza de Armas", "desc": "Heart of the city." },
+        "step_2": { "title": "Sacsayhuamán", "desc": "Nearby megalithic ruins." }
+      }
     },
     "id_51": {
       "title": "Cultural Melbourne",
       "desc_short": "Coffee, urban art and culture",
-      "desc_long": "Considered the cultural capital of Australia. Get lost in its famous 'laneways' full of artistic graffiti, enjoy the best coffee in the world and tour Victorian architecture mixed with modern skyscrapers.",
+      "desc_long": "Considered the cultural capital of Australia. Get lost in its famous 'laneways' full of artistic graffiti, enjoy the best coffee in the world, and tour Victorian architecture mixed with modern skyscrapers.",
       "location": "Melbourne, Australia",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Laneways", "desc": "Urban art tour in Hosier Lane." },
+        "step_2": { "title": "Great Ocean Road", "desc": "Excursion to the 12 Apostles." },
+        "step_3": { "title": "Café Culture", "desc": "Coffee tasting in Fitzroy." }
+      }
     },
     "id_52": {
       "title": "Great Barrier Reef Diving",
       "desc_short": "Underwater natural wonder",
-      "desc_long": "Dive into the largest reef system in the world. Turtles, clownfish and infinite colored corals await you in this unforgettable aquatic adventure.",
+      "desc_long": "Dive into the largest reef system in the world. Turtles, clownfish, and infinite colored corals await you in this unforgettable aquatic adventure.",
       "location": "Cairns, Australia",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Arrival in Cairns", "desc": "Equipment preparation and briefing." },
+        "step_2": { "title": "Outer Reef", "desc": "Full day of diving or snorkeling." },
+        "step_3": { "title": "Daintree Rainforest", "desc": "Visit to the oldest tropical forest." }
+      }
     },
     "id_53": {
       "title": "Relax in Fiji",
       "desc_short": "Turquoise waters and palm trees",
-      "desc_long": "Disconnect from the world in the heart of the South Pacific. Fiji welcomes you with its famous 'Bula' hospitality, immaculate white sand beaches and crystal clear waters perfect for doing nothing.",
+      "desc_long": "Disconnect from the world in the heart of the South Pacific. Fiji welcomes you with its famous 'Bula' hospitality, immaculate white sand beaches, and crystal clear waters perfect for doing nothing.",
       "location": "Nadi, Fiji",
-      "duration": "6 days / 5 nights"
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Bula Welcome", "desc": "Traditional Kava ceremony." },
+        "step_2": { "title": "Island Hopping", "desc": "Visit to nearby deserted islands." },
+        "step_3": { "title": "Snorkel", "desc": "Swim in soft coral reefs." }
+      }
     },
     "id_54": {
       "title": "Hobbiton and Maori Culture",
       "desc_short": "Middle Earth and geysers",
       "desc_long": "Enter the Shire visiting the Lord of the Rings movie set and discover the force of the earth in Rotorua with its geysers and rich Maori culture.",
       "location": "Rotorua, New Zealand",
-      "duration": "4 days / 3 nights"
+      "duration": "4 days / 3 nights",
+      "itinerary": {
+        "step_1": { "title": "Hobbiton", "desc": "Movie set tour." },
+        "step_2": { "title": "Te Puia", "desc": "Geysers and Maori culture." },
+        "step_3": { "title": "Hangi", "desc": "Traditional dinner cooked underground." }
+      }
+    },
+    "id_56": {
+      "title": "Great Migration Safari",
+      "desc_short": "Wild nature in its purest state",
+      "desc_long": "Witness the greatest natural spectacle on the planet. Traverse the endless plains of the Serengeti in search of the 'Big Five' and watch thousands of wildebeest and zebras cross the Mara River.",
+      "location": "Serengeti, Tanzania",
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Arusha", "desc": "Arrival and safari preparation." },
+        "step_2": { "title": "Game Drive", "desc": "Full day of lion and elephant sighting." },
+        "step_3": { "title": "Ngorongoro Crater", "desc": "Safari inside an extinct volcano." }
+      }
+    },
+    "id_57": {
+      "title": "Pharaohs and Nile",
+      "desc_short": "Millennial history",
+      "desc_long": "A journey back in time to ancient Egypt. From the imposing Pyramids of Giza to the temples of Luxor and Karnak, sailing on the river that gave life to a civilization.",
+      "location": "Cairo and Luxor, Egypt",
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Giza", "desc": "The Great Pyramids and the Sphinx." },
+        "step_2": { "title": "Egyptian Museum", "desc": "Treasures of Tutankhamun." },
+        "step_3": { "title": "Valley of the Kings", "desc": "Entrance to royal tombs in Luxor." }
+      }
+    },
+    "id_58": {
+      "title": "Victoria Falls",
+      "desc_short": "The smoke that thunders",
+      "desc_long": "Feel the power of one of the natural wonders of the world. Victoria Falls offer spectacular views, constant rainbows, and adrenaline-filled activities.",
+      "location": "Livingstone, Zambia",
+      "duration": "3 days / 2 nights",
+      "itinerary": {
+        "step_1": { "title": "Edge Walk", "desc": "Panoramic views of the waterfall." },
+        "step_2": { "title": "Devil's Pool", "desc": "Swim at the edge of the abyss (in season)." }
+      }
+    },
+    "id_60": {
+      "title": "Namib Desert",
+      "desc_short": "Red dunes and dead trees",
+      "desc_long": "Landscapes that seem from another planet. Climb the Big Daddy dune, walk among the petrified acacias of Deadvlei, and contemplate one of the cleanest starry skies in the world.",
+      "location": "Sossusvlei, Namibia",
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Dune 45", "desc": "Sunrise over the red desert." },
+        "step_2": { "title": "Deadvlei", "desc": "Surreal photography among black trees." },
+        "step_3": { "title": "Sesriem Canyon", "desc": "Geological hike." }
+      }
     },
     "id_61": {
       "title": "Wild Patagonia",
       "desc_short": "Trekking at the end of the world",
-      "desc_long": "Face the southern winds and walk among glaciers, turquoise lakes and imposing granite towers. The W Circuit is a mecca for hikers from all over the world.",
+      "desc_long": "Face the southern winds and walk among glaciers, turquoise lakes, and imposing granite towers. The W Circuit is a mecca for hikers from all over the world.",
       "location": "Torres del Paine, Chile",
-      "duration": "5 days / 4 nights"
+      "duration": "5 days / 4 nights",
+      "itinerary": {
+        "step_1": { "title": "Puerto Natales", "desc": "Equipment preparation and transfer." },
+        "step_2": { "title": "Base Torres", "desc": "The most iconic hike to the lagoon." },
+        "step_3": { "title": "Grey Glacier", "desc": "Navigation in front of blue ice walls." }
+      }
     },
     "id_62": {
       "title": "Pura Vida Costa Rica",
-      "desc_short": "Jungle, volcanoes and sloths",
-      "desc_long": "Immerse yourself in the country with the greatest biodiversity per square meter. Walk on hanging bridges through the mist, bathe in volcanic thermal waters and look for quetzals and sloths.",
+      "desc_short": "Jungle, volcanoes, and sloths",
+      "desc_long": "Immerse yourself in the country with the greatest biodiversity per square meter. Walk on hanging bridges through the mist, bathe in volcanic thermal waters, and look for quetzals and sloths.",
       "location": "Monteverde, Costa Rica",
-      "duration": "6 days / 5 nights"
+      "duration": "6 days / 5 nights",
+      "itinerary": {
+        "step_1": { "title": "Cloud Forest", "desc": "Canopy tour among tree tops." },
+        "step_2": { "title": "Arenal Volcano", "desc": "Hike through dried lava and thermal baths." },
+        "step_3": { "title": "Manuel Antonio", "desc": "Paradise beach and capuchin monkeys." }
+      }
     }
+  },
+  "includes_extras": {
+    "adventure_gear": "Safety and technical equipment",
+    "park_fees": "National park entrance fees",
+    "museum_fees": "Museum and monument entrance fees",
+    "food_tasting": "Local food tasting",
+    "welcome_drink": "Welcome cocktail",
+    "yoga_massage": "Yoga class or massage"
+  },
+  "gear_list": {
+    "title_recommended": "Recommended Gear",
+    "title_technical": "Necessary Technical Equipment",
+    "backpack": "Comfortable backpack (30-50L)",
+    "water_bottle": "Reusable water bottle",
+    "sun_protection": "Sunscreen and sunglasses",
+    "camera": "Camera",
+    "adapter": "Universal power adapter",
+    "trekking_shoes": "Waterproof trekking shoes",
+    "thermal_layers": "Thermal layered clothing",
+    "windbreaker": "Windbreaker jacket",
+    "first_aid": "Basic personal first aid kit",
+    "light_clothes": "Light and comfortable clothing",
+    "walking_shoes": "Walking shoes",
+    "swimwear": "Swimwear and towel",
+    "hat": "Cap or hat"
+  },
+  "reviews_mock": {
+    "user1_name": "Mary G.",
+    "user1_time": "2 weeks ago",
+    "user1_text": "\"Simply spectacular. The organization was impeccable and the places we visited exceeded my expectations. Totally recommended.\"",
+    "user2_name": "Charles R.",
+    "user2_time": "1 month ago",
+    "user2_text": "\"An unforgettable experience. The guide was very professional and the group was very fun. I will travel with Pack&Go again.\""
   }
 }

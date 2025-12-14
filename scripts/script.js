@@ -208,7 +208,7 @@ function actualizarHeaderUsuario() {
         return;
     }
     
-    const avatarImg = usuario.imagen || "assets/defecto.jpg"; 
+    const avatarImg = usuario.imagen || "assets/defecto.png"; 
     const nombreUsuario = usuario.nombre || "Usuario";
 
     // 2. Inyectamos el HTML del usuario logueado
@@ -219,6 +219,7 @@ function actualizarHeaderUsuario() {
             <div class="user-dropdown" id="userDropdown">
                 <div class="user-dropdown-header">Hola, ${nombreUsuario}</div>
                 <a href="perfil.html#datos"><i class="fa-solid fa-user-pen"></i> Perfil</a>
+                <a href="perfil.html#favoritos"><i class="fa-solid fa-star"></i> Mis favoritos</a>
                 <a href="perfil.html#viajes"><i class="fa-solid fa-suitcase"></i> Mis Viajes</a>
                 <a href="perfil.html#configuracion"><i class="fa-solid fa-gear"></i> Configuración</a>
                 <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
