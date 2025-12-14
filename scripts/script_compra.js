@@ -271,37 +271,34 @@ function initSuccessPage() {
     const reserva = JSON.parse(localStorage.getItem('ultima_reserva'));
     const setText = (id, txt) => { 
         const el = document.getElementById(id); 
-        if (el) { el.innerText = txt; }
+        if (el) { 
+            el.innerText = txt; 
+            el.removeAttribute('data-i18n');
+        }
+        // else{console.log("No encuentro algo");}
     };
 
     if (reserva) {
         setText('exito-titulo', reserva.viaje.titulo);
+        // console.log("La reserva se llama:", reserva.viaje.titulo)
         setText('exito-id', "#" + reserva.id_reserva);
         setText('exito-email', reserva.cliente.email);
-        setText('exito-destino', reserva.viaje.destino);
+        setText('exito-fecha', reserva.fecha_compra);
         setText('exito-precio', "$" + reserva.precio_pagado);
     }
 
     const actions = document.querySelector(".acciones-postcompra");
     if (actions) {
-        const isLogged = !!UserService.getCurrent();
-        const mainBtn = isLogged 
-            ? `<a href="perfil.html#viajes" class="btn-rounded-black salir" data-i18n="success.btn_profile">Ver perfil</a>`
-            : `<button id="btn-descargar-pdf" class="btn-rounded-black" data-i18n="success.btn_pdf">PDF</button>`;
-        
-        actions.innerHTML = `${mainBtn}<a href="index.html" class="btn-rounded-outline salir" data-i18n="success.btn_home">Inicio</a>`;
-        
+        // 1. Configurar botón PDF
         const btnPdf = document.getElementById('btn-descargar-pdf');
         if (btnPdf) {
-            btnPdf.addEventListener('click', () => window.print());
+            btnPdf.addEventListener('click', () => {
+                window.print(); // Esto abre el diálogo de impresión (Guardar como PDF)
+            });
         }
-
-        // Asignamos el evento de limpieza a todos los botones con clase 'salir'
         document.querySelectorAll('.salir').forEach(b => b.addEventListener('click', () => {
             cleanPurchaseData();
         }));
-        
-        if (window.i18n) window.i18n.run();
     }
 }
 
