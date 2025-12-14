@@ -34,7 +34,7 @@ if (langToggle && langSelector) {
         updateLanguageUI(savedSrc);
     } else {
         // Por defecto ponemos la de España si no hay nada guardado
-        updateLanguageUI('images/bandera_españa.png'); 
+        updateLanguageUI('assets/bandera_españa.png'); 
     }
 
     // B. ABRIR / CERRAR MENÚ
@@ -209,8 +209,7 @@ function actualizarHeaderUsuario() {
         return;
     }
     
-    // Ajuste: Usamos defecto.png como solicitaste y corregimos la ruta a images/
-    const avatarImg = usuario.imagen || "images/defecto.png"; 
+    const avatarImg = usuario.imagen || "assets/defecto.jpg"; 
     const nombreUsuario = usuario.nombre || "Usuario";
 
     // 2. Inyectamos el HTML del usuario logueado

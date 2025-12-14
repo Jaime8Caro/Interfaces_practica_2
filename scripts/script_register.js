@@ -256,7 +256,7 @@ if (form) {
                 reader.readAsDataURL(file);
             } else {
                 // Si cancela, volver a la imagen por defecto
-                imgPreview.src = "images/defecto.png"; 
+                imgPreview.src = "assets/defecto.jpg"; 
             }
         });
     }
