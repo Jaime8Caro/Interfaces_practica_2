@@ -1,7 +1,7 @@
 "use strict";
 
 const MSG_LEVELS = ["DEBUG", "INFO", "WARN", "ERROR"];
-const DEFAULT_i18n_DATA_ATTR = "vanilla-i18n";
+const DEFAULT_i18n_DATA_ATTR = "data-i18n"; // Ajustado a tu preferencia
 const DEFAULT_i18n_DIR = "assets/vanilla-i18n";
 const DEFAULT_LANG_TOGGLER_ID = "vanilla-i18n-toggler";
 
@@ -13,12 +13,15 @@ class vanilla_i18n {
     this._i18nDataAttr = opts.i18n_attr_name || DEFAULT_i18n_DATA_ATTR;
     this._localStorageKey = this._generateKeyFromHost();
     this._togglerID = opts.toggler_id || DEFAULT_LANG_TOGGLER_ID;
+    
     if (!opts.default_language) {
       opts.default_language = this._languages[0];
     }
+    
     if (!this._getLanguage() && opts.default_language) {
       this._setSavedLanguage(opts.default_language);
     }
+    
     document.addEventListener("DOMContentLoaded", () => {
       this._attachOnChangeToi18nToggler(this._togglerID);
     });
@@ -26,6 +29,7 @@ class vanilla_i18n {
 
   async run() {
     const lang = this._getLanguage();
+    
     if (lang && !this._languages.includes(lang)) {
       this._printMsg(
         `unsupported ${lang} language found in local storage, supported languages are ${this._languages}`,
@@ -39,9 +43,8 @@ class vanilla_i18n {
       );
       return;
     } else {
-      document.addEventListener("DOMContentLoaded", () => {
-        this._setTogglerValue(lang, this._togglerID);
-      });
+      const toggler = document.getElementById(this._togglerID);
+      if(toggler) this._setTogglerValue(lang, this._togglerID);
     }
 
     const langTranslations = await this._loadLangFile(lang);
@@ -53,16 +56,11 @@ class vanilla_i18n {
       return;
     }
 
-    const elemsForTranslation = this._getElementsForTranslation();
-    if (!elemsForTranslation) {
-      this._printMsg(`no element found for translating`, MSG_LEVELS[2]);
-      return;
-    }
-
-    this._translate(elemsForTranslation, langTranslations);
+    // Traducimos TODO (Texto normal y Atributos)
+    this._translate(langTranslations);
 
     this._printMsg(
-      `translation to ${lang} finished for ${elemsForTranslation.length} elements`,
+      `translation to ${lang} finished`,
       MSG_LEVELS[0]
     );
   }
@@ -98,11 +96,6 @@ class vanilla_i18n {
       langToggler.addEventListener("change", (event) => {
         this._runOnChange(event.target.value);
       });
-    } else {
-      this._printMsg(
-        `no language toggler found with id "${toggler_id}" for attaching onChange event`,
-        MSG_LEVELS[2]
-      );
     }
   }
 
@@ -111,43 +104,64 @@ class vanilla_i18n {
     if (langToggler) {
       langToggler.value = lang;
       langToggler.dispatchEvent(new Event("change"));
-    } else {
-      this._printMsg(
-        `no language toggler found with id "${toggler_id}" for setting value`,
-        MSG_LEVELS[2]
-      );
     }
   }
 
-  // translate all the elements with set i18n data attribute
-  _translate(elements, translation = undefined) {
+  // --- FUNCIÓN MEJORADA: Traduce texto y atributos ---
+  _translate(translation = undefined) {
     if (!translation) return;
 
+    // 1. Traducir TEXTO (innerHTML) usando data-i18n
+    const elements = document.querySelectorAll("[" + this._i18nDataAttr + "]");
     elements.forEach((element) => {
       var keys = element.getAttribute(this._i18nDataAttr).split(".");
-      var text = keys.reduce((obj, i) => obj[i], translation);
+      var text = keys.reduce((obj, i) => (obj ? obj[i] : null), translation);
       if (text) {
         element.innerHTML = text;
       }
     });
+
+    // 2. Traducir PLACEHOLDERS (data-i18n-placeholder)
+    const placeholders = document.querySelectorAll("[data-i18n-placeholder]");
+    placeholders.forEach((element) => {
+      var keys = element.getAttribute("data-i18n-placeholder").split(".");
+      var text = keys.reduce((obj, i) => (obj ? obj[i] : null), translation);
+      if (text) {
+        element.placeholder = text;
+      }
+    });
+
+    // 3. Traducir IMÁGENES ALT (data-i18n-alt)
+    const alts = document.querySelectorAll("[data-i18n-alt]");
+    alts.forEach((element) => {
+      var keys = element.getAttribute("data-i18n-alt").split(".");
+      var text = keys.reduce((obj, i) => (obj ? obj[i] : null), translation);
+      if (text) {
+        element.alt = text;
+      }
+    });
+    
+    // 4. Traducir TITULOS (data-i18n-title) - útil para tooltips
+    const titles = document.querySelectorAll("[data-i18n-title]");
+    titles.forEach((element) => {
+      var keys = element.getAttribute("data-i18n-title").split(".");
+      var text = keys.reduce((obj, i) => (obj ? obj[i] : null), translation);
+      if (text) {
+        element.title = text;
+      }
+    });
   }
 
-  _getElementsForTranslation() {
-    return document.querySelectorAll("[" + this._i18nDataAttr + "]");
-  }
-
-  // load language file from the server
   async _loadLangFile(lang = undefined) {
     if (!lang) return;
     const pathToLangFile = `/${this._path}/${lang}.json`;
     try {
       var res = await fetch(pathToLangFile);
-      return res.json();
-    } catch {
-      (error) => {
-        this._printMsg(error.message, MSG_LEVELS[0]);
-        return;
-      };
+      if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return await res.json();
+    } catch (error) {
+       this._printMsg(error.message, MSG_LEVELS[3]);
+       return;
     }
   }
 
@@ -162,18 +176,15 @@ class vanilla_i18n {
     return lang;
   }
 
-  // get language from local storage
   _getSavedLanguage() {
     return window.localStorage.getItem(this._localStorageKey);
   }
 
-  // set language to local storage
   _setSavedLanguage(lang) {
     if (!lang) return;
     window.localStorage.setItem(this._localStorageKey, lang);
   }
 
-  // generate key for storing language in local storage
   _generateKeyFromHost() {
     return window.location.host + "-vanilla-i18n";
   }
@@ -189,7 +200,6 @@ class vanilla_i18n {
     return path;
   }
 
-  // print messages to console
   _printMsg(msg, level) {
     if (!(level === MSG_LEVELS[0]) || this._debug) {
       console.info("vanilla-i18n | " + level + ":" + msg);
