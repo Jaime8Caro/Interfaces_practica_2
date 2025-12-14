@@ -1034,5 +1034,11 @@
     "default": "默认",
     "price_asc": "价格：从低到高",
     "price_desc": "价格：从高到低"
+  },
+  "blog_sort": {
+    "recent": "最新发布",
+    "oldest": "最早发布",
+    "az": "A-Z",
+    "za": "Z-A"
   }
 }

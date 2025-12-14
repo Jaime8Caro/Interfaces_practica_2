@@ -1035,5 +1035,11 @@
     "default": "Par défaut",
     "price_asc": "Prix : Croissant",
     "price_desc": "Prix : Décroissant"
+  },
+  "blog_sort": {
+    "recent": "Plus récents",
+    "oldest": "Plus anciens",
+    "az": "A-Z",
+    "za": "Z-A"
   }
 }

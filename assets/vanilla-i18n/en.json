@@ -1034,5 +1034,11 @@
     "default": "Default",
     "price_asc": "Price: Low to High",
     "price_desc": "Price: High to Low"
+  },
+  "blog_sort": {
+    "recent": "Most Recent",
+    "oldest": "Oldest",
+    "az": "A-Z",
+    "za": "Z-A"
   }
 }

@@ -448,81 +448,193 @@ function loadBlogPost() {
 
 function initBlogFilters(container) {
     const input = document.querySelector(".search-input-container input");
-    const state = { text: "", cat: "Todas las categorías", order: "Más recientes" };
+    
+    // Verificación de seguridad
+    if (!input) {
+        console.error("Error: No se encontró el input de búsqueda (.search-input-container input)");
+        return;
+    }
 
+    // ESTADO INICIAL
+    const filters = { text: "", cat: "Todas las categorías", order: "Más recientes" };
+
+    // --- FUNCIÓN PRINCIPAL DE FILTRADO Y ORDENAMIENTO ---
     const apply = () => {
+        // 1. Filtrado (Texto y Categoría)
         let res = blogData.filter(p => {
-            const txtMatch = p.titulo.toLowerCase().includes(state.text) || p.resumen.toLowerCase().includes(state.text);
-            const catMatch = state.cat === "Todas las categorías" || p.tag === state.cat;
-            return txtMatch && catMatch;
+            // Normalización para ignorar tildes y mayúsculas (ej: "México" == "mexico")
+            const cleanText = (str) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchText = cleanText(filters.text);
+            
+            const titleMatch = cleanText(p.titulo).includes(searchText);
+            const summaryMatch = cleanText(p.resumen).includes(searchText);
+            
+            const catMatch = filters.cat === "Todas las categorías" || p.tag === filters.cat;
+            
+            return (titleMatch || summaryMatch) && catMatch;
         });
 
+        // 2. Helper para convertir fecha texto ("25 Agosto, 2025") a objeto Date
         const parseDate = (str) => {
-            const parts = str.replace(',', '').split(' ');
-            return new Date(parts[2], ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"].indexOf(parts[1]), parts[0]);
+            if (!str) return new Date(0);
+            
+            // Limpiamos la fecha: "25 Agosto, 2025" -> ["25", "Agosto", "2025"]
+            const parts = str.replace(',', '').trim().split(/\s+/);
+            
+            if (parts.length < 3) return new Date(0);
+
+            const dia = parseInt(parts[0], 10);
+            const mesTexto = parts[1].toLowerCase();
+            const anio = parseInt(parts[2], 10);
+
+            // Mapa de meses estricto
+            const meses = {
+                "enero": 0, "febrero": 1, "marzo": 2, "abril": 3, "mayo": 4, "junio": 5,
+                "julio": 6, "agosto": 7, "septiembre": 8, "octubre": 9, "noviembre": 10, "diciembre": 11
+            };
+
+            const mesIndex = meses[mesTexto];
+
+            // Si el mes no es válido, devolvemos fecha 0 (se va al final)
+            if (mesIndex === undefined) return new Date(0);
+
+            return new Date(anio, mesIndex, dia);
         };
 
-        if (state.order === "Más recientes") { res.sort((a,b) => parseDate(b.fecha) - parseDate(a.fecha)); }
-        else if (state.order === "Más antiguos") { res.sort((a,b) => parseDate(a.fecha) - parseDate(b.fecha)); }
-        else if (state.order === "A-Z") { res.sort((a,b) => a.titulo.localeCompare(b.titulo)); }
-        else if (state.order === "Z-A") { res.sort((a,b) => b.titulo.localeCompare(a.titulo)); }
+        // 3. Ordenamiento
+        if (filters.order === "Más recientes") { 
+            res.sort((a,b) => parseDate(b.fecha) - parseDate(a.fecha)); 
+        }
+        else if (filters.order === "Más antiguos") { 
+            res.sort((a,b) => parseDate(a.fecha) - parseDate(b.fecha)); 
+        }
+        else if (filters.order === "A-Z") { 
+            res.sort((a,b) => a.titulo.localeCompare(b.titulo, 'es', { sensitivity: 'base' })); 
+        }
+        else if (filters.order === "Z-A") { 
+            res.sort((a,b) => b.titulo.localeCompare(a.titulo, 'es', { sensitivity: 'base' })); 
+        }
 
+        // 4. Renderizar
         renderBlogList(container, res);
     };
 
-    if (input) {
-        input.addEventListener("input", (e) => { 
-            state.text = e.target.value.toLowerCase().trim(); 
-            apply(); 
-        });
-    }
+    // Evento de búsqueda (Input)
+    input.addEventListener("input", (e) => { 
+        filters.text = e.target.value.trim(); // Guardamos el texto sin procesar, apply() lo normaliza
+        apply(); 
+    });
 
-    const setupMenu = (btnCls, opts, cb) => {
-        const btn = document.querySelector(btnCls);
-        if (!btn) {
-            return;
+    // --- CONFIGURACIÓN DE MENÚS DESPLEGABLES ---
+    const setupDropdown = (btnId, options, type) => {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+
+        const originalI18nKey = btn.getAttribute("data-i18n");
+
+        // Crear Wrapper si no existe
+        if (!btn.parentNode.classList.contains("filter-btn-wrapper")) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "filter-btn-wrapper";
+            btn.parentNode.insertBefore(wrapper, btn);
+            wrapper.appendChild(btn);
         }
-        
+        const wrapper = btn.parentNode;
+
+        // Limpiar menú anterior
+        const existingMenu = wrapper.querySelector(".category-dropdown");
+        if (existingMenu) existingMenu.remove();
+
+        // Crear menú nuevo
         const menu = document.createElement("div");
         menu.className = "category-dropdown";
-        
-        opts.forEach(o => {
+        if (type === 'orden') menu.classList.add("dropdown-right");
+
+        const allOpts = type === 'orden' ? options : ["Todas las categorías", ...options];
+
+        allOpts.forEach(opt => {
             const item = document.createElement("div");
             item.className = "category-option";
-            item.textContent = o;
-            item.onclick = () => { 
-                cb(o); 
-                menu.classList.remove("show"); 
-                if(btnCls.includes("icon")) {
-                    btn.classList.remove("active"); 
-                } else {
-                    btn.textContent = o; 
+
+            // Lógica de traducción de items
+            let i18nKey = "";
+            let labelText = opt;
+
+            if (type === 'cat') {
+                if (opt === 'Todas las categorías') i18nKey = 'blog.filter_all';
+                else i18nKey = `categories.${opt}`;
+            } else if (type === 'orden') {
+                if (opt === "Más recientes") i18nKey = "blog_sort.recent";
+                if (opt === "Más antiguos") i18nKey = "blog_sort.oldest";
+                if (opt === "A-Z") i18nKey = "blog_sort.az";
+                if (opt === "Z-A") i18nKey = "blog_sort.za";
+            }
+
+            item.textContent = labelText;
+            if (i18nKey) {
+                item.setAttribute("data-i18n", i18nKey);
+                if (window.i18n) window.i18n.run(item);
+            }
+
+            // Click en opción
+            item.addEventListener("click", () => {
+                filters[type] = opt; // Guardamos la opción seleccionada
+
+                // Actualizar Botón
+                const isDefaultSort = (type === 'orden' && opt === "Más recientes");
+                const isDefaultCat = (type === 'cat' && opt === "Todas las categorías");
+
+                if (isDefaultSort) {
+                    btn.removeAttribute("data-i18n");
+                    btn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
+                    btn.classList.remove("active");
+                } 
+                else if (isDefaultCat) {
+                    if (originalI18nKey) {
+                        btn.setAttribute("data-i18n", originalI18nKey);
+                        if (window.i18n) window.i18n.run(btn);
+                    } else {
+                        btn.textContent = labelText;
+                    }
+                    btn.classList.remove("active");
+                } 
+                else {
+                    btn.textContent = labelText; 
+                    btn.setAttribute("data-i18n", i18nKey);
+                    btn.classList.add("active");
+                    if (window.i18n) window.i18n.run(btn);
                 }
-            };
+
+                menu.classList.remove("show");
+                apply(); // Aplicar filtros
+            });
+
             menu.appendChild(item);
         });
-        
-        document.querySelector(".filter-buttons").appendChild(menu);
-        
+
+        wrapper.appendChild(menu);
+
         btn.onclick = (e) => {
             e.stopPropagation();
             document.querySelectorAll(".category-dropdown").forEach(m => {
                 if (m !== menu) m.classList.remove("show");
             });
             menu.classList.toggle("show");
-            
-            if(btnCls.includes("icon")) {
-                btn.classList.toggle("active");
-            }
         };
     };
 
-    setupMenu(".filter-btn", ["Todas las categorías", ...new Set(blogData.map(p => p.tag))], (sel) => { state.cat = sel; apply(); });
-    setupMenu(".filter-icon-btn", ["Más recientes", "Más antiguos", "A-Z", "Z-A"], (sel) => { state.order = sel; apply(); });
+    // Inicializar menús
+    const categoriasUnicas = [...new Set(blogData.map(p => p.tag))].sort();
+    setupDropdown("btn-blog-category", categoriasUnicas, "cat");
+    setupDropdown("btn-blog-sort", ["Más recientes", "Más antiguos", "A-Z", "Z-A"], "orden");
 
+    // Cerrar al hacer clic fuera
     document.addEventListener("click", () => {
         document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
     });
+    
+    // IMPORTANTE: Aplicar filtros al cargar para el orden inicial
+    apply();
 }
 
 // --- INIT ---
