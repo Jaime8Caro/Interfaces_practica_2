@@ -1,256 +1,220 @@
-const form = document.querySelector(".auth-card.signup-mode form");
+/**
+ * LÓGICA DE REGISTRO Y MODAL DE PRIVACIDAD
+ */
+function initRegister() {
+    const registerForm = document.querySelector(".auth-card.signup-mode form");
+    
+    if (!registerForm) {
+        return;
+    }
 
-if (form) {
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+    // --- A. MANEJO DEL FORMULARIO ---
+    registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-        // --- SELECCIÓN DE ELEMENTOS ---
-        const nombreInput = document.getElementById('nombre');
-        const apellidosInput = document.getElementById('apellidos');
-        const fechaInput = document.getElementById('fecha-nacimiento');
-        const correoInput = document.getElementById('email');
-        const correoConfInput = document.getElementById('confirmar-email');
-        const usuarioInput = document.getElementById('usuario');
-        const passInput = document.getElementById('password');
-        const imagenInput = document.getElementById('foto-perfil');
-        const privacyInput = document.getElementById("privacy");
-        const privacyLabel = form.querySelector('label[for="privacy"]');
-
-        // --- VALORES ---
-        const nombre = nombreInput.value.trim();
-        const apellidos = apellidosInput.value.trim();
-        const fechaNacimiento = fechaInput.value;
-        const correo = correoInput.value.trim();
-        const correoConfirmacion = correoConfInput.value.trim();
-        const apodo = usuarioInput.value.trim();
-        const contraseña = passInput.value.trim();
-        const imagenPerfil = imagenInput.files && imagenInput.files[0] ? imagenInput.files[0] : null;
-
-        let formularioValido = true;
-
-        // --- VALIDACIONES VISUALES ---
-
-        // 1. Nombre y Apellidos
-        validarCampoFormulario(nombreInput, nombre.length >= 3, "Mínimo 3 letras", "Nombre");
-        if (nombre.length < 3) formularioValido = false;
-
-        validarCampoFormulario(apellidosInput, apellidos.length >= 3, "Mínimo 3 letras", "Apellidos");
-        if (apellidos.length < 3) formularioValido = false;
-
-        // 2. Correo y Duplicados
-        let esCorreoFormatoValido = correo.length >= 3 && correo.includes("@");
-        
-        if (esCorreoFormatoValido && typeof validarUsuarioExistente === 'function' && validarUsuarioExistente(correo)) {
-            validarCampoFormulario(correoInput, false, "¡Correo ya registrado!", "Correo electrónico");
-            formularioValido = false;
-        } else {
-            validarCampoFormulario(correoInput, esCorreoFormatoValido, "Correo inválido", "Correo electrónico");
-            if (!esCorreoFormatoValido) formularioValido = false;
-        }
-
-        // 3. Confirmación de Correo
-        const coinciden = (correo === correoConfirmacion) && (correo !== "");
-        validarCampoFormulario(correoConfInput, coinciden, "Correos no coinciden", "Confirmacion correo");
-        if (!coinciden) formularioValido = false;
-
-        // 4. Fecha (Validar que no esté vacía y sea fecha pasada)
-        const esFechaValida = fechaNacimiento && (new Date(fechaNacimiento) < new Date());
-        validarCampoFormulario(fechaInput, esFechaValida, "Fecha inválida", "Fecha de nacimiento");
-        if (!esFechaValida) formularioValido = false;
-
-        // 5. Usuario / Apodo
-        validarCampoFormulario(usuarioInput, apodo.length >= 3, "Usuario muy corto", "Nombre de usuario");
-        if (apodo.length < 3) formularioValido = false;
-
-        // 6. Contraseña
-        validarCampoFormulario(passInput, contraseña.length >= 6, "Mínimo 6 caracteres", "Contraseña");
-        if (contraseña.length < 6) formularioValido = false;
-
-        // Validación de Privacidad
-        if (!privacyInput.checked) {
-            privacyLabel.style.color = "red";
-            privacyInput.style.outline = "2px solid red";
-            privacyInput.style.outlineOffset = "3px";
-            formularioValido = false;
-        } else {
-            privacyInput.style.outline = "none";
-            privacyLabel.style.color = "#333";
-        }
-
-        // --- GUARDADO ---
-        if (!formularioValido) {
-            return false;
-        }
-
-        // Objeto usuario
-        const nuevoUsuario = {
-            nombre, apellidos, correo,
-            fecha_nacimiento: fechaNacimiento,
-            apodo, contraseña,
-            imagen: null
+        // 1. Referencias
+        const fields = {
+            nombre: document.getElementById('nombre'),
+            apellidos: document.getElementById('apellidos'),
+            fecha: document.getElementById('fecha-nacimiento'),
+            email: document.getElementById('email'),
+            confEmail: document.getElementById('confirmar-email'),
+            user: document.getElementById('usuario'),
+            pass: document.getElementById('password'),
+            img: document.getElementById('foto-perfil'),
+            privacy: document.getElementById("privacy")
         };
 
-        const finalizarRegistro = (datosUsuario) => {
+        const values = {
+            nombre: fields.nombre.value.trim(),
+            apellidos: fields.apellidos.value.trim(),
+            fecha: fields.fecha.value,
+            email: fields.email.value.trim(),
+            confEmail: fields.confEmail.value.trim(),
+            apodo: fields.user.value.trim(),
+            pass: fields.pass.value.trim(),
+            imgFile: fields.img.files?.[0]
+        };
 
-        if (guardarUsuario(datosUsuario)){
-            window.location.href = "index.html";
+        // 2. Validaciones
+        let isValid = true;
+        
+        const validate = (input, condition, msg, placeholder) => {
+            validarCampoFormulario(input, condition, msg, placeholder);
+            if (!condition) {
+                isValid = false;
             }
         };
 
-        // Procesar imagen si existe
-        if (imagenPerfil) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                nuevoUsuario.imagen = e.target.result;
-                finalizarRegistro(nuevoUsuario);
-            };
-            reader.readAsDataURL(imagenPerfil);
+        validate(fields.nombre, values.nombre.length >= 3, "Mínimo 3 letras", "Nombre");
+        validate(fields.apellidos, values.apellidos.length >= 3, "Mínimo 3 letras", "Apellidos");
+        
+        // Validación de usuario existente
+        const users = UserService.getAll();
+        const emailExists = users.some(u => u.correo === values.email);
+        const emailFormat = values.email.includes("@") && values.email.length > 3;
+
+        if (emailFormat && emailExists) {
+            validarCampoFormulario(fields.email, false, "¡Correo ya registrado!", "Correo electrónico");
+            isValid = false;
         } else {
-            finalizarRegistro(nuevoUsuario);
+            validate(fields.email, emailFormat, "Correo inválido", "Correo electrónico");
+        }
+
+        validate(fields.confEmail, values.email === values.confEmail && values.email !== "", "No coinciden", "Confirmación correo");
+        validate(fields.fecha, values.fecha && new Date(values.fecha) < new Date(), "Fecha inválida", "Fecha de nacimiento");
+        validate(fields.user, values.apodo.length >= 3, "Usuario corto", "Nombre de usuario");
+        validate(fields.pass, values.pass.length >= 6, "Mínimo 6 caracteres", "Contraseña");
+
+        // Privacidad
+        const privacyLabel = registerForm.querySelector('label[for="privacy"]');
+        if (!fields.privacy.checked) {
+            privacyLabel.style.color = "red";
+            isValid = false;
+        } else {
+            privacyLabel.style.color = "#333";
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        // 3. Creación de objeto usuario
+        const newUser = {
+            nombre: values.nombre,
+            apellidos: values.apellidos,
+            correo: values.email,
+            fecha_nacimiento: values.fecha,
+            apodo: values.apodo,
+            contraseña: values.pass,
+            imagen: null
+        };
+
+        const executeRegister = (userObj) => {
+            if (UserService.register(userObj)) {
+                window.location.href = "index.html";
+            }
+        };
+
+        if (values.imgFile) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                newUser.imagen = ev.target.result;
+                executeRegister(newUser);
+            };
+            reader.readAsDataURL(values.imgFile);
+        } else {
+            executeRegister(newUser);
         }
     });
 
+    // --- B. PREVISUALIZACIÓN DE IMAGEN ---
+    const imgInput = document.getElementById('foto-perfil');
+    const imgPreview = document.getElementById('avatar-img-preview');
+    
+    if (imgInput && imgPreview) {
+        imgInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (ev) => imgPreview.src = ev.target.result;
+                reader.readAsDataURL(file);
+            } else {
+                imgPreview.src = "assets/defecto.png";
+            }
+        });
+    }
 
-    // MODAL DE PRIVACIDAD:
-    // --- REFERENCIAS ---
+    initPrivacyModal();
+}
+
+function initPrivacyModal() {
     const modal = document.getElementById("privacy-modal");
     const checkbox = document.getElementById("privacy");
-    const linkPrivacy = document.getElementById("open-privacy-modal");
+    const link = document.getElementById("open-privacy-modal");
     const closeBtn = document.getElementById("close-modal-x");
-    const modalFooter = document.getElementById("privacy-modal-footer");
     const acceptBtn = document.getElementById("btn-accept-privacy");
+    const footer = document.getElementById("privacy-modal-footer");
     const textField = document.getElementById("privacy-text");
 
-    // FUNCIÓN PARA ABRIR EL MODAL
-    // modo = 'sign' (firmar) | 'read' (solo leer)
-    const openModal = (mode) => {
-        modal.classList.add("show");
-        document.body.classList.add("no-scroll");
-        if (textField) textField.scrollTop = 0;
+    if (!modal) {
+        return;
+    }
 
-        if (mode === 'sign') {
-            // MODO FIRMAR: Botón visible y bloqueado
-            if (modalFooter) modalFooter.style.display = "flex"; 
-            if (acceptBtn) {
+    const toggleModal = (show, mode = 'read') => {
+        if (show) {
+            modal.classList.add("show");
+            document.body.classList.add("no-scroll");
+            if (textField) {
+                textField.scrollTop = 0;
+            }
+            
+            if (footer) {
+                footer.style.display = (mode === 'sign') ? "flex" : "none";
+            }
+            if (acceptBtn && mode === 'sign') {
                 acceptBtn.disabled = true;
                 acceptBtn.style.opacity = "0.5";
                 acceptBtn.style.cursor = "not-allowed";
             }
         } else {
-            // MODO LECTURA: Ocultamos el botón/footer para que no moleste
-            if (modalFooter) modalFooter.style.display = "none";
+            modal.classList.remove("show");
+            document.body.classList.remove("no-scroll");
         }
     };
 
-    // LÓGICA DEL CHECKBOX
     if (checkbox) {
         checkbox.addEventListener("click", (e) => {
-
             if (checkbox.checked) {
-                // CASO: Estaba vacío y el usuario quiere marcarlo.
-                // INTERCEPTAMOS: No dejamos marcarlo directamente. Abrimos modal.
-                e.preventDefault(); 
-                openModal('sign');
-            } else {
-                // CASO: Estaba lleno y el usuario quiere desmarcarlo.
-                // PERMITIMOS: No ponemos preventDefault(). 
-                // El navegador quitará el tick automáticamente.
+                e.preventDefault();
+                toggleModal(true, 'sign');
             }
         });
     }
 
-    // LÓGICA DEL ENLACE DE TEXTO
-    if (linkPrivacy) {
-        linkPrivacy.addEventListener("click", (e) => {
+    if (link) {
+        link.addEventListener("click", (e) => {
             e.preventDefault();
-            
-            // Si el checkbox YA está marcado
-            if (checkbox && checkbox.checked) {
-                // Abrimos en modo SOLO LECTURA (sin botón de firmar)
-                openModal('read');
-            } else {
-                // Si no está marcado, abrimos en modo FIRMAR
-                openModal('sign');
-            }
+            toggleModal(true, checkbox.checked ? 'read' : 'sign');
         });
     }
 
-    // CERRAR MODAL
-    const closeModal = () => {
-        modal.classList.remove("show");
-        document.body.classList.remove("no-scroll");
-    };
-
-    if (closeBtn) closeBtn.addEventListener("click", closeModal);
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => toggleModal(false));
+    }
+    
+    window.addEventListener("click", (e) => { 
+        if (e.target === modal) {
+            toggleModal(false);
+        } 
     });
 
-    // DETECTAR SCROLL (Solo si estamos en modo firmar)
     if (textField) {
-        textField.addEventListener("scroll", function() {
-            // Solo activamos lógica si el botón es visible
-            const isFooterVisible = modalFooter && modalFooter.style.display !== "none";
-            
-            if (isFooterVisible) {
-                // Tolerancia de 2px
-                if (this.scrollTop + this.clientHeight >= this.scrollHeight - 20) {
-                    if (acceptBtn) {
-                        acceptBtn.disabled = false;
-                        acceptBtn.style.opacity = "1";
-                        acceptBtn.style.cursor = "pointer";
-                    }
+        textField.addEventListener("scroll", () => {
+            if (footer.style.display !== "none" && acceptBtn) {
+                if (textField.scrollTop + textField.clientHeight >= textField.scrollHeight - 20) {
+                    acceptBtn.disabled = false;
+                    acceptBtn.style.opacity = "1";
+                    acceptBtn.style.cursor = "pointer";
                 }
             }
         });
     }
 
-    // ACEPTAR Y FIRMAR
     if (acceptBtn) {
         acceptBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            
             if (checkbox) {
-                // Marcamos el checkbox mediante código
                 checkbox.checked = true;
-                
-                // Limpieza visual (quitar bordes rojos si hubiera validación)
                 checkbox.style.outline = "none";
-                const label = document.querySelector('label[for="privacy"]');
-                if(label) label.style.color = "#333";
             }
-
-            closeModal();
-        });
-    }
-
-    //SUBIR IMAGEN:
-    const inputFoto = document.getElementById('foto-perfil');
-    const imgPreview = document.getElementById('avatar-img-preview');
-
-    if (inputFoto && imgPreview) {
-        inputFoto.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-
-            if (file) {
-                // Validar que sea imagen
-                if (!file.type.startsWith('image/')) {
-                    alert("Por favor, selecciona un archivo de imagen válido.");
-                    return;
-                }
-
-                // Usar FileReader para leer la imagen y mostrarla
-                const reader = new FileReader();
-                
-                reader.onload = function(evt) {
-                    imgPreview.src = evt.target.result;
-                };
-                
-                reader.readAsDataURL(file);
-            } else {
-                imgPreview.src = "assets/defecto.png"; 
+            const label = document.querySelector('label[for="privacy"]');
+            if (label) {
+                label.style.color = "#333";
             }
+            toggleModal(false);
         });
     }
 }
 
+initRegister();

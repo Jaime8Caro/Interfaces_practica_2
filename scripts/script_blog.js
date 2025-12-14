@@ -381,239 +381,164 @@ const blogData = [
 
 ];
     
-// 1. LÓGICA PARA LA PÁGINA BLOG PRINCIPAL
-const blogListContainer = document.querySelector(".blog-list-container");
-if (blogListContainer) {
-    renderBlogList(blogListContainer);
-    initBlogFilters(blogListContainer);
-}
-
-// 2. LÓGICA PARA EL POST INDIVIDUAL
-const articleBody = document.querySelector(".article-body");
-if (articleBody) {
-    loadBlogPost();
-}
-
-// 3. LÓGICA PARA LA PÁGINA DE INICIO (INDEX)
-const indexBlogContainer = document.getElementById("index-blog-container");
-if (indexBlogContainer) {
-    const ultimosDosPosts = blogData.slice(0, 2); 
-    renderBlogList(indexBlogContainer, ultimosDosPosts);
-}
-
-
-function renderBlogList(container, listaDePosts = blogData) {
+function renderBlogList(container, data = blogData) {
     container.innerHTML = "";
-    if (listaDePosts.length === 0) {
-        container.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #666; width: 100%;">
-                <h3 data-i18n="blog.no_results_title">No encontramos publicaciones</h3>
-                <p data-i18n="blog.no_results_text">Intenta con otra palabra clave.</p>
-            </div>`;
+    if (data.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 40px; color: #666; width: 100%;"><h3 data-i18n="blog.no_results_title"></h3><p data-i18n="blog.no_results_text"></p></div>`;
+        if (window.i18n) {
+            window.i18n.run();
+        }
         return;
     }
 
-    listaDePosts.forEach(post => {
-        const article = document.createElement("article");
-        article.classList.add("blog-card");
-        // AÑADIDOS DATA-I18N
-        article.innerHTML = `
-            <div class="blog-image">
-                <img src="${post.imagenPrincipal}" alt="${post.titulo}">
-            </div>
+    container.innerHTML = data.map(post => `
+        <article class="blog-card">
+            <div class="blog-image"><img src="${post.imagenPrincipal}" alt="${post.titulo}" loading="lazy"></div>
             <div class="blog-content">
                 <h3 data-i18n="data_blog.id_${post.id}.title">${post.titulo}</h3>
-                <p class="blog-author"><span data-i18n="blog.by">De</span> ${post.autor}</p>
+                <p class="blog-author"><span data-i18n="blog.by"></span> ${post.autor}</p>
                 <p class="blog-excerpt" data-i18n="data_blog.id_${post.id}.summary">${post.resumen}</p>
-                <a href="blog_post.html?id=${post.id}" class="btn-black-sm" data-i18n="blog.read_more">Leer artículo completo</a>
+                <a href="blog_post.html?id=${post.id}" class="btn-black-sm" data-i18n="blog.read_more">Leer</a>
             </div>
-        `;
-        container.appendChild(article);
-
-        if(window.i18n) window.i18n.run();
-    });
+        </article>
+    `).join('');
+    
+    if (window.i18n) {
+        window.i18n.run();
+    }
 }
 
 function loadBlogPost() {
-    // 1. Obtener ID de la URL
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"));
-
-    // 2. Buscar el post actual
+    const id = parseInt(new URLSearchParams(window.location.search).get("id"));
     const post = blogData.find(p => p.id === id);
-
-    if (!post) return; 
-
-    // Referencias
-    const titleEl = document.getElementById("post-title");
-    const tagEl = document.getElementById("post-tag");
-
-    // 3. Rellenar contenido e inyectar atributos data-i18n
-    if (tagEl) {
-        tagEl.textContent = post.tag;
-        // Asumimos que los tags coinciden con las claves en "categories"
-        tagEl.setAttribute("data-i18n", `categories.${post.tag}`);
+    if (!post) {
+        return;
     }
-    
-    if (titleEl) {
-        titleEl.textContent = post.titulo;
-        titleEl.setAttribute("data-i18n", `data_blog.id_${post.id}.title`);
-    }
-    
-    // Metadatos con iconos
-    document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> <span data-i18n="blog.by">Por</span> ${post.autor}`;
+
+    const setText = (id, txt, key) => {
+        const el = document.getElementById(id);
+        if(el) { 
+            el.textContent = txt; 
+            if(key) el.setAttribute("data-i18n", key); 
+        }
+    };
+
+    setText("post-tag", post.tag, `categories.${post.tag}`);
+    setText("post-title", post.titulo, `data_blog.id_${post.id}.title`);
+    document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> <span data-i18n="blog.by"></span> ${post.autor}`;
     document.getElementById("post-date").innerHTML = `<i class="fa-regular fa-calendar"></i> ${post.fecha}`;
     document.getElementById("post-time").innerHTML = `<i class="fa-regular fa-clock"></i> ${post.lectura}`;
-    
-    // Contenido HTML (Se queda igual, difícil de traducir párrafo a párrafo dinámicamente)
     document.getElementById("post-content").innerHTML = post.contenidoHTML;
 
-    // 4. Cambiar fondo del Hero
-    const heroSection = document.querySelector(".sticky-article-hero");
-    if (heroSection) {
-        heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${post.imagenPrincipal}')`;
-    }
-    
-    // 5. Posts Relacionados (Añadir data-i18n a los títulos sugeridos)
-    const relatedContainer = document.getElementById("related-posts-container");
+    document.querySelector(".sticky-article-hero").style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${post.imagenPrincipal}')`;
 
-    if (relatedContainer) {
-        const otrosPosts = blogData.filter(p => p.id !== id);
-        const sugeridos = otrosPosts.slice(0, 2);
-        relatedContainer.innerHTML = "";
-        
-        sugeridos.forEach(sugerido => {
-            const card = document.createElement("a");
-            card.href = `blog_post.html?id=${sugerido.id}`;
-            card.className = "related-card";
-            card.innerHTML = `
-                <img src="${sugerido.imagenPrincipal}" alt="${sugerido.titulo}">
-                <h4 data-i18n="data_blog.id_${sugerido.id}.title">${sugerido.titulo}</h4>
-            `;
-            relatedContainer.appendChild(card);
-        });
+    const related = document.getElementById("related-posts-container");
+    if (related) {
+        related.innerHTML = blogData.filter(p => p.id !== id).slice(0, 2).map(s => `
+            <a href="blog_post.html?id=${s.id}" class="related-card">
+                <img src="${s.imagenPrincipal}" alt="${s.titulo}">
+                <h4 data-i18n="data_blog.id_${s.id}.title">${s.titulo}</h4>
+            </a>
+        `).join('');
     }
-    if(window.i18n) window.i18n.run();
+    if (window.i18n) {
+        window.i18n.run();
+    }
 }
 
 function initBlogFilters(container) {
-    const searchInput = document.querySelector(".search-input-container input");
-    const categoryBtn = document.querySelector(".filter-btn");
-    const sortBtn = document.querySelector(".filter-icon-btn");
-    const filterButtonsContainer = document.querySelector(".filter-buttons");
-    
-    let terminoBusqueda = "";
-    let categoriaActual = "Todas las categorías";
-    let ordenActual = "Más recientes";
+    const input = document.querySelector(".search-input-container input");
+    const state = { text: "", cat: "Todas las categorías", order: "Más recientes" };
 
-    // --- FUNCIÓN HELPER: Convertir fecha string a objeto Date ---
-    const parsearFecha = (fechaStr) => {
-        const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        const partes = fechaStr.replace(',', '').split(' '); 
-        const dia = parseInt(partes[0]);
-        const mesIndex = meses.indexOf(partes[1]);
-        const anio = parseInt(partes[2]);
-        return new Date(anio, mesIndex, dia);
+    const apply = () => {
+        let res = blogData.filter(p => {
+            const txtMatch = p.titulo.toLowerCase().includes(state.text) || p.resumen.toLowerCase().includes(state.text);
+            const catMatch = state.cat === "Todas las categorías" || p.tag === state.cat;
+            return txtMatch && catMatch;
+        });
+
+        const parseDate = (str) => {
+            const parts = str.replace(',', '').split(' ');
+            return new Date(parts[2], ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"].indexOf(parts[1]), parts[0]);
+        };
+
+        if (state.order === "Más recientes") { res.sort((a,b) => parseDate(b.fecha) - parseDate(a.fecha)); }
+        else if (state.order === "Más antiguos") { res.sort((a,b) => parseDate(a.fecha) - parseDate(b.fecha)); }
+        else if (state.order === "A-Z") { res.sort((a,b) => a.titulo.localeCompare(b.titulo)); }
+        else if (state.order === "Z-A") { res.sort((a,b) => b.titulo.localeCompare(a.titulo)); }
+
+        renderBlogList(container, res);
     };
 
-    // --- FUNCIÓN MAESTRA DE FILTRADO Y ORDENAMIENTO ---
-    const aplicarFiltros = () => {
-        // 1. FILTRAR
-        let resultados = blogData.filter(post => {
-            const coincideTexto = post.titulo.toLowerCase().includes(terminoBusqueda) || 
-                                  post.resumen.toLowerCase().includes(terminoBusqueda);
-            const coincideCategoria = categoriaActual === "Todas las categorías" || post.tag === categoriaActual;
-            return coincideTexto && coincideCategoria;
-        });
-
-        // 2. ORDENAR
-        resultados.sort((a, b) => {
-            if (ordenActual === "Más recientes") {
-                return parsearFecha(b.fecha) - parsearFecha(a.fecha);
-            } else if (ordenActual === "Más antiguos") {
-                return parsearFecha(a.fecha) - parsearFecha(b.fecha);
-            } else if (ordenActual === "A-Z") {
-                return a.titulo.localeCompare(b.titulo);
-            } else if (ordenActual === "Z-A") {
-                return b.titulo.localeCompare(a.titulo);
-            }
-        });
-        renderBlogList(container, resultados);
-    };
-
-    // BÚSQUEDA
-    if (searchInput) {
-        searchInput.addEventListener("input", (e) => {
-            terminoBusqueda = e.target.value.toLowerCase().trim();
-            aplicarFiltros();
-        });
-        searchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                searchInput.blur();
-            }
+    if (input) {
+        input.addEventListener("input", (e) => { 
+            state.text = e.target.value.toLowerCase().trim(); 
+            apply(); 
         });
     }
 
-    // MENÚ DE CATEGORÍAS
-    if (categoryBtn && filterButtonsContainer) {
-        const categorias = ["Todas las categorías", ...new Set(blogData.map(p => p.tag))];
-        const catMenu = crearMenuDropdown(categorias, (seleccion) => {
-            categoriaActual = seleccion;
-            categoryBtn.textContent = seleccion;
-            aplicarFiltros();
-        });
-        filterButtonsContainer.appendChild(catMenu);
-        categoryBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            cerrarTodosLosMenus();
-            catMenu.classList.toggle("show");
-        });
-    }
-
-    // MENÚ DE ORDENAR
-    if (sortBtn && filterButtonsContainer) {
-        const opcionesOrden = ["Más recientes", "Más antiguos", "A-Z", "Z-A"];
-        const sortMenu = crearMenuDropdown(opcionesOrden, (seleccion) => {
-            ordenActual = seleccion;
-            aplicarFiltros();
-            console.log("Ordenando por:", seleccion);
-        });
-        sortMenu.classList.add("sort-menu");
-        filterButtonsContainer.appendChild(sortMenu);
-        sortBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            cerrarTodosLosMenus();
-            sortMenu.classList.toggle("show");
-            sortBtn.classList.toggle("active");
-        });
-    }
-
-    // UTILIDADES
-    document.addEventListener("click", (e) => {
-        if (!filterButtonsContainer.contains(e.target)) {
-            cerrarTodosLosMenus();
+    const setupMenu = (btnCls, opts, cb) => {
+        const btn = document.querySelector(btnCls);
+        if (!btn) {
+            return;
         }
-    });
-
-    function cerrarTodosLosMenus() {
-        document.querySelectorAll(".category-dropdown").forEach(el => el.classList.remove("show"));
-        if(sortBtn) sortBtn.classList.remove("active");
-    }
-    function crearMenuDropdown(opciones, onClickCallback) {
+        
         const menu = document.createElement("div");
         menu.className = "category-dropdown";
-        opciones.forEach(opcionTxt => {
+        
+        opts.forEach(o => {
             const item = document.createElement("div");
             item.className = "category-option";
-            item.textContent = opcionTxt;
-            item.addEventListener("click", () => {
-                onClickCallback(opcionTxt);
-                menu.classList.remove("show");
-                if(sortBtn) sortBtn.classList.remove("active");
-            });
+            item.textContent = o;
+            item.onclick = () => { 
+                cb(o); 
+                menu.classList.remove("show"); 
+                if(btnCls.includes("icon")) {
+                    btn.classList.remove("active"); 
+                } else {
+                    btn.textContent = o; 
+                }
+            };
             menu.appendChild(item);
         });
-        return menu;
+        
+        document.querySelector(".filter-buttons").appendChild(menu);
+        
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            document.querySelectorAll(".category-dropdown").forEach(m => {
+                if (m !== menu) m.classList.remove("show");
+            });
+            menu.classList.toggle("show");
+            
+            if(btnCls.includes("icon")) {
+                btn.classList.toggle("active");
+            }
+        };
+    };
+
+    setupMenu(".filter-btn", ["Todas las categorías", ...new Set(blogData.map(p => p.tag))], (sel) => { state.cat = sel; apply(); });
+    setupMenu(".filter-icon-btn", ["Más recientes", "Más antiguos", "A-Z", "Z-A"], (sel) => { state.order = sel; apply(); });
+
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
+    });
+}
+
+// --- INIT ---
+function init() {
+    const listContainer = document.querySelector(".blog-list-container");
+    const indexContainer = document.getElementById("index-blog-container");
+    const isPostPage = document.querySelector(".article-body");
+
+    if (listContainer) {
+        renderBlogList(listContainer);
+        initBlogFilters(listContainer);
+    } else if (indexContainer) {
+        renderBlogList(indexContainer, blogData.slice(0, 2));
+    } else if (isPostPage) {
+        loadBlogPost();
     }
 }
+
+init();

@@ -163,16 +163,14 @@
     "no_trips_title": "You don't have booked trips yet",
     "no_trips_text": "What are you waiting for your next adventure?",
     "btn_explore_destinations": "Explore Destinations",
-    "title_config": "Settings",
-    "label_payment": "Default payment method",
-    "ph_payment": "Ex: Visa ending in 4242",
-    "label_lang": "Language",
-    "ph_lang": "Ex: Spanish",
-    "label_interface": "Interface",
-    "ph_interface": "Ex: Light Mode",
-    "status_saved": "Changes saved.",
     "ref": "Ref:",
-    "view_details": "View details"
+    "view_details": "View details",
+
+    "title_edit_profile": "Edit Profile",
+    "label_photo": "Profile Picture",
+    "text_photo": "Click the lock to change it.",
+    "btn_save_changes": "Save Changes",
+    "status_saved": "Data updated successfully."
   },
   "checkout": {
     "back": "Back to experiences",
@@ -988,6 +986,16 @@
     "user2_name": "Charles R.",
     "user2_time": "1 month ago",
     "user2_text": "\"An unforgettable experience. The guide was very professional and the group was very fun. I will travel with Pack&Go again.\""
+  },
+  "login_modal": {
+    "title_default": "Login Required",
+    "msg_default": "To continue with your purchase, we need to identify you.",
+    "title_fav": "Log In",
+    "msg_fav": "You must have an account to save favorites.",
+    "title_buy": "Cannot Purchase Yet",
+    "msg_buy": "Please log in to complete your booking.",
+    "btn_close": "Keep exploring",
+    "btn_login": "Go to Login"
   },
   "privacy": {
     "s1_title": "1. Introduction",

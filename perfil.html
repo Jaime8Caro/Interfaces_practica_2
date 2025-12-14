@@ -143,29 +143,59 @@
                 </div>
 
                 <div id="tab-configuracion" class="tab-section" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                        <h1 style="margin:0;" data-i18n="profile.title_config">Configuración</h1>
-                        <button id="btn-lock-config" class="btn-icon" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #666;">
-                            <i class="fa-solid fa-lock"></i>
-                        </button>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h1 style="margin:0;" data-i18n="profile.title_edit_profile">Editar Perfil</h1>
+                            <button id="btn-lock-config" class="btn-icon" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #666;" title="Editar">
+                                <i class="fa-solid fa-lock"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <form class="profile-form">
-                        <div class="form-group">
-                            <label for="pago" data-i18n="profile.label_payment">Método de pago por defecto</label>
-                            <input type="text" id="pago" class="form-input config-field" placeholder="Ej: Tarjeta Visa terminada en 4242" data-i18n-placeholder="profile.ph_payment" disabled>
+                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                            <div style="position: relative;">
+                                <img id="config-avatar-preview" src="assets/defecto.png" alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd;">
+                                <label for="config-foto" id="btn-upload-photo" style="display: none; position: absolute; bottom: 0; right: 0; background: #333; color: #fff; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; cursor: pointer; font-size: 0.8rem;">
+                                    <i class="fa-solid fa-camera"></i>
+                                </label>
+                                <input type="file" id="config-foto" accept="image/*" style="display: none;">
+                            </div>
+                            <div>
+                                <h3 style="margin: 0 0 5px 0;" data-i18n="profile.label_photo">Foto de perfil</h3>
+                                <p style="margin: 0; font-size: 0.8rem; color: #888;" data-i18n="profile.text_photo">Haz clic en el candado para cambiarla.</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="idioma" data-i18n="profile.label_lang">Idioma</label>
-                            <input type="text" id="idioma" class="form-input config-field" placeholder="Ej: Español" data-i18n-placeholder="profile.ph_lang" disabled>
+
+                        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label for="config-nombre" data-i18n="profile.label_name">Nombre</label>
+                                <input type="text" id="config-nombre" class="form-input config-field" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="config-apellidos" data-i18n="profile.label_lastname">Apellidos</label>
+                                <input type="text" id="config-apellidos" class="form-input config-field" disabled>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="interfaz" data-i18n="profile.label_interface">Interfaz</label>
-                            <input type="text" id="interfaz" class="form-input config-field" placeholder="Ej: Modo Claro" data-i18n-placeholder="profile.ph_interface" disabled>
+                            <label for="config-usuario" data-i18n="profile.label_user">Nombre de usuario (Apodo)</label>
+                            <input type="text" id="config-usuario" class="form-input config-field" disabled>
                         </div>
+
+                        <div class="form-group">
+                            <label for="config-email" data-i18n="profile.label_email">Correo electrónico</label>
+                            <input type="email" id="config-email" class="form-input config-field" disabled>
+                        </div>
+                        
+                        <button type="button" id="btn-save-config" class="btn-black" style="display: none; margin-top: 20px; width: 100%;" data-i18n="profile.btn_save_changes">
+                            Guardar cambios
+                        </button>
                     </form>
                     
-                    <p id="config-status" style="font-size: 0.8rem; color: green; display: none; margin-top: 10px;" data-i18n="profile.status_saved">Cambios guardados.</p>
+                    <p id="config-status" style="font-size: 0.9rem; color: #28a745; display: none; margin-top: 15px; text-align: center;">
+                        <i class="fa-solid fa-check-circle"></i> <span data-i18n="profile.status_saved">Datos actualizados correctamente.</span>
+                    </p>
                 </div>
 
             </div>

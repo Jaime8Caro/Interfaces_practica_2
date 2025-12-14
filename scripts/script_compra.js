@@ -1,388 +1,319 @@
+/**
+ * GESTIÓN DE PROCESO DE COMPRA (CHECKOUT)
+ */
+
 let currentStep = 1;
-detectarPaginaYEjecutar();
 
-// Función principal para detectar la página y ejecutar la lógica correspondiente
-function detectarPaginaYEjecutar() {
-    const checkoutForm = document.getElementById('checkoutForm');
-    const successSection = document.querySelector('.success-section');
-
-    // 1. SI ESTAMOS EN EL PROCESO DE COMPRA
-    if (checkoutForm) {
-        // Verificamos que exista un usuario autenticado antes de mostrar el checkout 
-        let usuarioLogueado = null;
-        if (typeof obtenerUsuarioActual === 'function') {
-            usuarioLogueado = obtenerUsuarioActual();
-        }
-
-        if (!usuarioLogueado) {
-            if (typeof mostrarAvisoLogin === 'function') {
-                mostrarAvisoLogin();
-            }
-            return;
-        }
-        cargarResumenCompra();
-        checkoutForm.addEventListener('submit', finalizarCompra);
-        updateStepper(1);
-    }
+function initCheckout(form) {
+    const user = UserService.getCurrent();
     
-    // 2. SI ESTAMOS EN LA PÁGINA DE ÉXITO (compra_exito.html)
-    else if (successSection) {
-        cargarDatosExito();
-        cargarBotonesExito();
-    }
-}
-
-// ==========================================
-// LÓGICA DE PROCESO DE COMPRA (proceso_compra.html)
-// ==========================================
-
-// Función para cargar el resumen del viaje en el Paso 3
-function cargarResumenCompra() {
-    // Recuperamos el viaje que el usuario eligió
-    const compraGuardada = localStorage.getItem('compra_seleccionada');
-
-    if (compraGuardada) {
-        const viaje = JSON.parse(compraGuardada);
-        const titulo = document.getElementById('resumen-titulo');
-        const destino = document.getElementById('resumen-destino');
-        const precioRow = document.getElementById('resumen-precio-base');
-        const precioTotal = document.getElementById('resumen-total');
-        const duracion = document.getElementById('resumen-duracion');
-
-        if (titulo) titulo.innerText = viaje.titulo || "Experiencia";
-        if (destino) destino.innerText = viaje.destino || "Mundo";
-        if (duracion) duracion.innerText = viaje.duracion || "--";
-        
-        if (viaje.precio) {
-            const precioFmt = `$${viaje.precio.toFixed(2)}`;
-            if (precioRow) precioRow.innerText = precioFmt;
-            if (precioTotal) precioTotal.innerText = precioFmt;
-        }
-    } else {
-        console.warn("No hay compra seleccionada en localStorage.");
-    }
-}
-
-// Función para finalizar la compra al enviar el formulario
-function finalizarCompra(e) {
-    e.preventDefault();
-    let usuarioLogueado = null;
-    if (typeof obtenerUsuarioActual === 'function') {
-        usuarioLogueado = obtenerUsuarioActual();
-    }
-
-    if (!usuarioLogueado) {
-        if (typeof mostrarAvisoLogin === 'function') {
-            mostrarAvisoLogin();
-        }
+    // PROTECCIÓN: Si no hay usuario, redirigir al login
+    if (!user) {
+        window.location.href = 'login.html'; 
         return;
     }
 
-    // A. Recopilar Datos Personales
-    const datosContacto = {
-        nombre: document.querySelector('#step-1 input[placeholder="Nombre"]').value,
-        apellidos: document.querySelector('#step-1 input[placeholder="Apellidos"]').value,
-        email: document.querySelector('#step-1 input[placeholder="Correo electrónico"]').value,
-        telefono: document.querySelector('#step-1 input[placeholder="Teléfono"]').value,
+    autofillCheckoutData(user);
+    loadSummary();
+    form.addEventListener('submit', finalizePurchase);
+    updateStepper(1);
+    setupDynamicSections();
+    setupPaymentSelection();
+}
+
+function autofillCheckoutData(user) {
+    if (!user) return;
+
+    const setInputValue = (placeholder, value) => {
+        const input = document.querySelector(`#step-1 input[placeholder="${placeholder}"]`);
+        if (input && value) {
+            input.value = value;
+        }
     };
 
-    // B. Recopilar Acompañantes y Mascotas
-    const acompanantes = [];
-    document.querySelectorAll('#list-acompanantes .dynamic-card').forEach(card => {
-        acompanantes.push({
-            nombre: card.querySelector('input[placeholder="Nombre completo"]').value,
-            dni: card.querySelector('input[placeholder="DNI / Pasaporte"]').value
+    setInputValue("Nombre", user.nombre);
+    setInputValue("Apellidos", user.apellidos);
+    setInputValue("Correo electrónico", user.correo);
+    setInputValue("Teléfono", user.telefono || ""); 
+}
+
+function loadSummary() {
+    const trip = JSON.parse(localStorage.getItem('compra_seleccionada'));
+    if (!trip) {
+        window.location.href = 'experiencias.html';
+        return;
+    }
+
+    const setText = (id, val) => { 
+        const el = document.getElementById(id); 
+        if (el) { el.innerText = val; }
+    };
+    
+    setText('resumen-titulo', trip.titulo || "Experiencia");
+    setText('resumen-destino', trip.destino || "Mundo");
+    setText('resumen-duracion', trip.duracion || "--");
+    
+    if (trip.precio) {
+        const price = `$${trip.precio.toFixed(2)}`;
+        setText('resumen-precio-base', price);
+        setText('resumen-total', price);
+    }
+}
+
+function finalizePurchase(e) {
+    e.preventDefault();
+    
+    // Obtenemos el usuario más actualizado posible
+    const user = UserService.getCurrent();
+    if (!user) {
+        return window.mostrarAvisoLogin('login_modal.title_buy', 'login_modal.msg_buy');
+    }
+
+    const getVal = (sel) => {
+        const el = document.querySelector(sel);
+        return el ? el.value : '';
+    };
+    
+    const getList = (id, fields) => {
+        return Array.from(document.querySelectorAll(`#${id} .dynamic-card`)).map(card => {
+            const obj = {};
+            fields.forEach(f => {
+                const input = card.querySelector(f.sel);
+                if (input) obj[f.key] = input.value;
+            });
+            return obj;
         });
-    });
+    };
 
-    const mascotas = [];
-    document.querySelectorAll('#list-mascotas .dynamic-card').forEach(card => {
-        mascotas.push({
-            especie: card.querySelector('input[placeholder="Ej: Perro, Gato"]').value,
-            tamano: card.querySelector('select').value
-        });
-    });
+    const contact = {
+        nombre: getVal('#step-1 input[placeholder="Nombre"]'),
+        email: getVal('#step-1 input[placeholder="Correo electrónico"]'),
+        telefono: getVal('#step-1 input[placeholder="Teléfono"]')
+    };
 
-    // C. Recuperar datos del viaje
-    const viaje = JSON.parse(localStorage.getItem('compra_seleccionada') || '{}');
+    const companions = getList('list-acompanantes', [
+        {key: 'nombre', sel: 'input[type="text"]'}, {key: 'dni', sel: 'input:nth-of-type(2)'}
+    ]);
+    
+    const pets = getList('list-mascotas', [
+        {key: 'especie', sel: 'input'}, {key: 'tamano', sel: 'select'}
+    ]);
 
-    // D. Crear Objeto Reserva
-    const nuevaReserva = {
+    const trip = JSON.parse(localStorage.getItem('compra_seleccionada') || '{}');
+    const allergyInput = document.querySelector('#form-alergia textarea');
+
+    const reservation = {
         id_reserva: 'PKG-' + Date.now().toString().slice(-6),
         fecha_compra: new Date().toLocaleDateString(),
         estado: 'Confirmada',
-        viaje: viaje,
-        cliente: datosContacto,
-        detalles_adicionales: {
-            total_acompanantes: acompanantes.length,
-            lista_acompanantes: acompanantes,
-            total_mascotas: mascotas.length,
-            lista_mascotas: mascotas,
-            alergias: document.querySelector('#form-alergia textarea')?.value || 'Ninguna'
+        viaje: trip,
+        cliente: contact,
+        detalles: { 
+            companions, 
+            pets, 
+            alergias: allergyInput ? allergyInput.value : 'Ninguna' 
         },
-        precio_pagado: viaje.precio
+        precio_pagado: trip.precio
     };
 
-    // E. Guardar en Historial
-    const historialReservas = JSON.parse(localStorage.getItem('reservas') || '[]');
-    historialReservas.push(nuevaReserva);
-    localStorage.setItem('reservas', JSON.stringify(historialReservas));
+    // --- AQUÍ ESTÁ EL CAMBIO CLAVE ---
+    // Guardamos la reserva DENTRO del usuario
+    if (!user.reservas) {
+        user.reservas = [];
+    }
+    user.reservas.push(reservation);
 
-    // F. Guardar como Última Reserva (para la pantalla de éxito)
-    localStorage.setItem('ultima_reserva', JSON.stringify(nuevaReserva));
+    // Actualizamos el usuario en LocalStorage (y en la lista global)
+    UserService.saveCurrent(user);
 
-    // G. Redirigir
+    // Guardamos la última reserva para la pantalla de éxito
+    localStorage.setItem('ultima_reserva', JSON.stringify(reservation));
+
     window.location.href = 'compra_exito.html';
 }
 
-
-// --- NAVEGACIÓN ENTRE PASOS ---
-
-// Función para mostrar el paso correspondiente
-function showStep(stepNumber) {
-    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-    
-    const activeStep = document.getElementById(`step-${stepNumber}`);
-    if (activeStep) activeStep.classList.add('active');
-
-    const titles = { 1: "Datos Personales", 2: "Acompañantes y Mascotas", 3: "Confirmación y Pago" };
-    const titleElement = document.getElementById('checkout-title');
-    if (titleElement) titleElement.innerText = titles[stepNumber];
-
-    updateStepper(stepNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    currentStep = stepNumber;
+// --- LIMPIEZA DE DATOS ---
+// Esta función se llamará cuando el usuario salga de la pantalla de éxito
+function cleanPurchaseData() {
+    localStorage.removeItem('compra_seleccionada');
+    localStorage.removeItem('ultima_reserva');
+    console.log("Datos temporales de compra eliminados.");
 }
 
-function updateStepper(stepNumber) {
+// --- NAVEGACIÓN Y VALIDACIÓN (Igual que antes) ---
+window.goToStep = (step) => {
+    if (step > currentStep && !validateStep(currentStep)) return;
+    showStep(step);
+};
+
+window.nextStep = (step) => window.goToStep(step);
+window.prevStep = (step) => showStep(step);
+
+function showStep(step) {
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step-${step}`)?.classList.add('active');
+    
+    const titles = { 1: "Datos Personales", 2: "Acompañantes", 3: "Pago" };
+    const titleEl = document.getElementById('checkout-title');
+    if (titleEl) titleEl.innerText = titles[step];
+
+    updateStepper(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentStep = step;
+}
+
+function validateStep(step) {
+    const container = document.getElementById(`step-${step}`);
+    if (!container) return true;
+
+    let valid = true;
+    container.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
+        if (input.offsetParent === null) return;
+        
+        let isValid = input.value.trim().length > 0;
+        if (input.type === 'email') isValid = input.value.includes('@') && input.value.length > 3;
+
+        if (!isValid) {
+            input.style.border = "2px solid red";
+            valid = false;
+        } else {
+            input.style.border = "";
+        }
+    });
+    return valid;
+}
+
+function updateStepper(step) {
     for (let i = 1; i <= 3; i++) {
         const item = document.getElementById(`indicator-${i}`);
-        const circle = item.querySelector('.step-circle');
+        const circle = item?.querySelector('.step-circle');
+        
         if (item && circle) {
             item.classList.remove('active', 'completed');
-            circle.innerHTML = i; 
-            if (i < stepNumber) {
+            circle.innerHTML = i;
+            if (i < step) {
                 item.classList.add('completed');
                 circle.innerHTML = '<i class="fa-solid fa-check"></i>';
-            } else if (i === stepNumber) {
+            } else if (i === step) {
                 item.classList.add('active');
             }
         }
     }
 }
 
-// Mostrar/Ocultar la sección completa
-window.toggleListSection = function(checkboxId, wrapperId, type) {
-    const checkbox = document.getElementById(checkboxId);
-    const wrapper = document.getElementById(wrapperId);
-    const listContainerId = type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas';
-    const listContainer = document.getElementById(listContainerId);
-
-    if (checkbox && checkbox.checked) {
-        wrapper.style.display = 'block';
-        if (listContainer.children.length === 0) {
-            addDynamicEntry(type);
+// --- SECCIONES DINÁMICAS ---
+function setupDynamicSections() {
+    window.toggleListSection = (checkId, wrapId, type) => {
+        const chk = document.getElementById(checkId);
+        const wrap = document.getElementById(wrapId);
+        const list = document.getElementById(type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas');
+        
+        if (chk?.checked) {
+            wrap.style.display = 'block';
+            if (list.children.length === 0) addDynamicEntry(type);
+        } else {
+            wrap.style.display = 'none';
+            list.innerHTML = '';
         }
-    } else if (checkbox) {
-        wrapper.style.display = 'none';
-        listContainer.innerHTML = ''; 
-    }
-};
+    };
 
-// Añadir nueva tarjeta (sin borrar las anteriores)
-window.addDynamicEntry = function(type) {
-    const containerId = type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas';
-    const container = document.getElementById(containerId);
-    const count = container.children.length + 1;
-    const card = document.createElement('div');
-    card.className = 'dynamic-card';
-    card.id = `${type}-entry-${Date.now()}`;
-    let htmlContent = '';
-
-    if (type === 'acompanante') {
-        // Placeholder con data-i18n-placeholder
-        htmlContent = `
-            <h4><i class="fa-solid fa-user"></i> <span data-i18n="checkout.companion_label">Acompañante</span></h4>
-            <div class="input-group">
-                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_fullname">
-            </div>
-            <div class="input-group">
-                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_dni">
-            </div>
-        `;
-    } else {
-        htmlContent = `
-            <h4><i class="fa-solid fa-paw"></i> <span data-i18n="checkout.pet_label">Mascota</span></h4>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_pet_type">
-            </div>
-            <div class="input-group">
-                <select class="styled-select" required>
-                    <option value="" disabled selected data-i18n="checkout.select_size">Selecciona el tamaño</option>
-                    <option value="pequeño" data-i18n="checkout.size_s">Pequeño</option>
-                    <option value="mediano" data-i18n="checkout.size_m">Mediano</option>
-                    <option value="grande" data-i18n="checkout.size_l">Grande</option>
-                </select>
-            </div>
-        `;
-    }
-    htmlContent += `
-        <button type="button" class="btn-delete-card" onclick="removeEntry(this)" title="Eliminar">
-            <i class="fa-solid fa-trash-can"></i>
-        </button>
-    `;
-
-    card.innerHTML = htmlContent;
-    container.appendChild(card);
-    if(window.i18n) window.i18n.run();
-};
-
-// Borrar una tarjeta específica
-window.removeEntry = function(button) {
-    const card = button.closest('.dynamic-card');
-    if (card) {
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(20px)';
-        card.style.transition = 'all 0.3s ease';
+    window.addDynamicEntry = (type) => {
+        const container = document.getElementById(type === 'acompanante' ? 'list-acompanantes' : 'list-mascotas');
+        const card = document.createElement('div');
+        card.className = 'dynamic-card';
         
-        setTimeout(() => {
-            card.remove();
-        }, 300);
-    }
-};
+        const content = type === 'acompanante' 
+            ? `<h4><i class="fa-solid fa-user"></i> <span data-i18n="checkout.companion_label"></span></h4>
+               <div class="input-group"><input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_fullname"></div>
+               <div class="input-group"><input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_dni"></div>`
+            : `<h4><i class="fa-solid fa-paw"></i> <span data-i18n="checkout.pet_label"></span></h4>
+               <div class="input-group"><input type="text" class="input-gray" required data-i18n-placeholder="checkout.ph_pet_type"></div>
+               <div class="input-group"><select class="styled-select" required>
+                   <option value="" disabled selected data-i18n="checkout.select_size"></option>
+                   <option value="pequeño" data-i18n="checkout.size_s"></option>
+                   <option value="mediano" data-i18n="checkout.size_m"></option>
+                   <option value="grande" data-i18n="checkout.size_l"></option>
+               </select></div>`;
 
-// Lógica de Alergias
-window.toggleSimpleSection = function(checkboxId, containerId) {
-    const checkbox = document.getElementById(checkboxId);
-    const container = document.getElementById(containerId);
-    if(checkbox && checkbox.checked) {
-        container.style.display = 'block';
-        container.querySelector('textarea').setAttribute('required', 'true');
-    } else if (checkbox) {
-        container.style.display = 'none';
-        container.querySelector('textarea').removeAttribute('required');
-    }
-};
+        card.innerHTML = `${content}<button type="button" class="btn-delete-card" onclick="removeEntry(this)"><i class="fa-solid fa-trash-can"></i></button>`;
+        container.appendChild(card);
+        if (window.i18n) window.i18n.run();
+    };
 
-// Función para validar los campos del paso actual
-function validateCurrentStep(step) {
-    const currentStepDiv = document.getElementById(`step-${step}`);
-    if (!currentStepDiv) return true;
-
-    const inputsRequeridos = currentStepDiv.querySelectorAll('input[required], select[required], textarea[required]');
-    let pasoValido = true;
-
-    inputsRequeridos.forEach(input => {
-        if (input.offsetParent === null) return;
-
-        const placeholderOriginal = input.getAttribute('placeholder') || "Campo";
-        let condicion = input.value.trim().length > 0;
-        
-        if (input.type === 'email') condicion = input.value.includes('@') && input.value.length > 3;
-        
-        if (typeof validarCampoFormulario === 'function') {
-            validarCampoFormulario(input, condicion, "Requerido", placeholderOriginal);
-        } else if (!condicion) {
-            input.style.border = "2px solid red";
+    window.removeEntry = (btn) => {
+        const card = btn.closest('.dynamic-card');
+        if (card) card.remove();
+    };
+    
+    window.toggleSimpleSection = (chkId, boxId) => {
+        const box = document.getElementById(boxId);
+        const chk = document.getElementById(chkId);
+        if (box && chk) {
+            box.style.display = chk.checked ? 'block' : 'none';
+            const txt = box.querySelector('textarea');
+            if (txt) chk.checked ? txt.setAttribute('required', 'true') : txt.removeAttribute('required');
         }
-
-        if (!condicion) pasoValido = false;
-    });
-
-    return pasoValido;
+    };
 }
 
-window.goToStep = function(targetStep) {
-    if (targetStep > currentStep) {
-        if (!validateCurrentStep(currentStep)) return;
-    }
-    showStep(targetStep);
-};
+function setupPaymentSelection() {
+    const opts = document.querySelectorAll('.payment-option');
+    opts.forEach(o => o.addEventListener('click', () => {
+        opts.forEach(x => x.classList.remove('selected'));
+        o.classList.add('selected');
+        const radio = o.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+    }));
+}
 
-window.nextStep = function(targetStep) {
-    if (targetStep > currentStep) {
-        if (!validateCurrentStep(currentStep)) return;
-    }
-    showStep(targetStep);
-};
-
-window.prevStep = function(targetStep) {
-    showStep(targetStep);
-};
-
-const paymentOptions = document.querySelectorAll('.payment-option');
-paymentOptions.forEach(option => {
-    option.addEventListener('click', () => {
-        // 1. Quitar clase 'selected' a todos
-        paymentOptions.forEach(opt => opt.classList.remove('selected'));
-        
-        // 2. Añadir clase 'selected' al clickeado
-        option.classList.add('selected');
-        
-        // 3. Marcar el input radio interno como checked
-        const radio = option.querySelector('input[type="radio"]');
-        if(radio) radio.checked = true;
-    });
-});
-
-// ==========================================
-// LÓGICA DE PÁGINA DE ÉXITO (compra_exito.html)
-// ==========================================
-
-function cargarDatosExito() {    
+// --- PÁGINA ÉXITO ---
+function initSuccessPage() {
     const reserva = JSON.parse(localStorage.getItem('ultima_reserva'));
+    const setText = (id, txt) => { 
+        const el = document.getElementById(id); 
+        if (el) { el.innerText = txt; }
+    };
 
     if (reserva) {
-        const titulo = document.getElementById('exito-titulo');
-        const id = document.getElementById('exito-id');
-        const email = document.getElementById('exito-email');
-        const destino = document.getElementById('exito-destino');
-        const precio = document.getElementById('exito-precio');
+        setText('exito-titulo', reserva.viaje.titulo);
+        setText('exito-id', "#" + reserva.id_reserva);
+        setText('exito-email', reserva.cliente.email);
+        setText('exito-destino', reserva.viaje.destino);
+        setText('exito-precio', "$" + reserva.precio_pagado);
+    }
 
-        if (titulo) titulo.innerText = reserva.viaje.titulo || "Experiencia Pack&Go";
-        if (id) id.innerText = "#" + reserva.id_reserva;
-        if (email) email.innerText = reserva.cliente.email || "tu correo";
-        if (destino) destino.innerText = reserva.viaje.destino || "Mundo";
-        if (precio) precio.innerText = "$" + reserva.precio_pagado;
+    const actions = document.querySelector(".acciones-postcompra");
+    if (actions) {
+        const isLogged = !!UserService.getCurrent();
+        const mainBtn = isLogged 
+            ? `<a href="perfil.html#viajes" class="btn-rounded-black salir" data-i18n="success.btn_profile">Ver perfil</a>`
+            : `<button id="btn-descargar-pdf" class="btn-rounded-black" data-i18n="success.btn_pdf">PDF</button>`;
         
-    } else {
-        const titulo = document.getElementById('exito-titulo');
-        if(titulo) titulo.innerText = "No se encontró ninguna reserva reciente.";
+        actions.innerHTML = `${mainBtn}<a href="index.html" class="btn-rounded-outline salir" data-i18n="success.btn_home">Inicio</a>`;
+        
+        const btnPdf = document.getElementById('btn-descargar-pdf');
+        if (btnPdf) {
+            btnPdf.addEventListener('click', () => window.print());
+        }
+
+        // Asignamos el evento de limpieza a todos los botones con clase 'salir'
+        document.querySelectorAll('.salir').forEach(b => b.addEventListener('click', () => {
+            cleanPurchaseData();
+        }));
+        
+        if (window.i18n) window.i18n.run();
     }
 }
 
-function cargarBotonesExito() {
-    const accionesDiv = document.querySelector(".acciones-postcompra");
-    if (!accionesDiv) return;
-    const usuarioLogueado = obtenerUsuarioActual();
+function init() {
+    const checkoutForm = document.getElementById('checkoutForm');
+    const successSection = document.querySelector('.success-section');
 
-    let botonesHTML = '';
-
-    if (usuarioLogueado) {
-        botonesHTML = '<a href="perfil.html#viajes" class="btn-rounded-black salir" data-i18n="success.btn_profile">Ver en mi perfil</a>';
-    } else {
-        botonesHTML = '<button id="btn-descargar-pdf" class="btn-rounded-black" data-i18n="success.btn_pdf">Descargar PDF</button>';
+    if (checkoutForm) {
+        initCheckout(checkoutForm);
+    } else if (successSection) {
+        initSuccessPage();
     }
-
-    botonesHTML += '<a href="index.html" class="btn-rounded-outline salir" data-i18n="success.btn_home">Volver al inicio</a>';
-    accionesDiv.innerHTML = botonesHTML;
-    const btnPdf = document.getElementById('btn-descargar-pdf');
-    if (btnPdf) {
-        btnPdf.addEventListener('click', () => {
-            window.print(); 
-        });
-    }
-
-    document.querySelectorAll('.salir').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            limpiarDatosTemporales();
-        });
-    });
-    if(window.i18n) window.i18n.run();
 }
 
-function limpiarDatosTemporales() {
-    localStorage.removeItem('compra_seleccionada'); 
-    localStorage.removeItem('ultima_reserva');
-    console.log("Datos temporales de compra eliminados.");
-}
+init();

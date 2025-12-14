@@ -1,274 +1,276 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. CARGAR DATOS DEL USUARIO
-    cargarDatosUsuarioPerfil();
+/**
+ * GESTIÓN DE PERFIL DE USUARIO
+ */
 
-    // 2. GESTIÓN DE PESTAÑAS Y HASH (URL)
-    gestionarNavegacionPestanas();
-
-    // 3. GESTIÓN DEL LOGOUT
-    configurarLogoutSidebar();
-
-    // 4. CARGAR RESERVAS Y FAVORITOS
-    cargarReservasUsuario();
-
-    // 5. CARGAR FAVORITOS
-    cargarFavoritosUsuario();
-
-    // 6. GESTIONAR CONFIG
-    gestionarConfiguracion();
-});
-
-// --- FUNCIONES ---
-
-function cargarDatosUsuarioPerfil() {
-    // 1. Obtenemos el usuario
-    const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
-
-    if (!usuario) {
+function initProfile() {
+    const user = UserService.getCurrent();
+    if (!user) {
         window.location.href = 'login.html';
         return;
     }
 
-    // 2. Rellenamos el Avatar
-    const avatares = document.querySelectorAll('.user-avatar-placeholder, .profile-avatar-large');
-    avatares.forEach(div => {
-        if (usuario.imagen) {
-            div.style.backgroundImage = `url('${usuario.imagen}')`;
+    document.querySelectorAll('.user-avatar-placeholder, .profile-avatar-large').forEach(div => {
+        if (user.imagen) {
+            div.style.backgroundImage = `url('${user.imagen}')`;
             div.style.backgroundSize = 'cover';
         }
     });
 
-    // 3. Rellenamos los Inputs (Buscando los IDs que acabamos de poner)
-    const nombre = document.getElementById('input-nombre');
-    const apellido = document.getElementById('input-apellido');
-    const email = document.getElementById('input-email');
-    const usuarioInput = document.getElementById('input-usuario');
-    const nacimiento = document.getElementById('input-nacimiento');
-
-    if (nombre) nombre.value = usuario.nombre || '';
-    if (apellido) apellido.value = usuario.apellidos || usuario.apellido || '';
-    if (email) email.value = usuario.correo || '';
-    if (usuarioInput) usuarioInput.value = usuario.apodo|| usuario.username || '';
-    if (nacimiento) nacimiento.value = usuario.fecha_nacimiento || usuario.nacimiento || usuario.fecha || '';
-}
-
-function gestionarNavegacionPestanas() {
-    const links = document.querySelectorAll('.sidebar-link[data-tab]');
-    const secciones = document.querySelectorAll('.tab-section');
-
-    function activarPestana(nombreTab) {
-        // 1. Ocultamos TODAS las secciones primero
-        secciones.forEach(sec => sec.style.display = 'none');
-        
-        // 2. Desactivamos TODOS los links visualmente
-        links.forEach(link => link.classList.remove('active'));
-
-        // 3. Calculamos el ID que buscamos (Ej: "datos" -> "tab-datos")
-        const idSeccion = `tab-${nombreTab}`;
-        const seccionAmostrar = document.getElementById(idSeccion);
-
-        // 4. SI EXISTE, LO MOSTRAMOS
-        if (seccionAmostrar) {
-            seccionAmostrar.style.display = 'block';
-        } else {
-            console.error(`No encuentro el div con id="${idSeccion}"`);
-        }
-
-        // 5. Activamos el link del sidebar correspondiente
-        const linkActivo = document.querySelector(`.sidebar-link[data-tab="${nombreTab}"]`);
-        if (linkActivo) {
-            linkActivo.classList.add('active');
-        }
-    }
-
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const tabName = link.getAttribute('data-tab');
-            window.location.hash = tabName;
-            activarPestana(tabName);
-        });
-    });
-
-    // Carga inicial
-    function leerHashYActivar() {
-        const hash = window.location.hash.replace('#', '') || 'datos';
-        const tabFinal = (hash === 'perfil') ? 'datos' : hash;
-        activarPestana(tabFinal);
-    }
-
-    leerHashYActivar();
-    window.addEventListener('hashchange', leerHashYActivar);
-}
-
-function configurarLogoutSidebar() {
-    const btnLogout = document.getElementById('btn-logout-sidebar');
+    const setVal = (id, val) => { 
+        const el = document.getElementById(id); 
+        if(el) el.value = val || ''; 
+    };
     
+    setVal('input-nombre', user.nombre);
+    setVal('input-apellido', user.apellidos);
+    setVal('input-email', user.correo);
+    setVal('input-usuario', user.apodo);
+    setVal('input-nacimiento', user.fecha_nacimiento);
+
+    const btnLogout = document.getElementById('btn-logout-sidebar');
     if (btnLogout) {
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            logout();
+            UserService.logout();
         });
     }
 }
 
-function cargarReservasUsuario() {
-    const contenedor = document.getElementById('lista-reservas-container');
-    const mensajeVacio = document.getElementById('mensaje-sin-reservas');
-    const reservasGuardadas = JSON.parse(localStorage.getItem('reservas') || '[]');
-    const misReservas = reservasGuardadas;
+function setupTabs() {
+    const links = document.querySelectorAll('.sidebar-link[data-tab]');
+    const sections = document.querySelectorAll('.tab-section');
 
-    if (misReservas.length === 0) {
-        // CASO 1: NO HAY RESERVAS
-        if(contenedor) contenedor.style.display = 'none';
-        if(mensajeVacio) mensajeVacio.style.display = 'block';
-    } else {
-        // CASO 2: HAY RESERVAS -> Las pintamos
-        if(contenedor) contenedor.style.display = 'grid';
-        if(mensajeVacio) mensajeVacio.style.display = 'none';
+    const activate = (tab) => {
+        sections.forEach(s => s.style.display = 'none');
+        links.forEach(l => l.classList.remove('active'));
         
-        contenedor.innerHTML = '';
+        const section = document.getElementById(`tab-${tab}`);
+        const link = document.querySelector(`.sidebar-link[data-tab="${tab}"]`);
         
-        misReservas.forEach(reserva => {
-            // Protección por si la estructura de datos varía
-            const titulo = reserva.viaje ? reserva.viaje.titulo : 'Viaje Pack&Go';
-            const fecha = reserva.viaje ? reserva.viaje.fecha_inicio : reserva.fecha_compra;
-            const img = reserva.viaje ? reserva.viaje.imagen : 'assets/default_trip.jpg';
-            const id = reserva.id_reserva || '---';
+        if (section) section.style.setProperty('display', 'block');
+        if (link) link.classList.add('active');
+    };
 
-            const tarjetaHTML = `
-                <article class="trip-card">
-                    <div class="trip-image">
-                        <img src="${img}" alt="${titulo}" onerror="this.src='defecto.png'">
-                    </div>
-                    <div class="trip-info">
-                        <h3>${titulo}</h3>
-                        <p class="trip-date"><i class="fa-regular fa-calendar"></i> ${fecha}</p>
-                        <p class="trip-id" style="font-size: 0.8rem; color: #999;"><span data-i18n="profile.ref">Ref:</span> #${id}</p>
-                    </div>
-                </article>
-            `;
-            contenedor.innerHTML += tarjetaHTML;
-        });
-    }
-    if(window.i18n) window.i18n.run();
+    links.forEach(l => l.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = l.dataset.tab;
+        window.location.hash = tab;
+    }));
+
+    const handleHashChange = () => {
+        const hash = window.location.hash.replace('#', '') || 'datos';
+        const tab = (hash === 'perfil') ? 'datos' : hash;
+        activate(tab);
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
 }
-function cargarFavoritosUsuario() {
+
+function loadUserBookings() {
+    const container = document.getElementById('lista-reservas-container');
+    const emptyMsg = document.getElementById('mensaje-sin-reservas');
+    
+    if (!container) return;
+
+    // --- CAMBIO CLAVE ---
+    // Leemos las reservas DEL USUARIO, no del global
+    const user = UserService.getCurrent();
+    const bookings = user ? (user.reservas || []) : [];
+
+    if (bookings.length === 0) {
+        container.style.display = 'none';
+        if(emptyMsg) emptyMsg.style.display = 'block';
+        return;
+    }
+
+    if(emptyMsg) emptyMsg.style.display = 'none';
+    container.style.display = 'grid';
+    
+    container.innerHTML = bookings.map(b => `
+        <article class="trip-card">
+            <div class="trip-image">
+                <img src="${b.viaje.imagen || 'assets/default.jpg'}" alt="Viaje" onerror="this.src='assets/defecto.png'">
+            </div>
+            <div class="trip-info">
+                <h3>${b.viaje.titulo}</h3>
+                <p class="trip-date"><i class="fa-regular fa-calendar"></i> ${b.viaje.fecha_inicio || b.fecha_compra}</p>
+                <p class="trip-id" style="font-size: 0.8rem; color: #999;"><span data-i18n="profile.ref">Ref:</span> #${b.id_reserva}</p>
+            </div>
+        </article>
+    `).join('');
+    
+    if (window.i18n) window.i18n.run();
+}
+
+function loadUserFavorites() {
     const container = document.getElementById('favorites-container');
-    const noFavMsg = document.getElementById('no-favorites-msg');
+    const emptyMsg = document.getElementById('no-favorites-msg');
     
-    // Obtener usuario
-    const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
+    if (!container) return;
 
-    // Verificar si hay usuario y si tiene favoritos
-    if (!usuario || !usuario.favoritos || usuario.favoritos.length === 0) {
-        if(container) container.innerHTML = '';
-        if(noFavMsg) noFavMsg.style.display = 'block';
+    const user = UserService.getCurrent();
+    const favs = user?.favoritos || [];
+
+    if (favs.length === 0) {
+        container.innerHTML = '';
+        if (emptyMsg) emptyMsg.style.display = 'block';
         return;
     }
 
-    // Ocultar mensaje de vacío
-    if(noFavMsg) noFavMsg.style.display = 'none';
-    if(container) container.innerHTML = '';
-
-    // Filtrar los viajes que coinciden con los IDs guardados
-    if (typeof experiencesData === 'undefined') {
-        console.error("Error: experiencesData no está cargado. Revisa que script_experiencias.js esté incluido en el HTML.");
-        return;
+    if(emptyMsg) emptyMsg.style.display = 'none';
+    
+    if (typeof experiencesData !== 'undefined') {
+        const favExps = experiencesData.filter(e => favs.includes(e.id));
+        
+        container.innerHTML = favExps.map(exp => `
+            <a href="compra.html?id=${exp.id}" class="experience-card-item">
+                <div class="card-image-header">
+                    <span class="difficulty-badge">${exp.dificultad}</span>
+                    <button class="card-fav-btn active" onclick="toggleCardFav(event, ${exp.id}, this)">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    <img src="${exp.imagen}" alt="${exp.titulo}">
+                </div>
+                <div class="card-body">
+                    <h3>${exp.titulo}</h3>
+                    <p class="card-description">${exp.descripcionCorto}</p>
+                    <div class="card-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}</span>
+                        <span><i class="fa-regular fa-calendar"></i> ${exp.duracion}</span>
+                    </div>
+                    <div class="card-footer">
+                        <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
+                        <span class="btn-reservar" data-i18n="profile.view_details">Ver detalles</span>
+                    </div>
+                </div>
+            </a>
+        `).join('');
+        
+        if (window.i18n) window.i18n.run();
     }
+}
 
-    const misFavoritos = experiencesData.filter(exp => usuario.favoritos.includes(exp.id));
+function setupConfig() {
+    const elements = {
+        btnLock: document.getElementById('btn-lock-config'),
+        btnSave: document.getElementById('btn-save-config'),
+        btnUpload: document.getElementById('btn-upload-photo'),
+        inputs: document.querySelectorAll('.config-field'),
+        statusMsg: document.getElementById('config-status'),
+        imgPreview: document.getElementById('config-avatar-preview'),
+        fileInput: document.getElementById('config-foto'),
+        fields: {
+            nombre: document.getElementById('config-nombre'),
+            apellidos: document.getElementById('config-apellidos'),
+            usuario: document.getElementById('config-usuario'),
+            email: document.getElementById('config-email')
+        }
+    };
+    
+    if (!elements.btnLock) return;
 
-    // Pintar tarjetas
-    misFavoritos.forEach(exp => {
-        const cardHTML = `
-        <a href="compra.html?id=${exp.id}" class="experience-card-item">
-            <div class="card-image-header">
-                <span class="difficulty-badge">${exp.dificultad}</span>
-                
-                <button class="card-fav-btn active" onclick="toggleCardFav(event, ${exp.id}, this)">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
+    const loadData = () => {
+        const user = UserService.getCurrent();
+        if (user) {
+            elements.fields.nombre.value = user.nombre || '';
+            elements.fields.apellidos.value = user.apellidos || '';
+            elements.fields.usuario.value = user.apodo || '';
+            elements.fields.email.value = user.correo || '';
+            elements.imgPreview.src = user.imagen || 'assets/defecto.png';
+        }
+    };
 
-                <img src="${exp.imagen}" alt="${exp.titulo}">
-            </div>
-            <div class="card-body">
-                <h3>${exp.titulo}</h3>
-                <p class="card-description">${exp.descripcionCorto}</p>
-                <div class="card-meta">
-                    <span><i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}</span>
-                    <span><i class="fa-regular fa-calendar"></i> ${exp.duracion}</span>
-                    <span><i class="fa-solid fa-user-group"></i> ${exp.grupo}</span>
-                </div>
-                <div class="card-footer">
-                    <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
-                    <span class="btn-reservar" data-i18n="profile.view_details">Ver detalles</span>
-                </div>
-            </div>
-        </a>`;
-        container.innerHTML += cardHTML;
+    loadData();
+
+    elements.fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (evt) => elements.imgPreview.src = evt.target.result;
+            reader.readAsDataURL(file);
+        }
     });
-    if(window.i18n) window.i18n.run();
-}
 
-function gestionarConfiguracion() {
-    const btnLock = document.getElementById('btn-lock-config');
-    const inputsConfig = document.querySelectorAll('.config-field');
-    const icon = btnLock.querySelector('i');
-    const statusMsg = document.getElementById('config-status');
+    elements.btnLock.addEventListener('click', (e) => {
+        e.preventDefault();
+        const icon = elements.btnLock.querySelector('i');
+        const isLocked = elements.inputs[0].disabled;
 
-    // 1. CARGAR DATOS PREVIOS (Si el usuario ya guardó algo antes)
-    const configGuardada = JSON.parse(localStorage.getItem('userConfig')) || {};
-    
-    if (configGuardada.pago) document.getElementById('pago').value = configGuardada.pago;
-    if (configGuardada.idioma) document.getElementById('idioma').value = configGuardada.idioma;
-    if (configGuardada.interfaz) document.getElementById('interfaz').value = configGuardada.interfaz;
+        if (isLocked) {
+            elements.inputs.forEach(i => {
+                i.disabled = false;
+                i.style.borderColor = '#007bff';
+                i.style.backgroundColor = '#fff';
+            });
+            icon.className = 'fa-solid fa-lock-open';
+            icon.style.color = '#007bff';
+            elements.btnSave.style.display = 'block';
+            elements.btnUpload.style.display = 'block';
+            if (elements.statusMsg) elements.statusMsg.style.display = 'none';
+        } else {
+            loadData();
+            lockForm();
+        }
+    });
 
-    // 2. LOGICA DEL CANDADO
-    if (btnLock) {
-        btnLock.addEventListener('click', (e) => {
-            e.preventDefault();
+    elements.btnSave.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentUser = UserService.getCurrent();
+        if (!currentUser) return;
+
+        currentUser.nombre = elements.fields.nombre.value.trim();
+        currentUser.apellidos = elements.fields.apellidos.value.trim();
+        currentUser.apodo = elements.fields.usuario.value.trim();
+        currentUser.correo = elements.fields.email.value.trim();
+
+        const finalizeSave = () => {
+            // Guardamos usando el servicio centralizado (actualiza usuarioActual y lista global)
+            UserService.saveCurrent(currentUser);
             
-            // Comprobamos si actualmente está bloqueado (input disabled)
-            const estaBloqueado = inputsConfig[0].disabled;
+            if (typeof GlobalUI !== 'undefined') GlobalUI.renderUserHeader();
+            initProfile();
 
-            if (estaBloqueado) {
-                // --- ACCIÓN: DESBLOQUEAR ---
-                inputsConfig.forEach(input => {
-                    input.disabled = false;
-                    input.style.borderColor = '#007bff';
-                });
-                icon.classList.remove('fa-lock');
-                icon.classList.add('fa-lock-open');
-                icon.style.color = '#007bff';
-            
-                if(statusMsg) statusMsg.style.display = 'none';
-
-            } else {
-                // --- ACCIÓN: BLOQUEAR Y GUARDAR ---
-                const nuevaConfig = {};
-                
-                inputsConfig.forEach(input => {
-                    input.disabled = true;
-                    input.style.borderColor = '#ddd';
-                    nuevaConfig[input.id] = input.value;
-                });
-
-                // Guardar en LocalStorage
-                localStorage.setItem('userConfig', JSON.stringify(nuevaConfig));
-
-                // Cambiar icono a candado cerrado
-                icon.classList.remove('fa-lock-open');
-                icon.classList.add('fa-lock');
-                icon.style.color = '#666';
-
-                // Mostrar mensaje de guardado
-                if(statusMsg) {
-                    statusMsg.style.display = 'block';
-                    setTimeout(() => statusMsg.style.display = 'none', 3000);
-                }
+            lockForm();
+            if (elements.statusMsg) {
+                elements.statusMsg.style.display = 'block';
+                setTimeout(() => elements.statusMsg.style.display = 'none', 3000);
             }
+        };
+
+        if (elements.fileInput.files && elements.fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                currentUser.imagen = evt.target.result;
+                finalizeSave();
+            };
+            reader.readAsDataURL(elements.fileInput.files[0]);
+        } else {
+            finalizeSave();
+        }
+    });
+
+    function lockForm() {
+        const icon = elements.btnLock.querySelector('i');
+        elements.inputs.forEach(i => {
+            i.disabled = true;
+            i.style.borderColor = '#ddd';
+            i.style.backgroundColor = '#f9f9f9';
         });
+        icon.className = 'fa-solid fa-lock';
+        icon.style.color = '#666';
+        elements.btnSave.style.display = 'none';
+        elements.btnUpload.style.display = 'none';
     }
 }
+
+// --- INIT ---
+function init() {
+    initProfile();
+    setupTabs();
+    loadUserBookings();
+    loadUserFavorites();
+    setupConfig();
+}
+
+init();

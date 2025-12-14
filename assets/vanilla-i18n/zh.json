@@ -147,7 +147,7 @@
   "profile": {
     "tab_data": "个人资料",
     "tab_favorites": "收藏夹",
-    "tab_trips": "我的旅行",
+    "tab_trips": "我的行程",
     "tab_config": "设置",
     "logout": "退出登录",
     "title_data": "个人资料",
@@ -163,16 +163,14 @@
     "no_trips_title": "您尚未预订旅行",
     "no_trips_text": "还在等什么？开始您的下一次冒险吧！",
     "btn_explore_destinations": "探索目的地",
-    "title_config": "设置",
-    "label_payment": "默认支付方式",
-    "ph_payment": "例：以 4242 结尾的 Visa 卡",
-    "label_lang": "语言",
-    "ph_lang": "例：中文",
-    "label_interface": "界面",
-    "ph_interface": "例：浅色模式",
-    "status_saved": "更改已保存。",
     "ref": "参考号：",
-    "view_details": "查看详情"
+    "view_details": "查看详情",
+
+    "title_edit_profile": "编辑个人资料",
+    "label_photo": "头像",
+    "text_photo": "点击锁图标进行更改。",
+    "btn_save_changes": "保存更改",
+    "status_saved": "数据更新成功。"
   },
   "checkout": {
     "back": "返回体验",
@@ -988,6 +986,16 @@
     "user2_name": "查尔斯 R.",
     "user2_time": "1 个月前",
     "user2_text": "\"一次难忘的体验。导游非常专业，团队非常有趣。我会再次与 Pack&Go 一起旅行。\""
+  },
+  "login_modal": {
+    "title_default": "需要登录",
+    "msg_default": "为了继续您的购买，我们需要确认您的身份。",
+    "title_fav": "请登录",
+    "msg_fav": "您必须拥有账户才能保存收藏。",
+    "title_buy": "无法购买",
+    "msg_buy": "请登录以完成您的预订。",
+    "btn_close": "继续浏览",
+    "btn_login": "去登录"
   },
   "privacy": {
     "s1_title": "1. 简介",

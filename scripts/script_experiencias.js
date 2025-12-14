@@ -1085,70 +1085,33 @@ const experiencesData = [
     }
 ];
 
-// --- 1. LÓGICA DE LISTADOS Y DETALLE ---
-const experiencesListContainer = document.querySelector(".experiences-grid-list");
-const productDetailSection = document.querySelector(".product-details");
-
-document.addEventListener("DOMContentLoaded", function() {
+// --- LOGICA DE RENDERIZADO ---
+function renderExperiencesList(container, data = experiencesData) {
+    container.innerHTML = "";
     
-    // 1. LÓGICA PARA EXPERIENCIAS (Listado completo)
-    const experiencesListContainer = document.querySelector(".experiences-grid-list");
-    if (experiencesListContainer && !document.getElementById("list-europa")) {
-        renderExperiencesList(experiencesListContainer);
-        initExperiencesFilters(experiencesListContainer);
-    }
-    
-    // 2. LÓGICA PARA DESTINOS (Por continentes)
-    else if (document.getElementById("list-europa")) {
-        initDestinationsPage();
-    }
-    
-    // 3. LÓGICA PARA DETALLE DE COMPRA
-    else if (document.querySelector(".product-details")) {
-        loadExperienceDetail();
-    }
-
-    // 4. NUEVO: LÓGICA PARA EL INDEX (HOME)
-    const indexContainer = document.getElementById("index-experiences-container");
-    
-    if (indexContainer) {
-        const mejoresExperiencias = [...experiencesData]
-            .sort((a, b) => b.rating - a.rating)
-            .slice(0, 3);
-        renderExperiencesList(indexContainer, mejoresExperiencias);
-    }
-});
-
-// Función para renderizar la lista de experiencias
-function renderExperiencesList(container, listaDatos = experiencesData) {
-    container.innerHTML = ""; 
-
-    if (listaDatos.length === 0) {
+    if (data.length === 0) {
         container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3 data-i18n="general.no_results">No hay resultados...</h3></div>`;
-        if(window.i18n) window.i18n.run(); 
+        if (window.i18n) {
+            window.i18n.run();
+        }
         return;
     }
 
-    const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
-    const favoritos = usuario ? (usuario.favoritos || []) : [];
+    const user = UserService.getCurrent();
+    const favs = user?.favoritos || [];
 
-    listaDatos.forEach(exp => {
-        const esFavorito = favoritos.includes(exp.id);
-        const claseActiva = esFavorito ? "active" : "";
-        const iconoClase = esFavorito ? "fa-solid" : "fa-regular";
-        const card = document.createElement("a");
-        card.href = `compra.html?id=${exp.id}`;
-        card.className = "experience-card-item";
+    const html = data.map(exp => {
+        const isFav = favs.includes(exp.id);
+        const heartClass = isFav ? "fa-solid active" : "fa-regular";
         
-        // --- CLAVES DINÁMICAS ---
-        // Usamos el ID para crear claves únicas: data_experiences.id_4.title, etc.
-        card.innerHTML = `
+        return `
+        <a href="compra.html?id=${exp.id}" class="experience-card-item">
             <div class="card-image-header">
                 <span class="difficulty-badge" data-i18n="difficulty.${exp.dificultad}">${exp.dificultad}</span>
-                <button class="card-fav-btn ${claseActiva}" onclick="toggleCardFav(event, ${exp.id}, this)">
-                    <i class="${iconoClase} fa-heart"></i>
+                <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleCardFav(event, ${exp.id}, this)">
+                    <i class="${heartClass} fa-heart"></i>
                 </button>
-                <img src="${exp.imagen}" alt="${exp.titulo}">
+                <img src="${exp.imagen}" alt="${exp.titulo}" loading="lazy">
             </div>
             <div class="card-body">
                 <h3 data-i18n="data_experiences.id_${exp.id}.title">${exp.titulo}</h3>
@@ -1163,516 +1126,378 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
                     <span class="btn-reservar" data-i18n="cards.book_btn">Reservar</span>
                 </div>
             </div>
-        `;
-        container.appendChild(card);
-    });
+        </a>`;
+    }).join('');
 
-    if(window.i18n) window.i18n.run();
+    container.innerHTML = html;
+    if (window.i18n) {
+        window.i18n.run();
+    }
 }
 
-// Función para inicializar los filtros de experiencias
-function initExperiencesFilters(container) {
+// --- LOGICA DE FILTROS ---
+function initFilters(container) {
     const searchInput = document.getElementById("exp-search-input");
-    const categoryBtn = document.getElementById("btn-exp-category");
-    const difficultyBtn = document.getElementById("btn-exp-difficulty");
-    const sortBtn = document.getElementById("btn-exp-sort");
-    const filterContainer = document.querySelector(".filter-buttons");
-    let filtros = { texto: "", categoria: "Todas", dificultad: "Todas", orden: "Defecto" };
+    const filters = { texto: "", categoria: "Todas", dificultad: "Todas", orden: "Defecto" };
 
-    const aplicarFiltros = () => {
-        let resultados = experiencesData.filter(exp => {
-            const textoMatch = exp.titulo.toLowerCase().includes(filtros.texto) || 
-                               exp.ubicacion.toLowerCase().includes(filtros.texto);
-            const catMatch = filtros.categoria === "Todas" || exp.categoria === filtros.categoria;
-            const difMatch = filtros.dificultad === "Todas" || exp.dificultad === filtros.dificultad;
-            return textoMatch && catMatch && difMatch;
+    const apply = () => {
+        let result = experiencesData.filter(exp => {
+            const matchText = exp.titulo.toLowerCase().includes(filters.texto) || exp.ubicacion.toLowerCase().includes(filters.texto);
+            const matchCat = filters.categoria === "Todas" || exp.categoria === filters.categoria;
+            const matchDiff = filters.dificultad === "Todas" || exp.dificultad === filters.dificultad;
+            return matchText && matchCat && matchDiff;
         });
 
-
-        if (filtros.orden === "Precio: Menor a Mayor") {
-            resultados.sort((a, b) => a.precio - b.precio);
-        } else if (filtros.orden === "Precio: Mayor a Menor") {
-            resultados.sort((a, b) => b.precio - a.precio);
+        if (filters.orden === "Precio: Menor a Mayor") {
+            result.sort((a, b) => a.precio - b.precio);
+        } else if (filters.orden === "Precio: Mayor a Menor") {
+            result.sort((a, b) => b.precio - a.precio);
         }
 
-        renderExperiencesList(container, resultados);
+        renderExperiencesList(container, result);
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const busquedaURL = params.get("busqueda");
-    if (busquedaURL) {
-        // 1. Decodificar el texto
-        const textoDecodificado = decodeURIComponent(busquedaURL).toLowerCase();
-        
-        // 2. Escribirlo en el buscador de la página para que el usuario lo vea
-        if (searchInput) searchInput.value = decodeURIComponent(busquedaURL);
-        
-        // 3. Aplicar el filtro inmediatamente
-        filtros.texto = textoDecodificado;
-        aplicarFiltros();
+    // Búsqueda inicial por URL
+    const urlParam = new URLSearchParams(window.location.search).get("busqueda");
+    if (urlParam) {
+        if (searchInput) {
+            searchInput.value = decodeURIComponent(urlParam);
+        }
+        filters.texto = decodeURIComponent(urlParam).toLowerCase();
+        apply();
     }
 
-    if(searchInput) {
+    if (searchInput) {
         searchInput.addEventListener("input", (e) => {
-            filtros.texto = e.target.value.toLowerCase().trim();
-            aplicarFiltros();
+            filters.texto = e.target.value.toLowerCase().trim();
+            apply();
         });
     }
-    
-    const crearMenu = (boton, opciones, tipoFiltro) => {
+
+    // Configuración genérica de Dropdowns
+    const setupDropdown = (btnId, options, type) => {
+        const btn = document.getElementById(btnId);
+        if (!btn) {
+            return;
+        }
+        
         const menu = document.createElement("div");
-        menu.className = "category-dropdown"; 
-        const opcionTodas = document.createElement("div");
-        opcionTodas.className = "category-option";
-        opcionTodas.textContent = tipoFiltro === 'categoria' ? "Todas las categorías" : "Todas las dificultades";
-        opcionTodas.addEventListener("click", () => {
-            filtros[tipoFiltro] = "Todas";
-            boton.textContent = opcionTodas.textContent;
-            menu.classList.remove("show");
-            aplicarFiltros();
-        });
-        menu.appendChild(opcionTodas);
-        opciones.forEach(opcionTxt => {
+        menu.className = "category-dropdown";
+        
+        const allOpts = type === 'orden' ? options : ["Todas", ...options];
+        
+        allOpts.forEach(opt => {
             const item = document.createElement("div");
             item.className = "category-option";
-            item.textContent = opcionTxt;
+            item.textContent = (opt === "Todas" && type === 'categoria') ? "Todas las categorías" : opt;
+            
             item.addEventListener("click", () => {
-                filtros[tipoFiltro] = opcionTxt;
-                boton.textContent = opcionTxt; 
+                filters[type] = opt;
+                btn.textContent = item.textContent;
                 menu.classList.remove("show");
-                aplicarFiltros();
+                apply();
             });
             menu.appendChild(item);
         });
-        filterContainer.appendChild(menu); 
-        boton.addEventListener("click", (e) => {
+
+        document.querySelector(".filter-buttons").appendChild(menu);
+        
+        btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            document.querySelectorAll(".category-dropdown").forEach(m => { if(m !== menu) m.classList.remove("show"); });
+            document.querySelectorAll(".category-dropdown").forEach(m => {
+                if (m !== menu) m.classList.remove("show");
+            });
             menu.classList.toggle("show");
-            menu.style.top = (boton.offsetTop + boton.offsetHeight + 10) + "px";
-            if(boton === difficultyBtn || boton === categoryBtn) menu.style.left = boton.offsetLeft + "px";
+            menu.style.top = (btn.offsetTop + btn.offsetHeight + 10) + "px";
+            menu.style.left = btn.offsetLeft + "px";
         });
     };
 
-    if(categoryBtn) {
-        const categoriasUnicas = [...new Set(experiencesData.map(e => e.categoria))].sort();
-        crearMenu(categoryBtn, categoriasUnicas, "categoria");
-    }
+    const categories = [...new Set(experiencesData.map(e => e.categoria))].sort();
+    setupDropdown("btn-exp-category", categories, "categoria");
+    setupDropdown("btn-exp-difficulty", ["Baja", "Media", "Alta", "Muy Alta"], "dificultad");
+    setupDropdown("btn-exp-sort", ["Precio: Menor a Mayor", "Precio: Mayor a Menor", "Defecto"], "orden");
 
-    if(difficultyBtn) {
-        const dificultadesUnicas = ["Baja", "Media", "Alta", "Muy Alta"];
-        crearMenu(difficultyBtn, dificultadesUnicas, "dificultad");
-    }
-
-    if(sortBtn) {
-        const menuSort = document.createElement("div");
-        menuSort.className = "category-dropdown sort-menu";
-        ["Precio: Menor a Mayor", "Precio: Mayor a Menor", "Defecto"].forEach(orden => {
-            const item = document.createElement("div");
-            item.className = "category-option";
-            item.textContent = orden;
-            item.addEventListener("click", () => {
-                filtros.orden = orden;
-                menuSort.classList.remove("show");
-                aplicarFiltros();
-            });
-            menuSort.appendChild(item);
-        });
-        filterContainer.appendChild(menuSort);
-        sortBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
-            menuSort.classList.toggle("show");
-        });
-    }
-
-    document.addEventListener("click", (e) => {
-        if (filterContainer && !filterContainer.contains(e.target)) {
-            document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
-        }
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
     });
 }
 
-
-// Función para cargar el detalle de una experiencia
+// --- DETALLE DE EXPERIENCIA ---
 function loadExperienceDetail() {
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"));
+    const id = parseInt(new URLSearchParams(window.location.search).get("id"));
     const exp = experiencesData.find(e => e.id === id);
-    
+
     if (!exp) {
-        document.querySelector("main").innerHTML = "<div class='container' style='padding:150px 20px; text-align:center;'><h1 data-i18n='general.not_found_title'>Experiencia no encontrada</h1><p data-i18n='general.not_found_text'>Lo sentimos, no pudimos cargar este viaje.</p><a href='experiencias.html' class='btn-black' style='margin-top:20px;' data-i18n='product.back_link'>Volver al listado</a></div>";
-        if(window.i18n) window.i18n.run();
+        document.querySelector("main").innerHTML = `
+            <div class='container' style='padding:150px 20px; text-align:center;'>
+                <h1 data-i18n='general.not_found_title'>Experiencia no encontrada</h1>
+                <p data-i18n='general.not_found_text'>Lo sentimos, no pudimos cargar este viaje.</p>
+                <a href='experiencias.html' class='btn-black' style='margin-top:20px;' data-i18n='product.back_link'>Volver</a>
+            </div>`;
+        if (window.i18n) {
+            window.i18n.run();
+        }
         return;
     }
 
-    // 1. Rellenar datos visuales principales e inyectar atributos de traducción
+    // Bindings visuales
     document.getElementById("detail-image").src = exp.imagen;
+    document.getElementById("detail-price").textContent = `$ ${exp.precio}`;
+    document.getElementById("detail-date").textContent = exp.fechaPub;
     
-    // Título y Descripciones (Atributos directos)
-    const titleEl = document.getElementById("detail-title");
-    titleEl.textContent = exp.titulo;
-    titleEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.title`);
+    // Bindings con i18n
+    const bindText = (id, text, i18nKey) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.textContent = text;
+            if (i18nKey) {
+                el.setAttribute("data-i18n", i18nKey);
+            }
+        }
+    };
 
-    const shortDescEl = document.getElementById("detail-short-desc");
-    shortDescEl.textContent = exp.descripcionCorto;
-    shortDescEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.desc_short`);
+    bindText("detail-title", exp.titulo, `data_experiences.id_${exp.id}.title`);
+    bindText("detail-short-desc", exp.descripcionCorto, `data_experiences.id_${exp.id}.desc_short`);
+    bindText("detail-long-desc", exp.descripcionLarga, `data_experiences.id_${exp.id}.desc_long`);
+    bindText("detail-category", exp.categoria, `categories.${exp.categoria}`);
+    bindText("detail-difficulty", exp.dificultad, `difficulty.${exp.dificultad}`);
 
-    const longDescEl = document.getElementById("detail-long-desc");
-    longDescEl.textContent = exp.descripcionLarga;
-    longDescEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.desc_long`);
-
-    // Reseñas (Solo traducimos la palabra "reseñas" si creamos una clave, o lo dejamos mixto)
-    // Opción simple: dejar el número dinámico
+    // HTML Complejo
     document.getElementById("detail-reviews").innerHTML = `(${exp.resenas} <span data-i18n="product.reviews_word">reseñas</span>)`;
-    
-    // Iconos y Metadatos (Usamos span para aislar el texto traducible)
     document.getElementById("detail-location").innerHTML = `<i class="fa-solid fa-location-dot"></i> <span data-i18n="data_experiences.id_${exp.id}.location">${exp.ubicacion}</span>`;
     document.getElementById("detail-duration").innerHTML = `<i class="fa-regular fa-clock"></i> <span data-i18n="data_experiences.id_${exp.id}.duration">${exp.duracion}</span>`;
-    
-    // Grupo: Reemplazamos espacios por guiones bajos para la clave (Ej: "Grupos de 10" -> "Grupos_de_10")
-    const groupKey = exp.grupo.replace(/\s+/g, '_'); 
-    document.getElementById("detail-group").innerHTML = `<i class="fa-solid fa-user-group"></i> <span data-i18n="groups.${groupKey}">${exp.grupo}</span>`;
-    
-    // Tags (Categoría y Dificultad)
-    const catEl = document.getElementById("detail-category");
-    catEl.textContent = exp.categoria;
-    catEl.setAttribute("data-i18n", `categories.${exp.categoria}`);
-
-    const diffEl = document.getElementById("detail-difficulty");
-    diffEl.textContent = exp.dificultad;
-    diffEl.setAttribute("data-i18n", `difficulty.${exp.dificultad}`);
-
-    // Precio
-    document.getElementById("detail-price").textContent = `$ ${exp.precio}`;
-    
-    // Autor y Fecha
-    // Nota: He añadido la clave 'general.published_by'
+    document.getElementById("detail-group").innerHTML = `<i class="fa-solid fa-user-group"></i> <span data-i18n="groups.${exp.grupo.replace(/\s+/g, '_')}">${exp.grupo}</span>`;
     document.getElementById("detail-author").innerHTML = `<span data-i18n="general.published_by">Publicado por</span> <strong>${exp.autor}</strong>`;
-    document.getElementById("detail-date").textContent = exp.fechaPub;
 
-    // 2. Renderizar ITINERARIO
-    const timelineContainer = document.querySelector(".itinerary-timeline");
-    if(timelineContainer) {
-        timelineContainer.innerHTML = "";
-        if (exp.itinerario && exp.itinerario.length > 0) {
-            exp.itinerario.forEach((step, index) => {
-                const item = document.createElement("div");
-                item.className = "timeline-item";
-                
-                // Calculamos el índice del paso (step_1, step_2, etc.)
-                const stepNum = index + 1;
-                
-                item.innerHTML = `
-                    <div class="step-number">${step.dia}</div>
-                    <div class="timeline-content">
-                        <h3 data-i18n="data_experiences.id_${exp.id}.itinerary.step_${stepNum}.title">${step.titulo}</h3>
-                        <p data-i18n="data_experiences.id_${exp.id}.itinerary.step_${stepNum}.desc">${step.desc}</p>
-                    </div>
-                `;
-                timelineContainer.appendChild(item);
-            });
-        }
-    }
-
-    // 3. Renderizar Pestaña INCLUYE
-    const tabIncluye = document.getElementById("tab-incluye");
-    if (tabIncluye) {
-        tabIncluye.innerHTML = generarListaIncluye(exp.categoria);
-    }
-
-    // 4. Renderizar Pestaña EQUIPO
-    const tabEquipo = document.getElementById("tab-equipo");
-    if (tabEquipo) {
-        tabEquipo.innerHTML = generarListaEquipo(exp.dificultad);
-    }
-
-    // 5. Renderizar Pestaña RESEÑAS
-    const tabResenas = document.getElementById("tab-resenas");
-    if (tabResenas) {
-        tabResenas.innerHTML = generarResenas(exp.resenas);
-    }
-
-    // 6. Configuración del Botón de Reserva
-    let btnReservar = document.getElementById("btn-reservar-dinamico");
-    if (!btnReservar) btnReservar = document.querySelector(".price-action-row .btn-black");
-    
-    if (btnReservar) {
-        const nuevoBtn = btnReservar.cloneNode(true);
-        // Aseguramos que el botón tenga la traducción
-        nuevoBtn.setAttribute("data-i18n", "product.book_now");
-        btnReservar.parentNode.replaceChild(nuevoBtn, btnReservar);
-
-        nuevoBtn.addEventListener("click", () => {
-            if (typeof iniciarProcesoCompra === 'function') {
-                iniciarProcesoCompra(exp.titulo, exp.precio, exp.imagen, exp.duracion, exp.ubicacion);
-            } else {
-                localStorage.setItem('compra_seleccionada', JSON.stringify(exp));
-                window.location.href = 'proceso_compra.html';
-            }
-        });
-    }
-
-    // 6.5 LÓGICA DE FAVORITOS
-    const btnFav = document.querySelector('.btn-favorite');
-    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
-    
-    // Función auxiliar para actualizar texto del botón favorito
-    const updateFavBtnState = (isFav) => {
-        if (isFav) {
-            btnFav.classList.add('active');
-            btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> <span data-i18n="product.saved">Guardado</span>`;
-        } else {
-            btnFav.classList.remove('active');
-            btnFav.innerHTML = `<i class="fa-solid fa-plus"></i> <span data-i18n="product.add_fav">Añadir a favoritos</span>`;
+    // Renderizar Pestañas dinámicas
+    const renderTab = (id, content) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.innerHTML = content;
         }
     };
 
-    if (usuarioActual && usuarioActual.favoritos && usuarioActual.favoritos.includes(exp.id)) {
-        updateFavBtnState(true);
-    } else {
-        updateFavBtnState(false);
+    renderTab("tab-incluye", generarListaIncluye(exp.categoria));
+    renderTab("tab-equipo", generarListaEquipo(exp.dificultad));
+    renderTab("tab-resenas", generarResenas());
+
+    // Itinerario
+    const timeline = document.querySelector(".itinerary-timeline");
+    if (timeline && exp.itinerario) {
+        timeline.innerHTML = exp.itinerario.map((step, i) => `
+            <div class="timeline-item">
+                <div class="step-number">${step.dia}</div>
+                <div class="timeline-content">
+                    <h3 data-i18n="data_experiences.id_${exp.id}.itinerary.step_${i+1}.title">${step.titulo}</h3>
+                    <p data-i18n="data_experiences.id_${exp.id}.itinerary.step_${i+1}.desc">${step.desc}</p>
+                </div>
+            </div>
+        `).join('');
     }
 
-    btnFav.onclick = () => { // Usamos onclick para limpiar listeners anteriores si los hubiera al recargar
-        const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
-        if (!usuario) {
-            if (typeof mostrarAvisoLogin === 'function') {
-                mostrarAvisoLogin("Inicia sesión", "Necesitas identificarte para guardar favoritos.");
-            } else {
-                window.location.href = "login.html";
-            }
-            return;
-        }
-
-        if (!usuario.favoritos) usuario.favoritos = [];
-        const index = usuario.favoritos.indexOf(exp.id);
-
-        if (index === -1) {
-            usuario.favoritos.push(exp.id);
-            updateFavBtnState(true);
-            mostrarToast("Añadido a favoritos");
-        } else {
-            usuario.favoritos.splice(index, 1);
-            updateFavBtnState(false);
-            mostrarToast("Eliminado de favoritos");
-        }
-
-        localStorage.setItem("usuarioActual", JSON.stringify(usuario));
-        if (typeof actualizarUsuarioEnListaGlobal === 'function') {
-            actualizarUsuarioEnListaGlobal(usuario);
-        }
-        // Retraducir el nuevo estado del botón
-        if(window.i18n) window.i18n.run();
-    };
-
-    // 7. Activar Lógica de Pestañas
+    setupBookingButton(exp);
+    setupFavButton(exp);
     initTabs();
 
-    // 8. MEJORA DEL BOTÓN "VOLVER"
-    const backLink = document.querySelector('.breadcrumb-bar a');
-    if (backLink) {
-        backLink.addEventListener('click', (e) => {
-            if (window.history.length > 1) {
-                e.preventDefault();
-                window.history.back();
+    if (window.i18n) {
+        window.i18n.run();
+    }
+}
+
+// --- HELPERS PARA DETALLE ---
+
+// *** AQUÍ ESTABA EL PROBLEMA ***
+// Hemos añadido la comprobación UserService.getCurrent()
+function setupBookingButton(exp) {
+    let btn = document.getElementById("btn-reservar-dinamico") || document.querySelector(".price-action-row .btn-black");
+    
+    if (btn) {
+        const newBtn = btn.cloneNode(true);
+        newBtn.setAttribute("data-i18n", "product.book_now");
+        
+        newBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            // 1. Verificamos si hay usuario ANTES de redirigir
+            const user = UserService.getCurrent();
+            
+            if (!user) {
+                // Si no hay usuario, mostramos el modal y PARAMOS la función aquí.
+                // Así nos quedamos en la misma página.
+                window.mostrarAvisoLogin('login_modal.title_buy', 'login_modal.msg_buy');
+                return;
+            }
+
+            // 2. Si hay usuario, procedemos a guardar y navegar
+            localStorage.setItem('compra_seleccionada', JSON.stringify(exp));
+            window.location.href = 'proceso_compra.html';
+        });
+        
+        btn.parentNode.replaceChild(newBtn, btn);
+    }
+}
+
+function setupFavButton(exp) {
+    const btn = document.querySelector('.btn-favorite');
+    const user = UserService.getCurrent();
+    const isFav = user?.favoritos?.includes(exp.id);
+
+    const updateState = (active) => {
+        btn.classList.toggle('active', active);
+        btn.innerHTML = active 
+            ? `<i class="fa-solid fa-heart"></i> <span data-i18n="product.saved">Guardado</span>`
+            : `<i class="fa-solid fa-plus"></i> <span data-i18n="product.add_fav">Añadir</span>`;
+    };
+
+    updateState(isFav);
+
+    btn.onclick = () => {
+        const currentUser = UserService.getCurrent();
+        // También protegemos el favorito, aunque esto ya lo manejaba toggleCardFav
+        if (!currentUser) {
+            return window.mostrarAvisoLogin('login_modal.title_fav', 'login_modal.msg_fav');
+        }
+
+        if (!currentUser.favoritos) {
+            currentUser.favoritos = [];
+        }
+        
+        const idx = currentUser.favoritos.indexOf(exp.id);
+
+        if (idx === -1) {
+            currentUser.favoritos.push(exp.id);
+            updateState(true);
+        } else {
+            currentUser.favoritos.splice(idx, 1);
+            updateState(false);
+        }
+        UserService.saveCurrent(currentUser);
+        if (window.i18n) {
+            window.i18n.run();
+        }
+    };
+}
+
+function initTabs() {
+    const btns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-content-panel');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const panel = document.getElementById(btn.dataset.tab);
+            if (panel) {
+                panel.classList.add('active');
             }
         });
-        // Aquí también podríamos usar data-i18n si quisiéramos ser estrictos con "Volver a..."
-    }
-
-    // IMPORTANTE: EJECUTAR TRADUCCIÓN AL FINAL
-    if(window.i18n) window.i18n.run();
-}
-
-// Función para inicializar pestañas
-function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-content-panel');
-
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            tabButtons.forEach(b => b.classList.remove('active'));
-            tabPanels.forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            const targetId = btn.getAttribute('data-tab');
-            const targetPanel = document.getElementById(targetId);
-            if (targetPanel) targetPanel.classList.add('active');
-        });
     });
 }
 
-// Función para generar lista de incluye según categoría
 function generarListaIncluye(categoria) {
-    // Elementos base siempre presentes
-    let items = [
-        '<span data-i18n="product.include_1">Alojamiento seleccionado</span>',
-        '<span data-i18n="product.include_traslados">Traslados aeropuerto - hotel</span>',
-        '<span data-i18n="product.include_2">Guía experto</span>',
-        '<span data-i18n="product.include_seguro">Seguro de viaje básico</span>',
-        '<span data-i18n="product.include_atencion">Atención 24/7</span>'
+    const base = [
+        'product.include_1', 'product.include_traslados', 
+        'product.include_2', 'product.include_seguro', 'product.include_atencion'
     ];
-
-    // Elementos condicionales según categoría
+    
     if (categoria === "Aventura") {
-        items.push('<span data-i18n="includes_extras.adventure_gear">Equipo de seguridad y técnico</span>');
-        items.push('<span data-i18n="includes_extras.park_fees">Entradas a parques nacionales</span>');
+        base.push('includes_extras.adventure_gear', 'includes_extras.park_fees');
     }
     if (categoria === "Cultural") {
-        items.push('<span data-i18n="includes_extras.museum_fees">Entradas a museos y monumentos</span>');
-        items.push('<span data-i18n="includes_extras.food_tasting">Degustación de comida local</span>');
+        base.push('includes_extras.museum_fees', 'includes_extras.food_tasting');
     }
-    if (categoria === "Relax" || categoria === "Playa" || categoria === "Romántico") {
-        items.push('<span data-i18n="includes_extras.welcome_drink">Cóctel de bienvenida</span>');
-        items.push('<span data-i18n="includes_extras.yoga_massage">Clase de yoga o masaje</span>');
+    if (["Relax", "Playa", "Romántico"].includes(categoria)) {
+        base.push('includes_extras.welcome_drink', 'includes_extras.yoga_massage');
     }
 
-    let html = `<ul class="check-list">`;
-    items.forEach(item => {
-        // Como 'item' ya contiene el HTML del span, lo insertamos directamente
-        html += `<li><i class="fa-solid fa-check"></i> ${item}</li>`;
-    });
-    html += `</ul>`;
-    return html;
+    return `<ul class="check-list">${base.map(key => `<li><i class="fa-solid fa-check"></i> <span data-i18n="${key}"></span></li>`).join('')}</ul>`;
 }
 
-// Función para generar lista de equipo según dificultad
 function generarListaEquipo(dificultad) {
-    // Título por defecto
-    let tituloKey = "gear_list.title_recommended";
-    let tituloDef = "Equipaje recomendado";
-
-    // Ítems base
-    let items = [
-        '<span data-i18n="gear_list.backpack">Mochila cómoda (30-50L)</span>',
-        '<span data-i18n="gear_list.water_bottle">Botella de agua reutilizable</span>',
-        '<span data-i18n="gear_list.sun_protection">Protector solar y gafas de sol</span>',
-        '<span data-i18n="gear_list.camera">Cámara de fotos</span>',
-        '<span data-i18n="gear_list.adapter">Adaptador de corriente universal</span>'
+    const isHard = ["Alta", "Media"].includes(dificultad);
+    const titleKey = isHard ? "gear_list.title_technical" : "gear_list.title_recommended";
+    const items = [
+        'gear_list.backpack', 'gear_list.water_bottle', 'gear_list.sun_protection', 'gear_list.camera', 'gear_list.adapter'
     ];
 
-    if (dificultad === "Alta" || dificultad === "Media") {
-        items.push('<span data-i18n="gear_list.trekking_shoes">Calzado de trekking impermeable</span>');
-        items.push('<span data-i18n="gear_list.thermal_layers">Ropa térmica por capas</span>');
-        items.push('<span data-i18n="gear_list.windbreaker">Chaqueta cortavientos</span>');
-        items.push('<span data-i18n="gear_list.first_aid">Botiquín personal básico</span>');
-        
-        tituloKey = "gear_list.title_technical";
-        tituloDef = "Equipamiento técnico necesario";
+    if (isHard) {
+        items.push('gear_list.trekking_shoes', 'gear_list.thermal_layers', 'gear_list.windbreaker', 'gear_list.first_aid');
     } else {
-        items.push('<span data-i18n="gear_list.light_clothes">Ropa ligera y cómoda</span>');
-        items.push('<span data-i18n="gear_list.walking_shoes">Calzado para caminar</span>');
-        items.push('<span data-i18n="gear_list.swimwear">Bañador y toalla</span>');
-        items.push('<span data-i18n="gear_list.hat">Gorra o sombrero</span>');
+        items.push('gear_list.light_clothes', 'gear_list.walking_shoes', 'gear_list.swimwear', 'gear_list.hat');
     }
 
-    let html = `<h4 style="margin-bottom:1rem; font-size:1.1rem;" data-i18n="${tituloKey}">${tituloDef}</h4><ul class="equip-list">`;
-    items.forEach(item => {
-        html += `<li>${item}</li>`;
-    });
-    html += `</ul>`;
-    return html;
+    return `<h4 style="margin-bottom:1rem; font-size:1.1rem;" data-i18n="${titleKey}"></h4><ul class="equip-list">${items.map(k => `<li><span data-i18n="${k}"></span></li>`).join('')}</ul>`;
 }
 
-// Función para generar reseñas de ejemplo
-function generarResenas(cantidad) {
+function generarResenas() {
     return `
         <div class="testimonial-box-feature" style="margin-bottom:20px;">
             <div class="user-feature-header">
                 <div class="user-feature-icon icon-green"><i class="fa-regular fa-thumbs-up"></i></div>
-                <div>
-                    <h4 data-i18n="reviews_mock.user1_name">María González</h4>
-                    <small>
-                        <span data-i18n="reviews.verified">Viajero Verificado</span> • 
-                        <span data-i18n="reviews_mock.user1_time">Hace 2 semanas</span>
-                    </small>
-                </div>
-                <i class="fa-solid fa-quote-right quote-right"></i>
+                <div><h4 data-i18n="reviews_mock.user1_name"></h4><small><span data-i18n="reviews.verified"></span> • <span data-i18n="reviews_mock.user1_time"></span></small></div>
             </div>
-            <p data-i18n="reviews_mock.user1_text">"Simplemente espectacular. La organización fue impecable y los lugares que visitamos superaron mis expectativas. Totalmente recomendado."</p>
+            <p data-i18n="reviews_mock.user1_text"></p>
         </div>
-
         <div class="testimonial-box-feature">
             <div class="user-feature-header">
                 <div class="user-feature-icon icon-blue"><i class="fa-regular fa-star"></i></div>
-                <div>
-                    <h4 data-i18n="reviews_mock.user2_name">Carlos R.</h4>
-                    <small>
-                        <span data-i18n="reviews.verified">Viajero Verificado</span> • 
-                        <span data-i18n="reviews_mock.user2_time">Hace 1 mes</span>
-                    </small>
-                </div>
-                <i class="fa-solid fa-quote-right quote-right"></i>
+                <div><h4 data-i18n="reviews_mock.user2_name"></h4><small><span data-i18n="reviews.verified"></span> • <span data-i18n="reviews_mock.user2_time"></span></small></div>
             </div>
-            <p data-i18n="reviews_mock.user2_text">"Una experiencia inolvidable. El guía fue muy profesional y el grupo muy divertido. Volveré a viajar con Pack&Go."</p>
-        </div>
-    `;
+            <p data-i18n="reviews_mock.user2_text"></p>
+        </div>`;
 }
 
-// Función para inicializar la página de destinos por continentes
 function initDestinationsPage() {
-    const idsEuropa = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; 
-    const idsAsia   = [2, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]; 
-    const idsAfrica = [37, 38, 56, 57, 58, 60];
-    const idsOceania = [39, 40, 51, 52, 53, 54];
-    const idsAmerica = [3, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 61, 62]; 
-
-    const mapaContinentes = {
-        "list-oceania": idsOceania,
-        "list-africa": idsAfrica,
-        "list-europa": idsEuropa,
-        "list-america": idsAmerica,
-        "list-asia": idsAsia
+    const mapIds = {
+        "list-oceania": [39, 40, 51, 52, 53, 54],
+        "list-africa": [37, 38, 56, 57, 58, 60],
+        "list-europa": [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+        "list-america": [3, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 61, 62],
+        "list-asia": [2, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
     };
 
-    for (const [containerId, ids] of Object.entries(mapaContinentes)) {
-        const container = document.getElementById(containerId);
-        if (container) {
-            const ciudadesContinente = experiencesData.filter(e => ids.includes(e.id));
-            renderExperiencesList(container, ciudadesContinente);
+    Object.entries(mapIds).forEach(([id, ids]) => {
+        const el = document.getElementById(id);
+        if (el) {
+            renderExperiencesList(el, experiencesData.filter(e => ids.includes(e.id)));
         }
-    }
+    });
 
-    const botones = document.querySelectorAll(".continent-btn");
-    botones.forEach(btn => {
+    document.querySelectorAll(".continent-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-            botones.forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".continent-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
-            const continenteNombre = btn.textContent.trim().toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
-            const seccion = document.getElementById(`sec-${continenteNombre}`);
-            if (seccion) {
-                seccion.scrollIntoView({ behavior: 'smooth' });
+            
+            const target = btn.textContent.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const section = document.getElementById(`sec-${target}`);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 }
 
-// Función para mostrar el mensaje emergente
-function mostrarToast(mensaje, tipo = "success") {
-    let toast = document.getElementById("toast");
-    if (!toast) {
-        toast = document.createElement("div");
-        toast.id = "toast";
-        toast.className = "toast-notification";
-        document.body.appendChild(toast);
-    }
+// --- INIT (Detectar Página) ---
+function init() {
+    const listContainer = document.querySelector(".experiences-grid-list");
+    const indexContainer = document.getElementById("index-experiences-container");
+    const isDestinationsPage = document.getElementById("list-europa");
+    const isDetailPage = document.querySelector(".product-details");
 
-    const icono = tipo === "error" ? '<i class="fa-solid fa-circle-exclamation" style="color:#ff4d4d"></i>' : '<i class="fa-solid fa-circle-check"></i>';
-    toast.innerHTML = `${icono} ${mensaje}`;
-    toast.className = "toast-notification show";
-    setTimeout(() => {
-        toast.className = toast.className.replace("show", "");
-    }, 3000);
-}
-
-// Función para sincronizar con la lista de todos los usuarios
-function actualizarUsuarioEnListaGlobal(usuarioModificado) {
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const index = usuarios.findIndex(u => u.correo === usuarioModificado.correo);
-    
-    if (index !== -1) {
-        usuarios[index] = usuarioModificado;
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    if (listContainer && !isDestinationsPage) {
+        renderExperiencesList(listContainer);
+        initFilters(listContainer);
+    } else if (isDestinationsPage) {
+        initDestinationsPage();
+    } else if (isDetailPage) {
+        loadExperienceDetail();
+    } else if (indexContainer) {
+        const top3 = [...experiencesData].sort((a, b) => b.rating - a.rating).slice(0, 3);
+        renderExperiencesList(indexContainer, top3);
     }
 }
+
+init();

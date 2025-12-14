@@ -157,22 +157,20 @@
     "label_email": "E-mail",
     "label_user": "Nom d'utilisateur",
     "title_favorites": "Favoris",
-    "no_fav_msg": "Vous n'avez pas encore enregistré de voyages.",
+    "no_fav_msg": "Vous n'avez pas encore enregistré de voyage.",
     "btn_explore": "Explorer",
-    "title_trips": "Mes Réservations",
-    "no_trips_title": "Vous n'avez pas encore de voyages réservés",
+    "title_trips": "Mes réservations",
+    "no_trips_title": "Vous n'avez pas encore réservé de voyage",
     "no_trips_text": "Qu'attendez-vous pour votre prochaine aventure ?",
-    "btn_explore_destinations": "Explorer les Destinations",
-    "title_config": "Paramètres",
-    "label_payment": "Méthode de paiement par défaut",
-    "ph_payment": "Ex : Visa se terminant par 4242",
-    "label_lang": "Langue",
-    "ph_lang": "Ex : Espagnol",
-    "label_interface": "Interface",
-    "ph_interface": "Ex : Mode Clair",
-    "status_saved": "Modifications enregistrées.",
-    "ref": "Réf :",
-    "view_details": "Voir les détails"
+    "btn_explore_destinations": "Explorer les destinations",
+    "ref": "Réf:",
+    "view_details": "Voir détails",
+
+    "title_edit_profile": "Modifier le profil",
+    "label_photo": "Photo de profil",
+    "text_photo": "Cliquez sur le cadenas pour changer.",
+    "btn_save_changes": "Enregistrer les modifications",
+    "status_saved": "Données mises à jour avec succès."
   },
   "checkout": {
     "back": "Retour aux expériences",
@@ -989,6 +987,16 @@
     "user2_name": "Charles R.",
     "user2_time": "Il y a 1 mois",
     "user2_text": "\"Une expérience inoubliable. Le guide était très professionnel et le groupe très amusant. Je voyagerai à nouveau avec Pack&Go.\""
+  },
+  "login_modal": {
+    "title_default": "Connexion Requise",
+    "msg_default": "Pour continuer votre achat, nous devons vous identifier.",
+    "title_fav": "Se connecter",
+    "msg_fav": "Vous devez avoir un compte pour enregistrer vos favoris.",
+    "title_buy": "Achat impossible",
+    "msg_buy": "Veuillez vous connecter pour compléter votre réservation.",
+    "btn_close": "Continuer à explorer",
+    "btn_login": "Se connecter"
   },
   "privacy": {
     "s1_title": "1. Introduction",

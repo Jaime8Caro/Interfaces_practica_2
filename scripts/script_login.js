@@ -1,40 +1,42 @@
-// Buscamos el formulario dentro de la tarjeta de login
-const form = document.querySelector(".auth-card.login-mode form");
+/**
+ * LÓGICA DE INICIO DE SESIÓN
+ */
+function initLogin() {
+    const loginForm = document.querySelector(".auth-card.login-mode form");
 
-if (form) {
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Evitamos que se recargue la página
+    if (!loginForm) {
+        return;
+    }
 
-        // Referencias a los inputs (usando los IDs que tienes en login.html)
-        const correoInput = document.getElementById("email");
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("email");
         const passInput = document.getElementById("password");
+        const email = emailInput.value.trim();
+        const pass = passInput.value.trim();
 
-        // Valores limpios
-        const correo = correoInput.value.trim();
-        const contraseña = passInput.value.trim();
-        
-        let formularioValido = true;
-        
-        // 1. Validar formato básico del correo (mínimo 3 caracteres y que tenga @)
-        const correoValido = correo.length >= 3 && correo.includes("@");
-        validarCampoFormulario(correoInput, correoValido, "Correo no válido", "Correo electrónico");
-        if (!correoValido) formularioValido = false;
+        // Validaciones básicas
+        const isEmailValid = email.length >= 3 && email.includes("@");
+        const isPassValid = pass.length >= 6;
 
-        // 2. Validar longitud contraseña
-        const passValido = contraseña.length >= 6;
-        validarCampoFormulario(passInput, passValido, "Mínimo 6 caracteres", "Contraseña");
-        if (!passValido) formularioValido = false;
+        validarCampoFormulario(emailInput, isEmailValid, "Correo no válido", "Correo electrónico");
+        validarCampoFormulario(passInput, isPassValid, "Mínimo 6 caracteres", "Contraseña");
 
-        // 3. Intentar Login si el formato es correcto
-        if (formularioValido) {
-            const usuario = login(correo, contraseña);
-            
-            if (!usuario) {
-                validarCampoFormulario(correoInput, false, "Usuario no encontrado", "Correo electrónico");
-                validarCampoFormulario(passInput, false, "Credenciales invalidas", "Contraseña");
-            } else {
-                window.location.href = "index.html"; 
-            }
+        if (!isEmailValid || !isPassValid) {
+            return;
+        }
+
+        // Usamos UserService definido en script.js
+        const user = UserService.login(email, pass);
+
+        if (user) {
+            window.location.href = "index.html";
+        } else {
+            validarCampoFormulario(emailInput, false, "Usuario no encontrado", "Correo electrónico");
+            validarCampoFormulario(passInput, false, "Credenciales incorrectas", "Contraseña");
         }
     });
 }
+
+initLogin();
