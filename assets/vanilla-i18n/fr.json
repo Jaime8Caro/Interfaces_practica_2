@@ -105,7 +105,9 @@
     "reviews_text": "Avis de voyageurs vérifiés.",
     "include_traslados": "Transferts aéroport - hôtel",
     "include_seguro": "Assurance voyage de base",
-    "include_atencion": "Assistance 24/7"
+    "include_atencion": "Assistance 24/7",
+    "reviews_word": "avis",
+    "saved": "Enregistré"
   },
   "destinations_page": {
     "hero_title": "Meilleures Destinations",
@@ -224,7 +226,10 @@
     "btn_login": "J'ai déjà un compte"
   },
   "general": {
-    "no_results": "Aucun résultat..."
+    "no_results": "Aucun résultat...",
+    "published_by": "Publié par",
+    "not_found_title": "Expérience non trouvée",
+    "not_found_text": "Désolé, nous n'avons pas pu charger ce voyage."
   },
   "cards": {
     "per_person": "/ personne",
@@ -232,5 +237,469 @@
   },
   "reviews": {
     "verified": "Voyageur Vérifié"
+  },
+  "difficulty": {
+    "Baja": "Faible",
+    "Media": "Moyenne",
+    "Alta": "Élevée"
+  },
+  "data_blog": {
+    "id_1": {
+      "title": "Les coins du monde que tout routard devrait visiter en 2025",
+      "summary": "Voyager avec un sac à dos ne se démode jamais. Chaque année, de nouveaux coins apparaissent qui deviennent tendance..."
+    },
+    "id_2": {
+      "title": "Les 10 destinations les plus surprenantes de l'Inde",
+      "summary": "L'Inde est un continent en soi. Découvrez des temples oubliés, des routes des épices et des paysages qui défient l'imagination."
+    },
+    "id_3": {
+      "title": "Les secrets les mieux gardés du monde des routards",
+      "summary": "Économisez de l'argent, voyagez léger et rencontrez des locaux. Nous vous révélons les secrets des experts pour voyager plus loin avec moins."
+    },
+    "id_4": {
+      "title": "Nouveaux paradis pour routards que vous devriez connaître",
+      "summary": "Si vous recherchez une déconnexion totale, ces parcs naturels et plages vierges sont pour vous. Des endroits où le Wi-Fi n'arrive pas, mais la connexion est totale."
+    },
+    "id_5": {
+      "title": "Le tour du monde en 80 plats : Cuisine de rue incontournable",
+      "summary": "Oubliez les restaurants à nappe blanche. La vraie culture d'un pays se bout, se frit et se sert sur les trottoirs."
+    }
+  },
+  "categories": {
+    "Cultural": "Culturel",
+    "Naturaleza": "Nature",
+    "Urbano": "Urbain",
+    "Aventura": "Aventure",
+    "Relax": "Détente",
+    "Romántico": "Romantique",
+    "Gastronomía": "Gastronomie",
+    "Playa": "Plage",
+    "Espiritual": "Spirituel",
+    "Lujo": "Luxe",
+    "Fiesta": "Fête",
+    "Ecoturismo": "Écotourisme",
+    "Destinos 2025": "Destinations 2025",
+    "Asia": "Asie",
+    "Consejos": "Conseils"
+  },
+  "groups": {
+    "Grupos_de_10": "Groupes de 10",
+    "Grupos_de_12": "Groupes de 12",
+    "Grupos_de_8": "Groupes de 8",
+    "Grupos_Pequeños": "Petits Groupes",
+    "Parejas": "Couples",
+    "Urbano": "Urbain",
+    "Aventura": "Aventure",
+    "Relax": "Détente",
+    "Cultural": "Culturel",
+    "Amigos": "Amis",
+    "Jóvenes": "Jeunes",
+    "Gastronómico": "Gastronomique",
+    "Todos": "Tout le monde",
+    "Naturaleza": "Nature",
+    "Lujo": "Luxe",
+    "Familia": "Famille",
+    "Fiesta": "Fête"
+  },
+  "data_experiences": {
+    "id_4": {
+      "title": "Escapade impériale à Vienne",
+      "desc_short": "Musique classique, palais et culture du café",
+      "desc_long": "Ville impériale avec musées et musique classique à chaque pas. Le palais de Schönbrunn et la Ringstrasse condensent le baroque et l'historicisme, tandis que des cafés comme Demel maintiennent la tradition pâtissière. Idéal pour marcher entre parcs et opéras.",
+      "location": "Vienne, Autriche",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_5": {
+      "title": "Bruges de conte de fées",
+      "desc_short": "Canaux médiévaux et chocolat belge",
+      "desc_long": "Centre médiéval parfaitement conservé, canaux bordés d'arbres et places pavées comme le Markt. Beffrois, maisons de guilde et chocolateries créent une atmosphère de conte de fées qui invite à se perdre sans hâte.",
+      "location": "Bruges, Belgique",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_6": {
+      "title": "Design à Copenhague",
+      "desc_short": "Tradition nordique et avant-garde",
+      "desc_long": "Équilibre entre design contemporain et tradition nordique. Nyhavn, Tivoli et les quartiers cyclables montrent une ville humaine et accueillante ; gastronomie d'avant-garde et respect de l'espace public.",
+      "location": "Copenhague, Danemark",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_7": {
+      "title": "Charme de Ljubljana",
+      "desc_short": "Le joyau caché de la Slovénie",
+      "desc_long": "Petite capitale pittoresque, avec centre piétonnier, cafés au bord de la rivière et le château au sommet. Base idéale pour des excursions au lac de Bled et dans les Alpes juliennes.",
+      "location": "Ljubljana, Slovénie",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_8": {
+      "title": "Barcelone Moderniste",
+      "desc_short": "Gaudí, plage et tapas",
+      "desc_long": "Le modernisme de Gaudí, mer et montagne sur le même plan. La Sagrada Familia, le Parc Güell et la vie de quartier coexistent avec marchés et musées ; promenades de Montjuïc aux plages.",
+      "location": "Barcelone, Espagne",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_9": {
+      "title": "Séville a une couleur spéciale",
+      "desc_short": "Flamenco, Alcazar et tradition",
+      "desc_long": "Centre historique monumental, patios et azulejos. L'Alcazar, la Cathédrale et le quartier de Santa Cruz s'ajoutent à une puissante culture de tapas et au flamenco.",
+      "location": "Séville, Espagne",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_10": {
+      "title": "Tallinn Médiévale",
+      "desc_short": "Conte de fées dans la Baltique",
+      "desc_long": "Vieille ville médiévale fortifiée, tours et toits colorés avec vue sur la Baltique. Hiver froid, mais photogénique depuis Toompea.",
+      "location": "Tallinn, Estonie",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_11": {
+      "title": "Paris Romantique",
+      "desc_short": "La ville lumière et de l'amour",
+      "desc_long": "Romance urbaine : Seine, boulevards et musées emblématiques. Quartiers avec leur propre identité et cafés en terrasse ; Notre-Dame, Sacré-Cœur et la Tour Eiffel comme repères essentiels.",
+      "location": "Paris, France",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_12": {
+      "title": "Budapest Thermal",
+      "desc_short": "La perle du Danube",
+      "desc_long": "Architecture Art Nouveau, bains thermaux et promenades nocturnes sur le Danube. Le Parlement brille au crépuscule depuis le pont des Chaînes.",
+      "location": "Budapest, Hongrie",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_13": {
+      "title": "Renaissance à Florence",
+      "desc_short": "Art à chaque coin de rue",
+      "desc_long": "Berceau de la Renaissance : Duomo, Offices et artisanat dans l'Oltrarno. Une ville-musée vivante où chaque rue recèle sculptures, palais et ateliers.",
+      "location": "Florence, Italie",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_14": {
+      "title": "Rome Éternelle",
+      "desc_short": "Histoire vivante et gastronomie",
+      "desc_long": "La « Ville Éternelle » combine ruines classiques, places baroques et vie de quartier. Du Panthéon à la Fontaine de Trevi, l'histoire coexiste avec trattorias et terrasses.",
+      "location": "Rome, Italie",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_15": {
+      "title": "Canaux de Venise",
+      "desc_short": "La ville sur l'eau",
+      "desc_long": "Sans voitures et avec un tracé aquatique unique. Canaux, palais et ponts relient les îles ; de Saint-Marc aux quartiers plus calmes, c'est pure contemplation.",
+      "location": "Venise, Italie",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_16": {
+      "title": "La Valette Historique",
+      "desc_short": "Baroque et forteresses",
+      "desc_long": "Fortifiée et baroque, avec des points de vue sur le Grand Port. Palais, églises et musées concentrés dans un centre compact et praticable à pied.",
+      "location": "La Valette, Malte",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_17": {
+      "title": "Fjords depuis Bergen",
+      "desc_short": "Nature norvégienne",
+      "desc_long": "Maisons en bois à Bryggen, port animé et montagnes tombant dans les fjords. Point de départ idéal pour des routes panoramiques.",
+      "location": "Bergen, Norvège",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_18": {
+      "title": "Amsterdam à vélo",
+      "desc_short": "Canaux et liberté",
+      "desc_long": "Canaux classés au patrimoine de l'UNESCO, pignons étroits et culture cycliste. Musées de classe mondiale et quartiers verts reliés par des ponts.",
+      "location": "Amsterdam, Pays-Bas",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_19": {
+      "title": "Vins de Porto",
+      "desc_short": "Douro et azulejos",
+      "desc_long": "Azulejos, ponts sur le Douro et caves de vin de Porto. Librairie Lello et piscines de Leça comme icônes contemporaines.",
+      "location": "Porto, Portugal",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_20": {
+      "title": "Londres Cosmopolite",
+      "desc_short": "Histoire et modernité",
+      "desc_long": "Histoire et avant-garde sur les rives de la Tamise. Musées gratuits, immenses parcs et une scène culturelle et gastronomique inépuisable.",
+      "location": "Londres, Royaume-Uni",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_21": {
+      "title": "Mystère d'Édimbourg",
+      "desc_short": "Châteaux et légendes",
+      "desc_long": "Royal Mile, château et collines verdoyantes. La roche volcanique d'Arthur’s Seat offre une vue panoramique exceptionnelle sur la ville de pierre.",
+      "location": "Édimbourg, Royaume-Uni",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_22": {
+      "title": "Prague d'Or",
+      "desc_short": "Gothique et romantique",
+      "desc_long": "Dômes et tours gothiques sur une vieille ville photogénique. Pont Charles à l'aube et cafés historiques avec musique et littérature.",
+      "location": "Prague, République tchèque",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_23": {
+      "title": "Alpes à Lucerne",
+      "desc_short": "Lac et montagnes",
+      "desc_long": "Lac, montagnes proches et le Kapellbrücke comme carte postale. Toits médiévaux et air alpin à quelques minutes des routes de montagne.",
+      "location": "Lucerne, Suisse",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_24": {
+      "title": "Zurich Élégante",
+      "desc_short": "Luxe et lacs",
+      "desc_long": "Vieille ville élégante au bord du lac, musées, galeries et vie au bord de l'eau. Étés vibrants et efficacité suisse dans chaque détail.",
+      "location": "Zurich, Suisse",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_25": {
+      "title": "Pékin Impérial",
+      "desc_short": "Muraille et Cité Interdite",
+      "desc_long": "Capitale impériale avec la Cité Interdite, les hutongs et de larges avenues. Porte vers des sections proches de la Grande Muraille et une cuisine régionale délicieuse.",
+      "location": "Pékin, Chine",
+      "duration": "6 jours / 5 nuits"
+    },
+    "id_26": {
+      "title": "Hong Kong Vertical",
+      "desc_short": "Gratte-ciel et nature",
+      "desc_long": "Horizon dense autour d'un port rempli de ferries. Montagnes, îles et réserves naturelles à quelques minutes du centre financier.",
+      "location": "Hong Kong, Chine",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_27": {
+      "title": "Séoul Vibrante",
+      "desc_short": "Tradition et K-Pop",
+      "desc_long": "Gratte-ciel et palais, marchés de nuit et un réseau de métro impeccable. Des quartiers comme Bukchon et Myeongdong montrent tradition et mode.",
+      "location": "Séoul, Corée du Sud",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_28": {
+      "title": "Jaipur la Rose",
+      "desc_short": "Palais du Rajasthan",
+      "desc_long": "La « Ville Rose » : Hawa Mahal, forts et bazars couleur saumon. Artisanat, bijoux et gastronomie du Rajasthan dans les palais et les rues.",
+      "location": "Jaipur, Inde",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_29": {
+      "title": "Kyoto Zen",
+      "desc_short": "Temples et Geishas",
+      "desc_long": "Temples, sanctuaires et jardins classiques. Hanami au printemps, routes bordées d'arbres et possibilité de croiser des geishas à Gion.",
+      "location": "Kyoto, Japon",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_30": {
+      "title": "Spirituelle Luang Prabang",
+      "desc_short": "Moines et cascades",
+      "desc_long": "Patrimoine de l'UNESCO au confluent des rivières. Processions de moines à l'aube, cascades proches et architecture coloniale-bouddhiste.",
+      "location": "Luang Prabang, Laos",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_31": {
+      "title": "Beyrouth Historique",
+      "desc_short": "Le Paris du Moyen-Orient",
+      "desc_long": "Plages, clubs et toits face aux mosquées et souks historiques. Gastronomie et vie nocturne à l'air méditerranéen et levantin.",
+      "location": "Beyrouth, Liban",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_32": {
+      "title": "Mascate Mystique",
+      "desc_short": "Trésors d'Oman",
+      "desc_long": "Baies et montagnes encadrant mosquées, souks et forts portugais. Promenades côtières et architecture blanche près du golfe d'Oman.",
+      "location": "Mascate, Oman",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_33": {
+      "title": "Futur à Doha",
+      "desc_short": "Luxe dans le désert",
+      "desc_long": "Corniche avec skyline futuriste, Souq Waqif et Musée d'Art Islamique d'I. M. Pei. Mélange de tradition et de nouvelles zones culturelles.",
+      "location": "Doha, Qatar",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_34": {
+      "title": "Chiang Mai Thaïlandais",
+      "desc_short": "Temples et nature",
+      "desc_long": "Temples à flanc de colline, cafés et marchés créatifs. Point de départ pour la nature du nord et des expériences culinaires intenses.",
+      "location": "Chiang Mai, Thaïlande",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_35": {
+      "title": "Chaos et Calme à Hanoï",
+      "desc_short": "Essence du Vietnam",
+      "desc_long": "Lacs, temples et quartier français à l'air romantique. Rues étroites avec cafés traditionnels et marchés vibrants.",
+      "location": "Hanoï, Vietnam",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_36": {
+      "title": "Singapour Future",
+      "desc_short": "Jardins et gratte-ciel",
+      "desc_long": "Ville-jardin avec jungle urbaine, Jardin Botanique et Gardens by the Bay. Temples, maisons patrimoniales et une logistique impeccable pour se déplacer.",
+      "location": "Singapour, Singapour",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_37": {
+      "title": "Chefchaouen Bleu",
+      "desc_short": "La perle bleue du Maroc",
+      "desc_long": "Médina bleue entre montagnes du Rif. Ruelles peintes, portes artisanales et points de vue proches pour voir l'ensemble d'en haut.",
+      "location": "Chefchaouen, Maroc",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_38": {
+      "title": "Le Cap et les Manchots",
+      "desc_short": "Montagne et mer",
+      "desc_long": "Table Mountain, plages avec manchots et quartiers colorés comme Bo-Kaap. Jardins, vignobles proches et routes panoramiques côtières.",
+      "location": "Le Cap, Afrique du Sud",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_56": {
+      "title": "Safari Grande Migration",
+      "desc_short": "Nature sauvage à l'état pur",
+      "desc_long": "Soyez témoin du plus grand spectacle naturel de la planète. Parcourez les plaines infinies du Serengeti à la recherche des 'Big Five' et observez des milliers de gnous et de zèbres traverser la rivière Mara.",
+      "location": "Serengeti, Tanzanie",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_57": {
+      "title": "Pharaons et Nil",
+      "desc_short": "Histoire millénaire",
+      "desc_long": "Un voyage dans le temps vers l'Égypte ancienne. Des imposantes Pyramides de Gizeh aux temples de Louxor et Karnak, en naviguant sur le fleuve qui a donné vie à une civilisation.",
+      "location": "Le Caire et Louxor, Égypte",
+      "duration": "6 jours / 5 nuits"
+    },
+    "id_58": {
+      "title": "Chutes Victoria",
+      "desc_short": "La fumée qui gronde",
+      "desc_long": "Sentez la force de l'une des merveilles naturelles du monde. Les chutes Victoria offrent des vues spectaculaires, des arcs-en-ciel constants et des activités pleines d'adrénaline.",
+      "location": "Livingstone, Zambie",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_60": {
+      "title": "Désert du Namib",
+      "desc_short": "Dunes rouges et arbres morts",
+      "desc_long": "Des paysages qui semblent d'une autre planète. Escaladez la dune Big Daddy, marchez parmi les acacias pétrifiés de Deadvlei et contemplez l'un des ciels étoilés les plus propres du monde.",
+      "location": "Sossusvlei, Namibie",
+      "duration": "6 jours / 5 nuits"
+    },
+    "id_39": {
+      "title": "Sydney Iconique",
+      "desc_short": "Opéra et surf",
+      "desc_long": "Opéra emblématique, baie navigable et plages urbaines comme Bondi. Ferries quotidiens et parcs au bord de l'eau.",
+      "location": "Sydney, Australie",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_40": {
+      "title": "Adrénaline à Queenstown",
+      "desc_short": "Aventure extrême",
+      "desc_long": "Capitale de l'adrénaline entre lac et montagnes. Points de vue naturels, aventures et paysages cinématographiques.",
+      "location": "Queenstown, Nouvelle-Zélande",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_41": {
+      "title": "Québec Européen",
+      "desc_short": "La France en Amérique",
+      "desc_long": "Ville haute fortifiée avec vue sur le Saint-Laurent. Ambiance européenne, toits pentus et couchers de soleil roses.",
+      "location": "Québec, Canada",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_42": {
+      "title": "Rythme de La Havane",
+      "desc_short": "Salsa et voitures classiques",
+      "desc_long": "Architecture coloniale aux tons pastel, musique à chaque coin de rue et promenades en bord de mer. La Vieille Havane et le Malecón donnent le rythme.",
+      "location": "La Havane, Cuba",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_43": {
+      "title": "New York, New York",
+      "desc_short": "La capitale du monde",
+      "desc_long": "Architecture emblématique, parcs comme Central Park et une scène artistique incomparable. Énergie urbaine qui ne s'éteint jamais.",
+      "location": "New York, États-Unis",
+      "duration": "6 jours / 5 nuits"
+    },
+    "id_44": {
+      "title": "San Francisco Doré",
+      "desc_short": "Pont et tramways",
+      "desc_long": "Pont du Golden Gate, collines et maisons victoriennes. Musées de classe mondiale et quartiers avec leur propre caractère.",
+      "location": "San Francisco, États-Unis",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_45": {
+      "title": "San Miguel Colonial",
+      "desc_short": "Art et couleur au Mexique",
+      "desc_long": "Centre colonial avec paroisse néogothique rose. Rues pavées, patios et art dans les galeries et ateliers.",
+      "location": "San Miguel de Allende, Mexique",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_46": {
+      "title": "Buenos Aires Porteño",
+      "desc_short": "Tango et barbecue",
+      "desc_long": "Quartiers avec identité (Recoleta, San Telmo, La Boca), architecture variée et vie culturelle intense. Tango, grillades et librairies dans des bâtiments emblématiques.",
+      "location": "Buenos Aires, Argentine",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_47": {
+      "title": "Rio de Janeiro Samba",
+      "desc_short": "Christ et Copacabana",
+      "desc_long": "Plages mythiques, jungle urbaine et le Christ Rédempteur veillant sur les baies et les collines. Rythme de samba dans les rues et sur les places.",
+      "location": "Rio de Janeiro, Brésil",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_48": {
+      "title": "Carthagène Coloniale",
+      "desc_short": "Caraïbes et murailles",
+      "desc_long": "Murailles, places et demeures coloniales couvertes de bougainvilliers. Getsemaní et Bocagrande montrent leurs visages créatifs et modernes.",
+      "location": "Carthagène, Colombie",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_49": {
+      "title": "Quito Andin",
+      "desc_short": "Histoire dans les Andes",
+      "desc_long": "Centre historique doré sous les volcans andins. Vues depuis la Basilique du Vœu National et marchés traditionnels.",
+      "location": "Quito, Équateur",
+      "duration": "3 jours / 2 nuits"
+    },
+    "id_50": {
+      "title": "Cuzco Impérial",
+      "desc_short": "Capitale des Incas",
+      "desc_long": "Ancienne capitale inca avec places, couvents et rues pavées. Point de départ pour le Machu Picchu et points de vue comme le Christ Blanc.",
+      "location": "Cuzco, Pérou",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_51": {
+      "title": "Melbourne Culturelle",
+      "desc_short": "Café, art urbain et culture",
+      "desc_long": "Considérée comme la capitale culturelle de l'Australie. Perdez-vous dans ses célèbres 'laneways' pleins de graffitis artistiques, dégustez le meilleur café du monde et parcourez l'architecture victorienne mélangée aux gratte-ciel modernes.",
+      "location": "Melbourne, Australie",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_52": {
+      "title": "Plongée dans la Grande Barrière",
+      "desc_short": "Merveille naturelle sous-marine",
+      "desc_long": "Plongez dans le plus grand système de récifs du monde. Tortues, poissons-clowns et coraux aux couleurs infinies vous attendent dans cette aventure aquatique inoubliable.",
+      "location": "Cairns, Australie",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_53": {
+      "title": "Détente aux Fidji",
+      "desc_short": "Eaux turquoises et palmiers",
+      "desc_long": "Déconnectez-vous du monde au cœur du Pacifique Sud. Les Fidji vous accueillent avec leur célèbre hospitalité 'Bula', des plages de sable blanc immaculé et des eaux cristallines parfaites pour ne rien faire.",
+      "location": "Nadi, Fidji",
+      "duration": "6 jours / 5 nuits"
+    },
+    "id_54": {
+      "title": "Hobbiton et Culture Maori",
+      "desc_short": "Terre du Milieu et geysers",
+      "desc_long": "Entrez dans la Comté en visitant le plateau de tournage du Seigneur des Anneaux et découvrez la force de la terre à Rotorua avec ses geysers et la riche culture maorie.",
+      "location": "Rotorua, Nouvelle-Zélande",
+      "duration": "4 jours / 3 nuits"
+    },
+    "id_61": {
+      "title": "Patagonie Sauvage",
+      "desc_short": "Trekking au bout du monde",
+      "desc_long": "Affrontez les vents du sud et marchez parmi les glaciers, les lacs turquoise et les imposantes tours de granit. Le Circuit W est une mecque pour les randonneurs du monde entier.",
+      "location": "Torres del Paine, Chili",
+      "duration": "5 jours / 4 nuits"
+    },
+    "id_62": {
+      "title": "Pura Vida Costa Rica",
+      "desc_short": "Jungle, volcans et paresseux",
+      "desc_long": "Plongez dans le pays avec la plus grande biodiversité par mètre carré. Marchez sur des ponts suspendus à travers le brouillard, baignez-vous dans des eaux thermales volcaniques et cherchez des quetzals et des paresseux.",
+      "location": "Monteverde, Costa Rica",
+      "duration": "6 jours / 5 nuits"
+    }
   }
 }

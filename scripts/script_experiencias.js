@@ -1125,36 +1125,38 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
 
     if (listaDatos.length === 0) {
         container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #666;"><h3 data-i18n="general.no_results">No hay resultados...</h3></div>`;
+        if(window.i18n) window.i18n.run(); 
         return;
     }
 
-    // 1. OBTENER FAVORITOS DEL USUARIO ACTUAL
     const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
     const favoritos = usuario ? (usuario.favoritos || []) : [];
 
     listaDatos.forEach(exp => {
-        // 2. COMPROBAR SI ESTE VIAJE ES FAVORITO
         const esFavorito = favoritos.includes(exp.id);
         const claseActiva = esFavorito ? "active" : "";
         const iconoClase = esFavorito ? "fa-solid" : "fa-regular";
         const card = document.createElement("a");
         card.href = `compra.html?id=${exp.id}`;
         card.className = "experience-card-item";
+        
+        // --- CLAVES DINÁMICAS ---
+        // Usamos el ID para crear claves únicas: data_experiences.id_4.title, etc.
         card.innerHTML = `
             <div class="card-image-header">
-                <span class="difficulty-badge">${exp.dificultad}</span>
+                <span class="difficulty-badge" data-i18n="difficulty.${exp.dificultad}">${exp.dificultad}</span>
                 <button class="card-fav-btn ${claseActiva}" onclick="toggleCardFav(event, ${exp.id}, this)">
                     <i class="${iconoClase} fa-heart"></i>
                 </button>
                 <img src="${exp.imagen}" alt="${exp.titulo}">
             </div>
             <div class="card-body">
-                <h3>${exp.titulo}</h3>
-                <p class="card-description">${exp.descripcionCorto}</p>
+                <h3 data-i18n="data_experiences.id_${exp.id}.title">${exp.titulo}</h3>
+                <p class="card-description" data-i18n="data_experiences.id_${exp.id}.desc_short">${exp.descripcionCorto}</p>
                 <div class="card-meta">
-                    <span><i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}</span>
-                    <span><i class="fa-regular fa-calendar"></i> ${exp.duracion}</span>
-                    <span><i class="fa-solid fa-user-group"></i> ${exp.grupo}</span>
+                    <span><i class="fa-solid fa-location-dot"></i> <span data-i18n="data_experiences.id_${exp.id}.location">${exp.ubicacion}</span></span>
+                    <span><i class="fa-regular fa-calendar"></i> <span data-i18n="data_experiences.id_${exp.id}.duration">${exp.duracion}</span></span>
+                    <span><i class="fa-solid fa-user-group"></i> <span data-i18n="groups.${exp.grupo.replace(/\s+/g, '_')}">${exp.grupo}</span></span>
                 </div>
                 <div class="card-footer">
                     <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
@@ -1163,8 +1165,9 @@ function renderExperiencesList(container, listaDatos = experiencesData) {
             </div>
         `;
         container.appendChild(card);
-        if(window.i18n) window.i18n.run();
     });
+
+    if(window.i18n) window.i18n.run();
 }
 
 // Función para inicializar los filtros de experiencias
@@ -1296,31 +1299,57 @@ function loadExperienceDetail() {
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get("id"));
     const exp = experiencesData.find(e => e.id === id);
+    
     if (!exp) {
-        document.querySelector("main").innerHTML = "<div class='container' style='padding:150px 20px; text-align:center;'><h1>Experiencia no encontrada</h1><p>Lo sentimos, no pudimos cargar este viaje.</p><a href='experiencias.html' class='btn-black' style='margin-top:20px;'>Volver al listado</a></div>";
+        document.querySelector("main").innerHTML = "<div class='container' style='padding:150px 20px; text-align:center;'><h1 data-i18n='general.not_found_title'>Experiencia no encontrada</h1><p data-i18n='general.not_found_text'>Lo sentimos, no pudimos cargar este viaje.</p><a href='experiencias.html' class='btn-black' style='margin-top:20px;' data-i18n='product.back_link'>Volver al listado</a></div>";
+        if(window.i18n) window.i18n.run();
         return;
     }
 
-    // 1. Rellenar datos visuales principales (Hero)
+    // 1. Rellenar datos visuales principales e inyectar atributos de traducción
     document.getElementById("detail-image").src = exp.imagen;
-    document.getElementById("detail-title").textContent = exp.titulo;
-    document.getElementById("detail-reviews").textContent = `(${exp.resenas} reseñas)`;
     
-    // Iconos
-    document.getElementById("detail-location").innerHTML = `<i class="fa-solid fa-location-dot"></i> ${exp.ubicacion}`;
-    document.getElementById("detail-duration").innerHTML = `<i class="fa-regular fa-clock"></i> ${exp.duracion}`;
-    document.getElementById("detail-group").innerHTML = `<i class="fa-solid fa-user-group"></i> ${exp.grupo}`;
+    // Título y Descripciones (Atributos directos)
+    const titleEl = document.getElementById("detail-title");
+    titleEl.textContent = exp.titulo;
+    titleEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.title`);
+
+    const shortDescEl = document.getElementById("detail-short-desc");
+    shortDescEl.textContent = exp.descripcionCorto;
+    shortDescEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.desc_short`);
+
+    const longDescEl = document.getElementById("detail-long-desc");
+    longDescEl.textContent = exp.descripcionLarga;
+    longDescEl.setAttribute("data-i18n", `data_experiences.id_${exp.id}.desc_long`);
+
+    // Reseñas (Solo traducimos la palabra "reseñas" si creamos una clave, o lo dejamos mixto)
+    // Opción simple: dejar el número dinámico
+    document.getElementById("detail-reviews").innerHTML = `(${exp.resenas} <span data-i18n="product.reviews_word">reseñas</span>)`;
     
-    // Tags y Precio
-    document.getElementById("detail-category").textContent = exp.categoria;
-    document.getElementById("detail-difficulty").textContent = exp.dificultad;
+    // Iconos y Metadatos (Usamos span para aislar el texto traducible)
+    document.getElementById("detail-location").innerHTML = `<i class="fa-solid fa-location-dot"></i> <span data-i18n="data_experiences.id_${exp.id}.location">${exp.ubicacion}</span>`;
+    document.getElementById("detail-duration").innerHTML = `<i class="fa-regular fa-clock"></i> <span data-i18n="data_experiences.id_${exp.id}.duration">${exp.duracion}</span>`;
+    
+    // Grupo: Reemplazamos espacios por guiones bajos para la clave (Ej: "Grupos de 10" -> "Grupos_de_10")
+    const groupKey = exp.grupo.replace(/\s+/g, '_'); 
+    document.getElementById("detail-group").innerHTML = `<i class="fa-solid fa-user-group"></i> <span data-i18n="groups.${groupKey}">${exp.grupo}</span>`;
+    
+    // Tags (Categoría y Dificultad)
+    const catEl = document.getElementById("detail-category");
+    catEl.textContent = exp.categoria;
+    catEl.setAttribute("data-i18n", `categories.${exp.categoria}`);
+
+    const diffEl = document.getElementById("detail-difficulty");
+    diffEl.textContent = exp.dificultad;
+    diffEl.setAttribute("data-i18n", `difficulty.${exp.dificultad}`);
+
+    // Precio
     document.getElementById("detail-price").textContent = `$ ${exp.precio}`;
     
-    // Textos
-    document.getElementById("detail-short-desc").textContent = exp.descripcionCorto;
-    document.getElementById("detail-author").innerHTML = `Publicado por <strong>${exp.autor}</strong>`;
+    // Autor y Fecha
+    // Nota: He añadido la clave 'general.published_by'
+    document.getElementById("detail-author").innerHTML = `<span data-i18n="general.published_by">Publicado por</span> <strong>${exp.autor}</strong>`;
     document.getElementById("detail-date").textContent = exp.fechaPub;
-    document.getElementById("detail-long-desc").textContent = exp.descripcionLarga;
 
     // 2. Renderizar ITINERARIO
     const timelineContainer = document.querySelector(".itinerary-timeline");
@@ -1330,6 +1359,8 @@ function loadExperienceDetail() {
             exp.itinerario.forEach(step => {
                 const item = document.createElement("div");
                 item.className = "timeline-item";
+                // Aquí podrías añadir claves para el itinerario si decides traducirlo también en el JSON
+                // data-i18n="data_experiences.id_X.itinerary_day_1_title"
                 item.innerHTML = `
                     <div class="step-number">${step.dia}</div>
                     <div class="timeline-content">
@@ -1366,6 +1397,8 @@ function loadExperienceDetail() {
     
     if (btnReservar) {
         const nuevoBtn = btnReservar.cloneNode(true);
+        // Aseguramos que el botón tenga la traducción
+        nuevoBtn.setAttribute("data-i18n", "product.book_now");
         btnReservar.parentNode.replaceChild(nuevoBtn, btnReservar);
 
         nuevoBtn.addEventListener("click", () => {
@@ -1377,77 +1410,76 @@ function loadExperienceDetail() {
             }
         });
     }
+
     // 6.5 LÓGICA DE FAVORITOS
     const btnFav = document.querySelector('.btn-favorite');
-
-    // A. Comprobar si ya es favorito al cargar
     const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
+    
+    // Función auxiliar para actualizar texto del botón favorito
+    const updateFavBtnState = (isFav) => {
+        if (isFav) {
+            btnFav.classList.add('active');
+            btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> <span data-i18n="product.saved">Guardado</span>`;
+        } else {
+            btnFav.classList.remove('active');
+            btnFav.innerHTML = `<i class="fa-solid fa-plus"></i> <span data-i18n="product.add_fav">Añadir a favoritos</span>`;
+        }
+    };
+
     if (usuarioActual && usuarioActual.favoritos && usuarioActual.favoritos.includes(exp.id)) {
-        btnFav.classList.add('active');
-        btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> Guardado`;
+        updateFavBtnState(true);
+    } else {
+        updateFavBtnState(false);
     }
 
-    // B. Evento Click
-    btnFav.addEventListener('click', () => {
+    btnFav.onclick = () => { // Usamos onclick para limpiar listeners anteriores si los hubiera al recargar
         const usuario = typeof obtenerUsuarioActual === 'function' ? obtenerUsuarioActual() : null;
         if (!usuario) {
             if (typeof mostrarAvisoLogin === 'function') {
-                mostrarAvisoLogin(
-                    "Inicia sesión para guardar favoritos",
-                    "Necesitas identificarte para poder guardar esta experiencia en tu lista de deseos."
-                );
+                mostrarAvisoLogin("Inicia sesión", "Necesitas identificarte para guardar favoritos.");
             } else {
-                alert("Debes iniciar sesión");
                 window.location.href = "login.html";
             }
             return;
         }
 
-        // Inicializar array si no existe
         if (!usuario.favoritos) usuario.favoritos = [];
-
         const index = usuario.favoritos.indexOf(exp.id);
 
         if (index === -1) {
-            // AGREGAR
             usuario.favoritos.push(exp.id);
-            btnFav.classList.add('active');
-            btnFav.innerHTML = `<i class="fa-solid fa-heart"></i> Guardado`;
-            mostrarToast("Añadido a tus favoritos correctamente");
+            updateFavBtnState(true);
+            mostrarToast("Añadido a favoritos");
         } else {
-            // QUITAR
             usuario.favoritos.splice(index, 1);
-            btnFav.classList.remove('active');
-            btnFav.innerHTML = `<i class="fa-solid fa-plus"></i> Añadir a favoritos`;
+            updateFavBtnState(false);
             mostrarToast("Eliminado de favoritos");
         }
 
-        // C. Guardar cambios
         localStorage.setItem("usuarioActual", JSON.stringify(usuario));
         if (typeof actualizarUsuarioEnListaGlobal === 'function') {
             actualizarUsuarioEnListaGlobal(usuario);
         }
-    });
+        // Retraducir el nuevo estado del botón
+        if(window.i18n) window.i18n.run();
+    };
 
     // 7. Activar Lógica de Pestañas
     initTabs();
 
     // 8. MEJORA DEL BOTÓN "VOLVER"
     const backLink = document.querySelector('.breadcrumb-bar a');
-    
     if (backLink) {
         backLink.addEventListener('click', (e) => {
             if (window.history.length > 1) {
                 e.preventDefault();
-                window.history.back(); // Vuelve atrás recuperando el scroll
+                window.history.back();
             }
         });
-        if (document.referrer.includes("perfil.html")) {
-            backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver a mi perfil';
-        } else if (document.referrer.includes("index.html")) {
-            backLink.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver al inicio';
-        }
+        // Aquí también podríamos usar data-i18n si quisiéramos ser estrictos con "Volver a..."
     }
+
+    // IMPORTANTE: EJECUTAR TRADUCCIÓN AL FINAL
     if(window.i18n) window.i18n.run();
 }
 

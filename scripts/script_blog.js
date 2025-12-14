@@ -422,9 +422,9 @@ function renderBlogList(container, listaDePosts = blogData) {
                 <img src="${post.imagenPrincipal}" alt="${post.titulo}">
             </div>
             <div class="blog-content">
-                <h3>${post.titulo}</h3>
+                <h3 data-i18n="data_blog.id_${post.id}.title">${post.titulo}</h3>
                 <p class="blog-author"><span data-i18n="blog.by">De</span> ${post.autor}</p>
-                <p class="blog-excerpt">${post.resumen}</p>
+                <p class="blog-excerpt" data-i18n="data_blog.id_${post.id}.summary">${post.resumen}</p>
                 <a href="blog_post.html?id=${post.id}" class="btn-black-sm" data-i18n="blog.read_more">Leer artículo completo</a>
             </div>
         `;
@@ -443,19 +443,29 @@ function loadBlogPost() {
     const post = blogData.find(p => p.id === id);
 
     if (!post) return; 
+
+    // Referencias
     const titleEl = document.getElementById("post-title");
     const tagEl = document.getElementById("post-tag");
 
-    if (titleEl) titleEl.removeAttribute("data-i18n");
-    if (tagEl) tagEl.removeAttribute("data-i18n");
-
-    // 3. Rellenar el contenido del post
-    if (tagEl) tagEl.textContent = post.tag;
-    if (titleEl) titleEl.textContent = post.titulo;
+    // 3. Rellenar contenido e inyectar atributos data-i18n
+    if (tagEl) {
+        tagEl.textContent = post.tag;
+        // Asumimos que los tags coinciden con las claves en "categories"
+        tagEl.setAttribute("data-i18n", `categories.${post.tag}`);
+    }
     
-    document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> Por ${post.autor}`;
+    if (titleEl) {
+        titleEl.textContent = post.titulo;
+        titleEl.setAttribute("data-i18n", `data_blog.id_${post.id}.title`);
+    }
+    
+    // Metadatos con iconos
+    document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> <span data-i18n="blog.by">Por</span> ${post.autor}`;
     document.getElementById("post-date").innerHTML = `<i class="fa-regular fa-calendar"></i> ${post.fecha}`;
     document.getElementById("post-time").innerHTML = `<i class="fa-regular fa-clock"></i> ${post.lectura}`;
+    
+    // Contenido HTML (Se queda igual, difícil de traducir párrafo a párrafo dinámicamente)
     document.getElementById("post-content").innerHTML = post.contenidoHTML;
 
     // 4. Cambiar fondo del Hero
@@ -464,24 +474,26 @@ function loadBlogPost() {
         heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${post.imagenPrincipal}')`;
     }
     
-    // 5. Posts Relacionados
+    // 5. Posts Relacionados (Añadir data-i18n a los títulos sugeridos)
     const relatedContainer = document.getElementById("related-posts-container");
 
     if (relatedContainer) {
         const otrosPosts = blogData.filter(p => p.id !== id);
         const sugeridos = otrosPosts.slice(0, 2);
         relatedContainer.innerHTML = "";
+        
         sugeridos.forEach(sugerido => {
             const card = document.createElement("a");
             card.href = `blog_post.html?id=${sugerido.id}`;
             card.className = "related-card";
             card.innerHTML = `
                 <img src="${sugerido.imagenPrincipal}" alt="${sugerido.titulo}">
-                <h4>${sugerido.titulo}</h4>
+                <h4 data-i18n="data_blog.id_${sugerido.id}.title">${sugerido.titulo}</h4>
             `;
             relatedContainer.appendChild(card);
         });
     }
+    if(window.i18n) window.i18n.run();
 }
 
 function initBlogFilters(container) {
