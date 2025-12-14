@@ -2225,6 +2225,7 @@ blockquote {
         padding: 10px 15px;
         position: sticky;
         top: 0;
+        height: 10rem;
         z-index: 9999;
         background-color: var(--color-white);
         width: 100%;
@@ -2266,6 +2267,7 @@ blockquote {
         justify-content: center;
         overflow-x: auto;
         white-space: nowrap;
+        padding-top: 10px;
         padding-bottom: 5px;
         gap: 40px;
         -webkit-overflow-scrolling: touch;
@@ -2284,8 +2286,9 @@ blockquote {
         padding-top: 100px; 
         padding-bottom: 40px;
         background-attachment: scroll;
-        position: relative; 
-        top: auto;
+        position: relative;
+        position:sticky;
+        top: 10rem;
     }
 
     .hero-content {
@@ -2359,7 +2362,7 @@ blockquote {
         font-size: 0.85rem;
     }
 
-    /* --- 5. BLOG --- */
+    /* --- 5. BLOG y DESTINOS--- */
     .blog-card {
         flex-direction: column;
     }
@@ -2373,7 +2376,14 @@ blockquote {
     .blog-content h3 {
         font-size: 1.3rem;
     }
-
+    .sticky-europa-hero,
+    .sticky-america-hero,
+    .sticky-asia-hero,
+    .sticky-oceania-hero,
+    .sticky-africa-hero{
+        position:sticky;
+        top: 10rem;
+    }
     /* --- 6. FORMULARIOS (Login, Registro, Checkout) --- */
     .auth-card {
         padding: 1.5rem; 
@@ -2512,9 +2522,24 @@ blockquote {
 }
 
 /* Ajustes extra para móviles muy pequeños */
-@media (max-width: 380px) {
+@media (max-width: 430px) {
+    .btn-login, .btn-signup {
+        font-size: 0.6rem;
+    }
     .hero-content h1 { font-size: 1.6rem; }
     .btn-hero { width: 100%; }
     .price-action-row { flex-direction: column; align-items: stretch; gap: 10px;}
 }
+
+/* Ajustes extra para móviles muy muy pequeños */
+@media (max-width: 387px) {
+    .main-header{
+        height: 12rem;
+    }
+
+    .nav-links{
+        font-size: 0.8rem;
+    }
+}
+
 
