@@ -382,7 +382,7 @@ img { display: block; max-width: 100%; }
 .search-input-container input { border: none; background: transparent; outline: none; width: 100%; font-family: var(--font-main); }
 .filter-buttons { display: flex; gap: 12px; }
 .filter-btn, .filter-icon-btn {
-    background: #f4f4f4; border: none; cursor: pointer; color: #333; transition: background 0.3s;
+    background: #f4f4f4; border: none; cursor: pointer; color: #333; transition: background 0.3s; min-width: 120px;justify-content: center;text-align: center;
 }
 .filter-btn { padding: 12px 24px; border-radius: 30px; font-weight: 600; font-family: var(--font-main); }
 .filter-icon-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -2138,23 +2138,45 @@ blockquote {
 
 /* ==================================================================== MENÚ DESPLEGABLE CATEGORÍAS ===================================================================================== */
 .filter-buttons {position: relative; }
+.filter-btn-wrapper {
+    position: relative;
+    display: inline-flex; /* Mantiene comportamiento flex del botón */
+    align-items: center;
+}
 .category-dropdown {
     display: none;
     position: absolute;
-    top: 110%;
-    left: auto;
-    right: 0;
+    top: 100%; /* Justo debajo del botón */
     background-color: var(--color-white);
-    min-width: 180px; 
-    max-width: 250px;
-    
+    min-width: 200px; 
+    max-width: 90vw;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border-radius: 12px;
     z-index: 1000;
     overflow: hidden;
     padding: 5px 0;
+    margin-top: 8px; /* Un pequeño espacio de separación */
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.category-dropdown.show {display: block; animation: fadeIn 0.2s ease-out;}
+/* Estado visible */
+.category-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.category-dropdown {
+    left: 0;
+    right: auto;
+}
+.category-dropdown.dropdown-right {
+    left: auto !important;
+    right: 0 !important;
+}
+/* OPCIONES */
 .category-option {
     padding: 12px 20px;
     cursor: pointer;
@@ -2163,9 +2185,16 @@ blockquote {
     color: var(--color-gray);
     transition: background 0.2s, color 0.2s;
     border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap; /* Evita que el texto se rompa feo */
 }
-.category-option:last-child {border-bottom: none;}
-.category-option:hover {background-color: #f9f9f9;color: var(--color-black);font-weight: 600;}
+.category-option:last-child {
+    border-bottom: none;
+}
+.category-option:hover {
+    background-color: #f9f9f9;
+    color: var(--color-black);
+    font-weight: 600;
+}
 .category-dropdown.sort-menu {min-width: 160px;}
 .filter-icon-btn.active {background-color: var(--color-black); color: var(--color-white);}
 
@@ -2173,6 +2202,8 @@ blockquote {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* LOGIN REQUIRED MODAL */
 .login-required-overlay {
     position: fixed;
     inset: 0;
@@ -2517,16 +2548,6 @@ blockquote {
     .filter-buttons {
         position: relative;
         justify-content: space-between;
-    }
-
-    /* Forzamos al menú a pegarse a la derecha e ignorar el JS */
-    .category-dropdown.show {
-        left: auto !important; /* IMPORTANTE: Anula el estilo en línea de JS */
-        right: 0 !important;   /* IMPORTANTE: Lo alinea a la derecha */
-        top: 100% !important;
-        margin-top: 10px;
-        width: 220px;          /* Ancho suficiente */
-        max-width: 90vw;       /* Que no se salga si la pantalla es muy pequeña */
     }
 }
 

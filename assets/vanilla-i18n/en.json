@@ -1029,5 +1029,10 @@
     "fav_added": "Saved to favorites",
     "fav_removed": "Removed from favorites",
     "data_saved": "Data saved"
+  },
+  "sort": {
+    "default": "Default",
+    "price_asc": "Price: Low to High",
+    "price_desc": "Price: High to Low"
   }
 }

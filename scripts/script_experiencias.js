@@ -1153,16 +1153,15 @@ function initFilters(container) {
         } else if (filters.orden === "Precio: Mayor a Menor") {
             result.sort((a, b) => b.precio - a.precio);
         }
-
+        // Si es "Defecto", usamos el orden original del array (por id o índice)
+        
         renderExperiencesList(container, result);
     };
 
     // Búsqueda inicial por URL
     const urlParam = new URLSearchParams(window.location.search).get("busqueda");
     if (urlParam) {
-        if (searchInput) {
-            searchInput.value = decodeURIComponent(urlParam);
-        }
+        if (searchInput) searchInput.value = decodeURIComponent(urlParam);
         filters.texto = decodeURIComponent(urlParam).toLowerCase();
         apply();
     }
@@ -1174,43 +1173,102 @@ function initFilters(container) {
         });
     }
 
-    // Configuración genérica de Dropdowns
+    // --- CONFIGURACIÓN DE DROPDOWNS (Definitiva con Icono y Traducciones) ---
     const setupDropdown = (btnId, options, type) => {
         const btn = document.getElementById(btnId);
-        if (!btn) {
-            return;
+        if (!btn) return;
+
+        // 1. Guardamos la clave i18n original para restaurarla al dar a "Todas"
+        // (Solo si el botón tiene texto inicial, el de ordenar no tiene)
+        const originalI18nKey = btn.getAttribute("data-i18n");
+
+        // 2. Crear Wrapper (si no existe)
+        if (!btn.parentNode.classList.contains("filter-btn-wrapper")) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "filter-btn-wrapper";
+            btn.parentNode.insertBefore(wrapper, btn);
+            wrapper.appendChild(btn);
         }
-        
+        const wrapper = btn.parentNode;
+
+        // 3. Crear Menú
+        const existingMenu = wrapper.querySelector(".category-dropdown");
+        if (existingMenu) existingMenu.remove();
+
         const menu = document.createElement("div");
         menu.className = "category-dropdown";
-        
+        if (type === 'orden') menu.classList.add("dropdown-right");
+
         const allOpts = type === 'orden' ? options : ["Todas", ...options];
         
         allOpts.forEach(opt => {
             const item = document.createElement("div");
             item.className = "category-option";
-            item.textContent = (opt === "Todas" && type === 'categoria') ? "Todas las categorías" : opt;
             
+            // --- A. DETERMINAR LA CLAVE DE TRADUCCIÓN (i18n) ---
+            let i18nKey = "";
+
+            if (type === 'categoria') {
+                i18nKey = (opt === 'Todas') ? 'experiences_page.filter_all_cats' : `categories.${opt}`;
+            } 
+            else if (type === 'dificultad') {
+                i18nKey = (opt === 'Todas') ? 'experiences_page.filter_all_diff' : `difficulty.${opt}`;
+            } 
+            else if (type === 'orden') {
+                // Mapeamos las opciones de orden a sus claves del JSON
+                if (opt === 'Defecto') i18nKey = 'sort.default';
+                if (opt === 'Precio: Menor a Mayor') i18nKey = 'sort.price_asc';
+                if (opt === 'Precio: Mayor a Menor') i18nKey = 'sort.price_desc';
+            }
+
+            // Asignamos la clave al item del menú para que se traduzca
+            item.setAttribute("data-i18n", i18nKey);
+            // Ejecutamos traducción inmediata para este item
+            if (window.i18n) window.i18n.run(item);
+
+            // --- B. EVENTO CLICK ---
             item.addEventListener("click", () => {
-                filters[type] = opt;
-                btn.textContent = item.textContent;
+                filters[type] = opt; // Actualizamos filtro lógico
+
+                // LÓGICA VISUAL DEL BOTÓN
+                if (type === 'orden' && opt === 'Defecto') {
+                    // CASO ESPECIAL: Si es "Defecto", mostramos el ICONO
+                    btn.removeAttribute("data-i18n"); // Quitamos traducción para que no machaque el icono
+                    btn.innerHTML = '<i class="fa-solid fa-arrow-down-short-wide"></i>';
+                    btn.classList.remove("active");
+                } 
+                else {
+                    // CASO NORMAL: Asignamos la misma clave de traducción al botón
+                    // Así, si cambias de idioma, el botón también cambiará.
+                    btn.setAttribute("data-i18n", i18nKey);
+                    
+                    // Si es "Todas", quitamos el estado activo, si es específico, lo ponemos
+                    if (opt === 'Todas') {
+                        btn.classList.remove("active");
+                    } else {
+                        btn.classList.add("active");
+                    }
+
+                    // Forzamos la traducción del botón ahora mismo
+                    if (window.i18n) window.i18n.run(btn);
+                }
+
                 menu.classList.remove("show");
                 apply();
             });
             menu.appendChild(item);
         });
 
-        document.querySelector(".filter-buttons").appendChild(menu);
+        wrapper.appendChild(menu);
         
-        btn.addEventListener("click", (e) => {
+        // Evento toggle
+        btn.onclick = (e) => {
             e.stopPropagation();
             document.querySelectorAll(".category-dropdown").forEach(m => {
                 if (m !== menu) m.classList.remove("show");
             });
             menu.classList.toggle("show");
-            menu.style.top = (btn.offsetTop + btn.offsetHeight + 10) + "px";
-            menu.style.left = btn.offsetLeft + "px";
-        });
+        };
     };
 
     const categories = [...new Set(experiencesData.map(e => e.categoria))].sort();
@@ -1218,6 +1276,7 @@ function initFilters(container) {
     setupDropdown("btn-exp-difficulty", ["Baja", "Media", "Alta", "Muy Alta"], "dificultad");
     setupDropdown("btn-exp-sort", ["Precio: Menor a Mayor", "Precio: Mayor a Menor", "Defecto"], "orden");
 
+    // Cerrar al hacer click fuera
     document.addEventListener("click", () => {
         document.querySelectorAll(".category-dropdown").forEach(m => m.classList.remove("show"));
     });

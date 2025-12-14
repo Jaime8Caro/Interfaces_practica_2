@@ -1030,5 +1030,10 @@
     "fav_added": "Ajouté aux favoris",
     "fav_removed": "Retiré des favoris",
     "data_saved": "Données enregistrées"
+  },
+  "sort": {
+    "default": "Par défaut",
+    "price_asc": "Prix : Croissant",
+    "price_desc": "Prix : Décroissant"
   }
 }

@@ -1031,5 +1031,10 @@
     "fav_added": "Guardado en favoritos",
     "fav_removed": "Eliminado de favoritos",
     "data_saved": "Datos guardados"
+  },
+  "sort": {
+    "default": "Por defecto",
+    "price_asc": "Precio: Menor a Mayor",
+    "price_desc": "Precio: Mayor a Menor"
   }
 }
