@@ -116,7 +116,6 @@ function finalizePurchase(e) {
         precio_pagado: trip.precio
     };
 
-    // --- AQUÍ ESTÁ EL CAMBIO CLAVE ---
     // Guardamos la reserva DENTRO del usuario
     if (!user.reservas) {
         user.reservas = [];
@@ -166,21 +165,40 @@ function validateStep(step) {
     const container = document.getElementById(`step-${step}`);
     if (!container) return true;
 
-    let valid = true;
-    container.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
-        if (input.offsetParent === null) return;
-        
-        let isValid = input.value.trim().length > 0;
-        if (input.type === 'email') isValid = input.value.includes('@') && input.value.length > 3;
+    let stepIsValid = true;
 
-        if (!isValid) {
-            input.style.border = "2px solid red";
-            valid = false;
-        } else {
-            input.style.border = "";
+    container.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
+        // Ignorar inputs ocultos
+        if (input.offsetParent === null) return;
+
+        if (!input.dataset.originalPh) {
+            input.dataset.originalPh = input.placeholder || "";
         }
+
+        const originalPlaceholder = input.dataset.originalPh;
+        let isFieldValid = input.value.trim().length > 0;
+        let errorMsg = "Campo requerido";
+        
+        if (input.type === 'email') {
+            const emailFormatValid = input.value.includes('@') && input.value.length > 3;
+            
+            if (input.value.trim().length === 0) {
+                isFieldValid = false;
+                errorMsg = "Campo requerido";
+            } else if (!emailFormatValid) {
+                isFieldValid = false;
+                errorMsg = "Email inválido";
+            } else {
+                isFieldValid = true;
+            }
+        }
+        if (!isFieldValid) {
+            stepIsValid = false;
+        }
+        window.validarCampoFormulario(input, isFieldValid, errorMsg, originalPlaceholder);
     });
-    return valid;
+
+    return stepIsValid;
 }
 
 function updateStepper(step) {
