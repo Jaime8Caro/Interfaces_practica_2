@@ -2089,3 +2089,284 @@ blockquote {
         transform: translateY(0) scale(1);
     }
 }
+
+/* ==========================================================================
+   MEDIA
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* --- 1. CABECERA (Header) COMPACTA --- */
+    .main-header {
+        padding: 10px 15px;
+        position: relative; 
+    }
+
+    .navbar {
+        flex-wrap: wrap; 
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+        flex: 1; 
+    }
+
+    .user-actions, .language-selector {
+        margin: 0;
+        gap: 10px;
+    }
+
+    .btn-login, .btn-signup {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .search-bar {
+        order: 3; 
+        width: 100%;
+        max-width: 100%;
+        margin-top: 5px;
+        height: 40px;
+    }
+    
+    .nav-links {
+        order: 4;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+        gap: 40px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    /* --- 2. HERO SECTIONS (Portadas) --- */
+    .hero-section, 
+    .sticky-experiences-hero, 
+    .sticky-destinations-hero,
+    .sticky-article-hero,
+    .auth-hero-section {
+        height: auto;
+        min-height: 60vh; 
+        padding-top: 100px; 
+        padding-bottom: 40px;
+        background-attachment: scroll; 
+    }
+
+    .hero-content h1, 
+    .sticky-experiences-hero h1,
+    .sticky-destinations-hero h1,
+    .auth-page-title,
+    .sticky-article-hero h1 {
+        font-size: 2rem; 
+        margin-bottom: 1rem;
+    }
+    
+    .btn-hero {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    /* --- 3. CONTENIDO GENERAL Y CAPAS --- */
+    .content-layer, 
+    .scrolling-content-layer,
+    .experiences-content-list,
+    .article-content-layer {
+        width: 100%;
+        border-radius: 20px 20px 0 0; 
+        padding: 2rem 15px; 
+        margin-top: -20px;
+    }
+
+    .section-title {
+        margin-bottom: 2rem;
+    }
+
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+
+    /* --- 4. TARJETAS (Compactas) --- */
+    .experiences-grid, .experiences-grid-list {
+        grid-template-columns: 1fr; 
+        gap: 1.5rem;
+    }
+
+    .experience-card, .experience-card-item {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
+    }
+
+    .exp-image-container, .card-image-header {
+        height: 180px; 
+    }
+
+    .exp-content, .card-body {
+        padding: 1rem; 
+    }
+
+    .exp-content h3, .card-body h3 {
+        font-size: 1rem;
+    }
+
+    .card-meta {
+        margin-bottom: 1rem;
+        gap: 5px;
+    }
+
+    .btn-reservar, .card-footer .btn-reservar {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    /* --- 5. BLOG --- */
+    .blog-card {
+        flex-direction: column;
+    }
+    .blog-image {
+        height: 200px;
+        flex: none;
+    }
+    .blog-content {
+        padding: 1.5rem;
+    }
+    .blog-content h3 {
+        font-size: 1.3rem;
+    }
+
+    /* --- 6. FORMULARIOS (Login, Registro, Checkout) --- */
+    .auth-card {
+        padding: 1.5rem; 
+        width: 100%;
+    }
+
+    .input-group input, 
+    .styled-select, 
+    .styled-textarea {
+        padding: 12px 15px; 
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    .signup-grid, .form-row-2, .form-row-3 {
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+
+    /* --- 7. PÁGINA DE PRODUCTO (Detalle) --- */
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .product-gallery img {
+        height: 300px; 
+    }
+
+    .details-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .price-action-row {
+        position: fixed; 
+        bottom: 0; left: 0; right: 0;
+        margin: 0;
+        border-radius: 15px 15px 0 0;
+        z-index: 1000;
+        padding: 15px 20px;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+    }
+    
+    .main-footer {
+        padding-bottom: 100px; 
+    }
+
+    .price-action-row .btn-black {
+        width: auto;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .price-display .amount {
+        font-size: 1.5rem;
+    }
+
+    .tabs-navigation {
+        gap: 15px;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+        margin-bottom: 1.5rem;
+    }
+
+    /* --- 8. PERFIL --- */
+    .profile-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+        gap: 10px;
+    }
+    
+    .sidebar-nav ul {
+        flex-direction: row;
+        gap: 20px;
+        white-space: nowrap;
+    }
+    
+    .profile-content {
+        padding: 20px 15px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* --- 9. FOOTER --- */
+    .footer-container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    .footer-links {
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    /* --- 10. ARREGLO DE MENÚS DESPLEGABLES (FILTROS) --- */
+    /* Aseguramos que el contenedor sea relativo */
+    .filter-buttons {
+        position: relative;
+        justify-content: space-between;
+    }
+
+    /* Forzamos al menú a pegarse a la derecha e ignorar el JS */
+    .category-dropdown.show {
+        left: auto !important; /* IMPORTANTE: Anula el estilo en línea de JS */
+        right: 0 !important;   /* IMPORTANTE: Lo alinea a la derecha */
+        top: 100% !important;
+        margin-top: 10px;
+        width: 220px;          /* Ancho suficiente */
+        max-width: 90vw;       /* Que no se salga si la pantalla es muy pequeña */
+    }
+}
+
+/* Ajustes extra para móviles muy pequeños */
+@media (max-width: 380px) {
+    .hero-content h1 { font-size: 1.6rem; }
+    .btn-hero { width: 100%; }
+    .price-action-row { flex-direction: column; align-items: stretch; gap: 10px;}
+}
