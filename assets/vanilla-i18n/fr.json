@@ -209,7 +209,11 @@
     "select_size": "Sélectionnez la taille",
     "size_s": "Petit",
     "size_m": "Moyen",
-    "size_l": "Grand"
+    "size_l": "Grand",
+    "pay_card": "Carte de Crédit",
+    "pay_paypal": "PayPal",
+    "pay_apple": "Apple Pay",
+    "secure_payment": "Paiement 100% Sécurisé SSL"
   },
   "register": {
     "title": "Créer un compte",
@@ -223,7 +227,9 @@
     "label_photo": "Sélectionnez une photo de profil",
     "label_privacy": "Politique de confidentialité",
     "btn_create": "Créer un compte",
-    "btn_login": "J'ai déjà un compte"
+    "btn_login": "J'ai déjà un compte",
+    "privacy_accept": "J'ai lu et j'accepte la ",
+    "privacy_link": "Politique de confidentialité"
   },
   "general": {
     "no_results": "Aucun résultat...",
@@ -977,5 +983,32 @@
     "user2_name": "Charles R.",
     "user2_time": "Il y a 1 mois",
     "user2_text": "\"Une expérience inoubliable. Le guide était très professionnel et le groupe très amusant. Je voyagerai à nouveau avec Pack&Go.\""
+  },
+  "privacy": {
+    "s1_title": "1. Introduction",
+    "s1_text": "Cette Politique de Confidentialité régit le traitement des données personnelles collectées via le site de réservation de voyages Pack&Go (ci-après, le « Site Web »). L'accès et l'utilisation du Site Web impliquent l'acceptation pleine et sans réserve de cette politique. Pack&Go s'engage à garantir la confidentialité et la sécurité des données.",
+    "s2_title": "2. Responsable du traitement",
+    "s2_text": "Le responsable du traitement des données personnelles est Pack&Go S.L., sis Calle Viajera 123, Madrid, Espagne. Pour toute question, l'utilisateur peut contacter par e-mail à privacy@packandgo.com.",
+    "s3_title": "3. Données personnelles collectées",
+    "s3_text": "<p>Pack&Go peut collecter les catégories de données suivantes :</p><ul><li><strong>Données d'identification :</strong> nom, prénom, CNI/Passeport et date de naissance.</li><li><strong>Données de contact :</strong> adresse e-mail, numéro de téléphone et adresse postale.</li><li><strong>Données financières :</strong> informations de carte de crédit/débit nécessaires au paiement.</li><li><strong>Données techniques :</strong> adresse IP, type d'appareil, navigateur et habitudes de navigation.</li></ul>",
+    "s4_title": "4. Finalité du traitement",
+    "s4_text": "<p>Les données seront traitées pour :</p><ul><li>Gérer et traiter les réservations de voyages.</li><li>Envoyer des confirmations, billets et documents de voyage.</li><li>Fournir un service client et résoudre les incidents.</li><li>Respecter les obligations légales, comptables et fiscales.</li><li>Envoyer des communications commerciales si autorisé.</li></ul>",
+    "s5_title": "5. Légitimation",
+    "s5_text": "La base légale est l'exécution du contrat de service touristique, le consentement exprès de l'utilisateur et l'intérêt légitime de Pack&Go pour améliorer ses services.",
+    "s6_title": "6. Conservation des données",
+    "s6_text": "Les données personnelles seront conservées le temps nécessaire pour atteindre les objectifs pour lesquels elles ont été collectées et, par la suite, pendant les délais légaux pour répondre aux éventuelles responsabilités.",
+    "s7_title": "7. Communication à des tiers",
+    "s7_text": "Pack&Go pourra communiquer vos données aux fournisseurs tiers nécessaires au service (hôtels, compagnies aériennes, guides) et aux passerelles de paiement sécurisées. Aucune donnée ne sera cédée à des fins commerciales sans consentement.",
+    "s8_title": "8. Mesures de sécurité",
+    "s8_text": "Nous adoptons les mesures techniques et organisationnelles nécessaires pour garantir la sécurité des données et éviter leur altération, perte ou accès non autorisé, compte tenu de l'état de la technologie.",
+    "s9_title": "9. Droits des utilisateurs",
+    "s9_text": "L'utilisateur peut exercer ses droits d'accès, rectification, suppression, opposition, limitation et portabilité en envoyant une demande à notre e-mail de contact, accompagnée d'une copie de sa pièce d'identité.",
+    "s10_title": "10. Utilisation des cookies",
+    "s10_text": "Ce site utilise des cookies propres et de tiers pour améliorer l'expérience de navigation et obtenir des statistiques. Vous pouvez configurer votre navigateur pour rejeter les cookies, bien que cela puisse affecter le fonctionnement du site.",
+    "s11_title": "11. Modifications",
+    "s11_text": "Pack&Go se réserve le droit de modifier cette Politique de Confidentialité pour l'adapter aux changements législatifs. Les modifications seront publiées dans cette section.",
+    "s12_title": "12. Acceptation",
+    "s12_text": "L'utilisation du Site Web et la souscription aux services offerts impliquent que l'utilisateur a lu, compris et accepté cette Politique de Confidentialité dans son intégralité.",
+    "end": "--- Fin du document ---"
   }
 }

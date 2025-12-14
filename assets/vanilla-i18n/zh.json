@@ -1,0 +1,1013 @@
+{
+  "nav": {
+    "inicio": "首页",
+    "destinos": "目的地",
+    "experiencias": "体验",
+    "blog": "博客",
+    "search_placeholder": "搜索目的地",
+    "buscar": "搜索",
+    "login": "登录",
+    "signup": "注册"
+  },
+  "footer": {
+    "slogan": "道路交汇的社区。",
+    "features": "功能",
+    "learn_more": "了解更多",
+    "support": "支持",
+    "about": "关于",
+    "us": "我们",
+    "contact": "联系",
+    "terms": "条款",
+    "privacy": "隐私"
+  },
+  "hero": {
+    "titulo": "分享并发现长途背包旅行",
+    "boton": "开始我的冒险",
+    "testimonial_role": "背包客兼 Pack&Go 内容创作者",
+    "testimonial_text": "背包旅行教会我，自由不在于到达所有目的地，而在于享受路途中的每一步。"
+  },
+  "stats": {
+    "title": "“准备好体验冒险”",
+    "subtitle": "加入成千上万的背包客，分享关于住宿、签证、交通和冒险的经验。",
+    "active": "活跃背包客",
+    "countries": "覆盖国家",
+    "shared": "分享的体验"
+  },
+  "destinations": {
+    "title": "“新体验”",
+    "subtitle": "背包旅行的最新动态",
+    "sydney_title": "游览悉尼",
+    "sydney_desc": "发现悉尼的魔力，这是一个充满活力的城市，自然与城市生活完美融合。从标志性的歌剧院到邦迪海滩的海浪。",
+    "cta": "获取优惠",
+    "outback_title": "内陆魔力",
+    "outback_desc": "深入澳大利亚的红色心脏，探索内陆沙漠的广阔。在金色的沙丘和星空之间，您将体验到真实的冒险。"
+  },
+  "sections": {
+    "experiences_title": "“最佳体验”",
+    "experiences_subtitle": "仅限我们的旅行者",
+    "blogs_title": "“热门博客”",
+    "blogs_subtitle": "如果您想阅读一下",
+    "testimonials_title": "“旅行者的话”",
+    "testimonials_subtitle": "我们社区的故事"
+  },
+  "testimonials": {
+    "review1": "\"我跟随你们推荐的巴尔干路线，真是太棒了。我自己永远找不到那些旅馆。谢谢提示！\"",
+    "role1": "路上的背包客",
+    "review2": "\"关于 7kg 旅行的文章救了我的背。我从未想过可以如此轻便快乐地旅行而不缺少任何东西。\"",
+    "role2": "常旅客",
+    "review3": "\"我在为我的间隔年寻找灵感，这个博客给了我所需的推动力。印度的照片纯粹是魔术。\"",
+    "role3": "业余摄影师"
+  },
+  "blog": {
+    "hero_title": "要讲的故事",
+    "hero_subtitle": "在这个博客上认识其他旅行者的故事",
+    "search_placeholder": "搜索帖子",
+    "filter_all": "所有类别",
+    "by": "作者",
+    "read_more": "阅读全文",
+    "no_results_title": "未找到帖子",
+    "no_results_text": "尝试另一个关键词。"
+  },
+  "blog_post": {
+    "loading_tag": "正在加载...",
+    "loading_title": "正在加载标题...",
+    "back": "返回博客",
+    "related": "您可能也感兴趣"
+  },
+  "success": {
+    "title": "购买成功！",
+    "subtitle": "预订详情：",
+    "loading": "正在加载预订...",
+    "email_msg_1": "我们已发送确认邮件至",
+    "email_msg_2": "包含所有详细信息和完整行程。准备好您的冒险吧！",
+    "label_destiny": "目的地：",
+    "label_price": "总支付：",
+    "back": "返回体验",
+    "btn_profile": "在我的个人资料中查看",
+    "btn_pdf": "下载 PDF",
+    "btn_home": "返回首页"
+  },
+  "product": {
+    "back_link": "返回体验",
+    "loading_title": "正在加载...",
+    "add_fav": "添加到收藏夹",
+    "per_person": "/ 人",
+    "book_now": "立即预订",
+    "about_title": "关于此体验",
+    "tab_itinerary": "行程",
+    "tab_includes": "包含",
+    "tab_gear": "装备",
+    "tab_reviews": "评论",
+    "include_1": "精选住宿",
+    "include_2": "专家导游",
+    "include_3": "内部交通",
+    "gear_text": "查看描述以获取推荐装备。",
+    "reviews_text": "已验证旅行者的评论。",
+    "include_traslados": "机场 - 酒店接送",
+    "include_seguro": "基本旅行保险",
+    "include_atencion": "24/7 支持",
+    "reviews_word": "评论",
+    "saved": "已保存"
+  },
+  "destinations_page": {
+    "hero_title": "最佳目的地",
+    "hero_subtitle": "发现为您这样的背包客设计的独特冒险",
+    "discover_label": "发现",
+    "search_experiences_btn": "搜索体验",
+    "discover_stories_btn": "发现故事"
+  },
+  "continents": {
+    "europe": "欧洲",
+    "america": "美洲",
+    "asia": "亚洲",
+    "oceania": "大洋洲",
+    "africa": "非洲"
+  },
+  "experiences_page": {
+    "hero_title": "难忘的体验",
+    "hero_subtitle": "发现为您这样的背包客设计的独特冒险",
+    "search_placeholder": "搜索目的地或活动",
+    "filter_all_cats": "所有类别",
+    "filter_all_diff": "所有难度"
+  },
+  "login": {
+    "title": "登录",
+    "email_ph": "电子邮件",
+    "password_ph": "密码",
+    "forgot_pass": "忘记密码",
+    "submit_btn": "登录",
+    "no_account_btn": "我没有账户"
+  },
+  "profile": {
+    "tab_data": "个人资料",
+    "tab_favorites": "收藏夹",
+    "tab_trips": "我的旅行",
+    "tab_config": "设置",
+    "logout": "退出登录",
+    "title_data": "个人资料",
+    "label_name": "名字",
+    "label_lastname": "姓氏",
+    "label_dob": "出生日期",
+    "label_email": "电子邮件",
+    "label_user": "用户名",
+    "title_favorites": "收藏夹",
+    "no_fav_msg": "您尚未保存任何旅行。",
+    "btn_explore": "探索",
+    "title_trips": "我的预订",
+    "no_trips_title": "您尚未预订旅行",
+    "no_trips_text": "还在等什么？开始您的下一次冒险吧！",
+    "btn_explore_destinations": "探索目的地",
+    "title_config": "设置",
+    "label_payment": "默认支付方式",
+    "ph_payment": "例：以 4242 结尾的 Visa 卡",
+    "label_lang": "语言",
+    "ph_lang": "例：中文",
+    "label_interface": "界面",
+    "ph_interface": "例：浅色模式",
+    "status_saved": "更改已保存。",
+    "ref": "参考号：",
+    "view_details": "查看详情"
+  },
+  "checkout": {
+    "back": "返回体验",
+    "step1_title": "个人资料",
+    "step1_label": "个人资料",
+    "step2_label": "同伴",
+    "step3_label": "支付",
+    "ph_name": "名字",
+    "ph_lastname": "姓氏",
+    "ph_dni": "身份证/护照",
+    "ph_phone": "电话",
+    "ph_email": "电子邮件",
+    "btn_cancel": "取消",
+    "btn_next": "下一步",
+    "companions_title": "同伴",
+    "check_companions": "有人同行吗？",
+    "btn_add_companion": "添加另一位同伴",
+    "pets_title": "宠物",
+    "check_pets": "带宠物旅行？",
+    "btn_add_pet": "添加另一只宠物",
+    "allergies_title": "过敏",
+    "check_allergies": "有过敏吗？",
+    "ph_allergies": "请注明您是否对任何食物（如：麸质、坚果）、药物或动物过敏。",
+    "btn_back": "返回",
+    "summary_title": "旅行摘要",
+    "label_exp": "体验：",
+    "label_dest": "目的地：",
+    "summary_text": "您的冒险即将开始。在完成之前请查看详情。",
+    "label_dur": "时长：",
+    "cost_title": "总费用",
+    "label_base": "基本费用",
+    "label_taxes": "税费",
+    "payment_title": "货币与支付",
+    "btn_confirm": "确认购买",
+    "companion_label": "同伴",
+    "companion_title": "同伴",
+    "pet_label": "宠物",
+    "ph_fullname": "全名",
+    "ph_pet_type": "例：狗，猫",
+    "select_size": "选择大小",
+    "size_s": "小型",
+    "size_m": "中型",
+    "size_l": "大型",
+    "pay_paypal": "PayPal",
+    "pay_apple": "Apple Pay",
+    "secure_payment": "100% 安全 SSL 支付"
+  },
+  "register": {
+    "title": "创建账户",
+    "ph_name": "名字",
+    "ph_lastname": "姓氏",
+    "ph_dob": "出生日期",
+    "ph_email": "电子邮件",
+    "ph_confirm_email": "确认电子邮件",
+    "ph_user": "用户名",
+    "ph_password": "密码",
+    "label_photo": "选择头像",
+    "label_privacy": "隐私政策",
+    "btn_create": "创建账户",
+    "btn_login": "我已经有账户了",
+    "privacy_accept": "我已阅读并接受",
+    "privacy_link": "隐私政策"
+  },
+  "general": {
+    "no_results": "无结果...",
+    "published_by": "发布者",
+    "not_found_title": "未找到体验",
+    "not_found_text": "抱歉，我们无法加载此行程。"
+  },
+  "cards": {
+    "per_person": "/ 人",
+    "book_btn": "预订"
+  },
+  "reviews": {
+    "verified": "已验证旅行者"
+  },
+  "difficulty": {
+    "Baja": "低",
+    "Media": "中",
+    "Alta": "高"
+  },
+  "data_blog": {
+    "id_1": {
+      "title": "每个背包客在 2025 年都应该访问的世界角落",
+      "summary": "背包旅行从未过时。每年都会出现成为趋势的新角落..."
+    },
+    "id_2": {
+      "title": "印度最令人惊讶的 10 个目的地",
+      "summary": "印度本身就是一个大陆。发现被遗忘的寺庙、香料之路和挑战想象力的风景。"
+    },
+    "id_3": {
+      "title": "背包客世界保守得最好的秘密",
+      "summary": "省钱、轻装上阵并结识当地人。我们告诉您专家的秘密，用更少的钱走得更远。"
+    },
+    "id_4": {
+      "title": "您应该知道的新背包客天堂",
+      "summary": "如果您正在寻找彻底的断联，这些自然公园和原始海滩适合您。Wi-Fi 无法到达，但连接是完全的。"
+    },
+    "id_5": {
+      "title": "80 道菜环游世界：不容错过的街头美食",
+      "summary": "忘记白桌布餐厅。一个国家的真正文化是在人行道上煮、炸和供应的。"
+    }
+  },
+  "categories": {
+    "Cultural": "文化",
+    "Naturaleza": "自然",
+    "Urbano": "城市",
+    "Aventura": "冒险",
+    "Relax": "放松",
+    "Romántico": "浪漫",
+    "Gastronomía": "美食",
+    "Playa": "海滩",
+    "Espiritual": "精神",
+    "Lujo": "奢华",
+    "Fiesta": "派对",
+    "Ecoturismo": "生态旅游",
+    "Destinos 2025": "2025 目的地",
+    "Asia": "亚洲",
+    "Consejos": "建议"
+  },
+  "groups": {
+    "Grupos_de_10": "10 人组",
+    "Grupos_de_12": "12 人组",
+    "Grupos_de_8": "8 人组",
+    "Grupos_Pequeños": "小团体",
+    "Parejas": "情侣",
+    "Urbano": "城市",
+    "Aventura": "冒险",
+    "Relax": "放松",
+    "Cultural": "文化",
+    "Amigos": "朋友",
+    "Jóvenes": "青年",
+    "Gastronómico": "美食",
+    "Todos": "所有人",
+    "Naturaleza": "自然",
+    "Lujo": "奢华",
+    "Familia": "家庭",
+    "Fiesta": "派对"
+  },
+  "data_experiences": {
+    "id_4": {
+      "title": "维也纳帝国之旅",
+      "desc_short": "古典音乐、宫殿和咖啡文化",
+      "desc_long": "拥有博物馆和每一步都有古典音乐的帝国城市。美泉宫和环城大道凝聚了巴洛克风格和历史主义，而像 Demel 这样的咖啡馆保持着糕点传统。非常适合在公园和歌剧院之间漫步。",
+      "location": "奥地利维也纳",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "历史抵达", "desc": "漫步环城大道并品尝第一块萨赫蛋糕。" },
+        "step_2": { "title": "帝国宫殿", "desc": "美泉宫及其花园的导览游。" },
+        "step_3": { "title": "音乐与艺术", "desc": "维也纳国家歌剧院之夜。" }
+      }
+    },
+    "id_5": {
+      "title": "童话般的布鲁日",
+      "desc_short": "中世纪运河和比利时巧克力",
+      "desc_long": "保存完好的中世纪中心，绿树成荫的运河和像市集广场这样的鹅卵石广场。钟楼、行会房屋和巧克力店营造出一种童话般的氛围，邀请您悠闲地迷失其中。",
+      "location": "比利时布鲁日",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "乘船游览", "desc": "游览主要运河。" },
+        "step_2": { "title": "贝尔福钟楼", "desc": "攀登钟楼并品尝巧克力。" }
+      }
+    },
+    "id_6": {
+      "title": "哥本哈根设计",
+      "desc_short": "北欧传统与前卫",
+      "desc_long": "当代设计与北欧传统之间的平衡。新港、趣伏里公园和自行车街区展示了一个人性化和热情的城市；前卫的美食和对公共空间的尊重。",
+      "location": "丹麦哥本哈根",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "新港", "desc": "在旧港口享用晚餐。" },
+        "step_2": { "title": "趣伏里公园", "desc": "在最古老的游乐园度过快乐的一天。" }
+      }
+    },
+    "id_7": {
+      "title": "卢布尔雅那的魅力",
+      "desc_short": "斯洛文尼亚的隐藏宝石",
+      "desc_long": "风景如画的小首都，拥有步行中心、河畔咖啡馆和顶部的城堡。游览布莱德湖和朱利安阿尔卑斯山的理想基地。",
+      "location": "斯洛文尼亚卢布尔雅那",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "城堡", "desc": "乘坐缆车上城堡。" },
+        "step_2": { "title": "布莱德湖", "desc": "全天游览邻近的湖泊。" }
+      }
+    },
+    "id_8": {
+      "title": "现代主义巴塞罗那",
+      "desc_short": "高迪、海滩和塔帕斯",
+      "desc_long": "高迪的现代主义，海洋和山脉在同一平面上。圣家堂、桂尔公园和街区生活与市场和博物馆共存；从蒙特惠奇山到海滩的散步。",
+      "location": "西班牙巴塞罗那",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "圣家堂", "desc": "参观杰作内部。" },
+        "step_2": { "title": "哥特区", "desc": "老城区徒步游。" },
+        "step_3": { "title": "桂尔公园", "desc": "欣赏城市景观的日落。" }
+      }
+    },
+    "id_9": {
+      "title": "塞维利亚有一种特殊的颜色",
+      "desc_short": "弗拉明戈、阿尔卡萨尔宫和传统",
+      "desc_long": "纪念碑式的历史中心，庭院和瓷砖。阿尔卡萨尔宫、大教堂和圣克鲁斯街区增添了强大的塔帕斯文化和弗拉明戈舞。",
+      "location": "西班牙塞维利亚",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "皇家阿尔卡萨尔宫", "desc": "参观阿拉伯宫殿。" },
+        "step_2": { "title": "西班牙广场", "desc": "乘船游览和标志性照片。" }
+      }
+    },
+    "id_10": {
+      "title": "中世纪塔林",
+      "desc_short": "波罗的海的童话",
+      "desc_long": "有围墙的中世纪老城，塔楼和色彩缤纷的屋顶，享有波罗的海的美景。寒冷的冬天，但从座堂山看非常上镜。",
+      "location": "爱沙尼亚塔林",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "老城", "desc": "沿着城墙散步。" },
+        "step_2": { "title": "全景", "desc": "Kohtuotsa 观景台。" }
+      }
+    },
+    "id_11": {
+      "title": "浪漫巴黎",
+      "desc_short": "光之城与爱之城",
+      "desc_long": "城市浪漫：塞纳河、林荫大道和标志性博物馆。拥有自己特色的街区和街边咖啡馆；巴黎圣母院、圣心大教堂和埃菲尔铁塔是必不可少的地标。",
+      "location": "法国巴黎",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "埃菲尔铁塔", "desc": "战神广场野餐。" },
+        "step_2": { "title": "卢浮宫", "desc": "艺术和文化之晨。" },
+        "step_3": { "title": "蒙马特", "desc": "大教堂日落。" }
+      }
+    },
+    "id_12": {
+      "title": "温泉布达佩斯",
+      "desc_short": "多瑙河明珠",
+      "desc_long": "新艺术运动建筑，温泉浴场和多瑙河上的夜间散步。国会大厦在黄昏时分从链子桥上闪耀。",
+      "location": "匈牙利布达佩斯",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "国会大厦", "desc": "参观建筑瑰宝。" },
+        "step_2": { "title": "塞切尼温泉浴场", "desc": "温泉水中放松的下午。" }
+      }
+    },
+    "id_13": {
+      "title": "佛罗伦萨的文艺复兴",
+      "desc_short": "每个角落的艺术",
+      "desc_long": "文艺复兴的摇篮：大教堂、乌菲兹美术馆和奥尔特拉诺的手工艺品。一个活生生的博物馆城市，每条街道都有雕塑、宫殿和作坊。",
+      "location": "意大利佛罗伦萨",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "乌菲兹美术馆", "desc": "最好的文艺复兴作品。" },
+        "step_2": { "title": "老桥", "desc": "阿诺河上的日落。" }
+      }
+    },
+    "id_14": {
+      "title": "永恒罗马",
+      "desc_short": "活生生的历史和美食",
+      "desc_long": "“永恒之城”结合了古典废墟、巴洛克广场和街区生活。从万神殿到特莱维喷泉，历史与饮食店和露台共存。",
+      "location": "意大利罗马",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "斗兽场", "desc": "进入罗马圆形剧场。" },
+        "step_2": { "title": "梵蒂冈", "desc": "参观圣彼得大教堂。" },
+        "step_3": { "title": "特拉斯提弗列", "desc": "典型的罗马晚餐。" }
+      }
+    },
+    "id_15": {
+      "title": "威尼斯运河",
+      "desc_short": "水上城市",
+      "desc_long": "没有汽车，拥有独特的水上布局。运河、宫殿和桥梁连接着岛屿；从圣马可到更安静的街区，纯粹是沉思。",
+      "location": "意大利威尼斯",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "贡多拉", "desc": "传统的运河游。" },
+        "step_2": { "title": "穆拉诺和布拉诺", "desc": "参观玻璃和色彩之岛。" }
+      }
+    },
+    "id_16": {
+      "title": "历史悠久的瓦莱塔",
+      "desc_short": "巴洛克和堡垒",
+      "desc_long": "防御工事和巴洛克风格，拥有大港的观景点。宫殿、教堂和博物馆集中在一个紧凑且适合步行的中心。",
+      "location": "马耳他瓦莱塔",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "圣约翰副主教座堂", "desc": "令人印象深刻的巴洛克艺术。" },
+        "step_2": { "title": "三姐妹城", "desc": "乘船游览港口。" }
+      }
+    },
+    "id_17": {
+      "title": "卑尔根峡湾",
+      "desc_short": "挪威自然",
+      "desc_long": "布吕根的木屋，热闹的港口和落入峡湾的山脉。风景路线的完美起点。",
+      "location": "挪威卑尔根",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "布吕根", "desc": "漫步汉萨码头。" },
+        "step_2": { "title": "峡湾", "desc": "游览附近的峡湾。" }
+      }
+    },
+    "id_18": {
+      "title": "骑自行车的阿姆斯特丹",
+      "desc_short": "运河和自由",
+      "desc_long": "联合国教科文组织遗产运河，狭窄的山墙和自行车文化。世界级的博物馆和通过桥梁连接的绿色社区。",
+      "location": "荷兰阿姆斯特丹",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "自行车路线", "desc": "像当地人一样游览。" },
+        "step_2": { "title": "梵高博物馆", "desc": "必看的文化访问。" }
+      }
+    },
+    "id_19": {
+      "title": "波尔图葡萄酒",
+      "desc_short": "杜罗河和瓷砖",
+      "desc_long": "瓷砖，杜罗河上的桥梁和波特酒窖。莱罗书店和莱萨游泳池作为当代标志。",
+      "location": "葡萄牙波尔图",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "品酒", "desc": "参观加亚新城的酒窖。" },
+        "step_2": { "title": "里贝拉", "desc": "河边晚餐。" }
+      }
+    },
+    "id_20": {
+      "title": "大都会伦敦",
+      "desc_short": "历史与现代",
+      "desc_long": "泰晤士河畔的历史与前卫。免费博物馆，巨大的公园和用之不竭的文化和美食场景。",
+      "location": "英国伦敦",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "大本钟和眼", "desc": "城市标志。" },
+        "step_2": { "title": "大英博物馆", "desc": "世界历史。" },
+        "step_3": { "title": "康登镇", "desc": "另类市场。" }
+      }
+    },
+    "id_21": {
+      "title": "爱丁堡之谜",
+      "desc_short": "城堡和传说",
+      "desc_long": "皇家一英里，城堡和青山。亚瑟王座火山岩提供了石头城的独特全景。",
+      "location": "英国爱丁堡",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "爱丁堡城堡", "desc": "苏格兰皇冠上的宝石。" },
+        "step_2": { "title": "亚瑟王座", "desc": "徒步欣赏美景。" }
+      }
+    },
+    "id_22": {
+      "title": "金色布拉格",
+      "desc_short": "哥特式和浪漫",
+      "desc_long": "上镜的老城区上的哥特式圆顶和塔楼。黎明时的查理大桥和有音乐和文学的历史咖啡馆。",
+      "location": "捷克共和国布拉格",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "查理大桥", "desc": "没有人群的黎明。" },
+        "step_2": { "title": "布拉格城堡", "desc": "最大的城堡群。" }
+      }
+    },
+    "id_23": {
+      "title": "卢塞恩的阿尔卑斯山",
+      "desc_short": "湖泊和山脉",
+      "desc_long": "湖泊，附近的山脉和作为明信片的卡佩尔桥。中世纪的屋顶和高山空气距离山路只有几分钟的路程。",
+      "location": "瑞士卢塞恩",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "卡佩尔桥", "desc": "木制图标。" },
+        "step_2": { "title": "皮拉图斯山", "desc": "齿轮火车游览。" }
+      }
+    },
+    "id_24": {
+      "title": "优雅苏黎世",
+      "desc_short": "奢华和湖泊",
+      "desc_long": "湖边优雅的老城区，博物馆，画廊和水边生活。充满活力的夏天和每个细节中的瑞士效率。",
+      "location": "瑞士苏黎世",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "苏黎世湖", "desc": "乘船游览。" },
+        "step_2": { "title": "班霍夫大街", "desc": "购物和巧克力。" }
+      }
+    },
+    "id_25": {
+      "title": "帝都北京",
+      "desc_short": "长城和紫禁城",
+      "desc_long": "拥有紫禁城、胡同和宽阔大道的帝都。通往附近长城段的大门和美味的区域美食。",
+      "location": "中国北京",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "紫禁城", "desc": "帝国的心脏。" },
+        "step_2": { "title": "长城", "desc": "徒步世界奇迹。" }
+      }
+    },
+    "id_26": {
+      "title": "垂直香港",
+      "desc_short": "摩天大楼和自然",
+      "desc_long": "围绕充满渡轮的港口的密集天际线。山脉、岛屿和自然保护区距离金融中心仅几分钟路程。",
+      "location": "中国香港",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "太平山顶", "desc": "全景视图。" },
+        "step_2": { "title": "天星小轮", "desc": "穿越海湾。" }
+      }
+    },
+    "id_27": {
+      "title": "活力首尔",
+      "desc_short": "传统和 K-Pop",
+      "desc_long": "摩天大楼和宫殿，夜市和无可挑剔的地铁网络。北村和明洞等地区展示了传统和时尚。",
+      "location": "韩国首尔",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "景福宫", "desc": "皇家历史。" },
+        "step_2": { "title": "明洞", "desc": "购物和街头美食。" }
+      }
+    },
+    "id_28": {
+      "title": "粉红斋浦尔",
+      "desc_short": "拉贾斯坦邦的宫殿",
+      "desc_long": "“粉红之城”：风之宫、堡垒和鲑鱼色的集市。宫殿和街道上的手工艺品、珠宝和拉贾斯坦美食。",
+      "location": "印度斋浦尔",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "风之宫", "desc": "风的宫殿。" },
+        "step_2": { "title": "琥珀堡", "desc": "吉普车攀登和景观。" }
+      }
+    },
+    "id_29": {
+      "title": "禅意京都",
+      "desc_short": "寺庙和艺妓",
+      "desc_long": "寺庙、神社和经典花园。春天的赏花，绿树成荫的路线以及在祗园与艺妓相遇的可能性。",
+      "location": "日本京都",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "伏见稻荷", "desc": "在鸟居下行走。" },
+        "step_2": { "title": "竹林", "desc": "岚山漫步。" }
+      }
+    },
+    "id_30": {
+      "title": "精神琅勃拉邦",
+      "desc_short": "僧侣和瀑布",
+      "desc_long": "河流交汇处的联合国教科文组织遗产。黎明时的僧侣游行，附近的瀑布和殖民佛教建筑。",
+      "location": "老挝琅勃拉邦",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "布施", "desc": "黎明仪式。" },
+        "step_2": { "title": "光西瀑布", "desc": "在绿松石水中游泳。" }
+      }
+    },
+    "id_31": {
+      "title": "历史悠久的贝鲁特",
+      "desc_short": "中东的巴黎",
+      "desc_long": "海滩、俱乐部和面对清真寺和历史露天市场的屋顶。具有地中海和黎凡特风味的美食和夜生活。",
+      "location": "黎巴嫩贝鲁特",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "鸽子岩", "desc": "海岸日落。" },
+        "step_2": { "title": "露天市场", "desc": "传统购物。" }
+      }
+    },
+    "id_32": {
+      "title": "神秘马斯喀特",
+      "desc_short": "阿曼的宝藏",
+      "desc_long": "海湾和山脉环绕着清真寺、露天市场和葡萄牙堡垒。阿曼湾旁的沿海步道和白色建筑。",
+      "location": "阿曼马斯喀特",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "大清真寺", "desc": "令人印象深刻的建筑。" },
+        "step_2": { "title": "马特拉露天市场", "desc": "乳香的香味。" }
+      }
+    },
+    "id_33": {
+      "title": "未来多哈",
+      "desc_short": "沙漠中的奢华",
+      "desc_long": "拥有未来派天际线的海滨大道，瓦吉夫集市和贝聿铭的伊斯兰艺术博物馆。传统与新文化区的融合。",
+      "location": "卡塔尔多哈",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "伊斯兰博物馆", "desc": "艺术和景观。" },
+        "step_2": { "title": "瓦吉夫集市", "desc": "传统晚餐。" }
+      }
+    },
+    "id_34": {
+      "title": "泰国清迈",
+      "desc_short": "寺庙和自然",
+      "desc_long": "山坡上的寺庙，咖啡馆和创意市场。北部自然和强烈烹饪体验的起点。",
+      "location": "泰国清迈",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "素贴山", "desc": "山上的寺庙。" },
+        "step_2": { "title": "大象保护区", "desc": "负责任的旅游。" }
+      }
+    },
+    "id_35": {
+      "title": "河内的混乱与平静",
+      "desc_short": "越南的精髓",
+      "desc_long": "湖泊、寺庙和充满浪漫气息的法国区。拥有传统咖啡馆和充满活力的市场的狭窄街道。",
+      "location": "越南河内",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "老城区", "desc": "街头美食和混乱。" },
+        "step_2": { "title": "下龙湾", "desc": "游览自然遗产。" }
+      }
+    },
+    "id_36": {
+      "title": "未来新加坡",
+      "desc_short": "花园和摩天大楼",
+      "desc_long": "拥有城市丛林、植物园和滨海湾花园的花园城市。寺庙、文物房屋和无可挑剔的物流。",
+      "location": "新加坡",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "滨海湾花园", "desc": "未来派超级树。" },
+        "step_2": { "title": "滨海湾金沙", "desc": "从高处看风景。" }
+      }
+    },
+    "id_37": {
+      "title": "蓝色舍夫沙万",
+      "desc_short": "摩洛哥的蓝色珍珠",
+      "desc_long": "里夫山脉之间的蓝色麦地那。彩绘的小巷、工匠门和附近的观景点，可以从上面看到整体。",
+      "location": "摩洛哥舍夫沙万",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "麦地那", "desc": "迷失在蓝色中。" },
+        "step_2": { "title": "Akchour 瀑布", "desc": "附近的自然。" }
+      }
+    },
+    "id_38": {
+      "title": "开普敦和企鹅",
+      "desc_short": "山和海",
+      "desc_long": "桌山，有企鹅的海滩和像波卡普这样的多彩街区。花园，附近的葡萄园和风景秀丽的沿海路线。",
+      "location": "南非开普敦",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "桌山", "desc": "从顶部看的景色。" },
+        "step_2": { "title": "博尔德斯海滩", "desc": "与企鹅一起游泳。" }
+      }
+    },
+    "id_56": {
+      "title": "大迁徙游猎",
+      "desc_short": "最纯粹的野生自然",
+      "desc_long": "见证地球上最伟大的自然奇观。穿越塞伦盖蒂无尽的平原寻找“五大兽”，观看成千上万的角马和斑马穿过马拉河。",
+      "location": "坦桑尼亚塞伦盖蒂",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "阿鲁沙", "desc": "抵达和游猎准备。" },
+        "step_2": { "title": "驱车游猎", "desc": "全天观察狮子和大象。" },
+        "step_3": { "title": "恩戈罗恩戈罗火山口", "desc": "在死火山内游猎。" }
+      }
+    },
+    "id_57": {
+      "title": "法老和尼罗河",
+      "desc_short": "千年历史",
+      "desc_long": "穿越回古埃及的旅程。从宏伟的吉萨金字塔到卢克索和卡纳克神庙，在赋予文明生命的河流上航行。",
+      "location": "埃及开罗和卢克索",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "吉萨", "desc": "大金字塔和狮身人面像。" },
+        "step_2": { "title": "埃及博物馆", "desc": "图坦卡蒙的宝藏。" },
+        "step_3": { "title": "帝王谷", "desc": "卢克索皇家陵墓入口。" }
+      }
+    },
+    "id_58": {
+      "title": "维多利亚瀑布",
+      "desc_short": "雷鸣般的烟雾",
+      "desc_long": "感受世界自然奇观之一的力量。维多利亚瀑布提供壮观的景色、不断的彩虹和充满肾上腺素的活动。",
+      "location": "赞比亚利文斯顿",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "边缘漫步", "desc": "瀑布全景。" },
+        "step_2": { "title": "魔鬼池", "desc": "深渊边缘游泳（季节性）。" }
+      }
+    },
+    "id_60": {
+      "title": "纳米布沙漠",
+      "desc_short": "红色沙丘和死树",
+      "desc_long": "看起来像另一个星球的风景。攀登 Big Daddy 沙丘，在 Deadvlei 的石化金合欢树之间行走，并凝视世界上最干净的星空之一。",
+      "location": "纳米比亚索苏斯弗雷",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "45 号沙丘", "desc": "红色沙漠上的日出。" },
+        "step_2": { "title": "Deadvlei", "desc": "黑树间的超现实摄影。" },
+        "step_3": { "title": "塞斯瑞姆峡谷", "desc": "地质徒步。" }
+      }
+    },
+    "id_39": {
+      "title": "标志性悉尼",
+      "desc_short": "歌剧和冲浪",
+      "desc_long": "标志性的歌剧院，通航的海湾和像邦迪这样的城市海滩。日常渡轮和海滨公园。",
+      "location": "澳大利亚悉尼",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "歌剧院", "desc": "必拍照片。" },
+        "step_2": { "title": "邦迪海滩", "desc": "冲浪课程。" }
+      }
+    },
+    "id_40": {
+      "title": "皇后镇的肾上腺素",
+      "desc_short": "极限冒险",
+      "desc_long": "湖泊和山脉之间的肾上腺素之都。自然观景点，冒险和电影般的风景。",
+      "location": "新西兰皇后镇",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "蹦极", "desc": "跳入虚空。" },
+        "step_2": { "title": "米尔福德峡湾", "desc": "令人印象深刻的峡湾。" }
+      }
+    },
+    "id_41": {
+      "title": "欧洲魁北克",
+      "desc_short": "美洲的法国",
+      "desc_long": "享有圣劳伦斯景色的城墙上城。欧洲氛围，陡峭的屋顶和粉红色的日落。",
+      "location": "加拿大魁北克市",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "芳堤娜城堡", "desc": "最受关注的酒店。" },
+        "step_2": { "title": "小尚普兰", "desc": "童话般的街道。" }
+      }
+    },
+    "id_42": {
+      "title": "哈瓦那的节奏",
+      "desc_short": "萨尔萨和老爷车",
+      "desc_long": "柔和色调的殖民建筑，每个角落都有音乐和海滨长廊。旧哈瓦那和马雷孔设定了节奏。",
+      "location": "古巴哈瓦那",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "旧哈瓦那", "desc": "老爷车之旅。" },
+        "step_2": { "title": "马雷孔", "desc": "海边日落。" }
+      }
+    },
+    "id_43": {
+      "title": "纽约，纽约",
+      "desc_short": "世界之都",
+      "desc_long": "标志性建筑，像中央公园这样的公园和无与伦比的艺术场景。永不熄灭的城市能量。",
+      "location": "美国纽约",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "时代广场", "desc": "霓虹灯。" },
+        "step_2": { "title": "中央公园", "desc": "绿肺。" },
+        "step_3": { "title": "自由女神像", "desc": "乘渡轮去图标。" }
+      }
+    },
+    "id_44": {
+      "title": "金色旧金山",
+      "desc_short": "桥梁和电车",
+      "desc_long": "金门大桥，山丘和维多利亚式房屋。世界级的博物馆和具有自己特色的街区。",
+      "location": "美国旧金山",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "金门大桥", "desc": "骑自行车穿越。" },
+        "step_2": { "title": "恶魔岛", "desc": "参观监狱。" }
+      }
+    },
+    "id_45": {
+      "title": "殖民圣米格尔",
+      "desc_short": "墨西哥的艺术与色彩",
+      "desc_long": "带有粉红色新哥特式教区教堂的殖民中心。鹅卵石街道，庭院以及画廊和工作室中的艺术。",
+      "location": "墨西哥圣米格尔德阿连德",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "教区教堂", "desc": "粉红色图标。" },
+        "step_2": { "title": "手工艺品市场", "desc": "当地色彩。" }
+      }
+    },
+    "id_46": {
+      "title": "布宜诺斯艾利斯港口",
+      "desc_short": "探戈和烤肉",
+      "desc_long": "具有特色的街区（雷科莱塔、圣特尔莫、博卡），多样的建筑和激烈的文化生活。标志性建筑中的探戈、牛排馆和书店。",
+      "location": "阿根廷布宜诺斯艾利斯",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "卡米尼托", "desc": "博卡的色彩。" },
+        "step_2": { "title": "圣特尔莫", "desc": "古董集市。" }
+      }
+    },
+    "id_47": {
+      "title": "里约热内卢桑巴",
+      "desc_short": "基督和科帕卡巴纳",
+      "desc_long": "神话般的海滩，城市丛林和俯瞰海湾和山丘的救世基督像。街道和广场上的桑巴节奏。",
+      "location": "巴西里约热内卢",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "救世基督像", "desc": "海湾景色。" },
+        "step_2": { "title": "科帕卡巴纳", "desc": "海滩日和凯匹林纳鸡尾酒。" }
+      }
+    },
+    "id_48": {
+      "title": "殖民卡塔赫纳",
+      "desc_short": "加勒比和城墙",
+      "desc_long": "城墙，广场和覆盖着九重葛的殖民豪宅。盖塞马尼和博卡格兰德展示了它们创意和现代的面孔。",
+      "location": "哥伦比亚卡塔赫纳",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "城墙城市", "desc": "活生生的历史。" },
+        "step_2": { "title": "罗萨里奥群岛", "desc": "绿松石海滩游览。" }
+      }
+    },
+    "id_49": {
+      "title": "安第斯基多",
+      "desc_short": "安第斯山脉的历史",
+      "desc_long": "安第斯火山下的金色历史中心。从国家誓言大教堂和传统市场的景色。",
+      "location": "厄瓜多尔基多",
+      "duration": "3 天 / 2 晚",
+      "itinerary": {
+        "step_1": { "title": "历史中心", "desc": "金色教堂。" },
+        "step_2": { "title": "缆车", "desc": "皮钦查火山景色。" }
+      }
+    },
+    "id_50": {
+      "title": "帝国库斯科",
+      "desc_short": "印加首都",
+      "desc_long": "古老的印加首都，有广场、修道院和鹅卵石街道。通往马丘比丘的起点和像白基督这样的观景点。",
+      "location": "秘鲁库斯科",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "武器广场", "desc": "城市中心。" },
+        "step_2": { "title": "萨克塞瓦曼", "desc": "附近的巨石遗址。" }
+      }
+    },
+    "id_51": {
+      "title": "文化墨尔本",
+      "desc_short": "咖啡，城市艺术和文化",
+      "desc_long": "被认为是澳大利亚的文化之都。迷失在充满艺术涂鸦的著名“巷道”中，享受世界上最好的咖啡，游览维多利亚式建筑与现代摩天大楼的混合体。",
+      "location": "澳大利亚墨尔本",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "巷道", "desc": "霍西尔巷城市艺术之旅。" },
+        "step_2": { "title": "大洋路", "desc": "十二使徒岩游览。" },
+        "step_3": { "title": "咖啡文化", "desc": "菲茨罗伊咖啡品鉴。" }
+      }
+    },
+    "id_52": {
+      "title": "大堡礁潜水",
+      "desc_short": "水下自然奇观",
+      "desc_long": "潜入世界上最大的珊瑚礁系统。海龟、小丑鱼和无限颜色的珊瑚在这个难忘的水上冒险中等待着您。",
+      "location": "澳大利亚凯恩斯",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "抵达凯恩斯", "desc": "设备准备和简报。" },
+        "step_2": { "title": "外礁", "desc": "全天潜水或浮潜。" },
+        "step_3": { "title": "戴恩树雨林", "desc": "参观最古老的热带森林。" }
+      }
+    },
+    "id_53": {
+      "title": "斐济放松",
+      "desc_short": "绿松石水和棕榈树",
+      "desc_long": "在南太平洋中心与世界断联。斐济以其著名的“Bula”好客、完美无暇的白沙滩和清澈见底的水欢迎您，非常适合什么都不做。",
+      "location": "斐济纳迪",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "Bula 欢迎", "desc": "传统的卡瓦仪式。" },
+        "step_2": { "title": "跳岛游", "desc": "参观附近的无人岛。" },
+        "step_3": { "title": "浮潜", "desc": "在软珊瑚礁中游泳。" }
+      }
+    },
+    "id_54": {
+      "title": "霍比屯和毛利文化",
+      "desc_short": "中土世界和间歇泉",
+      "desc_long": "进入夏尔，参观指环王电影布景，并在罗托鲁瓦发现地球的力量及其间歇泉和丰富的毛利文化。",
+      "location": "新西兰罗托鲁瓦",
+      "duration": "4 天 / 3 晚",
+      "itinerary": {
+        "step_1": { "title": "霍比屯", "desc": "电影布景之旅。" },
+        "step_2": { "title": "Te Puia", "desc": "间歇泉和毛利文化。" },
+        "step_3": { "title": "Hangi", "desc": "传统的地下烹饪晚餐。" }
+      }
+    },
+    "id_61": {
+      "title": "野生巴塔哥尼亚",
+      "desc_short": "世界尽头的徒步旅行",
+      "desc_long": "面对南风，在冰川、绿松石湖泊和雄伟的花岗岩塔之间行走。W 环线是来自世界各地的徒步旅行者的圣地。",
+      "location": "智利百内国家公园",
+      "duration": "5 天 / 4 晚",
+      "itinerary": {
+        "step_1": { "title": "纳塔莱斯港", "desc": "设备准备和转移。" },
+        "step_2": { "title": "百内塔", "desc": "到泻湖的最具标志性的徒步旅行。" },
+        "step_3": { "title": "格雷冰川", "desc": "在蓝色冰墙前航行。" }
+      }
+    },
+    "id_62": {
+      "title": "纯净生活哥斯达黎加",
+      "desc_short": "丛林、火山和树懒",
+      "desc_long": "沉浸在每平方米生物多样性最丰富的国家。在雾中的吊桥上行走，在火山温泉中沐浴，寻找凤尾绿咬鹃和树懒。",
+      "location": "哥斯达黎加蒙特韦尔德",
+      "duration": "6 天 / 5 晚",
+      "itinerary": {
+        "step_1": { "title": "云雾森林", "desc": "树冠层之间的滑索之旅。" },
+        "step_2": { "title": "阿雷纳尔火山", "desc": "徒步穿越干涸的熔岩和温泉。" },
+        "step_3": { "title": "曼努埃尔安东尼奥", "desc": "天堂海滩和卷尾猴。" }
+      }
+    }
+  },
+  "includes_extras": {
+    "adventure_gear": "安全和技术装备",
+    "park_fees": "国家公园门票",
+    "museum_fees": "博物馆和纪念碑门票",
+    "food_tasting": "当地美食通过",
+    "welcome_drink": "欢迎鸡尾酒",
+    "yoga_massage": "瑜伽课或按摩"
+  },
+  "gear_list": {
+    "title_recommended": "推荐装备",
+    "title_technical": "必要技术装备",
+    "backpack": "舒适背包 (30-50L)",
+    "water_bottle": "可重复使用的水瓶",
+    "sun_protection": "防晒霜和太阳镜",
+    "camera": "相机",
+    "adapter": "通用电源适配器",
+    "trekking_shoes": "防水徒步鞋",
+    "thermal_layers": "保暖分层衣物",
+    "windbreaker": "防风夹克",
+    "first_aid": "基本个人急救箱",
+    "light_clothes": "轻便舒适的衣服",
+    "walking_shoes": "步行鞋",
+    "swimwear": "泳装和毛巾",
+    "hat": "帽子"
+  },
+  "reviews_mock": {
+    "user1_name": "玛丽 G.",
+    "user1_time": "2 周前",
+    "user1_text": "\"简直太壮观了。组织无可挑剔，我们去的地方超出了我的预期。完全推荐。\"",
+    "user2_name": "查尔斯 R.",
+    "user2_time": "1 个月前",
+    "user2_text": "\"一次难忘的体验。导游非常专业，团队非常有趣。我会再次与 Pack&Go 一起旅行。\""
+  },
+  "privacy": {
+    "s1_title": "1. 简介",
+    "s1_text": "本隐私政策规范通过 Pack&Go 旅游预订网站（以下简称“网站”）收集的个人数据的处理。访问和使用本网站意味着完全无保留地接受本政策。Pack&Go 致力于确保用户个人数据的保密性、完整性和安全性。",
+    "s2_title": "2. 数据控制者",
+    "s2_text": "个人数据的控制者是 Pack&Go S.L.，注册地址位于西班牙马德里 Calle Viajera 123。如有任何关于数据处理的疑问，用户可以通过电子邮件 privacy@packandgo.com 联系。",
+    "s3_title": "3. 收集的个人数据",
+    "s3_text": "<p>Pack&Go 可能会收集以下类别的数据：</p><ul><li><strong>身份数据：</strong>姓名、身份证/护照和出生日期。</li><li><strong>联系数据：</strong>电子邮件地址、电话号码和邮政地址。</li><li><strong>财务数据：</strong>处理付款所需的信用卡/借记卡信息。</li><li><strong>技术数据：</strong>IP 地址、设备类型、浏览器和浏览习惯。</li></ul>",
+    "s4_title": "4. 处理目的",
+    "s4_text": "<p>处理数据的目的如下：</p><ul><li>管理和处理旅行及体验预订。</li><li>发送确认信、机票和旅行文件。</li><li>提供客户服务并解决问题。</li><li>履行法律、会计和税务义务。</li><li>如果用户授权，发送商业通讯。</li></ul>",
+    "s5_title": "5. 合法性",
+    "s5_text": "数据处理的法律依据是旅游服务合同（预订）的执行、用户的明确同意（用于 Cookie 或时事通讯）以及 Pack&Go 改进服务的合法利益。",
+    "s6_title": "6. 数据保留",
+    "s6_text": "个人数据将在实现收集目的所需的时间内保留，随后将在法律规定的期限内保留，以应对因处理而产生的可能责任。",
+    "s7_title": "7. 向第三方披露",
+    "s7_text": "Pack&Go 可能会将您的数据传达给提供服务所需的第三方供应商（酒店、航空公司、运输公司、当地导游）和安全的支付网关。未经您的同意，不会出于商业目的将数据转让给第三方。",
+    "s8_title": "8. 安全措施",
+    "s8_text": "考虑到技术状况和存储数据的性质，我们采取必要的技术和组织措施来确保数据安全，防止更改、丢失、未经授权的处理或访问。",
+    "s9_title": "9. 用户权利",
+    "s9_text": "用户可以通过向我们的联系电子邮件发送请求并附上其身份证件副本，行使访问、更正、删除、反对、限制处理和携带数据的权利。",
+    "s10_title": "10. Cookie 的使用",
+    "s10_text": "本网站使用第一方和第三方 Cookie 来改善浏览体验并获取使用统计数据。您可以配置浏览器拒绝 Cookie，但这可能会影响网站的功能。",
+    "s11_title": "11. 修改",
+    "s11_text": "Pack&Go 保留修改本隐私政策以适应立法或判例变化的权利。修改将在此部分发布。",
+    "s12_title": "12. 接受",
+    "s12_text": "使用本网站并签约所提供的服务意味着用户已阅读、理解并完全接受本隐私政策。",
+    "end": "--- 文档结束 ---"
+  }
+}

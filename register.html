@@ -52,6 +52,9 @@
                     <a href="#" class="lang-option" data-lang="fr" data-src="assets/bandera_francia.png">
                         <img src="assets/bandera_francia.png" alt="fr" class="flag-icon">
                     </a>
+                    <a href="#" class="lang-option" data-lang="zh" data-src="assets/bandera_china.png">
+                        <img src="assets/bandera_china.png" alt="zh" class="flag-icon">
+                    </a>
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
@@ -108,9 +111,9 @@
 
                     <div class="privacy-check">
                         <input type="checkbox" id="privacy"> 
-                        <label for="privacy" data-i18n="register.label_privacy_pre">
-                            He leído y acepto la 
-                            <a href="#" id="open-privacy-modal" data-i18n="register.label_privacy_post">Política de privacidad</a>
+                        <label for="privacy">
+                            <span data-i18n="register.privacy_accept">He leído y acepto la </span>
+                            <a href="#" id="open-privacy-modal" data-i18n="register.privacy_link">Política de privacidad</a>
                         </label>
                     </div>
                     
@@ -162,39 +165,45 @@
             <h3 data-i18n="register.modal_title">Política de Privacidad</h3>
             <button id="close-modal-x" class="close-btn">&times;</button>
         </div>
-        
         <div class="modal-body" id="privacy-text">
-            <h4>1. Introducción</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            
-            <h4>2. Datos recopilados</h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            
-            <h4>3. Aceptación</h4>
-            <p>Al pulsar el botón siguiente, confirmas haber leído todo el documento.</p>
+            <h4 data-i18n="privacy.s1_title">1. Introducción</h4>
+            <p data-i18n="privacy.s1_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s2_title">2. Responsable del tratamiento</h4>
+            <p data-i18n="privacy.s2_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s3_title">3. Datos personales recopilados</h4>
+            <div data-i18n="privacy.s3_text">Cargando texto...</div>
+
+            <h4 data-i18n="privacy.s4_title">4. Finalidad del tratamiento</h4>
+            <div data-i18n="privacy.s4_text">Cargando texto...</div>
+
+            <h4 data-i18n="privacy.s5_title">5. Legitimación</h4>
+            <p data-i18n="privacy.s5_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s6_title">6. Conservación de los datos</h4>
+            <p data-i18n="privacy.s6_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s7_title">7. Comunicación a terceros</h4>
+            <p data-i18n="privacy.s7_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s8_title">8. Medidas de seguridad</h4>
+            <p data-i18n="privacy.s8_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s9_title">9. Derechos de los usuarios</h4>
+            <p data-i18n="privacy.s9_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s10_title">10. Uso de cookies</h4>
+            <p data-i18n="privacy.s10_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s11_title">11. Modificaciones</h4>
+            <p data-i18n="privacy.s11_text">Cargando texto...</p>
+
+            <h4 data-i18n="privacy.s12_title">12. Aceptación</h4>
+            <p data-i18n="privacy.s12_text">Cargando texto...</p>
+
             <br>
-            <h4>1. Introducción</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            
-            <h4>2. Datos recopilados</h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            
-            <h4>3. Aceptación</h4>
-            <p>Al pulsar el botón siguiente, confirmas haber leído todo el documento.</p>
-            <br>
-            <h4>1. Introducción</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            
-            <h4>2. Datos recopilados</h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            
-            <h4>3. Aceptación</h4>
-            <p>Al pulsar el botón siguiente, confirmas haber leído todo el documento.</p>
-            <br>
-            <p style="text-align: center; color: #888;">--- Fin del documento ---</p>
+            <p style="text-align: center; color: #888;" data-i18n="privacy.end">--- Fin del documento ---</p>
         </div>
 
         <div id="privacy-modal-footer" class="modal-footer" style="justify-content: center;">

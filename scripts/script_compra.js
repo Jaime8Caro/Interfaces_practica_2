@@ -16,10 +16,7 @@ function detectarPaginaYEjecutar() {
 
         if (!usuarioLogueado) {
             if (typeof mostrarAvisoLogin === 'function') {
-                mostrarAvisoLogin(
-                    'Inicia sesión para continuar',
-                    'Identifícate para revisar tus datos y terminar la compra.'
-                );
+                mostrarAvisoLogin();
             }
             return;
         }
@@ -76,10 +73,7 @@ function finalizarCompra(e) {
 
     if (!usuarioLogueado) {
         if (typeof mostrarAvisoLogin === 'function') {
-            mostrarAvisoLogin(
-                'Necesitas iniciar sesión',
-                'Inicia sesión para guardar tu reserva y continuar con el proceso'
-            );
+            mostrarAvisoLogin();
         }
         return;
     }
@@ -316,6 +310,20 @@ window.prevStep = function(targetStep) {
     showStep(targetStep);
 };
 
+const paymentOptions = document.querySelectorAll('.payment-option');
+paymentOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        // 1. Quitar clase 'selected' a todos
+        paymentOptions.forEach(opt => opt.classList.remove('selected'));
+        
+        // 2. Añadir clase 'selected' al clickeado
+        option.classList.add('selected');
+        
+        // 3. Marcar el input radio interno como checked
+        const radio = option.querySelector('input[type="radio"]');
+        if(radio) radio.checked = true;
+    });
+});
 
 // ==========================================
 // LÓGICA DE PÁGINA DE ÉXITO (compra_exito.html)

@@ -209,7 +209,10 @@
     "select_size": "Select size",
     "size_s": "Small",
     "size_m": "Medium",
-    "size_l": "Large"
+    "size_l": "Large",
+    "pay_paypal": "PayPal",
+    "pay_apple": "Apple Pay",
+    "secure_payment": "100% Secure SSL Payment"
   },
   "register": {
     "title": "Create account",
@@ -223,7 +226,9 @@
     "label_photo": "Select profile picture",
     "label_privacy": "Privacy Policy",
     "btn_create": "Create account",
-    "btn_login": "I already have an account"
+    "btn_login": "I already have an account",
+    "privacy_accept": "I have read and accept the ",
+    "privacy_link": "Privacy Policy"
   },
   "general": {
     "no_results": "No results...",
@@ -977,5 +982,32 @@
     "user2_name": "Charles R.",
     "user2_time": "1 month ago",
     "user2_text": "\"An unforgettable experience. The guide was very professional and the group was very fun. I will travel with Pack&Go again.\""
+  },
+  "privacy": {
+    "s1_title": "1. Introduction",
+    "s1_text": "This Privacy Policy governs the processing of personal data collected through the Pack&Go travel booking website (hereinafter, the \"Website\"). Access and use of the Website implies full and unreserved acceptance of the provisions of this policy. Pack&Go is committed to ensuring the confidentiality, integrity, and security of user data.",
+    "s2_title": "2. Data Controller",
+    "s2_text": "The data controller regarding personal data is Pack&Go S.L., with registered office at Calle Viajera 123, Madrid, Spain. For any queries related to data processing, the user may contact via email at privacy@packandgo.com.",
+    "s3_title": "3. Collected Personal Data",
+    "s3_text": "<p>Pack&Go may collect the following categories of data:</p><ul><li><strong>Identification data:</strong> name, surname, ID/Passport, and date of birth.</li><li><strong>Contact data:</strong> email address, phone number, and postal address.</li><li><strong>Financial data:</strong> credit/debit card information necessary to process payments.</li><li><strong>Technical data:</strong> IP address, device type, browser, and browsing habits.</li></ul>",
+    "s4_title": "4. Purpose of Processing",
+    "s4_text": "<p>Data will be processed for the following purposes:</p><ul><li>Manage and process travel and experience bookings.</li><li>Send confirmations, tickets, and travel documentation.</li><li>Provide customer service and resolve issues.</li><li>Comply with legal, accounting, and tax obligations.</li><li>Send commercial communications if authorized by the user.</li></ul>",
+    "s5_title": "5. Legal Basis",
+    "s5_text": "The legal basis for data processing is the execution of the tourism service contract (bookings), the user's express consent (for cookies or newsletters), and the legitimate interest of Pack&Go to improve its services.",
+    "s6_title": "6. Data Retention",
+    "s6_text": "Personal data will be kept for the time necessary to fulfill the purposes for which they were collected and, subsequently, for the periods legally established to address possible liabilities arising from the processing.",
+    "s7_title": "7. Disclosure to Third Parties",
+    "s7_text": "Pack&Go may communicate your data to third-party providers necessary for the provision of the service (hotels, airlines, transport companies, local guides) and to secure payment gateways. Data will not be sold to third parties for commercial purposes without your consent.",
+    "s8_title": "8. Security Measures",
+    "s8_text": "We adopt the necessary technical and organizational measures to ensure data security and prevent alteration, loss, unauthorized processing, or access, taking into account the state of technology and the nature of the stored data.",
+    "s9_title": "9. User Rights",
+    "s9_text": "The user may exercise their rights of access, rectification, deletion, opposition, limitation of processing, and portability by sending a request to our contact email, attaching a copy of their identity document.",
+    "s10_title": "10. Use of Cookies",
+    "s10_text": "This website uses first-party and third-party cookies to improve the browsing experience and obtain usage statistics. You can configure your browser to reject cookies, although this may affect the website's functionality.",
+    "s11_title": "11. Modifications",
+    "s11_text": "Pack&Go reserves the right to modify this Privacy Policy to adapt it to legislative or jurisprudential changes. Modifications will be published in this section.",
+    "s12_title": "12. Acceptance",
+    "s12_text": "The use of the Website and the contracting of the offered services implies that the user has read, understood, and accepted this Privacy Policy in its entirety.",
+    "end": "--- End of document ---"
   }
 }

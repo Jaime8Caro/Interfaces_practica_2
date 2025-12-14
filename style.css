@@ -1490,6 +1490,67 @@ body.no-scroll {
 .cost-row {font-size: 1.2rem;margin-bottom: 8px;}
 .cost-divider {border: none;border-top: 2px solid #333;width: 100px;margin: 15px auto;}
 .cost-total {font-size: 1.5rem;font-weight: 800;}
+.payment-methods-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 25px;
+}
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+    position: relative;
+}
+/* Ocultar el radio button nativo */
+.payment-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* Estilo al pasar el ratón */
+.payment-option:hover {
+    border-color: #bbb;
+    background-color: #f9f9f9;
+}
+/* Estilo cuando está SELECCIONADO */
+.payment-option.selected {
+    border-color: #4caf50; /* Verde Pack&Go */
+    background-color: #e8f5e9; /* Verde muy claro */
+    color: #2e7d32;
+}
+/* Iconos */
+.pay-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+    color: #555;
+}
+/* Cambiar color del icono al seleccionar */
+.payment-option.selected .pay-icon {
+    color: #4caf50;
+}
+.pay-label {
+    font-weight: 600;
+    font-size: 1rem;
+}
+/* Texto de seguridad */
+.secure-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
 /* Botón VERDE de Confirmar */
 .btn-confirm-green {

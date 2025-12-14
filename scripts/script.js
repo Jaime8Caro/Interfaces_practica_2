@@ -1,7 +1,7 @@
 actualizarHeaderUsuario();
 
 // Instanciamos la clase (asumiendo que vanilla-i18n.js se ha cargado antes en el HTML)
-const i18n = new vanilla_i18n(['es', 'en', 'fr'], {
+const i18n = new vanilla_i18n(['es', 'en', 'fr','zh'], {
     path: 'assets/vanilla-i18n', // Carpeta con los JSON (es.json, en.json...)
     debug: true,                 // Muestra info en la consola
     i18n_attr_name: 'data-i18n', // El atributo usado en el HTML
@@ -161,10 +161,7 @@ function validarUsuarioExistente(correo) {
 function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
     const usuario = obtenerUsuarioActual();
     if (!usuario) {
-        mostrarAvisoLogin(
-            "Necesitas iniciar sesión",
-            "Inicia sesión para guardar tu reserva y continuar con el proceso."
-        );
+        mostrarAvisoLogin();
         return;
     }
 
@@ -244,12 +241,10 @@ function actualizarHeaderUsuario() {
     });
 }
 
-function mostrarAvisoLogin(titulo, mensaje) {
-    // Buscamos el modal ya creado
+function mostrarAvisoLogin(tituloKey = 'login_modal.title_default', mensajeKey = 'login_modal.msg_default') {
     let modal = document.getElementById('login-required-modal');
 
     if (!modal) {
-        // Si no existe, lo construimos desde cero
         modal = document.createElement('div');
         modal.id = 'login-required-modal';
         modal.className = 'login-required-overlay';
@@ -257,32 +252,37 @@ function mostrarAvisoLogin(titulo, mensaje) {
         const tarjeta = document.createElement('div');
         tarjeta.className = 'login-required-card';
 
+        // Icono
         const icono = document.createElement('div');
         icono.className = 'login-required-icon';
         icono.innerHTML = '<i class="fa-solid fa-lock"></i>';
 
+        // Título
         const tituloEl = document.createElement('h3');
         tituloEl.id = 'login-required-title';
-        tituloEl.textContent = 'Necesitas iniciar sesión';
+        // Asignamos la clave por defecto
+        tituloEl.setAttribute('data-i18n', tituloKey);
 
+        // Mensaje
         const mensajeEl = document.createElement('p');
         mensajeEl.id = 'login-required-message';
-        mensajeEl.textContent = 'Para continuar con tu compra necesitamos identificarte.';
+        mensajeEl.setAttribute('data-i18n', mensajeKey);
 
+        // Botones
         const acciones = document.createElement('div');
         acciones.className = 'login-required-actions';
 
         const btnCerrar = document.createElement('button');
         btnCerrar.type = 'button';
-        btnCerrar.id = 'login-required-close';
         btnCerrar.className = 'btn-rounded-outline';
-        btnCerrar.textContent = 'Seguir explorando';
+        btnCerrar.setAttribute('data-i18n', 'login_modal.btn_close'); // Clave traducción
+        btnCerrar.textContent = 'Seguir explorando'; // Fallback
 
         const enlaceLogin = document.createElement('a');
         enlaceLogin.href = 'login.html';
-        enlaceLogin.id = 'login-required-login';
         enlaceLogin.className = 'btn-rounded-black';
-        enlaceLogin.textContent = 'Ir a iniciar sesión';
+        enlaceLogin.setAttribute('data-i18n', 'login_modal.btn_login'); // Clave traducción
+        enlaceLogin.textContent = 'Ir a iniciar sesión'; // Fallback
 
         acciones.appendChild(btnCerrar);
         acciones.appendChild(enlaceLogin);
@@ -293,19 +293,22 @@ function mostrarAvisoLogin(titulo, mensaje) {
         modal.appendChild(tarjeta);
         document.body.appendChild(modal);
 
-        // Cerrar al pulsar el botón
         btnCerrar.addEventListener('click', () => modal.classList.remove('show'));
-        // Cerrar al hacer clic fuera de la tarjeta
-        modal.addEventListener('click', (evento) => {
-            if (evento.target === modal) {
-                modal.classList.remove('show');
-            }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('show');
         });
+    } else {
+        // Si ya existe, actualizamos las claves de traducción
+        const t = modal.querySelector('#login-required-title');
+        const m = modal.querySelector('#login-required-message');
+        
+        t.setAttribute('data-i18n', tituloKey);
+        m.setAttribute('data-i18n', mensajeKey);
     }
 
-    // Actualizamos textos y mostramos el modal
-    modal.querySelector('#login-required-title').textContent = titulo;
-    modal.querySelector('#login-required-message').textContent = mensaje;
+    // IMPORTANTE: Forzar la traducción del nuevo contenido
+    if (window.i18n) window.i18n.run();
+
     modal.classList.add('show');
 }
 
@@ -346,7 +349,7 @@ window.toggleCardFav = function(e, idViaje, btn) {
 
     if (!usuario) {
         if (typeof mostrarAvisoLogin === 'function') {
-            mostrarAvisoLogin("Inicia sesión", "Debes estar registrado para guardar favoritos.");
+            mostrarAvisoLogin();
         } else {
             alert("Inicia sesión para guardar favoritos");
             window.location.href = "login.html";

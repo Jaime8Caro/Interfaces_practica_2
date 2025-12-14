@@ -50,6 +50,9 @@
                     <a href="#" class="lang-option" data-lang="fr" data-src="assets/bandera_francia.png">
                         <img src="assets/bandera_francia.png" alt="fr" class="flag-icon">
                     </a>
+                    <a href="#" class="lang-option" data-lang="zh" data-src="assets/bandera_china.png">
+                        <img src="assets/bandera_china.png" alt="zh" class="flag-icon">
+                    </a>
                 </div>
             </div>
             <div class="user-actions" id="user-actions-container">
@@ -201,7 +204,30 @@
 
                             <div class="conf-column center-content">
                                 <h3 class="column-title" data-i18n="checkout.payment_title">Divisas y Pago</h3>
-                                <button type="submit" class="btn-confirm-green" style="margin-top: 20px;" data-i18n="checkout.btn_confirm">Confirmar compra</button>
+                                
+                                <div class="payment-methods-grid">
+                                    <label class="payment-option selected">
+                                        <input type="radio" name="payment_method" value="card" checked>
+                                        <div class="pay-icon"><i class="fa-regular fa-credit-card"></i></div>
+                                        <span class="pay-label" data-i18n="checkout.pay_card">Tarjeta</span>
+                                    </label>
+
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment_method" value="paypal">
+                                        <div class="pay-icon"><i class="fa-brands fa-paypal"></i></div>
+                                        <span class="pay-label" data-i18n="checkout.pay_paypal">PayPal</span>
+                                    </label>
+
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment_method" value="apple">
+                                        <div class="pay-icon"><i class="fa-brands fa-apple"></i></div>
+                                        <span class="pay-label" data-i18n="checkout.pay_apple">Apple Pay</span>
+                                    </label>
+                                </div>
+
+                                <p class="secure-text"><i class="fa-solid fa-lock"></i> <span data-i18n="checkout.secure_payment">Pago 100% Seguro</span></p>
+
+                                <button type="submit" class="btn-confirm-green" data-i18n="checkout.btn_confirm">Confirmar compra</button>
                             </div>
                         </div>
                         <div class="checkout-actions" style="margin-top: 4rem;">
