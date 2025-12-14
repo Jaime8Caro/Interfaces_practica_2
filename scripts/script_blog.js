@@ -443,10 +443,16 @@ function loadBlogPost() {
     const post = blogData.find(p => p.id === id);
 
     if (!post) return; 
+    const titleEl = document.getElementById("post-title");
+    const tagEl = document.getElementById("post-tag");
+
+    if (titleEl) titleEl.removeAttribute("data-i18n");
+    if (tagEl) tagEl.removeAttribute("data-i18n");
 
     // 3. Rellenar el contenido del post
-    document.getElementById("post-tag").textContent = post.tag;
-    document.getElementById("post-title").textContent = post.titulo;
+    if (tagEl) tagEl.textContent = post.tag;
+    if (titleEl) titleEl.textContent = post.titulo;
+    
     document.getElementById("post-author").innerHTML = `<i class="fa-regular fa-user"></i> Por ${post.autor}`;
     document.getElementById("post-date").innerHTML = `<i class="fa-regular fa-calendar"></i> ${post.fecha}`;
     document.getElementById("post-time").innerHTML = `<i class="fa-regular fa-clock"></i> ${post.lectura}`;
@@ -457,6 +463,8 @@ function loadBlogPost() {
     if (heroSection) {
         heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${post.imagenPrincipal}')`;
     }
+    
+    // 5. Posts Relacionados
     const relatedContainer = document.getElementById("related-posts-container");
 
     if (relatedContainer) {
