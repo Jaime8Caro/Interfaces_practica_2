@@ -1080,15 +1080,23 @@ body.no-scroll {
     gap: 10px;
     transition: opacity 0.5s ease, bottom 0.5s ease, visibility 0s linear 0.5s;
 }
+
 .toast-notification.show {
     visibility: visible;
     opacity: 1;
     bottom: 50px; 
     transition: opacity 0.5s ease, bottom 0.5s ease, visibility 0s linear 0s;
 }
-.toast-notification i {
-    color: #4caf50;
+
+/* 1. Estilo base para los iconos (Verde por defecto: Portapapeles, Check, etc.) */
+.toast-notification i.fa-link {
+    color: #4caf50; /* Verde éxito */
     font-size: 1.2rem;
+}
+
+/* 2. Sobrescribir SOLO si es un corazón (Rojo) */
+.toast-notification i.fa-heart {
+    color: #ff4757; /* Un rojo vibrante y moderno */
 }
 .dynamic-list-container {
     display: flex;

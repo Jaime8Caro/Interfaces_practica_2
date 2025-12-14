@@ -1368,6 +1368,7 @@ function setupFavButton(exp) {
 
         if (idx === -1) {
             currentUser.favoritos.push(exp.id);
+            mostrarToastSimple("fa-solid fa-heart","Guardado en favoritos twin");
             updateState(true);
         } else {
             currentUser.favoritos.splice(idx, 1);
@@ -1524,7 +1525,7 @@ function setupShareButton(exp) {
             // 2. Fallback para PC: Copiar al portapapeles
             try {
                 await navigator.clipboard.writeText(window.location.href);
-                mostrarToastSimple("Enlace copiado al portapapeles");
+                mostrarToastSimple("fa-solid fa-link","Enlace copiado al portapapeles");
             } catch (err) {
                 alert("No se pudo copiar el enlace");
             }
@@ -1532,7 +1533,7 @@ function setupShareButton(exp) {
     });
 }
 
-function mostrarToastSimple(mensaje) {
+function mostrarToastSimple(elemento,mensaje) {
     let toast = document.getElementById('toast-simple');
     if (!toast) {
         toast = document.createElement('div');
@@ -1541,7 +1542,7 @@ function mostrarToastSimple(mensaje) {
         document.body.appendChild(toast);
     }
 
-    toast.innerHTML = `<i class="fa-solid fa-link"></i> ${mensaje}`;
+    toast.innerHTML = `<i class="${elemento}"></i> ${mensaje}`;
     toast.classList.add('show');
 
     // Quitarlo a los 3 segundos
