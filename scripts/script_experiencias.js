@@ -1298,6 +1298,7 @@ function loadExperienceDetail() {
 
     setupBookingButton(exp);
     setupFavButton(exp);
+    setupShareButton(exp);
     initTabs();
 
     if (window.i18n) {
@@ -1498,6 +1499,55 @@ function init() {
         const top3 = [...experiencesData].sort((a, b) => b.rating - a.rating).slice(0, 3);
         renderExperiencesList(indexContainer, top3);
     }
+}
+
+// --- LOGICA DE COMPARTIR ---
+function setupShareButton(exp) {
+    const btnShare = document.getElementById('btn-share-exp');
+    if (!btnShare) return;
+
+    btnShare.addEventListener('click', async () => {
+        const shareData = {
+            title: `Pack&Go: ${exp.titulo}`,
+            text: `Mira esta experiencia increíble en ${exp.ubicacion}: ${exp.descripcionCorto}`,
+            url: window.location.href
+        };
+
+        // 1. Intentar usar la API nativa
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log('Error al compartir:', err);
+            }
+        } else {
+            // 2. Fallback para PC: Copiar al portapapeles
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                mostrarToastSimple("Enlace copiado al portapapeles");
+            } catch (err) {
+                alert("No se pudo copiar el enlace");
+            }
+        }
+    });
+}
+
+function mostrarToastSimple(mensaje) {
+    let toast = document.getElementById('toast-simple');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-simple';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `<i class="fa-solid fa-link"></i> ${mensaje}`;
+    toast.classList.add('show');
+
+    // Quitarlo a los 3 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
 }
 
 init();
