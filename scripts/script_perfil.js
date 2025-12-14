@@ -236,6 +236,7 @@ function setupConfig() {
                 elements.statusMsg.style.display = 'block';
                 setTimeout(() => elements.statusMsg.style.display = 'none', 3000);
             }
+            mostrarToastSimple("fa-solid fa-floppy-disk", "toast.data_saved", "Datos guardados"); 
         };
 
         if (elements.fileInput.files && elements.fileInput.files[0]) {

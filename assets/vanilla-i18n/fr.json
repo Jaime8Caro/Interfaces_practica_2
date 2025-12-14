@@ -1024,5 +1024,11 @@
     "s12_title": "12. Acceptation",
     "s12_text": "L'utilisation du Site Web et la souscription aux services offerts impliquent que l'utilisateur a lu, compris et accepté cette Politique de Confidentialité dans son intégralité.",
     "end": "--- Fin du document ---"
+  },
+  "toast": {
+    "link_copied": "Lien copié dans le presse-papiers",
+    "fav_added": "Ajouté aux favoris",
+    "fav_removed": "Retiré des favoris",
+    "data_saved": "Données enregistrées"
   }
 }

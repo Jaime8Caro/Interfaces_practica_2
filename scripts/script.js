@@ -283,10 +283,52 @@ window.toggleCardFav = (e, id, btn) => {
     e.preventDefault();
     e.stopPropagation();
 
+    // Llamamos al cerebro
+    const resultado = gestionarFavorito(id);
+
+    // Si es null, es que no estaba logueado, no hacemos nada visual (el modal ya saltó)
+    if (resultado === null) return;
+
+    // Actualizamos SOLO la visual de la tarjeta
+    const icon = btn.querySelector("i");
+    
+    if (resultado === true) { // Añadido
+        btn.classList.add("active");
+        icon.className = "fa-solid fa-heart";
+    } else { // Quitado
+        btn.classList.remove("active");
+        icon.className = "fa-regular fa-heart";
+    }
+};
+
+function mostrarToastSimple(iconClass, i18nKey, defaultText = "") {
+    let toast = document.getElementById('toast-simple');
+    
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-simple';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="${iconClass}"></i> <span data-i18n="${i18nKey}">${defaultText}</span>`;
+    
+    if (window.i18n) {
+        window.i18n.run(toast); 
+    }
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
+
+function gestionarFavorito(id) {
     const user = UserService.getCurrent();
     
     if (!user) {
-        return window.mostrarAvisoLogin('login_modal.title_fav', 'login_modal.msg_fav');
+        window.mostrarAvisoLogin('login_modal.title_fav', 'login_modal.msg_fav');
+        return null;
     }
 
     if (!user.favoritos) {
@@ -294,21 +336,22 @@ window.toggleCardFav = (e, id, btn) => {
     }
     
     const index = user.favoritos.indexOf(id);
-    const icon = btn.querySelector("i");
+    let actionResult = false; 
 
     if (index === -1) {
+        // AÑADIR
         user.favoritos.push(id);
-        btn.classList.add("active");
-        icon.className = "fa-solid fa-heart";
+        // Pasamos el texto "fallback" para que se vea al instante
+        mostrarToastSimple("fa-solid fa-heart", "toast.fav_added", "Guardado en favoritos"); 
+        actionResult = true;
     } else {
         user.favoritos.splice(index, 1);
-        btn.classList.remove("active");
-        icon.className = "fa-regular fa-heart";
+        actionResult = false;
     }
 
-    // Guardamos usando el servicio centralizado que actualiza TODO
     UserService.saveCurrent(user);
-};
+    return actionResult;
+}
 
 window.obtenerUsuarioActual = UserService.getCurrent;
 window.logout = UserService.logout;

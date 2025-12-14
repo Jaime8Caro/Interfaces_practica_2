@@ -1025,5 +1025,11 @@
     "s12_title": "12. Aceptación",
     "s12_text": "El uso del Sitio Web y la contratación de los servicios ofrecidos implican que el usuario ha leído, comprendido y aceptado esta Política de Privacidad en su totalidad.",
     "end": "--- Fin del documento ---"
+  },
+  "toast": {
+    "link_copied": "Enlace copiado al portapapeles",
+    "fav_added": "Guardado en favoritos",
+    "fav_removed": "Eliminado de favoritos",
+    "data_saved": "Datos guardados"
   }
 }

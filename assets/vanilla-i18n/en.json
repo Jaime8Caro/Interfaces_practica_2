@@ -1023,5 +1023,11 @@
     "s12_title": "12. Acceptance",
     "s12_text": "The use of the Website and the contracting of the offered services implies that the user has read, understood, and accepted this Privacy Policy in its entirety.",
     "end": "--- End of document ---"
+  },
+  "toast": {
+    "link_copied": "Link copied to clipboard",
+    "fav_added": "Saved to favorites",
+    "fav_removed": "Removed from favorites",
+    "data_saved": "Data saved"
   }
 }

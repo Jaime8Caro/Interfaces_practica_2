@@ -1341,6 +1341,8 @@ function setupBookingButton(exp) {
 
 function setupFavButton(exp) {
     const btn = document.querySelector('.btn-favorite');
+    
+    // 1. Estado inicial visual
     const user = UserService.getCurrent();
     const isFav = user?.favoritos?.includes(exp.id);
 
@@ -1349,34 +1351,21 @@ function setupFavButton(exp) {
         btn.innerHTML = active 
             ? `<i class="fa-solid fa-heart"></i> <span data-i18n="product.saved">Guardado</span>`
             : `<i class="fa-solid fa-plus"></i> <span data-i18n="product.add_fav">Añadir</span>`;
+        
+        // Como hemos inyectado HTML nuevo con data-i18n, hay que traducir este botón
+        if (window.i18n) window.i18n.run(btn);
     };
 
     updateState(isFav);
 
+    // 2. Evento Click simplificado
     btn.onclick = () => {
-        const currentUser = UserService.getCurrent();
-        // También protegemos el favorito, aunque esto ya lo manejaba toggleCardFav
-        if (!currentUser) {
-            return window.mostrarAvisoLogin('login_modal.title_fav', 'login_modal.msg_fav');
-        }
+        // Llamamos a la función centralizada que pusimos en script.js
+        // Ella se encarga del Login, del Array, del Storage y del Toast
+        const resultado = gestionarFavorito(exp.id);
 
-        if (!currentUser.favoritos) {
-            currentUser.favoritos = [];
-        }
-        
-        const idx = currentUser.favoritos.indexOf(exp.id);
-
-        if (idx === -1) {
-            currentUser.favoritos.push(exp.id);
-            mostrarToastSimple("fa-solid fa-heart","Guardado en favoritos twin");
-            updateState(true);
-        } else {
-            currentUser.favoritos.splice(idx, 1);
-            updateState(false);
-        }
-        UserService.saveCurrent(currentUser);
-        if (window.i18n) {
-            window.i18n.run();
+        if (resultado !== null) {
+            updateState(resultado); // true o false
         }
     };
 }
@@ -1525,30 +1514,12 @@ function setupShareButton(exp) {
             // 2. Fallback para PC: Copiar al portapapeles
             try {
                 await navigator.clipboard.writeText(window.location.href);
-                mostrarToastSimple("fa-solid fa-link","Enlace copiado al portapapeles");
+                mostrarToastSimple("fa-solid fa-link", "toast.link_copied", "Enlace copiado al portapapeles");
             } catch (err) {
                 alert("No se pudo copiar el enlace");
             }
         }
     });
-}
-
-function mostrarToastSimple(elemento,mensaje) {
-    let toast = document.getElementById('toast-simple');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toast-simple';
-        toast.className = 'toast-notification';
-        document.body.appendChild(toast);
-    }
-
-    toast.innerHTML = `<i class="${elemento}"></i> ${mensaje}`;
-    toast.classList.add('show');
-
-    // Quitarlo a los 3 segundos
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
 }
 
 init();
