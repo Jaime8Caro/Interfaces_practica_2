@@ -304,23 +304,29 @@ window.toggleCardFav = (e, id, btn) => {
 function mostrarToastSimple(iconClass, i18nKey, defaultText = "") {
     let toast = document.getElementById('toast-simple');
     
+    // Creación del elemento si no existe
     if (!toast) {
         toast = document.createElement('div');
         toast.id = 'toast-simple';
         toast.className = 'toast-notification';
         document.body.appendChild(toast);
     }
+
+    // Si existe un temporizador pendiente guardado en el elemento, lo cancelamos.
+    if (toast.timerId) {
+        clearTimeout(toast.timerId);
+    }
+    // Actualizamos contenido
     toast.innerHTML = `<i class="${iconClass}"></i> <span data-i18n="${i18nKey}">${defaultText}</span>`;
     
     if (window.i18n) {
         window.i18n.run(toast); 
     }
-
     toast.classList.add('show');
-
-    setTimeout(() => {
+    toast.timerId = setTimeout(() => {
         toast.classList.remove('show');
-    }, 2000);
+        toast.timerId = null;
+    }, 2500);
 }
 
 function gestionarFavorito(id) {
@@ -346,6 +352,7 @@ function gestionarFavorito(id) {
         actionResult = true;
     } else {
         user.favoritos.splice(index, 1);
+        mostrarToastSimple("fa-regular fa-heart", "toast.fav_removed", "Eliminado de favoritos"); 
         actionResult = false;
     }
 
