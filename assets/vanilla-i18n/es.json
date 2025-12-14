@@ -7,7 +7,13 @@
     "search_placeholder": "Buscar destinos",
     "buscar": "Buscar",
     "login": "Iniciar sesión",
-    "signup": "Crear cuenta"
+    "signup": "Crear cuenta",
+    "user_menu": {
+      "profile": "Perfil",
+      "favorites": "Mis favoritos",
+      "trips": "Mis Viajes",
+      "logout": "Cerrar sesión"
+    }
   },
   "footer": {
     "slogan": "La comunidad donde los caminos se cruzan.",

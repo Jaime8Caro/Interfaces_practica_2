@@ -7,7 +7,13 @@
     "search_placeholder": "Rechercher des destinations",
     "buscar": "Rechercher",
     "login": "Connexion",
-    "signup": "S'inscrire"
+    "signup": "S'inscrire",
+    "user_menu": {
+      "profile": "Profil",
+      "favorites": "Mes favoris",
+      "trips": "Mes voyages",
+      "logout": "Déconnexion"
+    }
   },
   "footer": {
     "slogan": "La communauté où les chemins se croisent.",

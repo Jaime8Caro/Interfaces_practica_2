@@ -7,7 +7,13 @@
     "search_placeholder": "搜索目的地",
     "buscar": "搜索",
     "login": "登录",
-    "signup": "注册"
+    "signup": "注册",
+    "user_menu": {
+      "profile": "个人资料",
+      "favorites": "我的收藏",
+      "trips": "我的行程",
+      "logout": "退出登录"
+    }
   },
   "footer": {
     "slogan": "道路交汇的社区。",

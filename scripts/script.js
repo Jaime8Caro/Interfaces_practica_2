@@ -1,85 +1,69 @@
+// 1. LLAMADA INICIAL PARA PINTAR EL HEADER (Si hay usuario guardado)
 actualizarHeaderUsuario();
 
-// Instanciamos la clase (asumiendo que vanilla-i18n.js se ha cargado antes en el HTML)
-const i18n = new vanilla_i18n(['es', 'en', 'fr','zh'], {
-    path: 'assets/vanilla-i18n', // Carpeta con los JSON (es.json, en.json...)
-    debug: true,                 // Muestra info en la consola
-    i18n_attr_name: 'data-i18n', // El atributo usado en el HTML
+// 2. CONFIGURACIÓN I18N
+// Instanciamos la clase (vanilla-i18n.js debe estar cargado antes en el HTML)
+const i18n = new vanilla_i18n(['es', 'en', 'fr', 'zh'], {
+    path: 'assets/vanilla-i18n', 
+    debug: true,                 
+    i18n_attr_name: 'data-i18n', 
     default_language: 'es'
 });
 
 window.i18n = i18n;
-
-// Iniciamos la traducción
 i18n.run();
 
-const langToggle = document.getElementById('langToggle');
+// 3. LÓGICA DE IDIOMAS (Solo carga inicial y cambio de opción)
 const langSelector = document.querySelector('.language-selector');
 const currentFlag = document.getElementById('currentFlag');
 const langOptions = document.querySelectorAll('.lang-option');
 
-// Función auxiliar para cambiar la imagen de la bandera visualmente
+// Función auxiliar para cambiar la bandera visualmente
 function updateLanguageUI(src) {
     if (currentFlag) {
         currentFlag.src = src;
     }
 }
 
-if (langToggle && langSelector) {
-    
-    // A. CARGAR BANDERA VISUAL AL INICIAR
+if (langSelector) {
+    // A. CARGAR BANDERA AL INICIAR
     const savedSrc = localStorage.getItem('idioma_src');
     if (savedSrc) {
         updateLanguageUI(savedSrc);
     } else {
-        // Por defecto ponemos la de España si no hay nada guardado
         updateLanguageUI('assets/bandera_españa.png'); 
     }
 
-    // B. ABRIR / CERRAR MENÚ
-    langToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        langSelector.classList.toggle('active');
-    });
-
-    // C. CERRAR AL CLICAR FUERA
-    document.addEventListener('click', (e) => {
-        if (!langSelector.contains(e.target)) {
-            langSelector.classList.remove('active');
-        }
-    });
-
-    // D. SELECCIONAR IDIOMA
+    // B. SELECCIONAR OPCIÓN DE IDIOMA
     langOptions.forEach(option => {
         option.addEventListener('click', (e) => {
             e.preventDefault(); 
             
-            const selectedLang = option.getAttribute('data-lang'); // 'es', 'en', 'fr'
+            const selectedLang = option.getAttribute('data-lang'); 
             const selectedSrc = option.getAttribute('data-src');
 
-            // 1. Actualizar la bandera visualmente
+            // 1. Actualizar visualmente
             updateLanguageUI(selectedSrc);
-
-            // 2. Guardar la referencia de la imagen
             localStorage.setItem('idioma_src', selectedSrc);
 
-            // 3. EJECUTAR EL CAMBIO DE IDIOMA EN LA LIBRERÍA
-            // Esto traduce la página y actualiza el idioma en localStorage
+            // 2. Ejecutar traducción
             if (i18n) {
                 i18n._runOnChange(selectedLang);
             }
 
-            // 4. Cerrar el menú
+            // 3. Cerrar el menú explícitamente
             langSelector.classList.remove('active');
-
-            console.log(`Idioma cambiado a: ${selectedLang}`);
         });
     });
 }
 
+// ---------------------------------------------------------
+// FUNCIONES AUXILIARES Y LÓGICA DE USUARIO
+// ---------------------------------------------------------
+
 function validarCampoFormulario(campo, esValido, mensajeError, placeholderOriginal) {
     campo.classList.remove("campo-invalido");
-    void campo.offsetWidth;
+    void campo.offsetWidth; // Reflujo para reiniciar animación si la hubiera
     if (!esValido) {
         campo.value = "";
         campo.classList.add("campo-invalido");
@@ -105,13 +89,13 @@ function login(correo, contraseña) {
 }
 
 function logout(redirectUrl = "index.html") {
-    localStorage.setItem("usuarioActual", null);
+    localStorage.removeItem("usuarioActual"); // Mejor removeItem que set null
     window.location.href = redirectUrl;
 }
 
 function obtenerUsuarioActual() {
     const usuario = localStorage.getItem("usuarioActual");
-    if (usuario) {
+    if (usuario && usuario !== "null") {
         return JSON.parse(usuario);
     }
     return null;
@@ -128,19 +112,13 @@ function obtenerUsuarios() {
 function guardarUsuario(usuarioNuevo) {
     let usuariosGuardados = obtenerUsuarios();
 
-    //Comprobar si ya existe ese correo
     if (validarUsuarioExistente(usuarioNuevo.correo)) {
         console.log("Ese correo ya está registrado.");
         return false;
     }
 
-    //Agregar el nuevo usuario
     usuariosGuardados.push(usuarioNuevo);
-
-    //Guardar la lista actualizada
     localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-
-    //Marcarlo como el usuario actual
     localStorage.setItem("usuarioActual", JSON.stringify(usuarioNuevo));
 
     return true;
@@ -148,14 +126,7 @@ function guardarUsuario(usuarioNuevo) {
 
 function validarUsuarioExistente(correo) {
     const usuariosGuardados = obtenerUsuarios();
-    
-    for (let i = 0; i < usuariosGuardados.length; i++) {
-        const usuario = usuariosGuardados[i];
-        if (usuario.correo === correo) {
-            return true;
-        }
-    }
-    return false;
+    return usuariosGuardados.some(u => u.correo === correo);
 }
 
 function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
@@ -167,11 +138,11 @@ function iniciarProcesoCompra(titulo, precio, imagen, duracion, destino) {
 
     const compraActual = {
         titulo: titulo,
-        precio: parseFloat(precio), // Aseguramos que sea número
+        precio: parseFloat(precio),
         imagen: imagen,
         duracion: duracion,
         destino: destino,
-        fecha_inicio: new Date().toLocaleDateString() // Simulada
+        fecha_inicio: new Date().toLocaleDateString()
     };
 
     localStorage.setItem('compra_seleccionada', JSON.stringify(compraActual));
@@ -189,58 +160,69 @@ function limpiarTodoLocalStorage() {
     console.log("Todo el localStorage ha sido limpiado");
 }
 
-
+// ---------------------------------------------------------
+// RENDERIZADO DEL HEADER (Usuario Logueado)
+// ---------------------------------------------------------
 function actualizarHeaderUsuario() {
     const container = document.getElementById('user-actions-container');
-    if (!container){
-        console.log("algo salio mal") 
-        return;
-    }
+    if (!container) return;
 
-    // 1. Recuperamos el usuario
     const usuario = obtenerUsuarioActual();
     
-    // Si NO hay usuario, no hacemos nada
-    if (!usuario){
-        return;
-    }
+    // Si NO hay usuario, no hacemos nada (se queda el botón Login/Registro original)
+    if (!usuario) return;
     
     const avatarImg = usuario.imagen || "assets/defecto.png"; 
     const nombreUsuario = usuario.nombre || "Usuario";
 
-    // 2. Inyectamos el HTML del usuario logueado
+    // Inyectamos HTML
     container.innerHTML = `
         <div class="user-profile-wrapper" id="userMenuBtn">
             <img src="${avatarImg}" alt="Perfil" class="user-avatar">
             <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; color: #555;"></i>
             <div class="user-dropdown" id="userDropdown">
-                <div class="user-dropdown-header">Hola, ${nombreUsuario}</div>
-                <a href="perfil.html#datos"><i class="fa-solid fa-user-pen"></i> Perfil</a>
-                <a href="perfil.html#favoritos"><i class="fa-solid fa-star"></i> Mis favoritos</a>
-                <a href="perfil.html#viajes"><i class="fa-solid fa-suitcase"></i> Mis Viajes</a>
-                <a href="perfil.html#configuracion"><i class="fa-solid fa-gear"></i> Configuración</a>
-                <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
+                <div class="user-dropdown-header">
+                    <span data-i18n="nav.user_menu.hello">Hola</span>, ${nombreUsuario}
+                </div>
+                <a href="perfil.html#datos">
+                    <i class="fa-solid fa-user-pen"></i> 
+                    <span data-i18n="nav.user_menu.profile">Perfil</span>
+                </a>
+                <a href="perfil.html#favoritos">
+                    <i class="fa-solid fa-star"></i> 
+                    <span data-i18n="nav.user_menu.favorites">Favoritos</span>
+                </a>
+                <a href="perfil.html#viajes">
+                    <i class="fa-solid fa-suitcase"></i> 
+                    <span data-i18n="nav.user_menu.trips">Mis Viajes</span>
+                </a>
+                <button id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> 
+                    <span data-i18n="nav.user_menu.logout">Cerrar sesión</span>
+                </button>
             </div>
         </div>
     `;
 
-    // 3. Lógica para abrir/cerrar el menú de usuario
-    const menuBtn = document.getElementById('userMenuBtn');
-    const dropdown = document.getElementById('userDropdown');
-    const logoutBtn = document.getElementById('logout-btn');
+    // Traducir el nuevo contenido
+    if (window.i18n) window.i18n.run();
 
-    menuBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); 
-        dropdown.classList.toggle('show');
-    });
-    document.addEventListener('click', () => {
-        dropdown.classList.remove('show');
-    });
-    logoutBtn.addEventListener('click', () => {
-        logout();
-    });
+    // NOTA: Hemos eliminado los addEventListener de click aquí.
+    // Ahora todo se maneja en el "CONTROLADOR MAESTRO DE CLICS" abajo del todo.
+
+    // Solo añadimos el listener específico de logout
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita conflictos
+            logout();
+        });
+    }
 }
 
+// ---------------------------------------------------------
+// MODAL DE AVISO DE LOGIN
+// ---------------------------------------------------------
 function mostrarAvisoLogin(tituloKey = 'login_modal.title_default', mensajeKey = 'login_modal.msg_default') {
     let modal = document.getElementById('login-required-modal');
 
@@ -252,37 +234,32 @@ function mostrarAvisoLogin(tituloKey = 'login_modal.title_default', mensajeKey =
         const tarjeta = document.createElement('div');
         tarjeta.className = 'login-required-card';
 
-        // Icono
         const icono = document.createElement('div');
         icono.className = 'login-required-icon';
         icono.innerHTML = '<i class="fa-solid fa-lock"></i>';
 
-        // Título
         const tituloEl = document.createElement('h3');
         tituloEl.id = 'login-required-title';
-        // Asignamos la clave por defecto
         tituloEl.setAttribute('data-i18n', tituloKey);
 
-        // Mensaje
         const mensajeEl = document.createElement('p');
         mensajeEl.id = 'login-required-message';
         mensajeEl.setAttribute('data-i18n', mensajeKey);
 
-        // Botones
         const acciones = document.createElement('div');
         acciones.className = 'login-required-actions';
 
         const btnCerrar = document.createElement('button');
         btnCerrar.type = 'button';
         btnCerrar.className = 'btn-rounded-outline';
-        btnCerrar.setAttribute('data-i18n', 'login_modal.btn_close'); // Clave traducción
-        btnCerrar.textContent = 'Seguir explorando'; // Fallback
+        btnCerrar.setAttribute('data-i18n', 'login_modal.btn_close');
+        btnCerrar.textContent = 'Seguir explorando';
 
         const enlaceLogin = document.createElement('a');
         enlaceLogin.href = 'login.html';
         enlaceLogin.className = 'btn-rounded-black';
-        enlaceLogin.setAttribute('data-i18n', 'login_modal.btn_login'); // Clave traducción
-        enlaceLogin.textContent = 'Ir a iniciar sesión'; // Fallback
+        enlaceLogin.setAttribute('data-i18n', 'login_modal.btn_login');
+        enlaceLogin.textContent = 'Ir a iniciar sesión';
 
         acciones.appendChild(btnCerrar);
         acciones.appendChild(enlaceLogin);
@@ -298,27 +275,24 @@ function mostrarAvisoLogin(tituloKey = 'login_modal.title_default', mensajeKey =
             if (e.target === modal) modal.classList.remove('show');
         });
     } else {
-        // Si ya existe, actualizamos las claves de traducción
         const t = modal.querySelector('#login-required-title');
         const m = modal.querySelector('#login-required-message');
-        
         t.setAttribute('data-i18n', tituloKey);
         m.setAttribute('data-i18n', mensajeKey);
     }
 
-    // IMPORTANTE: Forzar la traducción del nuevo contenido
     if (window.i18n) window.i18n.run();
-
     modal.classList.add('show');
 }
 
-// --- FUNCIONALIDAD BUSCADOR HEADER ---
+// ---------------------------------------------------------
+// FUNCIONALIDAD BUSCADOR HEADER
+// ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
     const headerSearchInput = document.querySelector('.search-bar input');
     const headerSearchBtn = document.querySelector('.search-bar button');
 
     if (headerSearchInput && headerSearchBtn) {
-        
         const realizarBusquedaHeader = () => {
             const texto = headerSearchInput.value.trim();
             if (texto) {
@@ -340,12 +314,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --- FUNCIÓN GLOBAL PARA EL BOTÓN CORAZÓN DE LAS TARJETAS ---
+// ---------------------------------------------------------
+// FAVORITOS (Botón Corazón)
+// ---------------------------------------------------------
 window.toggleCardFav = function(e, idViaje, btn) {
     e.preventDefault();
     e.stopPropagation();
 
-    let usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+    let usuario = obtenerUsuarioActual();
 
     if (!usuario) {
         if (typeof mostrarAvisoLogin === 'function') {
@@ -366,12 +342,12 @@ window.toggleCardFav = function(e, idViaje, btn) {
         usuario.favoritos.push(idViaje);
         btn.classList.add("active");
         icono.className = "fa-solid fa-heart"; 
-        if(typeof mostrarToast === 'function') mostrarToast("Añadido a favoritos");
+        // if(typeof mostrarToast === 'function') mostrarToast("Añadido a favoritos");
     } else {
         usuario.favoritos.splice(index, 1);
         btn.classList.remove("active");
         icono.className = "fa-regular fa-heart"; 
-        if(typeof mostrarToast === 'function') mostrarToast("Eliminado de favoritos");
+        // if(typeof mostrarToast === 'function') mostrarToast("Eliminado de favoritos");
     }
 
     localStorage.setItem("usuarioActual", JSON.stringify(usuario));
@@ -383,3 +359,44 @@ window.toggleCardFav = function(e, idViaje, btn) {
         localStorage.setItem("usuarios", JSON.stringify(usuariosGlobales));
     }
 };
+
+// =========================================================
+// CONTROLADOR MAESTRO DE CLICS (MENÚS DESPLEGABLES)
+// =========================================================
+// Este evento global maneja la apertura y cierre de TODOS los menús
+// para evitar conflictos.
+document.addEventListener('click', (e) => {
+    // 1. Identificar elementos (buscamos por ID o Clase según corresponda)
+    const langToggle = document.getElementById('langToggle');       // Botón bandera
+    const langSelector = document.querySelector('.language-selector'); // Contenedor dropdown (.active)
+    
+    const userWrapper = document.getElementById('userMenuBtn');     // Botón/Wrapper usuario
+    const userDropdown = document.getElementById('userDropdown');   // Dropdown usuario (.show)
+
+    // --- CASO 1: Clic en IDIOMAS ---
+    // Si clicamos en el botón de la bandera o dentro de él
+    if (langToggle && (langToggle.contains(e.target))) {
+        // Cierra el menú de usuario si existe y está abierto
+        if (userDropdown) userDropdown.classList.remove('show');
+        
+        // Alterna el menú de idiomas
+        if (langSelector) langSelector.classList.toggle('active');
+        return; 
+    }
+
+    // --- CASO 2: Clic en USUARIO ---
+    // Si clicamos en el avatar/flecha o dentro del wrapper
+    if (userWrapper && (userWrapper.contains(e.target))) {
+        // Cierra el menú de idiomas si está abierto
+        if (langSelector) langSelector.classList.remove('active');
+
+        // Alterna el menú de usuario
+        if (userDropdown) userDropdown.classList.toggle('show');
+        return; 
+    }
+
+    // --- CASO 3: Clic FUERA (Cerrar todo) ---
+    // Si el clic no fue ni en idiomas ni en usuario, cerramos ambos
+    if (langSelector) langSelector.classList.remove('active');
+    if (userDropdown) userDropdown.classList.remove('show');
+});
