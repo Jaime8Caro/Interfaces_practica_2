@@ -31,7 +31,7 @@
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -97,13 +97,13 @@
                     
                     <div id="step-1" class="step-content active">
                         <div class="form-row-3">
-                            <div class="input-group"><input type="text" placeholder="Nombre" class="input-gray" required data-i18n-placeholder="checkout.ph_name"></div>
-                            <div class="input-group"><input type="text" placeholder="Apellidos" class="input-gray" required data-i18n-placeholder="checkout.ph_lastname"></div>
-                            <div class="input-group"><input type="text" placeholder="DNI/NIF" class="input-gray" required data-i18n-placeholder="checkout.ph_dni"></div>
+                            <div class="input-group"><input type="text" placeholder="Nombre" class="input-gray" aria-label="input-Nombre" required data-i18n-placeholder="checkout.ph_name"></div>
+                            <div class="input-group"><input type="text" placeholder="Apellidos" class="input-gray" aria-label="input-Apellidos" required data-i18n-placeholder="checkout.ph_lastname"></div>
+                            <div class="input-group"><input type="text" placeholder="DNI/NIF" class="input-gray" aria-label="input-DNI" required data-i18n-placeholder="checkout.ph_dni"></div>
                         </div>
                         <div class="form-row-2">
-                            <div class="input-group"><input type="tel" placeholder="Teléfono" class="input-gray" required data-i18n-placeholder="checkout.ph_phone"></div>
-                            <div class="input-group"><input type="email" name="user_email" placeholder="Correo electrónico" class="input-gray" required data-i18n-placeholder="checkout.ph_email"></div>
+                            <div class="input-group"><input type="tel" placeholder="Teléfono" class="input-gray" aria-label="input-Telefono" required data-i18n-placeholder="checkout.ph_phone"></div>
+                            <div class="input-group"><input type="email" name="user_email" placeholder="Correo electrónico" class="input-gray" aria-label="input-email" required data-i18n-placeholder="checkout.ph_email"></div>
                         </div>
 
                         <div class="checkout-actions">
@@ -246,9 +246,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">

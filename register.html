@@ -27,13 +27,13 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="index.html#" data-i18n="nav.inicio">Inicio</a></li>
                 <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
                 <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
                 <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -71,27 +71,27 @@
                 <form action="#">
                     <div class="signup-grid">
                         <div class="input-group">
-                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" data-i18n-placeholder="register.ph_name">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" aria-label="nombre" data-i18n-placeholder="register.ph_name">
                         </div>
                         <div class="input-group">
-                            <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" data-i18n-placeholder="register.ph_lastname">
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" aria-label="Apellidos" data-i18n-placeholder="register.ph_lastname">
                         </div>
                         <div class="input-group">
-                            <input type="date" id="fecha-nacimiento" name="fecha_nacimiento">
-                        </div>
-
-                        <div class="input-group">
-                            <input type="email" id="email" name="email" placeholder="Correo electrónico" data-i18n-placeholder="register.ph_email">
-                        </div>
-                        <div class="input-group">
-                            <input type="email" id="confirmar-email" name="confirmar_email" placeholder="Confirmacion correo" data-i18n-placeholder="register.ph_confirm_email">
-                        </div>
-                        <div class="input-group">
-                            <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" data-i18n-placeholder="register.ph_user">
+                            <input type="date" id="fecha-nacimiento" aria-label="fecha_nacimiento" name="fecha_nacimiento">
                         </div>
 
                         <div class="input-group">
-                            <input type="password" id="password" name="password" placeholder="Contraseña" data-i18n-placeholder="register.ph_password">
+                            <input type="email" id="email" name="email" placeholder="Correo electrónico" aria-label="Correo electronico" data-i18n-placeholder="register.ph_email">
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="confirmar-email" name="confirmar_email" placeholder="Confirmacion correo" aria-label="Confirmacion correo" data-i18n-placeholder="register.ph_confirm_email">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" aria-label="Apodo" data-i18n-placeholder="register.ph_user">
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" id="password" name="password" placeholder="Contraseña" aria-label="Contraseña" data-i18n-placeholder="register.ph_password">
                         </div>
                         <div class="input-group profile-upload-group">
                             <label class="avatar-upload-label" for="foto-perfil">
@@ -133,9 +133,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">

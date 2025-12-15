@@ -95,7 +95,7 @@ function loadUserBookings() {
             <div class="trip-info">
                 <h3>${b.viaje.titulo}</h3>
                 <p class="trip-date"><i class="fa-regular fa-calendar"></i> ${b.viaje.fecha_inicio || b.fecha_compra}</p>
-                <p class="trip-id" style="font-size: 0.8rem; color: #999;"><span data-i18n="profile.ref">Ref:</span> #${b.id_reserva}</p>
+                <p class="trip-id" style="font-size: 0.8rem; color: #555;"><span data-i18n="profile.ref">Ref:</span> #${b.id_reserva}</p>
             </div>
         </article>
     `).join('');
@@ -126,7 +126,7 @@ function loadUserFavorites() {
         container.innerHTML = favExps.map(exp => `
             <a href="compra.html?id=${exp.id}" class="experience-card-item">
                 <div class="card-image-header">
-                    <span class="difficulty-badge">${exp.dificultad}</span>
+                    <span class="difficulty-badge" data-i18n="difficulty.${exp.dificultad}">${exp.dificultad}</span>
                     <button class="card-fav-btn active" onclick="toggleCardFav(event, ${exp.id}, this)">
                         <i class="fa-solid fa-heart"></i>
                     </button>
@@ -140,8 +140,10 @@ function loadUserFavorites() {
                         <span><i class="fa-regular fa-calendar"></i> ${exp.duracion}</span>
                     </div>
                     <div class="card-footer">
-                        <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
-                        <span class="btn-reservar" data-i18n="profile.view_details">Ver detalles</span>
+                        <span class="price">$${exp.precio}</span>
+                        <span class="pers" data-i18n="cards.per_person">/ persona</span>
+                        <div></div>
+                        <span class="btn-reservar" data-i18n="cards.book_btn">Reservar</span>
                     </div>
                 </div>
             </a>

@@ -30,7 +30,7 @@
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -75,7 +75,7 @@
             <h1 class="page-title-center" style="margin-bottom: 2rem;" data-i18n="success.title">¡Compra realizada con éxito!</h1>
 
             <div class="success-details-box">
-                <h3 class="details-subtitle"><span data-i18n="success.subtitle">Detalles de la reserva:</span> <span id="exito-id">#PKG-0000</span></h3>
+                <h2 class="details-subtitle"><span data-i18n="success.subtitle">Detalles de la reserva:</span> <span id="exito-id">#PKG-0000</span></h2>
                 
                 <h2 class="experience-title-large" id="exito-titulo" data-i18n="success.loading">Cargando reserva...</h2>
                 
@@ -112,9 +112,16 @@
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a> </div>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
+                </div>
             </div>
 
             <div class="footer-links">

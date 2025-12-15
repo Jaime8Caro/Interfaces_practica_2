@@ -1,66 +1,72 @@
 // DATOS: Aquí definimos todos los artículos disponibles
 const blogData = [
     {
-        id: 1,
-        titulo: "Los rincones del mundo que todo mochilero debería visitar en 2025",
-        autor: "Carolina Monteamor",
-        fecha: "25 Agosto, 2025",
-        lectura: "5 min de lectura",
-        imagenPrincipal: "assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg",
-        tag: "Destinos 2025",
-        resumen: "Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia...",
-        contenidoHTML: `
-            <p class="lead-text">
-                Viajar con la mochila al hombro nunca pasa de moda. Cada año surgen nuevos destinos que despiertan la curiosidad de quienes buscan aventura, autenticidad y experiencias que dejen huella. El 2025 promete ser un año lleno de oportunidades para los mochileros del mundo.
-            </p>
+    id: 1,
+    titulo: "Los rincones del mundo que todo mochilero debería visitar en 2025",
+    autor: "Carolina Monteamor",
+    fecha: "25 Agosto, 2025",
+    lectura: "5 min de lectura",
+    imagenPrincipal: "assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg",
+    tag: "Destinos 2025",
+    resumen: "Viajar con la mochila al hombro nunca pasa de moda. Cada año aparecen nuevos rincones que se vuelven tendencia...",
+    contenidoHTML: `
+        <p class="lead-text">
+            Viajar con la mochila al hombro nunca pasa de moda. Cada año surgen nuevos destinos que despiertan la curiosidad de quienes buscan aventura, autenticidad y experiencias que dejen huella. El 2025 promete ser un año lleno de oportunidades para los mochileros del mundo.
+        </p>
 
-            <p>
-                Desde rutas poco transitadas en Asia hasta paisajes naturales intactos en América del Sur, pasando por aldeas europeas que parecen detenidas en el tiempo. A continuación, te presentamos algunos de los rincones más sorprendentes que deberías incluir en tu lista de viajes este año.
-            </p>
+        <p>
+            Desde rutas poco transitadas en Asia hasta paisajes naturales intactos en América del Sur, pasando por aldeas europeas que parecen detenidas en el tiempo. A continuación, te presentamos algunos de los rincones más sorprendentes que deberías incluir en tu lista de viajes este año.
+        </p>
 
-            <h2>1. Ubud y los Arrozales de Bali, Indonesia</h2>
-            <p>
-                Aunque Bali es un destino conocido, alejarse de las zonas más turísticas de Kuta y adentrarse en el corazón de Ubud sigue siendo una experiencia transformadora. Los arrozales de Tegallalang ofrecen un paisaje verde esmeralda que parece sacado de una pintura.
-            </p>
-            
-            <figure class="article-inline-image">
-                <img src="assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Arrozales de Bali">
-                <figcaption>Los impresionantes arrozales de Tegallalang en Ubud.</figcaption>
-            </figure>
+        <h2>1. Ubud y los Arrozales de Bali, Indonesia</h2>
+        <p>
+            Aunque Bali es un destino conocido, alejarse de las zonas más turísticas de Kuta y adentrarse en el corazón de Ubud sigue siendo una experiencia transformadora. Los arrozales de Tegallalang ofrecen un paisaje verde esmeralda que parece sacado de una pintura.
+        </p>
+        
+        <figure class="article-inline-image">
+            <img src="assets/niklas-weiss--2WlTWZLnRc-unsplash.jpg" alt="Arrozales de Bali">
+            <figcaption>Los impresionantes arrozales de Tegallalang en Ubud.</figcaption>
+        </figure>
 
-            <p>
-                Para el mochilero, Ubud es el punto de partida ideal para explorar templos escondidos, practicar yoga en medio de la selva y conectar con la cultura local de una manera profunda y respetuosa. No olvides visitar el Monkey Forest, pero ¡cuidado con tus pertenencias!
-            </p>
+        <p>
+            Para el mochilero, Ubud es el punto de partida ideal para explorar templos escondidos, practicar yoga en medio de la selva y conectar con la cultura local de una manera profunda y respetuosa. No olvides visitar el Monkey Forest, pero ¡cuidado con tus pertenencias!
+        </p>
 
-            <blockquote>
-                “Viajar no es solo moverse de un lugar a otro, es cambiar tus ideas y prejuicios por experiencias reales.”
-            </blockquote>
+        <blockquote>
+            “Viajar no es solo moverse de un lugar a otro, es cambiar tus ideas y prejuicios por experiencias reales.”
+        </blockquote>
 
-            <h2>2. La Ruta de los Balcanes</h2>
-            <p>
-                Europa del Este sigue siendo uno de los secretos mejor guardados y más económicos para los mochileros. Países como Albania, Montenegro y Bosnia ofrecen montañas espectaculares, playas de aguas cristalinas y ciudades con una historia fascinante, todo a una fracción del coste de Europa Occidental.
-            </p>
+        <h2>2. La Ruta de los Balcanes</h2>
+        <p>
+            Europa del Este sigue siendo uno de los secretos mejor guardados y más económicos para los mochileros. Países como Albania, Montenegro y Bosnia ofrecen montañas espectaculares, playas de aguas cristalinas y ciudades con una historia fascinante, todo a una fracción del coste de Europa Occidental.
+        </p>
 
-            <h3>Consejos para el viajero sostenible</h3>
-            <ul>
-                <li>Utiliza transporte local siempre que sea posible.</li>
-                <li>Lleva tu propia botella de agua reutilizable.</li>
-                <li>Respeta las costumbres locales de vestimenta en templos.</li>
-                <li>Apoya a los artesanos locales comprando directamente a ellos.</li>
-            </ul>
+        <h3>Consejos para el viajero sostenible</h3>
+        <ul>
+            <li>Utiliza transporte local siempre que sea posible.</li>
+            <li>Lleva tu propia botella de agua reutilizable.</li>
+            <li>Respeta las costumbres locales de vestimenta en templos.</li>
+            <li>Apoya a los artesanos locales comprando directamente a ellos.</li>
+        </ul>
 
-            <p>
-                Preparar tu mochila para el 2025 significa estar listo para lo inesperado. Recuerda que la mejor ruta es a veces la que no aparece en los mapas, sino la que te recomiendan los locales con una sonrisa.
-            </p>
+        <p>
+            Preparar tu mochila para el 2025 significa estar listo para lo inesperado. Recuerda que la mejor ruta es a veces la que no aparece en los mapas, sino la que te recomiendan los locales con una sonrisa.
+        </p>
 
-            <div class="share-section">
-                <span>¿Te gustó? Compártelo:</span>
-                <div class="share-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
+        <div class="share-section">
+            <span>¿Te gustó? Compártelo:</span>
+            <div class="share-icons">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
+        </div>
         `
     },
     {
@@ -129,9 +135,15 @@ const blogData = [
         <div class="share-section">
             <span>¿Te inspiró este artículo? Compártelo:</span>
             <div class="share-icons">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
     `
@@ -207,9 +219,15 @@ const blogData = [
         <div class="share-section">
             <span>¿Tienes algún secreto viajero? Compártelo:</span>
             <div class="share-icons">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
         `
@@ -290,9 +308,15 @@ const blogData = [
         <div class="share-section">
             <span>¿Cuál es tu paraíso soñado? Cuéntanoslo:</span>
             <div class="share-icons">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
         `
@@ -371,9 +395,15 @@ const blogData = [
         <div class="share-section">
             <span>¿Cuál fue tu mejor comida callejera?</span>
             <div class="share-icons">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Twitter">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
             </div>
         </div>
         `
@@ -395,8 +425,8 @@ function renderBlogList(container, data = blogData) {
         <article class="blog-card">
             <div class="blog-image"><img src="${post.imagenPrincipal}" alt="${post.titulo}" loading="lazy"></div>
             <div class="blog-content">
-                <h3 data-i18n="data_blog.id_${post.id}.title">${post.titulo}</h3>
-                <p class="blog-author"><span data-i18n="blog.by"></span> ${post.autor}</p>
+                <h2 data-i18n="data_blog.id_${post.id}.title">${post.titulo}</h2>
+                <p class="blog-author"><span data-i18n="blog.by">De </span> ${post.autor}</p>
                 <p class="blog-excerpt" data-i18n="data_blog.id_${post.id}.summary">${post.resumen}</p>
                 <a href="blog_post.html?id=${post.id}" class="btn-black-sm" data-i18n="blog.read_more">Leer</a>
             </div>
@@ -437,7 +467,7 @@ function loadBlogPost() {
         related.innerHTML = blogData.filter(p => p.id !== id).slice(0, 2).map(s => `
             <a href="blog_post.html?id=${s.id}" class="related-card">
                 <img src="${s.imagenPrincipal}" alt="${s.titulo}">
-                <h4 data-i18n="data_blog.id_${s.id}.title">${s.titulo}</h4>
+                <h2 data-i18n="data_blog.id_${s.id}.title">${s.titulo}</h2>
             </a>
         `).join('');
     }

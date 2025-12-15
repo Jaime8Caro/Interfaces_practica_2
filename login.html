@@ -27,13 +27,13 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="index.html#" data-i18n="nav.inicio">Inicio</a></li>
                 <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
                 <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
                 <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -71,11 +71,11 @@
             <div class="auth-card login-mode">
                 <form action="#">
                     <div class="input-group">
-                        <input type="text" id="email" placeholder="Correo electrónico" data-i18n-placeholder="login.email_ph">
+                        <input type="text" id="email" placeholder="Correo electrónico" aria-label="Correo electrónico" data-i18n-placeholder="login.email_ph">
                     </div>
                     
                     <div class="input-group">
-                        <input type="password" id="password" placeholder="Contraseña" data-i18n-placeholder="login.password_ph">
+                        <input type="password" id="password" placeholder="Contraseña" aria-label="Contraseña" data-i18n-placeholder="login.password_ph">
                     </div>
                     
                     <a href="#" class="forgot-password-link" data-i18n="login.forgot_pass">No recuerdo mi contraseña</a>
@@ -95,9 +95,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">

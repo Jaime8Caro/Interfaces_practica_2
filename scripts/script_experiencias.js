@@ -1108,8 +1108,9 @@ function renderExperiencesList(container, data = experiencesData) {
         <a href="compra.html?id=${exp.id}" class="experience-card-item">
             <div class="card-image-header">
                 <span class="difficulty-badge" data-i18n="difficulty.${exp.dificultad}">${exp.dificultad}</span>
-                <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleCardFav(event, ${exp.id}, this)">
-                    <i class="${heartClass} fa-heart"></i>
+                <button class="card-fav-btn ${isFav ? 'active' : ''}" 
+                        onclick="toggleCardFav(event, ${exp.id}, this)"
+                        aria-label="Añadir a favoritos"> <i class="${heartClass} fa-heart"></i>
                 </button>
                 <img src="${exp.imagen}" alt="${exp.titulo}" loading="lazy">
             </div>
@@ -1122,7 +1123,9 @@ function renderExperiencesList(container, data = experiencesData) {
                     <span><i class="fa-solid fa-user-group"></i> <span data-i18n="groups.${exp.grupo.replace(/\s+/g, '_')}">${exp.grupo}</span></span>
                 </div>
                 <div class="card-footer">
-                    <span class="price">$${exp.precio} <small data-i18n="cards.per_person">/ persona</small></span>
+                    <span class="price">$${exp.precio}</span>
+                    <span class="pers" data-i18n="cards.per_person">/ persona</span>
+                    <div></div>
                     <span class="btn-reservar" data-i18n="cards.book_btn">Reservar</span>
                 </div>
             </div>

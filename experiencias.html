@@ -27,14 +27,14 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="index.html#" data-i18n="nav.inicio">Inicio</a></li>
                 <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
                 <li><a href="experiencias.html" class="active" data-i18n="nav.experiencias">Experiencias</a></li>
                 <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -79,12 +79,12 @@
             <div class="search-filter-bar">
                 <div class="search-input-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="exp-search-input" placeholder="Buscar destino o actividad" data-i18n-placeholder="experiences_page.search_placeholder">
+                    <input type="text" id="exp-search-input" placeholder="Buscar destino o actividad" aria-label="Buscar destino o actividad" data-i18n-placeholder="experiences_page.search_placeholder">
                 </div>
                 <div class="filter-buttons">
                     <button class="filter-btn" id="btn-exp-category" data-i18n="experiences_page.filter_all_cats">Todas las categorías</button>
                     <button class="filter-btn" id="btn-exp-difficulty" data-i18n="experiences_page.filter_all_diff">Todas las dificultades</button>
-                    <button class="filter-btn" id="btn-exp-sort"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
+                    <button class="filter-btn" aria-label="busqueda_precio" id="btn-exp-sort"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
                 </div>
             </div>
 
@@ -98,9 +98,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">

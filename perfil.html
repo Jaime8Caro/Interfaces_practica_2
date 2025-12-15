@@ -27,14 +27,14 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="index.html#" data-i18n="nav.inicio">Inicio</a></li>
                 <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
                 <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
                 <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
             </ul>
 
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             
@@ -91,27 +91,27 @@
                     <form class="profile-form">
                         <div class="form-group">
                             <label for="input-nombre" data-i18n="profile.label_name">Nombre</label>
-                            <input type="text" id="input-nombre" class="form-input" readonly>
+                            <input type="text" id="input-nombre" class="form-input" aria-label="input-nombre" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="input-apellido" data-i18n="profile.label_lastname">Apellido</label>
-                            <input type="text" id="input-apellido" class="form-input" readonly>
+                            <input type="text" id="input-apellido" class="form-input" aria-label="input-apellido" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="input-nacimiento" data-i18n="profile.label_dob">Fecha de nacimiento</label>
-                            <input type="text" id="input-nacimiento" class="form-input" readonly>
+                            <input type="text" id="input-nacimiento" class="form-input" aria-label="input-nacimiento" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="input-email" data-i18n="profile.label_email">Correo electrónico</label>
-                            <input type="email" id="input-email" class="form-input" readonly>
+                            <input type="email" id="input-email" class="form-input" aria-label="input-email" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="input-usuario" data-i18n="profile.label_user">Nombre de usuario</label>
-                            <input type="text" id="input-usuario" class="form-input" readonly>
+                            <input type="text" id="input-usuario" class="form-input" aria-label="input-usuario" readonly>
                         </div>
                     </form>
                 </div>
@@ -121,7 +121,7 @@
                     <div class="favorites-grid" id="favorites-container">
                         </div>
                     
-                    <div id="no-favorites-msg" style="display:none; text-align:center; padding:40px; color:#888;">
+                    <div id="no-favorites-msg" style="display:none; text-align:center; padding:40px; color:#555;">
                         <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:15px; opacity:0.5;"></i>
                         <p data-i18n="profile.no_fav_msg">Aún no has guardado ningún viaje.</p>
                         <a href="experiencias.html" class="btn-black-sm" style="margin-top:10px;" data-i18n="profile.btn_explore">Explorar</a>
@@ -135,9 +135,9 @@
                         </div>
 
                     <div id="mensaje-sin-reservas" class="empty-state" style="text-align: center; padding: 50px; display: none;">
-                        <i class="fa-solid fa-suitcase-rolling" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
-                        <h3 style="color: #555;" data-i18n="profile.no_trips_title">No tienes viajes reservados aún</h3>
-                        <p style="color: #888; margin-bottom: 20px;" data-i18n="profile.no_trips_text">¿A qué estás esperando para tu próxima aventura?</p>
+                        <i class="fa-solid fa-suitcase-rolling" style="font-size: 4rem; color: #b3b3b3; margin-bottom: 20px;"></i>
+                        <h3 style="color: #444;" data-i18n="profile.no_trips_title">No tienes viajes reservados aún</h3>
+                        <p style="color: #555; margin-bottom: 20px;" data-i18n="profile.no_trips_text">¿A qué estás esperando para tu próxima aventura?</p>
                         <a href="destinos.html" class="btn-black-sm" data-i18n="profile.btn_explore_destinations">Explorar Destinos</a>
                     </div>
                 </div>
@@ -156,14 +156,14 @@
                         <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
                             <div style="position: relative;">
                                 <img id="config-avatar-preview" src="assets/defecto.png" alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd;">
-                                <label for="config-foto" id="btn-upload-photo" style="display: none; position: absolute; bottom: 0; right: 0; background: #333; color: #fff; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; cursor: pointer; font-size: 0.8rem;">
+                                <label for="config-foto" id="btn-upload-photo" aria-label="upload-photo" style="display: none; position: absolute; bottom: 0; right: 0; background: #333; color: #fff; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; cursor: pointer; font-size: 0.8rem;">
                                     <i class="fa-solid fa-camera"></i>
                                 </label>
                                 <input type="file" id="config-foto" accept="image/*" style="display: none;">
                             </div>
                             <div>
                                 <h3 style="margin: 0 0 5px 0;" data-i18n="profile.label_photo">Foto de perfil</h3>
-                                <p style="margin: 0; font-size: 0.8rem; color: #888;" data-i18n="profile.text_photo">Haz clic en el candado para cambiarla.</p>
+                                <p style="margin: 0; font-size: 0.8rem; color: #555;" data-i18n="profile.text_photo">Haz clic en el candado para cambiarla.</p>
                             </div>
                         </div>
 
@@ -208,9 +208,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">

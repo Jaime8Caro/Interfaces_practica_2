@@ -25,13 +25,13 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="index.html#" data-i18n="nav.inicio">Inicio</a></li>
                 <li><a href="destinos.html" data-i18n="nav.destinos">Destinos</a></li>
                 <li><a href="experiencias.html" data-i18n="nav.experiencias">Experiencias</a></li>
                 <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
+                <input type="text" placeholder="Buscar destinos" aria-label="Buscar destinos" data-i18n-placeholder="nav.search_placeholder">
                 <button type="submit" data-i18n="nav.buscar">Buscar</button>
             </div>
             <div class="language-selector">
@@ -75,11 +75,13 @@
             <div class="search-filter-bar">
                 <div class="search-input-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar publicación" data-i18n-placeholder="blog.search_placeholder">
+                    <input type="text" placeholder="Buscar publicación" aria-label="Buscar publicación" data-i18n-placeholder="blog.search_placeholder">
                 </div>
                 <div class="filter-buttons">
                     <button class="filter-btn" id="btn-blog-category" data-i18n="blog.filter_all">Todas las categorías</button>
-                    <button class="filter-btn" id="btn-blog-sort"><i class="fa-solid fa-bars-staggered"></i></button>
+                    <button class="filter-btn" id="btn-blog-sort" aria-label="Ordenar resultados">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
                 </div>
             </div>
 
@@ -94,9 +96,15 @@
                 <h3>Pack&Go</h3>
                 <p data-i18n="footer.slogan">La comunidad donde los caminos se cruzan.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-solid fa-x"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                 </div>
             </div>
             <div class="footer-links">
